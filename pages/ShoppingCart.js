@@ -1,4 +1,5 @@
 import { css, Global } from '@emotion/react';
+import Cookies from 'js-cookie';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -19,7 +20,7 @@ const articleOneShoppingCartStyle = css`
   /* background-color: grey; */
   /* border: 1px solid red; */
 
-  div:first-child {
+  div:first-of-type {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -43,7 +44,19 @@ const divOrderSummaryStyle = css`
   justify-content: space-around;
 `;
 
-export default function ShoppingCart() {
+function getParsedCookie(key) {
+  try {
+    return JSON.parse(Cookies.get(key));
+  } catch (err) {
+    return undefined;
+  }
+}
+
+export default function ShoppingCart(props) {
+  const currentCookies = getParsedCookie('cart');
+  console.log('ShoppingCartCookie:', currentCookies);
+  console.log('ShoppingCartCookie:', typeof currentCookies);
+
   return (
     <Layout>
       <Head>
@@ -55,19 +68,22 @@ export default function ShoppingCart() {
         <h1>Your Cart</h1>
       </section>
       <section css={sectionShoppingCartStyle}>
+        {/* {props.cartCookie.forEach((product) => {
+          console.log(product.price);
+        })} */}
         <article css={articleOneShoppingCartStyle}>
           <div>
             <div>
-              Image
+              img
               <div>Plant Name</div>
             </div>
             <div>Price</div>
-            <div>quantity</div>
-            <div>Total</div>
+            <div>Quantity</div>
+            <div>total</div>
             <button>x</button>
           </div>
         </article>
-
+        {/* ; // })} */}
         <article css={articleTwoshoppingCartStyle}>
           <h2>Order Summary</h2>
           <div css={divOrderSummaryStyle}>

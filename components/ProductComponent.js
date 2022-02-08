@@ -22,14 +22,14 @@ const plants = [
     id: '00',
     name: 'Plant Name',
     type: 'Lorem',
-    price: 60000,
+    price: 6000,
     img: 'image00',
   },
   {
     id: '01',
     name: 'Plant Name',
     type: 'Lorem',
-    price: 60000,
+    price: 5000,
     img: 'image01',
   },
   {
@@ -37,14 +37,14 @@ const plants = [
     name: 'Plant Name',
     type: 'Lorem',
     img: 'image02',
-    price: 60000,
+    price: 3000,
   },
   {
-    id: '04',
+    id: '03',
     name: 'Plant Name',
     type: 'Lorem',
     img: 'image04',
-    price: 60000,
+    price: 2000,
   },
 ];
 
@@ -60,7 +60,7 @@ export default function ProductsComponent(props) {
               </a>
             </Link>
             <h2>Text</h2>
-            <p>Price: Price</p>
+            <p>Price: {plant.price}</p>
           </div>
         );
       })}
@@ -114,9 +114,11 @@ export default function ProductsComponent(props) {
 // }
 
 export function getServerSideProps() {
+  console.log('PlantsDatabaseProducts:', plantsDatabase);
+
   return {
     props: {
-      plants: plantsDatabase,
+      plant: plantsDatabase,
     },
   };
 }

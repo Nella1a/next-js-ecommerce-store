@@ -1,7 +1,9 @@
 import { css, Global } from '@emotion/react';
+import Cookies from 'js-cookie';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import ShoppingCart from '../pages/Shoppingcart';
 import shoppingBag from '../public/shopping-bag.png';
 
 // import shoppingCartIcon from '../public/shoppingCartIcon.svg';
@@ -67,18 +69,49 @@ const shoppintCartQuantityStyle = css`
 
   span {
     position: relative;
-    top: 1px;
-    right: 1.9px;
+    top: 0px;
+    right: 0px;
     font-size: 0.75rem;
   }
 `;
 
-export default function Header() {
-  const [cartItems, setCartItems] = useState(0); //cart items
+function getParsedCookie(key) {
+  try {
+    return JSON.parse(Cookies.get(key));
+  } catch (err) {
+    return undefined;
+  }
+}
+
+export default function Header(props) {
+  const [sumOfcartItems, setSumOfCartItems] = useState(0);
+
+  const currentCookies = getParsedCookie('cart');
+
+  console.log('currentCookies:', currentCookies);
+
+  useEffect(() => {
+    if (currentCookies !== undefined) {
+      const abc = currentCookies.map((event) => event.quanity);
+      const reducer = (previousValue, currentValue) =>
+        previousValue + currentValue;
+
+      setSumOfCartItems(abc.reduce(reducer));
+    }
+  }, [currentCookies]);
+
+  console.log('SumCartItems:', sumOfcartItems);
+  // currentCookies.map((event) => console.log(event.price));
+
+  // console.log('currentCookies:', JSON.parse(currentCookies));
+
+  // JSON.parse(currentCookies).map((event) => {
+  //   return console.log(event.quanity);
+  // });
 
   return (
     <header css={navigationStyle}>
-      <Link href="http://localhost:3001/">
+      <Link href="http://localhost:3000/">
         <a>LOGO</a>
       </Link>
       <Link href="/Products">
@@ -86,7 +119,7 @@ export default function Header() {
           Products
         </a>
       </Link>
-      <Link href="/ShoppingCart" data-test-id="cart-link">
+      <Link href="/Shoppingcart" data-test-id="cart-link">
         <a>
           <div css={shoppingCartNavStyleContainer}>
             {' '}
@@ -94,7 +127,7 @@ export default function Header() {
               {' '}
               <Image src={shoppingBag} alt="shopping cart icon" />
               <div css={shoppintCartQuantityStyle}>
-                <span data-test-id="cart-count">1</span>
+                <span data-test-id="cart-count">{sumOfcartItems}</span>
               </div>
             </div>
           </div>
@@ -102,4 +135,21 @@ export default function Header() {
       </Link>
     </header>
   );
+}
+
+export function getServerSideProps(context) {
+  const cookies = context.req.cookies;
+  console.log('cookiesHeader:', cookies);
+
+  // if the cookie is undefined it is going to return an empty array
+  // If it is defined it will return everything inside of it
+  const cart = context.req.cookies.cart || '[]';
+  const cartCookies = JSON.parse(cart);
+  console.log('headCookdies:', cartCookies);
+
+  return {
+    props: {
+      cartCookies: cartCookies,
+    },
+  };
 }
