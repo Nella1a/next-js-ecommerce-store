@@ -1,27 +1,61 @@
-import { css, Global } from '@emotion/react';
 import Head from 'next/head';
-import Image from 'next/image';
-import Header from '../components/Header';
+import Link from 'next/link';
+import { useState } from 'react';
+import { heroImage, indexJsStyle, sectionStyle } from '../components/elements';
+import Layout from '../components/Layout';
 import ProductsComponent from '../components/ProductComponent';
+import { readPlants } from '../util/database.js';
+import Products from './Products';
 
-const sectionOneIndex = css`
-  background-color: grey;
-`;
+export default function Home(props) {
+  const [cartCookie, setCartCookie] = useState(props.cartCookies);
 
-export default function Home() {
+  console.log('Index_props.database:', props.plants);
+  console.log('Index_cartCookie:', props.cartCookies);
+  console.log('IndexcartCookie:', cartCookie);
   return (
-    <div>
+    <Layout>
       <Head>
         <title>Plant Love</title>
         <meta name="description" content="Plant Shop" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
 
-      <section>
-        <h1>Plant Parent</h1>
+      <img src="/header_blank.jpg" alt="Hero" css={heroImage} />
+      <section css={indexJsStyle}>
+        <div>
+          <p>Lorem Ipsum Lorem</p>
+          <p>Lorem Ipsum Lorem Lorem!</p>
+          <p>
+            <Link href="/Products" passHref>
+              <button>View All Plants</button>
+            </Link>
+          </p>
+        </div>
       </section>
-      <ProductsComponent />
-    </div>
+      <section css={sectionStyle}>
+        <Products plants={props.plants} cartCookie={cartCookie} />
+      </section>
+    </Layout>
   );
+}
+
+export async function getServerSideProps(context) {
+  // read plants from database
+  const plants = await readPlants();
+
+  // if the cookie is undefined it is going to return an empty array
+  // If it is defined it will return everything inside of it
+  const cartCookies = context.req.cookies.cart || '[]';
+
+  const allCartCookies = JSON.parse(cartCookies);
+  console.log('Index_ServerSide_Cookies:', allCartCookies);
+
+  /* return plants via props to frontend */
+  return {
+    props: {
+      plants: plants,
+      cartCookies: allCartCookies,
+    },
+  };
 }

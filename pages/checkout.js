@@ -1,44 +1,10 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
+import { flexStyle, formStyle } from '../components/elements';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
 import ProductsComponent from '../components/ProductComponent';
-
-const styleheaderone = css`
-  margin: 0 auto;
-`;
-
-const formStyle = css`
-  section {
-    width: 50%;
-  }
-
-  p,
-  label,
-  input {
-    margin-bottom: 16px;
-  }
-
-  input,
-  select {
-    width: 100%;
-    height: 48px;
-  }
-`;
-
-const flexStyle = css`
-  display: flex;
-  gap: 16px;
-
-  p {
-    width: 50%;
-  }
-
-  button {
-    text-align: right;
-  }
-`;
 
 export default function CheckOut() {
   return (

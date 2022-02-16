@@ -1,170 +1,124 @@
-import { css } from '@emotion/react';
-import Cookies from 'js-cookie';
 import Head from 'next/head';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { singleProductPageStyle } from '../../components/elements';
 import Layout from '../../components/Layout';
-import plantsDatabase from '../../util/PDatabase';
-import ShoppingCart from '../Shoppingcart';
-
-const styleSingleProductSection = css`
-  display: flex;
-  gap: 96px;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-
-  h1 {
-    margin: 16px 0;
-  }
-
-  article {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 600px;
-    p {
-      margin-bottom: 48px;
-    }
-  }
-`;
-
-function getParsedCookie(key) {
-  try {
-    return JSON.parse(Cookies.get(key));
-  } catch (err) {
-    return undefined;
-  }
-}
-
-function setParsedCookie(key, value) {
-  Cookies.set(key, JSON.stringify(value));
-}
+import { getParsedCookie, setParsedCookie } from '../../util/cookies';
+import { getPlantById } from '../../util/database.js';
 
 export default function SingleAnimal(props) {
-  const [quanity, setQuantity] = useState();
-  const [plantPrice, setPlantPrice] = useState();
-  const [plantId, setPlantId] = useState();
+  const [quantity, setQuantity] = useState();
+  // const [cartCookie, setCartCookie] = useState();
   const [cartCookie, setCartCookie] = useState(props.cartCookies);
 
-  function cartItems(plantID, quantitiy, price) {
-    console.log('plantID:', plantID, 'quantitiy:', quantitiy, 'price', price);
+  console.log('SingleAnimalCartCookie', props.cartCookie);
 
+  function cartItems(plantID, quant) {
+    /* new quantity and id of item to set in cart cookie  */
     const value = {
       plantID: plantID,
-      price: price,
-      quanity: quanity,
+      quantity: quant,
     };
 
-    // get value of the cookie:
-    const cartCookieValue = getParsedCookie(props.cartCookies) || [];
-    console.log('cartCookie', cartCookie);
+    // read cookie
+    const cartCookieValue = getParsedCookie(props.cartCookie) || [];
+    console.log('cartCookie', props.cartCookie);
 
-    // ***update the cookie:
+    // update cookie
     let newCookie;
     if (cartCookieValue !== undefined) {
-      newCookie = [...cartCookieValue, ...cartCookie, value];
+      newCookie = [...cartCookieValue, ...props.cartCookie, value];
       console.log('newCookie:', newCookie);
     } else {
       newCookie = value;
     }
     // 3. set the new value of the cookie
-
     setCartCookie(newCookie);
     setParsedCookie('cart', newCookie);
   }
 
-  console.log('Price:', props.price);
   function changeQuantity(event) {
+    console.log('event.target:', event.target);
     let { value, min, max } = event.target;
     value = Math.max(Number(min), Math.min(Number(max), Number(value)));
     setQuantity(value);
-    console.log('quantitiy:', quanity);
+    console.log('quantitiy:', quantity);
   }
-
   return (
     <Layout>
-      {console.log(props)}
       <Head>
-        <title>Plant {props.plant.name}</title>
+        <title>Plant</title>
         <meta name="Plant with a smile" content="View all Plants" />
       </Head>
-      <section css={styleSingleProductSection}>
+      <section css={singleProductPageStyle}>
         <Image
-          src={`/image${props.plantID}.jpg`}
-          width="600"
-          height="600"
+          src={`/image0${props.plantID}.jpeg`}
+          width="393"
+          height="491,5"
           data-test-id="product-image"
         />
 
         <article>
-          <h1>Plant Name</h1>
-          <p data-test-id="product-price">price: {props.price}</p>
+          <h1>{props.plant.name}</h1>
+          <p data-test-id="product-price">{props.plant.price}</p>
           <p>
-            DetailsLorem Ipsum Lorem Ipsum Lorem Ipsum <br />
-            `single animal page (dynamic route), id: ${props.plantID}`;
+            {props.plant.description}
+            <br />
+            {/*     `single animal page (dynamic route), id: ${props.plant.id}`; */}
           </p>
           <div>
-            <label htmlFor="quantity">Quantity</label>
-            {/* // input field for quantitiy: */}
-            <input
-              data-test-id="product-quantity"
-              type="number"
-              min="1"
-              max="10"
-              value={quanity}
-              onChange={changeQuantity}
-            />
+            <label htmlFor="product-quantity">
+              {/* // input field for quantitiy: */}
+              <input
+                data-test-id="product-quantity"
+                type="number"
+                min="1"
+                max="10"
+                placeholder="select quantity"
+                value={quantity}
+                onChange={(event) => changeQuantity(event)}
+              />
+            </label>
             {/* Button add to cart: */}
             <button
               data-test-id="product-add-to-cart"
-              onClick={() => cartItems(props.plantID, quanity, props.price)}
+              onClick={() => cartItems(props.plant.id, quantity)}
             >
               Add to cart
             </button>
           </div>
         </article>
       </section>
-      {/* <ShoppingCart
-        quanity={quanity}
-        setQuantity={setQuantity}
-        plantPrice={plantPrice}
-        setPlantPrice={setPlantPrice}
-        plantId={plantId}
-        setPlantId={setPlantId}
-        cartCookie={cartCookie}
-        setCartCookie={setCartCookie}
-      /> */}
     </Layout>
   );
 }
 
-export function getServerSideProps(context) {
+export async function getServerSideProps(context) {
+  /* get current plant id from ../product/id */
   const plantID = context.query.plantID;
-  const machtingplantprice = plantsDatabase.find((plant) =>
-    plantID === plant.id ? plant.price : false,
-  );
 
-  const cookies = context.req.cookies;
-  console.log('cookies:', cookies);
+  /* get the plantID from database */
+  const plant = await getPlantById(plantID);
 
-  // if the cookie is undefined it is going to return an empty array
-  // If it is defined it will return everything inside of it
+  /* read current cookie; if no cookie return [] */
   const cart = context.req.cookies.cart || '[]';
-  console.log('Cookies Shopping Cart:', cart);
-  const cartCookies = JSON.parse(cart);
+  const cartCookie = JSON.parse(cart);
 
-  console.log('plantID:', plantID);
-  console.log('machingplantPrice:', machtingplantprice.price);
-  console.log('PlantsDatabase:', plantsDatabase);
-  // console.log('ID', plantsDatabase[0].id);
-  // console.log('MachingID', machtingplant);
+  /*  return singlePlant and plantID via props to frontend */
+  console.log('Single-Plant_propsplantID:', plant);
+  console.log('Single-Plant_ID_FromBrowser:', plantID);
   return {
     props: {
-      plant: plantsDatabase,
+      plant: plant,
       plantID: plantID,
-      price: machtingplantprice.price,
-      cartCookies: cartCookies,
+      cartCookie: cartCookie,
     },
   };
 }
+
+/*
+Ich hole mir hier nur den Article aus der Datenbank den ich brauche.
+Dieser wird innerhalb von ServerSideProps geholt und mittels props übergeben.
+im Frontend kann ich dan mittels props.name/id/.. auf den Article zugreifen
+
+*/

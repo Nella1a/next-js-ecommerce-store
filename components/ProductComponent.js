@@ -2,65 +2,48 @@ import { css, Global } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import image00 from '../public/image00.jpg';
-import image02 from '../public/image01.jpg';
-import image03 from '../public/image02.jpg';
-import image04 from '../public/image04.jpg';
-import plantsDatabase from '../util/PDatabase';
+import image05 from '../public/image05.jpeg';
+import image06 from '../public/image06.jpeg';
+import image07 from '../public/image07.jpeg';
+import image08 from '../public/image08.jpeg';
+
+// import { readPlants } from '../util/database.js';
 
 const styleSectionProducts = css`
   display: flex;
   gap: 48px;
 
   h2 {
-    margin: 16px 0;
+    margin: 8px 0;
+    font-size: 16px;
   }
 `;
 
-const plants = [
-  {
-    id: '00',
-    name: 'Plant Name',
-    type: 'Lorem',
-    price: 6000,
-    img: 'image00',
-  },
-  {
-    id: '01',
-    name: 'Plant Name',
-    type: 'Lorem',
-    price: 5000,
-    img: 'image01',
-  },
-  {
-    id: '02',
-    name: 'Plant Name',
-    type: 'Lorem',
-    img: 'image02',
-    price: 3000,
-  },
-  {
-    id: '03',
-    name: 'Plant Name',
-    type: 'Lorem',
-    img: 'image04',
-    price: 2000,
-  },
-];
-
 export default function ProductsComponent(props) {
   return (
+    /*   <>
+      {console.log('ProductComponent Cookie:', props.cartCookie)}
+      {console.log('ProductComponent1 props.plants:', props.plants)}
+    </> */
     <section css={styleSectionProducts}>
-      {plants.map((plant) => {
+      {console.log('ProductComponent Cookie:', props.cartCookie)}
+      {console.log('ProductComponent1 props.plants:', props.plants)}
+      {console.log(typeof props.plants)}
+      {props.plants.map((event) => {
         return (
-          <div key={`guest-${plant.id}`}>
-            <Link href={`/Products/${plant.id}`}>
+          <div key={`guest-${event.id}`}>
+            <Link href={`/Products/${event.id}`}>
               <a data-test-id="ID">
-                <Image src={image03} alt="succulenten1" />
+                <Image
+                  src={`/image0${event.id}.jpeg`}
+                  width="393"
+                  height="491,5"
+                  alt="succulenten1"
+                />
               </a>
             </Link>
-            <h2>Text</h2>
-            <p>Price: {plant.price}</p>
+            <h2>{event.name}</h2>
+            <p>{event.price / 100}</p>
           </div>
         );
       })}
@@ -68,57 +51,25 @@ export default function ProductsComponent(props) {
   );
 }
 
-// export default function ProductsComponent(props) {
-//   console.log(JSON.stringify(props));
-//   return (
-//     <section css={styleSectionProducts}>
-//       <div>
-//         {/* creating a dynanmic Link  */}
-//         <Link href="/Products">
-//           <a data-test-id="ID">
-//             <Image src={image00} alt="succulenten1" />
-//           </a>
-//         </Link>
-//         <h2>Text</h2>
-//         <p>Price: Price</p>
-//       </div>
-//       <div>
-//         <Link href="/Products">
-//           <a data-test-id="ID">
-//             <Image src={image03} alt="succulenten1" />
-//           </a>
-//         </Link>
-//         <h2>Text</h2>
-//         <p>Price: Price</p>
-//       </div>
-//       <div>
-//         <Link href="/Products">
-//           <a data-test-id="ID">
-//             <Image src={image02} alt="succulenten1" />
-//           </a>
-//         </Link>
-//         <h2>Text</h2>
-//         <p>Price: Price</p>
-//       </div>
-//       <div>
-//         <Link href="/Products">
-//           <a data-test-id="ID">
-//             <Image src={image04} alt="succulenten1" />
-//           </a>
-//         </Link>
-//         <h2>Text</h2>
-//         <p>Price: Price</p>
-//       </div>
-//     </section>
-//   );
+// export async function getServerSideProps(context) {
+//   // const plantID = context.query.plantID;
+
+//   const plants = await readPlants();
+
+//   return {
+//     props: {
+//       plants: plants,
+//     },
+//   };
 // }
 
-export function getServerSideProps() {
-  console.log('PlantsDatabaseProducts:', plantsDatabase);
+// export async function getServerSideProps() {
+//   // const plantID = context.query.plantID;
 
-  return {
-    props: {
-      plant: plantsDatabase,
-    },
-  };
-}
+//   const plants = await readPlants();
+//   return {
+//     props: {
+//       plants: plants,
+//     },
+//   };
+// }

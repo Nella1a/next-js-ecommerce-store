@@ -10,10 +10,10 @@ export default function Layout(props) {
       </Head>
       <Header />
       <main>
-        <section>{props.children.h1}</section>
-        <section>{props.children.h2}</section>
+        {props.children}
+        {/* <section>{props.children}</section> */}
       </main>
-      <footer>{props.children}</footer>
+      {/* <footer>{props.children}</footer> */}
     </>
   );
 }
