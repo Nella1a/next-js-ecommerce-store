@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Footer from './Footer';
 import Header from './Header';
 
 export default function Layout(props) {
@@ -14,6 +15,7 @@ export default function Layout(props) {
         {/* <section>{props.children}</section> */}
       </main>
       {/* <footer>{props.children}</footer> */}
+      <Footer />
     </>
   );
 }

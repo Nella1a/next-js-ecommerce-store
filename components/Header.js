@@ -16,10 +16,9 @@ export default function Header() {
     if (currentCookies !== undefined) {
       const abc = currentCookies.map((event) => event.quantity);
       const reducedAbc = abc.reduce((a, b) => a + b, 0);
-      // const reducer = (previousValue, currentValue) =>
-      //   previousValue + currentValue;
-
-      // setSumOfCartItems(abc.reduce(reducer));
+      const reducer = (previousValue, currentValue) =>
+        previousValue + currentValue;
+      setSumOfCartItems(abc.reduce(reducer));
       setSumOfCartItems(reducedAbc);
     } else {
       setSumOfCartItems(0);
@@ -34,6 +33,16 @@ export default function Header() {
             <img src="/logo_shelovesplants.svg" alt="logo she loves plants" />
           </a>
         </Link>
+        <Link href="/Products">
+          <a>Sale</a>
+        </Link>
+        <Link href="/Products">
+          <a>Inspiration</a>
+        </Link>
+        <Link href="/Products">
+          <a>Contact</a>
+        </Link>
+
         <Link href="/Products">
           <a data-test-id="products-link">Products</a>
         </Link>

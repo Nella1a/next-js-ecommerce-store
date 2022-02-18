@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { type } from 'os';
 import { useEffect, useState } from 'react';
-import { shoppingCartStyle } from '../components/elements';
+import { plantName, shoppingCartStyle } from '../components/elements';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
 import {
@@ -18,7 +18,9 @@ import { readPlants } from '../util/database';
 export default function ShoppingCart(props) {
   const [sumItems, setSumItems] = useState([]);
   const currentCookies = getParsedCookie('cart');
-  const [cookieOfCartItems, setCookieOfCartItems] = useState(currentCookies);
+  const [cookieOfCartItems, setCookieOfCartItems] = useState(
+    props.currentCookies,
+  );
 
   console.log('ShoppingCartCookie:', cookieOfCartItems);
   console.log('ShoppingCartCookie:', typeof cookieOfCartItems);
@@ -29,8 +31,9 @@ export default function ShoppingCart(props) {
   function eventHandler(id, quan) {
     console.log('id:', id, 'quan:', quan);
 
+    // delete item from shopping cart
     const newCartCookie = cookieOfCartItems.filter(
-      (event) => event.plantID !== id,
+      (event) => event.plantId !== id,
     );
 
     console.log('newCartCookie', newCartCookie);
@@ -86,28 +89,32 @@ export default function ShoppingCart(props) {
               cookieOfCartItems.map((cookie) => {
                 return (
                   /* Anfang Return 2*/
-                  element.id === cookie.plantID && (
+                  element.id === cookie.plantId && (
                     <div key={`cartItems_${props.plants.id}`}>
                       <div>
                         <Image
-                          src={`/image0${cookie.plantID}.jpeg`}
+                          src={`/image0${cookie.plantId}.jpeg`}
                           width="98,25"
                           height="122,87"
                           alt="succulenten1"
                         />
-                        <div>{element.name}</div>
+                        <div css={plantName}>{element.name}</div>
                       </div>
                       <div>Price: {element.price}</div>
                       <div>Quantity: {cookie.quantity}</div>
                       <div>
                         total:{' '}
-                        {(sumofCartItems = element.price * cookie.quantity)}
+                        {
+                          (sumofCartItems = (
+                            element.price * cookie.quantity
+                          ).toFixed(2))
+                        }
                         {sum.push(sumofCartItems)}
                       </div>
 
                       <button
                         onClick={() =>
-                          eventHandler(cookie.plantID, cookie.quantity)
+                          eventHandler(cookie.plantId, cookie.quantity)
                         }
                       >
                         x
@@ -137,12 +144,10 @@ export default function ShoppingCart(props) {
           <div>
             <h2>Order Summary</h2>
             <div>
-              <p>Subtotal</p>
-              <p>{sum.reduce((a, b) => a + b, 0)}</p>
-            </div>
-            <div>
-              <p data-test-id="cart-total">Total</p>
-              <p>XXXX</p>
+              <p>
+                <span>Total:</span>
+              </p>
+              <p>{sum.reduce((a, b) => a + b)}</p>
             </div>
             <Link href="/checkout" passHref>
               <button data-test-id="cart-checkout">CHECKOUT</button>
@@ -155,14 +160,15 @@ export default function ShoppingCart(props) {
 }
 export async function getServerSideProps(context) {
   // const plantID = context.query.plantID;
-  // const cartCookies = context.req.cookies || '[]';
-  // const cartObjectCookie = JSON.parse(cartCookies);
+  const cartCookies = context.req.cookies.cart || '[]';
+  const cartObjectCookie = JSON.parse(cartCookies);
 
   const plants = await readPlants();
+  console.log('Cart:', plants);
   return {
     props: {
       plants: plants,
-      // currentCookies: cartObjectCookie,
+      currentCookies: cartObjectCookie,
     },
   };
 }

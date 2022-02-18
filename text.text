@@ -11,7 +11,7 @@ import { getParsedCookie, setParsedCookie } from '../../util/cookies';
 import { getPlantById } from '../../util/database.js';
 
 export default function SingleAnimal(props) {
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState();
   const [cartCookie, setCartCookie] = useState(props.cartCookies);
 
   console.log('Sprops.cartCookie', props.cartCookie);
@@ -24,39 +24,44 @@ export default function SingleAnimal(props) {
       quantity: quant,
     };
 
+    // update cookie   if (props.cartCookieValue !== '[]')
     let newCookie;
-    // check if a cookie is set
     if (props.cartCookie !== '[]') {
-      // check if plant is aready in cart
       const checkifPlantIsAlreadyInCart = props.cartCookie.some(
         (element) => element.plantId === id,
       );
-
-      // if plant is aready in cart update quantity of plant; else: add new plant to cookie
+      console.log('checkIdenticalId:', checkifPlantIsAlreadyInCart);
       if (checkifPlantIsAlreadyInCart) {
         const newCartCookie = props.cartCookie.map((element) => {
           if (element.plantId === id) {
+            console.log('element.quantity:', element.quantity);
+            console.log('element.quantity-Typeof:', typeof element.quantity);
             element.quantity = element.quantity + quant;
           }
+
           return element;
         });
 
         newCookie = [...newCartCookie];
+        console.log('newCartCookie]', newCookie);
       } else {
         newCookie = [...props.cartCookie, { plantId: id, quantity: quant }];
+        console.log('newCookie:', newCookie);
       }
     } else {
       newCookie = value;
     }
-    // set the new value of the cookie
+    // 3. set the new value of the cookie
     setCartCookie(newCookie);
     setParsedCookie('cart', newCookie);
   }
 
   function changeQuantity(event) {
+    console.log('event.target:', event.target);
     let { value, min, max } = event.target;
     value = Math.max(Number(min), Math.min(Number(max), Number(value)));
     setQuantity(value);
+    console.log('quantitiy:', quantity);
   }
   return (
     <Layout>
@@ -83,17 +88,15 @@ export default function SingleAnimal(props) {
             </p>
             {/* <div> */}
             <label htmlFor="product-quantity">
-              {' '}
-              Select quantity
               {/* // input field for quantitiy: */}
               <input
                 data-test-id="product-quantity"
                 type="number"
                 min="1"
                 max="10"
+                placeholder="select quantity"
                 value={quantity}
                 onChange={(event) => changeQuantity(event)}
-                YX
               />
             </label>
             {/* Button add to cart: */}
@@ -130,7 +133,8 @@ export async function getServerSideProps(context) {
   const cartCookie = JSON.parse(cart);
 
   /*  return singlePlant and plantID via props to frontend */
-
+  console.log('Single-Plant_propsplantID:', plant);
+  console.log('Single-Plant_ID_FromBrowser:', plantID);
   return {
     props: {
       plant: plant,

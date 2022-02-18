@@ -1,7 +1,12 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
-import { heroImage, indexJsStyle, sectionStyle } from '../components/elements';
+import {
+  bestSellerStyle,
+  heroImage,
+  indexJsStyle,
+  styleComp,
+} from '../components/elements';
 import Layout from '../components/Layout';
 import ProductsComponent from '../components/ProductComponent';
 import { readPlants } from '../util/database.js';
@@ -33,8 +38,9 @@ export default function Home(props) {
           </p>
         </div>
       </section>
-      <section css={sectionStyle}>
-        <Products plants={props.plants} cartCookie={cartCookie} />
+      <section css={bestSellerStyle}>
+        <h1>Best Seller</h1>
+        <ProductsComponent plants={props.plants} cartCookie={cartCookie} />
       </section>
     </Layout>
   );
@@ -49,13 +55,13 @@ export async function getServerSideProps(context) {
   const cartCookies = context.req.cookies.cart || '[]';
 
   const allCartCookies = JSON.parse(cartCookies);
-  console.log('Index_ServerSide_Cookies:', allCartCookies);
+  // console.log('Index_ServerSide_Cookies:', allCartCookies);
 
   /* return plants via props to frontend */
   return {
     props: {
       plants: plants,
-      cartCookies: allCartCookies,
+      cartCookies: allCartCookies || null,
     },
   };
 }

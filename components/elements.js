@@ -37,6 +37,10 @@ export const globalStyleBody = (theme) => css`
     background-color: var(--backgroundColor);
   }
 
+  main {
+    margin-top: 4rem;
+  }
+
   /* make img easier to work with*/
   img {
     max-width: 100%; /* ensure that the img gets narrow when viewoprt shrinks*/
@@ -67,6 +71,7 @@ export const globalStyleBody = (theme) => css`
     min-height: 40px;
     padding: 10px 16px;
     margin: 1rem 0;
+    color: #000;
   }
 `;
 
@@ -167,6 +172,21 @@ export const shoppingBagStyle = (theme) => css`
 `;
 
 /* *************************** */
+/*         footer       */
+/* *************************** */
+
+export const footerStyle = css`
+  ${flexCenter}
+  gap: 4rem;
+  ${size('', '4rem')}
+  margin: 2rem;
+
+  a {
+    text-decoration: none;
+  }
+`;
+
+/* *************************** */
 /*         Index.js            */
 /* *************************** */
 
@@ -203,15 +223,30 @@ export const indexJsStyle = (theme) => css`
 
     button {
       ${size('17.65rem', '1.47rem')}
-      /* background-color: #bd692e; */
+
       background-color: #ed943b;
       border: none;
-      color: #fff;
+
       &:hover {
         background-color: #ff6900;
       }
     }
   }
+`;
+
+export const bestSellerStyle = css`
+  margin-top: 15rem;
+  gap: 48px;
+
+  h2 {
+    margin: 8px 0;
+    font-size: 16px;
+  }
+`;
+
+export const styleComp = css`
+  display: flex;
+  flex-direction: column;
 `;
 
 /* *************************** */
@@ -236,39 +271,70 @@ export const sectionStyle = css`
 
 export const singleProductPageStyle = css`
   display: flex;
-  gap: 96px;
+  flex-direction: column;
+  gap: 0rem;
   width: 100%;
   justify-content: center;
   align-items: center;
 
-  article {
+  div:first-of-type {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 500px;
+    gap: 3rem;
 
-    h1 {
-      margin: 16px 0;
-    }
+    article {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 500px;
 
-    p {
-      margin-bottom: 48px;
-    }
-
-    input {
-      padding: 0.75rem 0.5rem 0.75rem 0.75rem;
-      ${size('17.65rem', '1.47rem')}
-    }
-
-    button {
-      ${size('17.65rem', '1.47rem')}
-      background-color: #ed943b;
-      border: none;
-      color: #fff;
-
-      &:hover {
-        background-color: #ff6900;
+      h1 {
+        margin: 16px 0;
       }
+
+      p {
+        margin-bottom: 48px;
+      }
+
+      label {
+        display: flex;
+        align-items: center;
+      }
+      input {
+        padding: 0.75rem 0.5rem 0.75rem 0.75rem;
+        margin-left: 1rem;
+        text-align: center;
+        ${size('9.825rem', '2.47rem')}
+      }
+
+      button {
+        ${size('17.65rem', '1.47rem')}
+        background-color: #ed943b;
+        border: none;
+
+        &:hover {
+          background-color: #ff6900;
+        }
+      }
+    }
+  }
+`;
+
+export const singleProductPageStyleSecondArticle = css`
+  margin-top: 3rem;
+  height: 0px;
+
+  a {
+    text-decoration: none;
+  }
+
+  button {
+    ${size('17.65rem', '1.47rem')}
+
+    border: 1px solid #ed943b;
+    background-color: transparent;
+
+    &:hover {
+      background-color: #ff6900;
     }
   }
 `;
@@ -296,7 +362,11 @@ export const shoppingCartStyle = css`
 
   article:nth-of-type(2) {
     width: 30%;
-    div:first-of-type {
+
+    display: flex;
+    align-items: center;
+
+    div:first-child {
       width: 100%;
       flex-direction: column;
       display: flex;
@@ -304,22 +374,34 @@ export const shoppingCartStyle = css`
       justify-content: space-around;
       background-color: lightgray;
       gap: 32px;
+      padding: 1rem;
+
+      div {
+        display: flex;
+        gap: 1rem;
+        border-bottom: 0.5px solid grey;
+        padding-bottom: 1rem;
+        width: 95%;
+      }
     }
-    div:nth-of-type(2) {
+    /* div:nth-of-type(2) {
       display: flex;
       justify-content: space-around;
-    }
+    } */
     button {
       ${size('17.65rem', '1.47rem')}
       background-color: #ed943b;
       border: none;
-      color: #fff;
 
       &:hover {
         background-color: #ff6900;
       }
     }
   }
+`;
+
+export const plantName = css`
+  margin-left: 1rem;
 `;
 
 /* *************************** */
@@ -355,7 +437,6 @@ export const flexStyle = css`
     ${size('17.65rem', '1.47rem')}
     background-color: #ed943b;
     border: none;
-    color: #fff;
 
     &:hover {
       background-color: #ff6900;

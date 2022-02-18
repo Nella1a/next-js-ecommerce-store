@@ -7,16 +7,23 @@ import image06 from '../public/image06.jpeg';
 import image07 from '../public/image07.jpeg';
 import image08 from '../public/image08.jpeg';
 
-// import { readPlants } from '../util/database.js';
-
 const styleSectionProducts = css`
   display: flex;
   gap: 48px;
-
   h2 {
     margin: 8px 0;
     font-size: 16px;
   }
+
+  img {
+    display: block;
+    border: 5px solid grey;
+  }
+`;
+
+const imgStyle = css`
+  display: block;
+  border: 5px solid grey;
 `;
 
 export default function ProductsComponent(props) {
@@ -32,18 +39,20 @@ export default function ProductsComponent(props) {
       {props.plants.map((event) => {
         return (
           <div key={`guest-${event.id}`}>
-            <Link href={`/Products/${event.id}`}>
+            <Link href={`/Products/${event.id}`} passHref>
               <a data-test-id="ID">
                 <Image
                   src={`/image0${event.id}.jpeg`}
                   width="393"
                   height="491,5"
                   alt="succulenten1"
+                  css={imgStyle}
                 />
               </a>
             </Link>
+
             <h2>{event.name}</h2>
-            <p>{event.price / 100}</p>
+            <p>{event.price}</p>
           </div>
         );
       })}

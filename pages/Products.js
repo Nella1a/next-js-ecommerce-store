@@ -28,9 +28,9 @@ export default function Products(props) {
         <title>View all Plants</title>
         <meta name="description" content="View all Plants" />
       </Head>
+      {/* <h1>Products</h1> */}
       <section css={sectionStyle}>
         {' '}
-        <h1>Products</h1>
         {/* {console.log('Products_Plants_Database:', props.plants)} */}
         {console.log('ProductComponent Cookie:', props.cartCookie)}
         {console.log('ProductComponent1 props.plants:', props.plants)}
