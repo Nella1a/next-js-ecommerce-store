@@ -9,6 +9,7 @@ import {
 import Layout from '../../components/Layout';
 import { getParsedCookie, setParsedCookie } from '../../util/cookies';
 import { getPlantById } from '../../util/database.js';
+import { addAndUpdateQuantityInCookie } from '../../util/functions';
 
 export default function SingleAnimal(props) {
   const [quantity, setQuantity] = useState(1);
@@ -16,43 +17,15 @@ export default function SingleAnimal(props) {
 
   console.log('Sprops.cartCookie', props.cartCookie);
 
-  function cartItems(id, quant) {
-    console.log('id & quantitit:', id, quant);
-    /* new quantity and id of item to set in cart cookie  */
-    const value = {
-      plantID: id,
-      quantity: quant,
-    };
-
-    let newCookie;
-    // check if a cookie is set
-    if (props.cartCookie !== '[]') {
-      // check if plant is aready in cart
-      const checkifPlantIsAlreadyInCart = props.cartCookie.some(
-        (element) => element.plantId === id,
-      );
-
-      // if plant is aready in cart update quantity of plant; else: add new plant to cookie
-      if (checkifPlantIsAlreadyInCart) {
-        const newCartCookie = props.cartCookie.map((element) => {
-          if (element.plantId === id) {
-            element.quantity = element.quantity + quant;
-          }
-          return element;
-        });
-
-        newCookie = [...newCartCookie];
-      } else {
-        newCookie = [...props.cartCookie, { plantId: id, quantity: quant }];
-      }
-    } else {
-      newCookie = value;
-    }
-    // set the new value of the cookie
+  function addToCartEventHandler(newPlantId, newPlantQuantity, cookie) {
+    const newCookie = addAndUpdateQuantityInCookie(
+      newPlantId,
+      newPlantQuantity,
+      cookie,
+    );
     setCartCookie(newCookie);
     setParsedCookie('cart', newCookie);
   }
-
   function changeQuantity(event) {
     let { value, min, max } = event.target;
     value = Math.max(Number(min), Math.min(Number(max), Number(value)));
@@ -76,12 +49,8 @@ export default function SingleAnimal(props) {
           <article>
             <h1>{props.plant.name}</h1>
             <p data-test-id="product-price">{props.plant.price}</p>
-            <p>
-              {props.plant.description}
-              <br />
-              {/*     `single animal page (dynamic route), id: ${props.plant.id}`; */}
-            </p>
-            {/* <div> */}
+            <p>{props.plant.description}</p>
+
             <label htmlFor="product-quantity">
               {' '}
               Select quantity
@@ -99,11 +68,16 @@ export default function SingleAnimal(props) {
             {/* Button add to cart: */}
             <button
               data-test-id="product-add-to-cart"
-              onClick={() => cartItems(props.plant.id, quantity)}
+              onClick={() =>
+                addToCartEventHandler(
+                  props.plant.id,
+                  quantity,
+                  props.cartCookie,
+                )
+              }
             >
               Add to cart
             </button>
-            {/* </div> */}
           </article>
         </div>
         <article css={singleProductPageStyleSecondArticle}>

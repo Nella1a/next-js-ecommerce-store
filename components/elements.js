@@ -367,6 +367,7 @@ export const shoppingCartStyle = css`
     align-items: center;
 
     div:first-child {
+      /* WARNING: Change this to first of type */
       width: 100%;
       flex-direction: column;
       display: flex;

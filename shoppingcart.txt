@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-// import { type } from 'os';
+import { type } from 'os';
 import { useEffect, useState } from 'react';
 import { plantName, shoppingCartStyle } from '../components/elements';
 import Header from '../components/Header';
@@ -14,9 +14,10 @@ import {
   setParsedCookie,
 } from '../util/cookies';
 import { readPlants } from '../util/database';
-import { cartTotalPrice, multiplePriceAndQuantity } from '../util/functions';
+import { CartSum } from '../util/function';
 
 export default function ShoppingCart(props) {
+  const [sumItems, setSumItems] = useState(0);
   // const currentCookies = getParsedCookie('cart');
   const [cookieOfCartItems, setCookieOfCartItems] = useState(
     props.currentCookies,
@@ -25,8 +26,11 @@ export default function ShoppingCart(props) {
   console.log('ShoppingCartCookie:', cookieOfCartItems);
   console.log('ShoppingCartCookie:', typeof cookieOfCartItems);
 
-  let singlePlantPriceTotal = 0;
-  const cartSubTotalPrice = [];
+  let sumofCartItems = 0;
+  let sum = [];
+
+  console.log('sumItems:', sumItems);
+  console.log('sumofCartItems:', sumofCartItems);
 
   function eventHandler(id, quan) {
     console.log('id:', id, 'quan:', quan);
@@ -57,10 +61,7 @@ export default function ShoppingCart(props) {
         </Head>
 
         <section>
-          <h1> Your cart is currently empty.</h1>
-          <Link href="/Products">
-            <a>Continue Shopping</a>
-          </Link>
+          <h1> Upps - your cart is empty</h1>
         </section>
       </Layout>
     );
@@ -100,14 +101,15 @@ export default function ShoppingCart(props) {
                       <div>Price: {element.price}</div>
                       <div>Quantity: {cookie.quantity}</div>
                       <div>
-                        total:
-                        {
-                          (singlePlantPriceTotal = multiplePriceAndQuantity(
-                            element.price,
-                            cookie.quantity,
-                          ))
+                        total:{' '}
+                        {/* {
+                          (sumofCartItems = (
+                            element.price * cookie.quantity
+                          ).toFixed(2))
                         }
-                        {cartSubTotalPrice.push(singlePlantPriceTotal)}
+                        {sum.push(sumofCartItems)} */}
+                        {(sumofCartItems = element.price * cookie.quantity)}
+                        {console.log('sumOfCartItems')}
                       </div>
 
                       <button
@@ -132,8 +134,8 @@ export default function ShoppingCart(props) {
               <p>
                 <span>Total:</span>
               </p>
-
-              <p>{cartTotalPrice(cartSubTotalPrice)}</p>
+              {/* <p>{sum.reduce((a, b) => a + b)}</p> */}
+              <p>{sumItems}</p>
             </div>
 
             <Link href="/checkout" passHref>

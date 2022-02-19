@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import { flexStyle, formStyle } from '../components/elements';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
@@ -17,7 +18,7 @@ export default function CheckOut() {
       <section>
         {' '}
         <h1>Shipping Information</h1>
-        <form css={formStyle}>
+        <form css={formStyle} onsubmit="event.preventDefault()">
           <section>
             <h2>Delivery to: </h2>
             <p>
@@ -178,7 +179,11 @@ export default function CheckOut() {
               </p>
             </div>
             <div css={flexStyle}>
-              <button>Complete payment</button>
+              <Link href="/thankyou">
+                <a>
+                  <button>Complete payment</button>
+                </a>
+              </Link>
             </div>
           </section>
         </form>

@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-// read specific cookie according to key and return its value; if no cookie return undefined
+// read cookie
 export function getParsedCookie(key) {
   try {
     return JSON.parse(Cookies.get(key));
@@ -9,11 +9,12 @@ export function getParsedCookie(key) {
   }
 }
 
+// set cookie
 export function setParsedCookie(key, value) {
   Cookies.set(key, JSON.stringify(value));
 }
 
-// delete cookie/item from cart
+// delete cookie
 export function deleteCookie(key) {
   Cookies.remove(key);
 }
