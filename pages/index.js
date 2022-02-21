@@ -33,13 +33,18 @@ export default function Home(props) {
           <p>Lorem Ipsum Lorem Lorem!</p>
           <p>
             <Link href="/Products" passHref>
-              <button>View All Plants</button>
+              <a>
+                <button data-test-id="button-view-all-plants">
+                  {' '}
+                  View All Plants
+                </button>
+              </a>
             </Link>
           </p>
         </div>
       </section>
       <section css={bestSellerStyle}>
-        <h1>Best Seller</h1>
+        <h1>Best Sellers</h1>
         <ProductsComponent plants={props.plants} cartCookie={cartCookie} />
       </section>
     </Layout>
