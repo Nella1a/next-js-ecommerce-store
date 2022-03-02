@@ -46,8 +46,8 @@ export default function Header() {
         <Link href="/Products">
           <a data-test-id="products-link">Products</a>
         </Link>
-        <Link href="/Shoppingcart" data-test-id="cart-link">
-          <a>
+        <Link href="/Shoppingcart">
+          <a data-test-id="header-shoppingCart-link">
             <div css={shoppingBagStyle}>
               <div>
                 <Image src={shoppingBag} alt="shopping cart icon" />

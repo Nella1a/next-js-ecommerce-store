@@ -1,7 +1,12 @@
 import Cookies from 'js-cookie';
 
+type Value = {
+  plantID: number;
+  quantity: number;
+};
+
 // read cookie
-export function getParsedCookie(key) {
+export function getParsedCookie(key: string) {
   try {
     return JSON.parse(Cookies.get(key));
   } catch (err) {
@@ -10,15 +15,15 @@ export function getParsedCookie(key) {
 }
 
 // set cookie
-export function setParsedCookie(key, value) {
+export function setParsedCookie(key: string, value: Value) {
   Cookies.set(key, JSON.stringify(value));
 }
 
 // delete cookie
-export function deleteCookie(key) {
+export function deleteCookie(key: string) {
   Cookies.remove(key);
 }
 
-export function stringifyCookieValue(value) {
+export function stringifyCookieValue(value: Value) {
   return JSON.stringify(value);
 }

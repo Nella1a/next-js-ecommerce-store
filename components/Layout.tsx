@@ -2,7 +2,11 @@ import Head from 'next/head';
 import Footer from './Footer';
 import Header from './Header';
 
-export default function Layout(props) {
+type Props = {
+  children?: React.ReactNode;
+};
+
+export default function Layout(props: Props) {
   return (
     <>
       <Head>

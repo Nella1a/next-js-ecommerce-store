@@ -5,7 +5,7 @@ export default function ThankYouPage() {
   return (
     <Layout>
       <Head>
-        <title>checkout Thank You</title>
+        <title>Thank you for your order</title>
         <meta name="description" content="checkout thank you page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

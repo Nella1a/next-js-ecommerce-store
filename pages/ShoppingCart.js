@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import Cookies from 'js-cookie';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -111,6 +112,7 @@ export default function ShoppingCart(props) {
                       </div>
 
                       <button
+                        data-test-id="delete item from cart"
                         onClick={() =>
                           eventHandler(cookie.plantId, cookie.quantity)
                         }
@@ -145,6 +147,7 @@ export default function ShoppingCart(props) {
     </Layout>
   );
 }
+
 export async function getServerSideProps(context) {
   // const plantID = context.query.plantID;
   const cartCookies = context.req.cookies.cart || '[]';

@@ -1,4 +1,5 @@
 import { css, Global } from '@emotion/react';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -19,7 +20,17 @@ const styleSectionProducts = css`
   }
 `;
 
-export default function Products(props) {
+type Plants = {
+  id: number;
+  name: string;
+  price: number;
+};
+
+type Props = {
+  plants: Plants[];
+};
+
+export default function Products(props: Props) {
   // console.log('Products_cartCookies:', props.cartCookie);
 
   return (
@@ -32,14 +43,14 @@ export default function Products(props) {
       <section css={sectionStyle}>
         {' '}
         {/* {console.log('Products_Plants_Database:', props.plants)} */}
-        {console.log('ProductComponent Cookie:', props.cartCookie)}
+        {/*   {console.log('ProductComponent Cookie:', props.cartCookie)}
         {console.log('ProductComponent1 props.plants:', props.plants)}
-        {console.log(typeof props.plants)}
+        {console.log(typeof props.plants)} */}
         {props.plants.map((event) => {
           return (
             <div key={`guest-${event.id}`}>
               <Link href={`/Products/${event.id}`}>
-                <a data-test-id="ID">
+                <a data-test-id={`data-test-id-${event.id}`}>
                   <Image
                     src={`/image0${event.id}.jpeg`}
                     width="393"
@@ -60,7 +71,25 @@ export default function Products(props) {
   );
 }
 
-export async function getServerSideProps(context) {
+// export async function getServerSideProps(context) {
+//   // read plants from database
+//   const plants = await readPlants();
+//   // if the cookie is undefined it is going to return an empty array
+//   // If it is defined it will return everything inside of it
+//   const cartCookies = context.req.cookies.cart || '[]';
+
+//   const allCartCookies = JSON.parse(cartCookies);
+//   // console.log('headCookdies:', allCartCookies);
+//   /* return plants via props to frontend */
+//   return {
+//     props: {
+//       plants: plants,
+//       cartCookies: allCartCookies,
+//     },
+//   };
+// }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
   // read plants from database
   const plants = await readPlants();
   // if the cookie is undefined it is going to return an empty array
@@ -76,4 +105,4 @@ export async function getServerSideProps(context) {
       cartCookies: allCartCookies,
     },
   };
-}
+};

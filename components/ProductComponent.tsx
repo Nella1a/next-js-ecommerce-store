@@ -1,11 +1,6 @@
-import { css, Global } from '@emotion/react';
+import { css } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
-import image05 from '../public/image05.jpeg';
-import image06 from '../public/image06.jpeg';
-import image07 from '../public/image07.jpeg';
-import image08 from '../public/image08.jpeg';
 
 const styleSectionProducts = css`
   display: flex;
@@ -26,21 +21,28 @@ const imgStyle = css`
   border: 5px solid grey;
 `;
 
-export default function ProductsComponent(props) {
+type Plants = {
+  id: number;
+  name: string;
+  price: number;
+};
+
+type Props = {
+  plants: Plants[];
+};
+
+export default function ProductsComponent(props: Props) {
   return (
-    /*   <>
-      {console.log('ProductComponent Cookie:', props.cartCookie)}
-      {console.log('ProductComponent1 props.plants:', props.plants)}
-    </> */
     <section css={styleSectionProducts}>
-      {console.log('ProductComponent Cookie:', props.cartCookie)}
-      {console.log('ProductComponent1 props.plants:', props.plants)}
+      {/* {console.log('ProductComponent Cookie:', props.cartCookie)} */}
+      {/* {console.log('ProductComponent1 props.plants:', props.plants)} */}
       {console.log(typeof props.plants)}
       {props.plants.map((event) => {
         return (
           <div key={`guest-${event.id}`}>
+            {console.log('event.id', event.id)}
             <Link href={`/Products/${event.id}`} passHref>
-              <a data-test-id="ID">
+              <a>
                 <Image
                   src={`/image0${event.id}.jpeg`}
                   width="393"

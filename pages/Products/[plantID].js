@@ -56,13 +56,13 @@ export default function SingleAnimal(props) {
               Select quantity
               {/* // input field for quantitiy: */}
               <input
+                name="selectQuantity"
                 data-test-id="product-quantity"
                 type="number"
                 min="1"
                 max="10"
                 value={quantity}
                 onChange={(event) => changeQuantity(event)}
-                YX
               />
             </label>
             {/* Button add to cart: */}
