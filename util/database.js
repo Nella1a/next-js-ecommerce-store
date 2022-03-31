@@ -3,13 +3,12 @@ import camelcaseKeys from 'camelcase-keys';
 import { config } from 'dotenv-safe';
 // 1. Import postgres (= client library which connects to DBMS)
 import postgres from 'postgres';
+import setPostgresDefaultsOnHeroku from './setPostgresDefaultsOnHeroku.js';
 
+setPostgresDefaultsOnHeroku();
 config();
 
 // Type needed for the connection function below
-declare module globalThis {
-  let postgresSqlClient: ReturnType<typeof postgres> | undefined;
-}
 
 function connectOneTimeToDatabase() {
   let sql;
@@ -33,8 +32,6 @@ function connectOneTimeToDatabase() {
 
 // Connect to PostgresSQl
 const sql = connectOneTimeToDatabase();
-
-
 
 export async function readPlants() {
   const plants = await sql`
