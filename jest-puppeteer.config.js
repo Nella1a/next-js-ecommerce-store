@@ -4,9 +4,9 @@ module.exports = {
     headless: false,
   },
 
-  // server: {
-  //   // command: 'yarn dev',
-  // },
+  server: {
+    command: 'yarn dev',
+  },
 
   browserContext: 'default',
 };
