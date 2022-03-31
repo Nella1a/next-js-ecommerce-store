@@ -1,17 +1,15 @@
-import { css } from '@emotion/react';
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+// import { useState } from 'react';
 import { flexStyle, formStyle } from '../components/elements';
-import Header from '../components/Header';
 import Layout from '../components/Layout';
-import ProductsComponent from '../components/ProductComponent';
 import { deleteCookie } from '../util/cookies';
 
 export default function CheckOut() {
-  const [required, setRequired] = useState(true);
+  // const [required, setRequired] = useState(true);
 
+  const required = true;
   function checkform(event) {
     console.log(`So your name is ${event.target.name.value}?`);
     // event.preventDefault();
@@ -59,7 +57,7 @@ export default function CheckOut() {
             </p>
             <div css={flexStyle}>
               <p>
-                <label htmlfor="firstName">
+                <label htmlFor="firstName">
                   <span>First Name: </span>
 
                   <strong>
@@ -77,7 +75,7 @@ export default function CheckOut() {
                 </label>
               </p>
               <p>
-                <label htmlfor="lastName">
+                <label htmlFor="lastName">
                   <span>Last Name </span>
                   <strong>
                     <abbr title="required" aria-label="required">
@@ -95,7 +93,7 @@ export default function CheckOut() {
             </div>
             <div css={flexStyle}>
               <p>
-                <label htmlfor="adress">
+                <label htmlFor="adress">
                   <span>Adress: </span>
                   <strong>
                     <abbr title="required" aria-label="required">
@@ -111,7 +109,7 @@ export default function CheckOut() {
                 />
               </p>
               <p>
-                <label htmlfor="city">
+                <label htmlFor="city">
                   <span>City: </span>
                   <strong>
                     <abbr title="required" aria-label="required">
@@ -183,7 +181,7 @@ export default function CheckOut() {
               </select>
             </p> */}
             <p>
-              <label htmlfor="cardNumber">
+              <label htmlFor="cardNumber">
                 <span>Card number:</span>
                 <strong>
                   <abbr title="required" aria-label="required">
@@ -195,17 +193,17 @@ export default function CheckOut() {
                 type="tel"
                 id="cardNumber"
                 name="cardnumber"
-                inputmode="numeric"
+                inputMode="numeric"
                 pattern="[0-9\s]{13,19}"
-                autocomplete="cc-number"
-                maxlength="19"
+                autoComplete="cc-number"
+                maxLength="19"
                 placeholder="xxxx xxxx xxxx xxxx"
                 data-test-id="checkout-credit-card"
                 required="required"
               />
             </p>
             <p>
-              <label htmlfor="nameOncard">
+              <label htmlFor="nameOncard">
                 <span>Name on card:</span>
                 <strong>
                   <abbr title="required" aria-label="required">
@@ -222,7 +220,7 @@ export default function CheckOut() {
             </p>
             <div css={flexStyle}>
               <p>
-                <label htmlfor="expiration">
+                <label htmlFor="expiration">
                   <span>Expiry Date:</span>
                   <strong>
                     <abbr title="required" aria-label="required">
@@ -239,7 +237,7 @@ export default function CheckOut() {
                 />
               </p>
               <p>
-                <label htmlfor="securityCode">
+                <label htmlFor="securityCode">
                   <span>Security Code</span>
                   <strong>
                     <abbr title="required" aria-label="required">
@@ -252,8 +250,8 @@ export default function CheckOut() {
                   required="required"
                   // pattern="^(0[1-9]|1[0-2])\/([0-9]{2})$"
                   name="securityCode"
-                  autocomplete="cc-csc"
-                  inputmode="numeric"
+                  autoComplete="cc-csc"
+                  inputMode="numeric"
                   maxLength="3"
                   data-test-id="checkout-security-code"
                 />
@@ -285,7 +283,7 @@ export default function CheckOut() {
                 />
               )}
             </div>
-            {console.log('required', required)}
+            {/* {setRequired(false)} */}
           </section>
         </form>
       </section>

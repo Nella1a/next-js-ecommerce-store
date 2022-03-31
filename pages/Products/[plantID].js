@@ -7,7 +7,8 @@ import {
   singleProductPageStyleSecondArticle,
 } from '../../components/elements';
 import Layout from '../../components/Layout';
-import { getParsedCookie, setParsedCookie } from '../../util/cookies';
+import { setParsedCookie } from '../../util/cookies';
+// import { getParsedCookie, setParsedCookie } from '../../util/cookies';
 import { getPlantById } from '../../util/database.js';
 import { addAndUpdateQuantityInCookie } from '../../util/functions';
 
@@ -16,6 +17,7 @@ export default function SingleAnimal(props) {
   const [cartCookie, setCartCookie] = useState(props.cartCookies);
 
   console.log('Sprops.cartCookie', props.cartCookie);
+  console.log(cartCookie);
 
   function addToCartEventHandler(newPlantId, newPlantQuantity, cookie) {
     const newCookie = addAndUpdateQuantityInCookie(
@@ -27,7 +29,11 @@ export default function SingleAnimal(props) {
     setParsedCookie('cart', newCookie);
   }
   function changeQuantity(event) {
+    // const { min, max } = event.target;
+    // let value = event.target;
+
     let { value, min, max } = event.target;
+    // let value = event.target;
     value = Math.max(Number(min), Math.min(Number(max), Number(value)));
     setQuantity(value);
   }
@@ -48,7 +54,7 @@ export default function SingleAnimal(props) {
 
           <article>
             <h1>{props.plant.name}</h1>
-            <p data-test-id="product-price">{props.plant.price}</p>
+            <p data-test-id="product-price"> €{props.plant.price}</p>
             <p>{props.plant.description}</p>
 
             <label htmlFor="product-quantity">
@@ -72,6 +78,7 @@ export default function SingleAnimal(props) {
                 addToCartEventHandler(
                   props.plant.id,
                   quantity,
+                  // props.cartCookie,
                   props.cartCookie,
                 )
               }
@@ -95,7 +102,7 @@ export default function SingleAnimal(props) {
 export async function getServerSideProps(context) {
   /* get current plant id from ../product/id */
   const plantID = context.query.plantID;
-
+  console.log('plantID', plantID);
   /* get the plantID from database */
   const plant = await getPlantById(plantID);
 
@@ -113,9 +120,3 @@ export async function getServerSideProps(context) {
     },
   };
 }
-
-/*
-Ich hole mir hier nur den Article aus der Datenbank den ich brauche.
-Dieser wird innerhalb von ServerSideProps geholt und mittels props übergeben.
-im Frontend kann ich dan mittels props.name/id/.. auf den Article zugreifen
-*/

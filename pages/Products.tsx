@@ -1,24 +1,24 @@
-import { css, Global } from '@emotion/react';
+// import { css, Global } from '@emotion/react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { sectionStyle } from '../components/elements';
-import Header from '../components/Header';
+// import Header from '../components/Header';
 import Layout from '../components/Layout';
-import ProductsComponent from '../components/ProductComponent';
+// import ProductsComponent from '../components/ProductComponent';
 import { readPlants } from '../util/database';
-import SingleAnimal from './Products/[plantID]';
+// import SingleAnimal from './Products/[plantID]';
 
-const styleSectionProducts = css`
-  display: flex;
-  gap: 48px;
+// const styleSectionProducts = css`
+//   display: flex;
+//   gap: 48px;
 
-  h2 {
-    margin: 8px 0;
-    font-size: 16px;
-  }
-`;
+//   h2 {
+//     margin: 8px 0;
+//     font-size: 16px;
+//   }
+// `;
 
 type Plants = {
   id: number;
@@ -32,7 +32,7 @@ type Props = {
 
 export default function Products(props: Props) {
   // console.log('Products_cartCookies:', props.cartCookie);
-
+  console.log('props:', props);
   return (
     <Layout>
       <Head>
@@ -51,6 +51,7 @@ export default function Products(props: Props) {
             <div key={`guest-${event.id}`}>
               <Link href={`/Products/${event.id}`}>
                 <a data-test-id={`data-test-id-${event.id}`}>
+                  {console.log('id:', event.id)}
                   <Image
                     src={`/image0${event.id}.jpeg`}
                     width="393"
@@ -60,7 +61,7 @@ export default function Products(props: Props) {
                 </a>
               </Link>
               <h2>{event.name}</h2>
-              <p>{event.price}</p>
+              <p>€{event.price}</p>
             </div>
           );
         })}
@@ -92,6 +93,7 @@ export default function Products(props: Props) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // read plants from database
   const plants = await readPlants();
+  console.log('plants gSSP:', plants);
   // if the cookie is undefined it is going to return an empty array
   // If it is defined it will return everything inside of it
   const cartCookies = context.req.cookies.cart || '[]';

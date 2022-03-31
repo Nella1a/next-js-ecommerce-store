@@ -286,6 +286,7 @@ export const singleProductPageStyle = css`
       flex-direction: column;
       justify-content: center;
       height: 500px;
+      width: 50%;
 
       h1 {
         margin: 16px 0;

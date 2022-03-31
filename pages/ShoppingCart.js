@@ -1,17 +1,18 @@
-import { css } from '@emotion/react';
-import Cookies from 'js-cookie';
-import { GetServerSideProps } from 'next';
+// import { css } from '@emotion/react';
+// import Cookies from 'js-cookie';
+// import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 // import { type } from 'os';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { plantName, shoppingCartStyle } from '../components/elements';
-import Header from '../components/Header';
+// import Header from '../components/Header';
 import Layout from '../components/Layout';
 import {
   deleteCookie,
-  getParsedCookie,
+  // getParsedCookie,
   setParsedCookie,
 } from '../util/cookies';
 import { readPlants } from '../util/database';
@@ -98,10 +99,10 @@ export default function ShoppingCart(props) {
                         />
                         <div css={plantName}>{element.name}</div>
                       </div>
-                      <div>Price: {element.price}</div>
+                      <div>Price: € {element.price}</div>
                       <div>Quantity: {cookie.quantity}</div>
                       <div>
-                        total:
+                        total: €
                         {
                           (singlePlantPriceTotal = multiplePriceAndQuantity(
                             element.price,
@@ -135,7 +136,7 @@ export default function ShoppingCart(props) {
                 <span>Total:</span>
               </p>
 
-              <p>{cartTotalPrice(cartSubTotalPrice)}</p>
+              <p>€ {cartTotalPrice(cartSubTotalPrice)}</p>
             </div>
 
             <Link href="/checkout" passHref>

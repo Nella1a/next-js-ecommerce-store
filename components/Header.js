@@ -6,7 +6,7 @@ import { getParsedCookie } from '../util/cookies';
 import { headerStyle, shoppingBagStyle } from './elements';
 
 export default function Header() {
-  const [sumOfcartItems, setSumOfCartItems] = useState(0);
+  const [sumOfcartItems, setSumOfcartItems] = useState(0);
 
   /* read cookies: return cookie or [] */
   const currentCookies = getParsedCookie('cart');
@@ -18,10 +18,10 @@ export default function Header() {
       const reducedAbc = abc.reduce((a, b) => a + b, 0);
       const reducer = (previousValue, currentValue) =>
         previousValue + currentValue;
-      setSumOfCartItems(abc.reduce(reducer));
-      setSumOfCartItems(reducedAbc);
+      setSumOfcartItems(abc.reduce(reducer));
+      setSumOfcartItems(reducedAbc);
     } else {
-      setSumOfCartItems(0);
+      setSumOfcartItems(0);
     }
   }, [currentCookies]);
 

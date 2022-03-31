@@ -12,13 +12,6 @@ export default function ThankYouPage() {
 
       <section css>
         <h1>Thank you for your order.</h1>
-        <article>
-          <p>Your Order Number: XXX </p>
-          <p>
-            We are processing it now. You will receive an email confirmation
-            shortly.{' '}
-          </p>
-        </article>
       </section>
     </Layout>
   );
