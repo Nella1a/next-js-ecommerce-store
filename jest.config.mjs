@@ -1,6 +1,6 @@
 const config = {
-  // testEnvironment: 'jsdom',
-  preset: 'jest-puppeteer',
+  testEnvironment: 'jsdom',
+  // preset: 'jest-puppeteer',
   testPathIgnorePatterns: ['<rootDir>/util/__tests__'],
   // testPathIgnorePatterns: ['<rootDir>/integration'],
 };
