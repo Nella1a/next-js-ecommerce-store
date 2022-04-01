@@ -21,8 +21,9 @@ Clone the repository and install all dependencies
 git clone https://github.com/Nella1a/next-js-ecommerce-store
 cd next-js-ecommerce-store
 yarn
-Setup a database with postgres on your computer
 ```
+
+Setup a database with postgres on your computer
 
 ```
 psql <login>
