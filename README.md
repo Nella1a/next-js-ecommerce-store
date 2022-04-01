@@ -1,6 +1,6 @@
 # ecommerce store for plants
 
-## description
+## Description
 
 - landing page
 - Products-Overview page
@@ -17,11 +17,17 @@
 
 Clone the repository and install all dependencies
 
-`git clone https://github.com/Nella1a/next-js-ecommerce-store cd next-js-ecommerce-store yarn Setup a database with postgres on your computer:`
+````
+git clone https://github.com/Nella1a/next-js-ecommerce-store cd next-js-ecommerce-store yarn Setup a database with postgres on your computer:
+```
 
-`psql <login> CREATE DATABASE <database name>; CREATE USER <username> WITH ENCRYPTED PASSWORD '<pw>'; GRANT ALL PRIVILEGES ON DATABASE <database name> TO <user name>; Create a .env file and include all information for the database (eg password, username). Use yarn migrate up/down to run migrations.`
+````
 
-### Screenshots of the project
+psql <login> CREATE DATABASE <database name>; CREATE USER <username> WITH ENCRYPTED PASSWORD '<pw>'; GRANT ALL PRIVILEGES ON DATABASE <database name> TO <user name>; Create a .env file and include all information for the database (eg password, username). Use yarn migrate up/down to run migrations.
+
+```
+
+## Screenshots of the project
 
 <p>
   <img src="./public/landingPage.png" width="400" alt="screenhot of original landig page">
@@ -32,3 +38,4 @@ Clone the repository and install all dependencies
 <p>
   <img src="./public/shoppingCart.png" width="400" alt="screenhot of original landig page">
 </p>
+```
