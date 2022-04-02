@@ -34,17 +34,17 @@ export default function Header() {
           </a>
         </Link>
         <Link href="/Products">
-          <a>Sale</a>
+          <a data-test-id="products-link">Products</a>
         </Link>
-        <Link href="/Products">
+        <Link href="/Underconstruction">
           <a>Inspiration</a>
         </Link>
-        <Link href="/Products">
+        <Link href="/Underconstruction">
           <a>Contact</a>
         </Link>
 
-        <Link href="/Products">
-          <a data-test-id="products-link">Products</a>
+        <Link href="/Underconstruction">
+          <a>Sale</a>
         </Link>
         <Link href="/Shoppingcart">
           <a data-test-id="header-shoppingCart-link">
