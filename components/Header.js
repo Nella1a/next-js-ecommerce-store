@@ -28,7 +28,7 @@ export default function Header() {
   return (
     <header css={headerStyle}>
       <nav>
-        <Link href="http://localhost:3000/">
+        <Link href="http://localhost:3000/" passHref>
           <a>
             <img src="/logo_shelovesplants.svg" alt="logo she loves plants" />
           </a>
