@@ -132,15 +132,15 @@ export const headerStyle = css`
       display: block;
       font-weight: bold;
       color: black;
-
-      &:hover {
-        border-bottom: 3px solid #ed943b;
-      }
     }
   }
 
   a:nth-of-type(2) {
     margin-left: auto;
+
+    &:hover {
+      border-bottom: 3px solid #ed943b;
+    }
   }
 `;
 
