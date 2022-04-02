@@ -54,7 +54,7 @@ export default function ProductsComponent(props: Props) {
             </Link>
 
             <h2>{event.name}</h2>
-            <p>{event.price}</p>
+            <p>€{event.price}</p>
           </div>
         );
       })}

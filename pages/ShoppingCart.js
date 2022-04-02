@@ -7,7 +7,11 @@ import Link from 'next/link';
 // import { type } from 'os';
 // import { useEffect, useState } from 'react';
 import { useState } from 'react';
-import { plantName, shoppingCartStyle } from '../components/elements';
+import {
+  plantName,
+  shoppingCartStyle,
+  underConstruction,
+} from '../components/elements';
 // import Header from '../components/Header';
 import Layout from '../components/Layout';
 import {
@@ -58,10 +62,10 @@ export default function ShoppingCart(props) {
           <meta name="description" content="Your Shopping Cart" />
         </Head>
 
-        <section>
+        <section css={underConstruction}>
           <h1> Your cart is currently empty.</h1>
-          <Link href="/Products">
-            <a>Continue Shopping</a>
+          <Link href="/Products" passHref>
+            <button>Continue Shopping</button>
           </Link>
         </section>
       </Layout>
