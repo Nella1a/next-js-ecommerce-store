@@ -61,26 +61,3 @@ export default function ProductsComponent(props: Props) {
     </section>
   );
 }
-
-// export async function getServerSideProps(context) {
-//   // const plantID = context.query.plantID;
-
-//   const plants = await readPlants();
-
-//   return {
-//     props: {
-//       plants: plants,
-//     },
-//   };
-// }
-
-// export async function getServerSideProps() {
-//   // const plantID = context.query.plantID;
-
-//   const plants = await readPlants();
-//   return {
-//     props: {
-//       plants: plants,
-//     },
-//   };
-// }
