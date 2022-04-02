@@ -47,18 +47,15 @@ export default function Home(props: Props) {
           <p>Lorem Ipsum Lorem Lorem!</p>
           <p>
             <Link href="/Products" passHref>
-              <a>
-                <button data-test-id="button-view-all-plants">
-                  {' '}
-                  View All Plants
-                </button>
-              </a>
+              <button data-test-id="button-view-all-plants">
+                {' '}
+                View All Plants
+              </button>
             </Link>
           </p>
         </div>
       </section>
       <section css={bestSellerStyle}>
-        <h1>Best Sellers</h1>
         <ProductsComponent plants={props.plants} />
       </section>
     </Layout>
