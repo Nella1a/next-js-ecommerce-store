@@ -62,14 +62,14 @@ export const globalStyleBody = (theme) => css`
   }
 
   button {
-    letter-spacing: 0.5px;
-    line-height: 18px;
+    letter-spacing: 0.031rem;
+    line-height: 1.125rem;
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 0.75rem;
     display: block;
-    min-height: 40px;
-    padding: 10px 16px;
+    min-height: 2.5rem;
+    padding: 0.625rem 1rem;
     margin: 1rem 0;
     color: #000;
   }
@@ -131,15 +131,16 @@ export const headerStyle = css`
       text-decoration: none;
       display: block;
       font-weight: bold;
-    }
-
-    a:nth-of-type(2) {
-      margin-left: auto;
+      color: black;
 
       &:hover {
-        border-bottom: 3px solid red;
+        border-bottom: 3px solid #ed943b;
       }
     }
+  }
+
+  a:nth-of-type(2) {
+    margin-left: auto;
   }
 `;
 
@@ -235,7 +236,7 @@ export const indexJsStyle = (theme) => css`
 `;
 
 export const bestSellerStyle = css`
-  margin-top: 15rem;
+  margin-top: 30rem;
   gap: 48px;
 
   h2 {
@@ -437,6 +438,28 @@ export const flexStyle = css`
   }
   button {
     ${size('17.65rem', '1.47rem')}
+    background-color: #ed943b;
+    border: none;
+
+    &:hover {
+      background-color: #ff6900;
+    }
+  }
+`;
+/* *************************** */
+/*    Underconstruction        */
+/* *************************** */
+export const underConstruction = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  h1 {
+    margin-top: 3rem;
+  }
+
+  button {
+    ${size('15rem', '1.47rem')}
     background-color: #ed943b;
     border: none;
 
