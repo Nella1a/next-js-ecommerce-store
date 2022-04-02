@@ -46,17 +46,17 @@ export default function Header() {
         <Link href="/Underconstruction">
           <a>Sale</a>
         </Link>
-        <Link href="/Shoppingcart">
-          <a data-test-id="header-shoppingCart-link">
-            <div css={shoppingBagStyle}>
+        <Link href="/Cart" passHref>
+          {/* <a data-test-id="header-shoppingCart-link"> */}
+          <div css={shoppingBagStyle}>
+            <div>
+              <Image src={shoppingBag} alt="shopping cart icon" />
               <div>
-                <Image src={shoppingBag} alt="shopping cart icon" />
-                <div>
-                  <span data-test-id="cart-count">{sumOfcartItems}</span>
-                </div>
+                <span data-test-id="cart-count">{sumOfcartItems}</span>
               </div>
             </div>
-          </a>
+          </div>
+          {/* </a> */}
         </Link>
       </nav>
     </header>
