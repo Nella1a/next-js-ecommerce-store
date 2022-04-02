@@ -1,4 +1,4 @@
-import { addAndUpdateQuantityInCookie } from '../../../util/functions';
+import { addAndUpdateQuantityInCookie } from '../functions';
 
 // Unit: Test function for updating quantity in item of cookie (eg. adding an item to the cart that already exists)
 
