@@ -1,12 +1,24 @@
+// module.exports = {
+//   launch: {
+//     // // Comment this in if you want to see the browser
+//     headless: false,
+//   },
+
+//   server: {
+//     command: 'yarn dev',
+//   },
+
+//   browserContext: 'default',
+// };
+
 module.exports = {
   launch: {
-    // // Comment this in if you want to see the browser
-    headless: false,
+    // headless: false,
   },
 
   server: {
-    command: 'yarn dev',
+    command: 'yarn start',
   },
 
-  browserContext: 'default',
+  // browserContext: 'default',
 };
