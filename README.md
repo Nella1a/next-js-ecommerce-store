@@ -3,11 +3,11 @@
 ## Description
 
 - landing page
-- Products-Overview page
-- Single product page, includes price, description and possibility to select quantiy and add to cart
-- Shopping cart page, shows selected product(s), price, quantity and total price
-- Checkout page, includes a form for shipping address and payment details
-- Thank you page
+- products-overview page
+- single product page, includes price, description and possibility to select quantity and add to cart
+- shopping cart page, shows selected product(s), price, quantity and total price
+- checkout page, includes a form for shipping address and payment details
+- thank you page
 
 ## Languages & Technologies used
 
