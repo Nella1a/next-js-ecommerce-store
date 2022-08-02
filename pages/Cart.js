@@ -7,6 +7,7 @@ import Link from 'next/link';
 // import { type } from 'os';
 // import { useEffect, useState } from 'react';
 import { useState } from 'react';
+import AddQuantity from '../components/AddQuantity';
 import {
   plantName,
   shoppingCartStyle,
@@ -14,11 +15,7 @@ import {
 } from '../components/elements';
 // import Header from '../components/Header';
 import Layout from '../components/Layout';
-import {
-  deleteCookie,
-  // getParsedCookie,
-  setParsedCookie,
-} from '../util/cookies';
+import { deleteCookie, setParsedCookie } from '../util/cookies';
 import { readPlants } from '../util/database';
 import { cartTotalPrice, multiplePriceAndQuantity } from '../util/functions';
 
@@ -104,7 +101,8 @@ export default function ShoppingCart(props) {
                         <div css={plantName}>{element.name}</div>
                       </div>
                       <div>Price: € {element.price}</div>
-                      <div>Quantity: {cookie.quantity}</div>
+
+                      <AddQuantity quantity={cookie.quantity}/>
                       <div>
                         total: €
                         {
@@ -116,6 +114,9 @@ export default function ShoppingCart(props) {
                         {cartSubTotalPrice.push(singlePlantPriceTotal)}
                       </div>
 
+
+
+
                       <button
                         data-test-id="delete item from cart"
                         onClick={() =>
@@ -124,6 +125,7 @@ export default function ShoppingCart(props) {
                       >
                         x
                       </button>
+
                     </div>
                   )
                 ); /* Ende Return 2 */
