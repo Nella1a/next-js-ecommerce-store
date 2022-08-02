@@ -92,12 +92,16 @@ export default function ShoppingCart(props) {
                   element.id === cookie.plantId && (
                     <div key={`cartItems_${props.plants.id}`}>
                       <div>
+                      <Link href={`/Products/${element.id}`} passHref>
+                        <a>
                         <Image
                           src={`/image0${cookie.plantId}.jpeg`}
                           width="98,25"
                           height="122,87"
                           alt="succulenten1"
                         />
+                        </a>
+                        </Link>
                         <div css={plantName}>{element.name}</div>
                       </div>
                       <div>Price: € {element.price}</div>
