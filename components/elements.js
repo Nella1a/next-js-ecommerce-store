@@ -39,11 +39,12 @@ export const globalStyleBody = (theme) => css`
 
   main {
     margin-top: 4rem;
+    height: auto;
   }
 
   /* make img easier to work with*/
   img {
-    max-width: 100%; /* ensure that the img gets narrow when viewoprt shrinks*/
+   //max-width: 100%; /* ensure that the img gets narrow when viewoprt shrinks*/
     display: block;
   }
 
@@ -108,7 +109,7 @@ export const headerStyle = css`
   z-index: 1;
 
   nav {
-    width: 1200px;
+    max-width: 1200px;
     ${marginCenter}
     /* margin: 0 auto; */
     position: relative;
@@ -121,6 +122,11 @@ export const headerStyle = css`
     z-index: 1;
     height: 4rem;
     color: #43964f;
+
+    @media only screen and (max-width:750px) {
+      gap: 30px;
+  }
+
 
     img {
       width: 80%;
@@ -137,10 +143,12 @@ export const headerStyle = css`
 
   a:nth-of-type(2) {
     margin-left: auto;
+  }
 
+  a:nth-of-type(n+2) {
     &:hover {
-      border-bottom: 3px solid #ed943b;
-    }
+        border-bottom: 3px solid #ed943b;
+      }
   }
 `;
 
@@ -193,19 +201,57 @@ export const footerStyle = css`
 
 export const heroImage = css`
   ${marginCenter}
-  width: 100%;
+  //max-width: 1400px;
+  max-height: 400px;
   height: auto;
-  position: absolute;
+  width: auto;
+  //min-width: 1000px;
+  position: relative;
+  border: 1px solid red;
+  // If the browser window is 866px or smaller
+  @media only screen and (max-width:866px) {
+  //max-width: 1000px;
+  //left: 50px;
+  }
+
 `;
 
-export const indexJsStyle = (theme) => css`
-  max-width: 1200px;
-  height: 5rem;
+
+export const heroImage1 = css`
+ // ${marginCenter}
+  background: url("header_blank.jpg") no-repeat right bottom;
+  //background-size: 150px;
+  //max-width: 1400px;
+  height: 480px;
+  //height: auto;
+ // width: auto;
+  //min-width: 1000px;
   position: relative;
+  border: 1px solid red;
+  // If the browser window is 866px or smaller
+  @media only screen and (max-width:866px) {
+  //max-width: 1000px;
+   left: 50px;
+  }
+
+`;
+
+
+
+
+
+
+
+export const indexJsStyle = (theme) => css`
+  max-width: 1400px;
+  height: 5rem;
+  position: absolute;
+  top: 13rem;
+  left: 10rem;
   ${marginCenter}
 
   div {
-    position: absolute;
+    width: inherit;
     left: 1%;
     top: 6rem;
     color: #43964f;
@@ -215,6 +261,13 @@ export const indexJsStyle = (theme) => css`
       margin: 1rem 0;
       font-weight: 500;
       text-align: center;
+
+      @media (max-width: 1020px) {
+        font-size: ${theme.typography.medium};
+
+      }
+
+
     }
 
     p:last-of-type {
@@ -228,15 +281,25 @@ export const indexJsStyle = (theme) => css`
       background-color: #ed943b;
       border: none;
 
+      @media (max-width: 1020px) {
+        ${size('10.65rem', '1rem')}
+
+      }
+
+
       &:hover {
         background-color: #ff6900;
       }
+
+
+
+
     }
   }
 `;
 
 export const bestSellerStyle = css`
-  margin-top: 30rem;
+  //margin-top: 30rem;
   gap: 48px;
 
   h2 {
