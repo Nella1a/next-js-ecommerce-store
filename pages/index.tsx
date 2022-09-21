@@ -5,6 +5,7 @@ import Link from 'next/link';
 import {
   bestSellerStyle,
   heroImage,
+  heroImage1,
   indexJsStyle,
 } from '../components/elements';
 import Layout from '../components/Layout';
@@ -40,7 +41,8 @@ export default function Home(props: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <img src="/header_blank.jpg" alt="Hero" css={heroImage} />
+      {/* <img src="/header_blank.jpg" alt="Hero" css={heroImage} />  */}
+      <div css={heroImage1}/>
       <section css={indexJsStyle}>
         <div>
           <p>Lorem Ipsum Lorem</p>
@@ -55,9 +57,16 @@ export default function Home(props: Props) {
           </p>
         </div>
       </section>
+
+
+
+
       <section css={bestSellerStyle}>
+      <h2>Best Seller</h2>
+        <ProductsComponent plants={props.plants} />
         <ProductsComponent plants={props.plants} />
       </section>
+
     </Layout>
   );
 }
