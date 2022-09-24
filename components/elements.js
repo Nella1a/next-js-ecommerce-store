@@ -17,6 +17,7 @@ export const globalStyleBody = (theme) => css`
   }
 
   /* Reset margin */
+
   body,
   h1,
   h2,
@@ -35,6 +36,7 @@ export const globalStyleBody = (theme) => css`
     width: 100vw;
     font-family: ${theme.font};
     background-color: var(--backgroundColor);
+    margin: 0 1rem;
   }
 
   main {
@@ -195,66 +197,112 @@ export const footerStyle = css`
   }
 `;
 
+export const styleLargeButton = css`
+display: flex;
+justify-content: center;
+button {
+      ${size('17.65rem', '1.47rem')}
+      background-color: #ed943b;
+      border: none;
+
+      @media (max-width: 1140px) {
+        ${size('15.65rem', '1rem')}
+      }
+
+      @media only screen and (max-width:1030px) {
+       ${size('13.65rem', '1rem')}
+      }
+
+      @media only screen and (max-width:780px) {
+       ${size('10.65rem', '1rem')}
+      }
+
+      // mobile
+      @media only screen and (max-width:500px) {
+       ${size('7.65rem', '.3rem')}
+       font-size: .5rem;
+      }
+
+      &:hover {
+        background-color: #ff6900;
+      }
+
+    }
+
+
+`;
+
+
+
+
+
+
 /* *************************** */
 /*         Index.js            */
 /* *************************** */
 
-export const heroImage = css`
-  ${marginCenter}
-  //max-width: 1400px;
-  max-height: 400px;
-  height: auto;
-  width: auto;
-  //min-width: 1000px;
-  position: relative;
-  border: 1px solid red;
-  // If the browser window is 866px or smaller
-  @media only screen and (max-width:866px) {
-  //max-width: 1000px;
-  //left: 50px;
-  }
-
-`;
-
-
 export const heroImage1 = css`
- // ${marginCenter}
-  background: url("header_blank.jpg") no-repeat right bottom;
-  //background-size: 150px;
-  //max-width: 1400px;
+  background: url("header_blank.jpg") no-repeat right -100px bottom;
+  background-size: 1600px;
   height: 480px;
-  //height: auto;
- // width: auto;
-  //min-width: 1000px;
   position: relative;
   border: 1px solid red;
+
   // If the browser window is 866px or smaller
-  @media only screen and (max-width:866px) {
-  //max-width: 1000px;
-   left: 50px;
+
+  @media only screen and (max-width:950px) {
+    height: 400px;
+    background-size: 1300px;
+  }
+
+  // mobile
+  @media only screen and (max-width:500px) {
+    height: 200px;
+    background-size: 700px;
   }
 
 `;
-
-
-
-
-
 
 
 export const indexJsStyle = (theme) => css`
-  max-width: 1400px;
-  height: 5rem;
-  position: absolute;
-  top: 13rem;
-  left: 10rem;
-  ${marginCenter}
+  width: 1200px;
+  min-width: 1000px;
+  height: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  // mobile
+  @media only screen and (max-width:500px) {
+      height:200px;
+  }
+
+
 
   div {
-    width: inherit;
-    left: 1%;
-    top: 6rem;
+    width: 43%;
     color: #43964f;
+
+
+   @media only screen and (max-width:1140px) {
+      width: 35%;
+  }
+
+  @media only screen and (max-width:1030px) {
+      width: 30%;
+  }
+
+  @media only screen and (max-width:820px) {
+      width: 20%;
+      background-size: auto;
+  }
+
+  @media only screen and (max-width:500px) {
+      width: 15%;
+  }
+
+
 
     p {
       font-size: ${theme.typography.xLarge};
@@ -262,49 +310,71 @@ export const indexJsStyle = (theme) => css`
       font-weight: 500;
       text-align: center;
 
-      @media (max-width: 1020px) {
-        font-size: ${theme.typography.medium};
 
+      @media only screen and (max-width: 950px) {
+        font-size: 2.3rem;
+        margin: unset;
       }
 
+      @media only screen and (max-width: 780px) {
+        font-size: 1.5rem;
+       // margin: unset;
+      }
+
+      @media only screen and (max-width: 500px) {
+        font-size: 1rem;
+      }
 
     }
+
 
     p:last-of-type {
       display: flex;
       justify-content: center;
     }
 
+
+
     button {
       ${size('17.65rem', '1.47rem')}
-
       background-color: #ed943b;
       border: none;
 
-      @media (max-width: 1020px) {
-        ${size('10.65rem', '1rem')}
-
+      @media (max-width: 1140px) {
+        ${size('15.65rem', '1rem')}
       }
 
+      @media only screen and (max-width:1030px) {
+       ${size('13.65rem', '1rem')}
+      }
+
+      @media only screen and (max-width:780px) {
+       ${size('10.65rem', '1rem')}
+      }
+
+      // mobile
+      @media only screen and (max-width:500px) {
+       ${size('7.65rem', '.3rem')}
+       font-size: .5rem;
+      }
 
       &:hover {
         background-color: #ff6900;
       }
 
-
-
-
     }
   }
 `;
 
-export const bestSellerStyle = css`
-  //margin-top: 30rem;
+export const bestSellerStyle  = (theme) => css`
   gap: 48px;
+  margin-top: 4rem;
+
 
   h2 {
-    margin: 8px 0;
-    font-size: 16px;
+    text-align: center;
+    font-size: ${theme.typography.large};
+
   }
 `;
 
@@ -323,7 +393,7 @@ export const sectionStyle = css`
   display: flex;
   gap: 48px;
 
-  h2 {
+  h3 {
     margin: 8px 0;
     font-size: 16px;
   }
