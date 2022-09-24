@@ -1,13 +1,11 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
+import BackGImage from '../components/BackGImage';
+import Delivery from '../components/DeliveryInfos';
 // import { useState } from 'react';
-import {
-  bestSellerStyle,
-  heroImage,
-  heroImage1,
-  indexJsStyle,
-} from '../components/elements';
+import { bestSellerStyle, styleLargeButton } from '../components/elements';
+import Footer from '../components/Footer';
+import LargeButton from '../components/LargeButton';
 import Layout from '../components/Layout';
 import ProductsComponent from '../components/ProductComponent';
 import { readPlants } from '../util/database.js';
@@ -41,31 +39,25 @@ export default function Home(props: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* <img src="/header_blank.jpg" alt="Hero" css={heroImage} />  */}
-      <div css={heroImage1}/>
-      <section css={indexJsStyle}>
-        <div>
-          <p>Lorem Ipsum Lorem</p>
-          <p>Lorem Ipsum Lorem Lorem!</p>
-          <p>
-            <Link href="/Products" passHref>
-              <button data-test-id="button-view-all-plants">
-                {' '}
-                View All Plants
-              </button>
-            </Link>
-          </p>
-        </div>
-      </section>
-
-
-
-
+      <BackGImage />
       <section css={bestSellerStyle}>
       <h2>Best Seller</h2>
+      <div>
         <ProductsComponent plants={props.plants} />
         <ProductsComponent plants={props.plants} />
+      </div>
       </section>
+      <LargeButton styleButton={styleLargeButton} innerText="Shop Bestsellers"/>
+      <BackGImage />
+      <section css={bestSellerStyle}>
+      <h2>Sale</h2>
+      <div>
+        <ProductsComponent plants={props.plants} />
+      </div>
+      </section>
+      <LargeButton styleButton={styleLargeButton} innerText="Shop Sales Items"/>
+      <Delivery />
+      <Footer />
 
     </Layout>
   );
