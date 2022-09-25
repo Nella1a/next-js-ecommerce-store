@@ -62,6 +62,9 @@ export const globalStyleBody = (theme) => css`
   section {
     max-width: 1200px;
     margin: 8rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
   }
 
   button {
@@ -242,7 +245,7 @@ button {
 /* *************************** */
 
 export const heroImage1 = css`
-  background: url("header_blank.jpg") no-repeat right -100px bottom;
+  // background: url("header_blank.jpg") no-repeat right -100px bottom;
   background-size: 1600px;
   height: 480px;
   position: relative;
@@ -600,4 +603,21 @@ export const underConstruction = css`
       background-color: #ff6900;
     }
   }
+`;
+
+/* *************************** */
+/*    DeliveryInfos.js       */
+/* *************************** */
+
+export const deliveryInfos = (theme) => css`
+  height: 200px;
+  background-color: #DFDFDB;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: ${theme.typography.large};
+
+
+
 `;

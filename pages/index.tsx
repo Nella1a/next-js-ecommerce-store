@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import BackGImage from '../components/BackGImage';
@@ -9,6 +10,20 @@ import LargeButton from '../components/LargeButton';
 import Layout from '../components/Layout';
 import ProductsComponent from '../components/ProductComponent';
 import { readPlants } from '../util/database.js';
+
+const bgImageHero = css`
+  background: url("header_blank.jpg") no-repeat right -100px bottom;
+`;
+
+const bgImageSale = css`
+  background: url("placeholder_sale.jpg") no-repeat right -100px bottom;
+  background-size: 1600px;
+`;
+
+const buttonCallToAction = css`
+  border-radius: 10rem;
+`
+
 
 type Plants = {
   id: number;
@@ -39,24 +54,29 @@ export default function Home(props: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <BackGImage />
+      <BackGImage
+        firstText="Lorem Ipsum Lorem"
+        secondText="Lorem Ipsum Lorem Ipsum!"
+        bgImage={bgImageHero}
+        />
       <section css={bestSellerStyle}>
-      <h2>Best Seller</h2>
-      <div>
+        <h2>Best Seller</h2>
         <ProductsComponent plants={props.plants} />
         <ProductsComponent plants={props.plants} />
-      </div>
+        <LargeButton styleButton={styleLargeButton} innerText="Shop Bestsellers" styleb={buttonCallToAction}/>
       </section>
-      <LargeButton styleButton={styleLargeButton} innerText="Shop Bestsellers"/>
-      <BackGImage />
+      <BackGImage bgImage={bgImageSale} />
       <section css={bestSellerStyle}>
-      <h2>Sale</h2>
-      <div>
-        <ProductsComponent plants={props.plants} />
-      </div>
+        <h2>Sale</h2>
+        <div>
+          <ProductsComponent plants={props.plants} />
+        </div>
+        <LargeButton styleButton={styleLargeButton} innerText="Shop Sales Items" styleb={buttonCallToAction}/>
       </section>
-      <LargeButton styleButton={styleLargeButton} innerText="Shop Sales Items"/>
       <Delivery />
+
+
+
       <Footer />
 
     </Layout>
