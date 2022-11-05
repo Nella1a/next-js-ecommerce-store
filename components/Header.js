@@ -5,9 +5,40 @@ import shoppingBag from '../public/shopping-bag.png';
 import { getParsedCookie } from '../util/cookies';
 import { headerStyle, shoppingBagStyle } from './elements';
 
+// get window width
+const GetScreenSize = () => {
+
+  const [screenSize, setScreenSize] = useState(0);
+
+  useEffect(() => {
+    function handleScreenResize(){
+      setScreenSize(window.innerWidth);
+    }
+
+    window.addEventListener("resize", handleScreenResize);
+
+    handleScreenResize()
+
+    return () => {
+      window.removeEventListener("resize", handleScreenResize);
+    };
+
+  }, []);
+
+ return screenSize
+}
+
+
+
+
+
+
+
+
+
 export default function Header() {
   const [sumOfcartItems, setSumOfcartItems] = useState(0);
-
+  const screenwidth = GetScreenSize()
   /* read cookies: return cookie or [] */
   const currentCookies = getParsedCookie('cart');
 
@@ -25,29 +56,44 @@ export default function Header() {
     }
   }, [currentCookies]);
 
+  console.log("WIDTH HEADER: ",screenwidth)
+
   return (
     <header css={headerStyle}>
       <nav>
-        <Link href="/" passHref>
-          <a>
-            <img src="/logo_shelovesplants.svg" alt="logo she loves plants" />
-          </a>
-        </Link>
-        <Link href="/Products">
-          <a data-test-id="products-link">Products</a>
-        </Link>
-        <Link href="/Underconstruction">
-          <a>Inspiration</a>
-        </Link>
-        <Link href="/Underconstruction">
-          <a>Contact</a>
-        </Link>
 
-        <Link href="/Underconstruction">
-          <a>Sale</a>
-        </Link>
+          <Link href="/" passHref>
+            <a>
+              <img src="/logo_shelovesplants.svg" alt="logo she loves plants" />
+            </a>
+          </Link>
+
+          {/* conditional rendering */}
+            {screenwidth > 768 ?
+            <>
+              <Link href="/Products">
+                <a data-test-id="products-link">Plants</a>
+              </Link>
+              <Link href="/Underconstruction">
+                <a>Inspiration</a>
+              </Link>
+              <Link href="/Underconstruction">
+                <a>Sale</a>
+              </Link>
+              <Link href="/Underconstruction">
+                <a>Contact</a>
+              </Link>
+            </> :
+            <span>
+              <Image
+                src="/menu.png"
+                width= "29"
+                height= "29"
+                alt="menu icon"
+              />
+            </span>
+          }
         <Link href="/Cart" passHref>
-          {/* <a data-test-id="header-shoppingCart-link"> */}
           <div css={shoppingBagStyle}>
             <div>
               <Image src={shoppingBag} alt="shopping cart icon" />
@@ -56,8 +102,8 @@ export default function Header() {
               </div>
             </div>
           </div>
-          {/* </a> */}
         </Link>
+
       </nav>
     </header>
   );

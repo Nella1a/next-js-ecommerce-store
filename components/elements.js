@@ -7,6 +7,7 @@ import { css } from '@emotion/react';
 export const globalStyleBody = (theme) => css`
   :root {
     --backgroundColor: #e4e8e7;
+    --backgroundColorWhite: #fff;
   }
 
   /* Reset sizing   */
@@ -28,6 +29,13 @@ export const globalStyleBody = (theme) => css`
     margin: 0;
   }
 
+h2 {
+  font-size: 2rem;
+    margin-top: 5.5rem;
+    margin-bottom: 3.5rem;
+}
+
+
   /* set up the body */
   body {
     line-height: 1.5; /* default for browser: 1.4 tends to be very small*/
@@ -35,18 +43,22 @@ export const globalStyleBody = (theme) => css`
     min-height: 100vh;
     width: 100vw;
     font-family: ${theme.font};
-    background-color: var(--backgroundColor);
-    margin: 0 1rem;
+    background-color: var(--backgroundColorWhite);
   }
 
   main {
     margin-top: 4rem;
     height: auto;
+    margin: auto auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   /* make img easier to work with*/
   img {
-   //max-width: 100%; /* ensure that the img gets narrow when viewoprt shrinks*/
+   max-width: 100%; /* ensure that the img gets narrow when viewoprt shrinks*/
     display: block;
   }
 
@@ -60,11 +72,19 @@ export const globalStyleBody = (theme) => css`
   }
 
   section {
-    max-width: 1200px;
-    margin: 8rem auto;
+    margin: 0 auto;
+    max-width: 1400px;
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    //align-items: center;
+    //gap: 4rem;
+    //width: 87rem;
+    //border: 3px solid pink;
+  /*   max-width: 1400px;
+    margin: 0 auto;
+    padding-left: 3rem;
+    padding-right: 3rem; */
+
   }
 
   button {
@@ -79,6 +99,7 @@ export const globalStyleBody = (theme) => css`
     margin: 1rem 0;
     color: #000;
   }
+
 `;
 
 /* *************************** */
@@ -105,7 +126,6 @@ const size = (width = '100%', height = '100%') => {
 
 export const headerStyle = css`
   max-width: 100%;
-  /* ${marginCenter} */
   position: fixed;
   background-color: #fff;
   left: 0;
@@ -114,24 +134,21 @@ export const headerStyle = css`
   z-index: 1;
 
   nav {
-    max-width: 1200px;
+    max-width: 1400px;
     ${marginCenter}
-    /* margin: 0 auto; */
+
     position: relative;
     left: 0;
     right: 0;
     top: 4px;
-    gap: 48px;
+    gap: 2rem;
     align-items: center;
     display: flex;
+    justify-content: space-between;
     z-index: 1;
     height: 4rem;
     color: #43964f;
-
-    @media only screen and (max-width:750px) {
-      gap: 30px;
-  }
-
+    //border: 3px solid green;
 
     img {
       width: 80%;
@@ -144,7 +161,26 @@ export const headerStyle = css`
       font-weight: bold;
       color: black;
     }
+
+
+    @media (max-width: 1200px) {
+      gap: 1rem;
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+
+   @media (max-width:768px) {
+    span {
+      display: block;
+      margin-left: auto;
+      position: relative;
+      top: 3px;
+
+    }
+      gap: .5rem;
+    }
   }
+
 
   a:nth-of-type(2) {
     margin-left: auto;
@@ -190,53 +226,77 @@ export const shoppingBagStyle = (theme) => css`
 /* *************************** */
 
 export const footerStyle = css`
-  ${flexCenter}
   gap: 4rem;
-  ${size('', '4rem')}
-  margin: 2rem;
+  height: auto;
+  background-color: #fff;
+
+
+    div {
+      display: flex;
+      justify-content: space-around;
+      padding: 3rem 0;
+      margin: 0 auto;
+
+      @media screen and (max-width: 480px) {
+        flex-direction: column;
+      }
+      gap: 2.5rem;
+    }
+
+    article {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      p:first-of-type {
+      font-weight: bold;
+    }
+
+    form {
+      display: flex;
+
+      flex-direction: column;
+    }
+
+
+
+    @media screen and (max-width: 480px) {
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+   }
+
+
+  article:nth-of-type(2) {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
 
   a {
     text-decoration: none;
+    display: block;
   }
+
+
 `;
 
 export const styleLargeButton = css`
 display: flex;
 justify-content: center;
+
 button {
       ${size('17.65rem', '1.47rem')}
       background-color: #ed943b;
       border: none;
-
-      @media (max-width: 1140px) {
-        ${size('15.65rem', '1rem')}
-      }
-
-      @media only screen and (max-width:1030px) {
-       ${size('13.65rem', '1rem')}
-      }
-
-      @media only screen and (max-width:780px) {
-       ${size('10.65rem', '1rem')}
-      }
-
-      // mobile
-      @media only screen and (max-width:500px) {
-       ${size('7.65rem', '.3rem')}
-       font-size: .5rem;
-      }
 
       &:hover {
         background-color: #ff6900;
       }
 
     }
-
-
 `;
-
-
-
 
 
 
@@ -244,141 +304,124 @@ button {
 /*         Index.js            */
 /* *************************** */
 
-export const heroImage1 = css`
-  // background: url("header_blank.jpg") no-repeat right -100px bottom;
-  background-size: 1600px;
-  height: 480px;
+export const bgImgContainer = css`
+  height: 600px;
   position: relative;
   border: 1px solid red;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  // If the browser window is 866px or smaller
 
-  @media only screen and (max-width:950px) {
-    height: 400px;
-    background-size: 1300px;
+  @media (max-width: 1024px) {
+   height: 500px;
   }
 
-  // mobile
-  @media only screen and (max-width:500px) {
-    height: 200px;
-    background-size: 700px;
+  @media (max-width: 769px) {
+   height: 400px;
+  }
+
+  @media screen and (max-width: 480px) {
+    height: 300px;
   }
 
 `;
 
 
-export const indexJsStyle = (theme) => css`
-  width: 1200px;
-  min-width: 1000px;
-  height: 480px;
-  margin: 0 auto;
+export const bgImgInnerContainer = (theme) => css`
+  height: 12.5rem;
+  width: auto;
+  color: #fff;
+  letter-spacing: .2rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-
-  // mobile
-  @media only screen and (max-width:500px) {
-      height:200px;
-  }
-
-
-
-  div {
-    width: 43%;
-    color: #43964f;
-
-
-   @media only screen and (max-width:1140px) {
-      width: 35%;
-  }
-
-  @media only screen and (max-width:1030px) {
-      width: 30%;
-  }
-
-  @media only screen and (max-width:820px) {
-      width: 20%;
-      background-size: auto;
-  }
-
-  @media only screen and (max-width:500px) {
-      width: 15%;
-  }
+  //border: 2px solid blue;
 
 
 
     p {
       font-size: ${theme.typography.xLarge};
-      margin: 1rem 0;
+
+      //margin: 0 0;
       font-weight: 500;
-      text-align: center;
 
-
-      @media only screen and (max-width: 950px) {
-        font-size: 2.3rem;
-        margin: unset;
-      }
-
-      @media only screen and (max-width: 780px) {
-        font-size: 1.5rem;
-       // margin: unset;
-      }
-
-      @media only screen and (max-width: 500px) {
-        font-size: 1rem;
-      }
-
+      //text-shadow: 3px 4px 7px rgba(81,67,21,0.8);
+      //text-shadow: 6px 6px 0px rgba(0,0,0,0.2);
+      text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+                 0px -5px 35px rgba(255,255,255,0.3),
+                 0px 1px 4px rgb(0,0,0)
+                 ;
     }
-
-
-    p:last-of-type {
-      display: flex;
-      justify-content: center;
-    }
-
-
 
     button {
-      ${size('17.65rem', '1.47rem')}
+      ${size('10.65rem', '1.47rem')}
       background-color: #ed943b;
       border: none;
-
-      @media (max-width: 1140px) {
-        ${size('15.65rem', '1rem')}
-      }
-
-      @media only screen and (max-width:1030px) {
-       ${size('13.65rem', '1rem')}
-      }
-
-      @media only screen and (max-width:780px) {
-       ${size('10.65rem', '1rem')}
-      }
-
-      // mobile
-      @media only screen and (max-width:500px) {
-       ${size('7.65rem', '.3rem')}
-       font-size: .5rem;
-      }
 
       &:hover {
         background-color: #ff6900;
       }
-
     }
-  }
+
+   @media (max-width: 769px) {
+    height: 11.25rem;
+
+    //width: 60%;
+   }
+
+   @media (max-width: 425px) {
+    height: 10.25;
+
+    //width: 80%;
+
+    font-size: ${theme.typography.large};
+      p {
+        font-size: 1.8rem;
+        }
+    }
+
+
 `;
 
 export const bestSellerStyle  = (theme) => css`
   gap: 48px;
-  margin-top: 4rem;
+  //margin-top: 4rem;
 
 
   h2 {
-    text-align: center;
+    //text-align: center;
     font-size: ${theme.typography.large};
-
+    margin-top: 5.5rem;
+    margin-bottom: 3.5rem;
   }
+
+   > div {
+
+      display: grid;
+      gap: 30px;
+      grid-template-columns: repeat(4, 1fr);
+
+      @media screen and (max-width: 1024px) {
+        gap: 24px;
+      }
+
+      @media screen and (max-width: 800px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      @media screen and (max-width: 480px) {
+      gap: 4px;
+      grid-template-columns: 1fr;
+      }
+
+
+
+}
+
 `;
 
 export const styleComp = css`
@@ -386,35 +429,223 @@ export const styleComp = css`
   flex-direction: column;
 `;
 
+
+
+/* *************************** */
+/*     indexTextImage.js       */
+/* *************************** */
+
+/*
+export const indexTextImageComp = css`
+
+
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin-top: 64px;
+  margin-bottom: 56px;
+  gap: 2rem;
+
+  div {
+    margin: 3rem 0;
+  }
+
+  div:first-of-type{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 40px;
+    //flex-basis: 33.33%;
+    border: 1px solid red;
+
+    h2 {
+      font-size: 2rem;
+      margin-top: 0;
+    }
+
+    button {
+      width: 10.65rem;
+      height: 1.47rem;
+      background-color: #ed943b;
+      border: none;
+      border-radius: 20px;
+    }
+
+    }
+
+  div:nth-of-type(2){
+
+    width: 100%;
+  }
+
+ @media (max-width: 768px){
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  div {
+    margin: .5rem 0;
+  }
+
+ }
+`;
+*/
+
+
+export const indexTextImageComp = css`
+
+  border: 2px solid green;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  margin-top: 64px;
+  margin-bottom: 56px;
+  gap: 2rem;
+
+  > div:first-of-type{
+    height: 100%;
+  }
+
+  > div:nth-of-type(2){
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+
+    }
+
+  @media screen and (max-width: 1024px){
+    grid-template-columns: 1fr;
+  > div:first-of-type{
+    height: 40rem;
+  }
+
+  > div:nth-of-type(2){
+    grid-template-columns: repeat(3, 1fr)
+    }
+  }
+
+  @media screen and (max-width: 768px){
+    grid-template-columns: 1fr;
+
+  > div:nth-of-type(2){
+    grid-template-columns: repeat(2, 1fr)
+    }
+  }
+
+`;
+
+
+export const separator = css`
+ background-color: #224229;
+  height: 5px;
+  margin-bottom: 0!important;
+  margin-top: 0!important;
+  opacity: 1;
+  padding: 0!important;
+
+  margin: 0 64px;
+  width: calc(100% - 280px);
+
+`;
+
+
+
+
+
 /* *************************** */
 /*         Products.js         */
 /* *************************** */
 
-export const sectionStyle = css`
-  margin-top: 15rem;
-
+export const styleSectionProducts = css`
   display: flex;
-  gap: 48px;
+  flex-direction: column;
+  gap: 1px;
+  border: 1px solid green;
 
-  h3 {
-    margin: 8px 0;
-    font-size: 16px;
+ div{
+  width: 100%;
+ }
+
+  div:first-of-type {
+    height: auto;
+    position: relative;
+
+
+      span {
+        position: absolute;
+        display: block;
+        //background-color: #37798D;
+        background-color: #009A7B;
+        color: #fff;
+        width: 70%;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        top: 30px;
+
+        @media (max-width: 800px){
+        font-size: 18px;
+        }
+      }
+    }
+
+
+  a {
+    text-decoration: none;
   }
-`;
 
+
+    h3 {
+    font-size: 18px;
+    margin: .5rem 0;
+
+   }
+
+
+  @media (max-width: 1024px) {
+
+  }
+
+ /*  @media screen and (max-width: 768px) {
+
+    //gap: 3px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    //grid-template-columns: repeat(auto-fill, 1fr);
+    //grid-template-rows:1fr 1fr;
+    grid-gap:32px ;
+
+    section {
+      width: 100vw;
+    }
+
+  } */
+
+
+
+  `;
 /* *************************** */
 /*  Single Product Page        */
 /* *************************** */
 
 export const singleProductPageStyle = css`
-  display: flex;
-  flex-direction: column;
-  gap: 0rem;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-
+ display: grid;
+ grid-template-columns: minmax(0, 100px) 2fr;
+  max-width: 1000px;
+  margin-top: 10rem;
   div:first-of-type {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    p {
+      height: 82.3px;
+      width: 70.84px;
+      background-color: blue;
+    }
+
+  }
+  div:nth-of-type(2) {
     display: flex;
     gap: 3rem;
 
@@ -481,56 +712,137 @@ export const singleProductPageStyleSecondArticle = css`
 /*      Shoppingcart.js          */
 /* *************************** */
 
+export const shoppingCartSectionHeader = css`
+margin-top: 5rem;
+margin-bottom: 5rem;
+text-align: left;
+
+`;
+
+
 export const shoppingCartStyle = css`
-  display: flex;
-  gap: 96px;
+  display: grid;
+  gap: 60px;
+  grid-template-columns: 2fr 1fr;
+  background-color: #f8f8f8;
+
+
 
   article:first-of-type {
-    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin-top: 1rem;
+    > div {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
 
-    div {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      height: 256px;
-      border-top: 1px solid grey;
-      border-bottom: 1px solid grey;
+      a {
+        display: block;
+        text-align: right;
+      }
+
+     div {
+        display: grid;
+
+        grid-template-areas:
+        "area1 ."
+        "area2  area4"
+        "area3  ." ;
+
+        div:first-of-type {
+          grid-area: area1;
+          margin-left: unset;
+        }
+
+        div:nth-of-type(2){
+          grid-area: area2;
+          select {
+            height: 2.47rem;
+            padding: 0.75rem 0.5rem 0.75rem 0.75rem;
+            text-align: center;
+            width: 8.825rem;
+            height: 3rem;
+
+          }
+        }
+
+        div:nth-of-type(3){
+          grid-area: area4;
+        }
+
+        button {
+          all: unset;
+          grid-area: area3;
+          color: gray
+        }
+
+
+      }
+
     }
   }
 
   article:nth-of-type(2) {
-    width: 30%;
-
     display: flex;
     align-items: center;
+    width: 100%;
 
-    div:first-child {
-      /* WARNING: Change this to first of type */
+
+
+      h2 {
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        width: inherit;
+      }
+
+
+    > div {
+
       width: 100%;
       flex-direction: column;
       display: flex;
       align-items: flex-start;
       justify-content: space-around;
-      background-color: lightgray;
-      gap: 32px;
+      background-color: #e0e0e0;
       padding: 1rem;
 
       div {
-        display: flex;
-        gap: 1rem;
-        border-bottom: 0.5px solid grey;
-        padding-bottom: 1rem;
-        width: 95%;
+        width: inherit;
+
       }
+
+      div:nth-of-type(2) {
+       p{
+        margin-top: .5rem;
+        margin-bottom: 2rem;
+        font-weight: 600;
+
+       }
+
+        border-top: 1px solid grey;
+      }
+
     }
-    /* div:nth-of-type(2) {
-      display: flex;
-      justify-content: space-around;
-    } */
+
+    p {
+        width: inherit;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+
+          span {
+            display: block;
+          }
+       }
+
+
+
     button {
       ${size('17.65rem', '1.47rem')}
       background-color: #ed943b;
       border: none;
+
 
       &:hover {
         background-color: #ff6900;
@@ -586,6 +898,7 @@ export const flexStyle = css`
 /*    Underconstruction        */
 /* *************************** */
 export const underConstruction = css`
+margin-top: 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -617,6 +930,8 @@ export const deliveryInfos = (theme) => css`
   justify-content: center;
   align-items: center;
   font-size: ${theme.typography.large};
+  width: 100vw;
+  margin: none;
 
 
 

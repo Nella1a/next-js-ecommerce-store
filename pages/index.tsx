@@ -2,27 +2,31 @@ import { css } from '@emotion/react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import BackGImage from '../components/BackGImage';
+/* import ButtonCallToAction from '../components/ButtonCallToAction';
+ */
 import Delivery from '../components/DeliveryInfos';
-// import { useState } from 'react';
-import { bestSellerStyle, styleLargeButton } from '../components/elements';
+import { bestSellerStyle, indexTextImageComp } from '../components/elements';
 import Footer from '../components/Footer';
-import LargeButton from '../components/LargeButton';
+import IndexTextImage from '../components/IndexTextImage';
 import Layout from '../components/Layout';
+/* import PlantComp from '../components/PlantComp';
+ */
 import ProductsComponent from '../components/ProductComponent';
 import { readPlants } from '../util/database.js';
 
 const bgImageHero = css`
-  background: url("header_blank.jpg") no-repeat right -100px bottom;
+  background: no-repeat center url("indexHeroImg.jpeg");
+  background-size: cover;
 `;
 
-const bgImageSale = css`
+/* const bgImageSale = css`
   background: url("placeholder_sale.jpg") no-repeat right -100px bottom;
   background-size: 1600px;
 `;
 
-const buttonCallToAction = css`
+const buttonCallToActionIndex = css`
   border-radius: 10rem;
-`
+` */
 
 
 type Plants = {
@@ -41,11 +45,40 @@ type Props = {
   plants: Plants[];
   cartCookies: CartCookie[];
 };
+
+// get window width
+/* const GetScreenSize = () => {
+
+  const [screenSize, setScreenSize] = useState(0);
+
+  useEffect(() => {
+    function handleScreenResize(){
+      setScreenSize(window.innerWidth);
+    }
+
+    window.addEventListener("resize", handleScreenResize);
+
+    handleScreenResize()
+
+    return () => {
+      window.removeEventListener("resize", handleScreenResize);
+    };
+
+  }, [setScreenSize]);
+
+ return screenSize
+}
+ */
+
+
 export default function Home(props: Props) {
-  // const [cartCookie, setCartCookie] = useState(props.cartCookies);
+
 
   console.log('Index_props.database typeopf:', typeof props.plants);
   console.log('Index_cartCookie: typeof', typeof props.cartCookies);
+
+
+
   return (
     <Layout>
       <Head>
@@ -55,29 +88,52 @@ export default function Home(props: Props) {
       </Head>
 
       <BackGImage
-        firstText="Lorem Ipsum Lorem"
-        secondText="Lorem Ipsum Lorem Ipsum!"
+        firstText="Delivering Plants,"
+        secondText="Delivering Happiness!"
         bgImage={bgImageHero}
         />
+
       <section css={bestSellerStyle}>
-        <h2>Best Seller</h2>
-        <ProductsComponent plants={props.plants} />
-        <ProductsComponent plants={props.plants} />
-        <LargeButton styleButton={styleLargeButton} innerText="Shop Bestsellers" styleb={buttonCallToAction}/>
+        <h2>Best Sellers</h2>
+        <div>
+          <ProductsComponent plants={props.plants} />
+          <ProductsComponent plants={props.plants} />
+        </div>
       </section>
-      <BackGImage bgImage={bgImageSale} />
-      <section css={bestSellerStyle}>
+      <section>
+        <h2>Summer Favorites</h2>
+        <div css={indexTextImageComp}>
+          <IndexTextImage plants={props.plants} />
+        </div>
+      </section>
+
+      <Delivery />
+      <Footer />
+
+
+
+
+
+
+
+      {/*   <ButtonCallToAction styleButton={styleLargeButton} innerText="Shop Bestsellers" styleb={buttonCallToActionIndex}/> */}
+
+
+{/*       <BackGImage bgImage={bgImageSale} />
+ */}
+    {/*   <section css={bestSellerStyle}>
         <h2>Sale</h2>
         <div>
           <ProductsComponent plants={props.plants} />
         </div>
-        <LargeButton styleButton={styleLargeButton} innerText="Shop Sales Items" styleb={buttonCallToAction}/>
+        <ButtonCallToAction styleButton={styleLargeButton} innerText="Shop Sales Items" styleb={buttonCallToActionIndex}/>
+      </section> */}
+   {/*    <section>
+        <Delivery />
       </section>
-      <Delivery />
 
 
-
-      <Footer />
+ */}
 
     </Layout>
   );
