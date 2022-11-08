@@ -106,7 +106,6 @@ export default function Home(props: Props) {
           <IndexTextImage plants={props.plants} />
         </div>
       </section>
-
       <Delivery />
       <Footer />
 

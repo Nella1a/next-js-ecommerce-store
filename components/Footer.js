@@ -13,6 +13,24 @@ export default function Footer() {
             <p>Contact</p>
           </article>
           <article>
+            <p>About</p>
+            <p>Plant Care</p>
+            <p>FAQ</p>
+            <p>Contact</p>
+          </article>
+          <article>
+            <p>Terms</p>
+            <Link href="http://localhost:3000/">
+              <a>Refund Policy</a>
+            </Link>
+            <Link href="http://localhost:3000/">
+              <a>Terms of Service</a>
+            </Link>
+            <Link href="http://localhost:3000/">
+              <a>Delivery and Schipping</a>
+            </Link>
+          </article>
+          <article>
             <p>Join Us</p>
             <p>Subscribe to our newsletter</p>
             <form>
@@ -26,18 +44,6 @@ export default function Footer() {
                 </p>
               <button>Sign Up</button>
             </form>
-          </article>
-          <article>
-            <p>Terms</p>
-            <Link href="http://localhost:3000/">
-              <a>Refund Policy</a>
-            </Link>
-            <Link href="http://localhost:3000/">
-              <a>Terms of Service</a>
-            </Link>
-            <Link href="http://localhost:3000/">
-              <a>Delivery and Schipping</a>
-            </Link>
           </article>
       </div>
     </footer>
