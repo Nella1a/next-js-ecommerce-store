@@ -2,10 +2,12 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import Delivery from '../../components/DeliveryInfos';
 import {
   singleProductPageStyle,
   singleProductPageStyleSecondArticle,
 } from '../../components/elements';
+import Footer from '../../components/Footer';
 import Layout from '../../components/Layout';
 import { setParsedCookie } from '../../util/cookies';
 import { getPlantById } from '../../util/database.js';
@@ -125,6 +127,8 @@ export default function SingleProduct(props) {
           </Link>
         </article>
       </section>
+      <Delivery />
+      <Footer />
     </Layout>
   );
 }

@@ -229,6 +229,10 @@ export const footerStyle = css`
   gap: 4rem;
   height: auto;
   background-color: #fff;
+  width: 1400px;
+  margin: auto auto;
+  //border: 1px solid red;
+  margin-top: 56px;
 
 
     div {
@@ -236,11 +240,15 @@ export const footerStyle = css`
       justify-content: space-around;
       padding: 3rem 0;
       margin: 0 auto;
+      max-width:inherit;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
 
       @media screen and (max-width: 480px) {
         flex-direction: column;
       }
-      gap: 2.5rem;
+      //gap: 2.5rem;
     }
 
     article {
@@ -253,8 +261,32 @@ export const footerStyle = css`
 
     form {
       display: flex;
-
       flex-direction: column;
+
+      input {
+        ${size('17.65rem', '1.47rem')}
+        letter-spacing: 0.031rem;
+        line-height: 1.125rem;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 0.75rem;
+        display: block;
+        min-height: 2.5rem;
+        padding: 0.625rem 1rem;
+        color: #000;
+      }
+
+      button {
+      ${size('17.65rem', '1.47rem')}
+      background-color: #ed943b;
+      border: none;
+
+      &:hover {
+        background-color: #ff6900;
+      }
+
+    }
+
     }
 
 
@@ -269,7 +301,7 @@ export const footerStyle = css`
 
   article:nth-of-type(2) {
     display: flex;
-    align-items: center;
+    //align-items: center;
     gap: 1rem;
   }
 
@@ -930,8 +962,12 @@ export const deliveryInfos = (theme) => css`
   justify-content: center;
   align-items: center;
   font-size: ${theme.typography.large};
-  width: 100vw;
   margin: none;
+  max-width: unset;
+  width: 100%;
+  background-color: rgb(249,248,247);
+
+
 
 
 

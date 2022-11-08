@@ -2,7 +2,9 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import Delivery from '../components/DeliveryInfos';
 import { bestSellerStyle } from '../components/elements';
+import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import ProductsComponent from '../components/ProductComponent';
 import { readPlants } from '../util/database';
@@ -58,6 +60,8 @@ export default function Products(props: Props) {
 
 
       </section>
+      <Delivery />
+      <Footer />
     </Layout>
   );
 }
