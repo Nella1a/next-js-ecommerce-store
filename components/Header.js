@@ -1,8 +1,10 @@
+import { css } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import shoppingBag from '../public/shopping-bag.png';
 import { getParsedCookie } from '../util/cookies';
+import BurgerMenue from './BurgerMenue';
 import { headerStyle, shoppingBagStyle } from './elements';
 
 // get window width
@@ -29,7 +31,22 @@ const GetScreenSize = () => {
 }
 
 
+/* const burgerMenue = (showBurger) => css`
+position: absolute;
+right: 0;
+top: 100px;
+z-index: 1 ;
+height: 100vh;
+width: 80%;
+background-color: rgb(249,248,247);
+display: none;
 
+@media (max-width: 768px) {
+  display: ${showBurger && "block"};
+}
+`;
+
+ */
 
 
 
@@ -39,6 +56,8 @@ const GetScreenSize = () => {
 export default function Header() {
   const [sumOfcartItems, setSumOfcartItems] = useState(0);
   const screenwidth = GetScreenSize()
+  const [showBurger, setShowBurger] = useState(false)
+
   /* read cookies: return cookie or [] */
   const currentCookies = getParsedCookie('cart');
 
@@ -58,7 +77,12 @@ export default function Header() {
 
   console.log("WIDTH HEADER: ",screenwidth)
 
+
+
   return (
+    <Fragment>
+    <BurgerMenue showBurger={showBurger} setShowBurger={setShowBurger}/>
+
     <header css={headerStyle}>
       <nav>
 
@@ -84,7 +108,13 @@ export default function Header() {
                 <a>Contact</a>
               </Link>
             </> :
-            <span>
+            <button>
+            <span
+            onClick={() => setShowBurger(true)}
+            onKeyDown={() => setShowBurger(true)}
+            role="menu"
+            tabIndex={0}
+            >
               <Image
                 src="/menu.png"
                 width= "29"
@@ -92,6 +122,8 @@ export default function Header() {
                 alt="menu icon"
               />
             </span>
+
+            </button>
           }
         <Link href="/Cart" passHref>
           <div css={shoppingBagStyle}>
@@ -106,5 +138,7 @@ export default function Header() {
 
       </nav>
     </header>
+    </Fragment>
+
   );
 }
