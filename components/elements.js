@@ -150,6 +150,10 @@ export const headerStyle = css`
     color: #43964f;
     //border: 3px solid green;
 
+    button {
+      all: unset;
+    }
+
     img {
       width: 80%;
       height: auto;
@@ -163,6 +167,7 @@ export const headerStyle = css`
     }
 
 
+
     @media (max-width: 1200px) {
       gap: 1rem;
       padding-left: 3rem;
@@ -170,7 +175,7 @@ export const headerStyle = css`
     }
 
    @media (max-width:768px) {
-    span {
+    button {
       display: block;
       margin-left: auto;
       position: relative;
@@ -663,20 +668,17 @@ export const styleSectionProducts = css`
 
 export const singleProductPageStyle = css`
  display: grid;
- grid-template-columns: minmax(0, 100px) 2fr;
+ grid-template-columns: minmax(0, 150px) 2fr;
   max-width: 1000px;
   margin-top: 10rem;
-  div:first-of-type {
+
+  > div:first-of-type {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    p {
-      height: 82.3px;
-      width: 70.84px;
-      background-color: blue;
-    }
-
+    justify-content: space-between;
   }
+
   div:nth-of-type(2) {
     display: flex;
     gap: 3rem;
@@ -962,13 +964,28 @@ export const deliveryInfos = (theme) => css`
   justify-content: center;
   align-items: center;
   font-size: ${theme.typography.large};
-  margin: none;
+  margin: 2rem 0;
   max-width: unset;
   width: 100%;
   background-color: rgb(249,248,247);
-
-
-
-
-
 `;
+
+/* *************************** */
+/*    BurgerMenue.js       */
+/* *************************** */
+/* export const burgerMenue = css`
+position: absolute;
+right: 0;
+top: 100px;
+z-index: 1 ;
+height: 100vh;
+width: 80%;
+background-color: rgb(249,248,247);
+display: none;
+
+@media (max-width: 768px) {
+  display: block;
+
+}
+
+`; */
