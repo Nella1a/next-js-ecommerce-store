@@ -3,39 +3,56 @@ import { css } from '@emotion/react';
 import Link from 'next/link';
 
 const burgerMenue = (showBurger) => css`
-position: absolute;
-right: 0;
-top: 0;
-z-index: 2 ;
-height: 100%;
-width: 80%;
-background-color: rgb(249,248,247);
-display: none;
+  display: none;
 
-div {
-  display: flex;
-  justify-content: space-around;
+  @media (max-width: 768px) {
+    height: 100vh;
+    display: block;
 
-  h2 {
-    all: unset;
+    //display: ${showBurger &&  "block"};
+
+
+    div {
+    display: flex;
+    justify-content: space-around;
+
+
+    h2 {
+      all: unset;
+    }
+
+    button {
+      all: unset;
+      font-size: 25px;
+    }
   }
 
-  button {
-    all: unset;
-    font-size: 25px;
-  }
+
+  position: absolute;
+  left: ${!showBurger ? "-400px": "0px"};
+  top: 0;
+  z-index: 999 ;
+  //height: 100%;
+  width: 60%;
+  background-color: rgb(249,248,247);
+  opacity: ${!showBurger ? 0: 1};
+  //visibility: ${!showBurger ? "visible" : "hidden"};
+  transition: all .6s;
 }
 
-@media (max-width: 768px) {
-  display: ${showBurger && "block"};
-}
 `;
 
 
-
-
 export default function BurgerMenue(props) {
-console.log("SHOWBURGER: ", props.showBurger)
+
+// hide responsive menue bar & display grey layer over body
+function hideRespMenu(){
+  props.setShowBurger(false)
+  props.setShowRespMenue(false)
+}
+
+
+
 
 
 return(
@@ -43,8 +60,8 @@ return(
   <div>
   <h2>Menu</h2>
   <button
-         onClick={() => props.setShowBurger(false)}
-         onKeyDown={() => props.setShowBurger(false)}
+         onClick={hideRespMenu}
+         onKeyDown={hideRespMenu}
          role="menu"
          tabIndex={0}
   >x

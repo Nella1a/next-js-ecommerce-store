@@ -44,6 +44,8 @@ h2 {
     width: 100vw;
     font-family: ${theme.font};
     background-color: var(--backgroundColorWhite);
+    position: relative;
+
   }
 
   main {
