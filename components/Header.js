@@ -31,32 +31,13 @@ const GetScreenSize = () => {
 }
 
 
-/* const burgerMenue = (showBurger) => css`
-position: absolute;
-right: 0;
-top: 100px;
-z-index: 1 ;
-height: 100vh;
-width: 80%;
-background-color: rgb(249,248,247);
-display: none;
 
-@media (max-width: 768px) {
-  display: ${showBurger && "block"};
-}
-`;
-
- */
-
-
-
-
-
-
-export default function Header() {
+export default function Header(props) {
   const [sumOfcartItems, setSumOfcartItems] = useState(0);
   const screenwidth = GetScreenSize()
   const [showBurger, setShowBurger] = useState(false)
+
+
 
   /* read cookies: return cookie or [] */
   const currentCookies = getParsedCookie('cart');
@@ -76,12 +57,31 @@ export default function Header() {
   }, [currentCookies]);
 
   console.log("WIDTH HEADER: ",screenwidth)
+  console.log("SHOWBURGER: ", showBurger)
+  // console.log("Props.RespMenue: ", props.showRespMenue)
+
+
+   // show responsive menue bar & display grey layer over body
+    function handleShowBurger(){
+      setShowBurger(true)
+      props.setShowRespMenue(true)
+    }
+
+
+
+
+
 
 
 
   return (
     <Fragment>
-    <BurgerMenue showBurger={showBurger} setShowBurger={setShowBurger}/>
+    <BurgerMenue
+      showBurger={showBurger}
+      setShowBurger={setShowBurger}
+      setShowRespMenue={props.setShowRespMenue}
+
+    />
 
     <header css={headerStyle}>
       <nav>
@@ -110,8 +110,8 @@ export default function Header() {
             </> :
             <button>
             <span
-            onClick={() => setShowBurger(true)}
-            onKeyDown={() => setShowBurger(true)}
+            onClick={handleShowBurger}
+            onKeyDown={handleShowBurger}
             role="menu"
             tabIndex={0}
             >

@@ -76,11 +76,17 @@ export default function Home(props: Props) {
 
   console.log('Index_props.database typeopf:', typeof props.plants);
   console.log('Index_cartCookie: typeof', typeof props.cartCookies);
+  console.log("Props.RespMenue: ", props.showRespMenue)
+
 
 
 
   return (
-    <Layout>
+    <Layout
+      showRespMenue={props.showRespMenue}
+      setShowRespMenue={props.setShowRespMenue}
+
+    >
       <Head>
         <title>Plant Love</title>
         <meta name="description" content="Plant Shop" />
