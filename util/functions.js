@@ -22,8 +22,11 @@ export function addAndUpdateQuantityInCookie(
   NewPlantId,
   NewPlantQuantity,
   cartCookie,
+  add,
+
 ) {
   console.log('id & quantitit:', NewPlantId, NewPlantQuantity);
+  console.log("CartCookieBE: ", cartCookie)
   /* new quantity and id of item to set in cart cookie  */
   const value = {
     plantID: NewPlantId,
@@ -31,8 +34,10 @@ export function addAndUpdateQuantityInCookie(
   };
 
   let newCookie;
+
   // check if a cookie is set
   if (cartCookie !== '[]') {
+
     // check if plant is aready in cart
     const checkifPlantIsAlreadyInCart = cartCookie.some(
       (element) => element.plantId === NewPlantId,
@@ -41,7 +46,11 @@ export function addAndUpdateQuantityInCookie(
     // if plant is aready in cart update quantity of plant; else: add new plant to cookie
     if (checkifPlantIsAlreadyInCart) {
       const newCartCookie = cartCookie.map((element) => {
-        if (element.plantId === NewPlantId) {
+
+        if (element.plantId === NewPlantId ) {
+              element.quantity = NewPlantQuantity;
+        }
+      if(element.plantId === NewPlantId & add) {
           element.quantity = element.quantity + NewPlantQuantity;
         }
         return element;

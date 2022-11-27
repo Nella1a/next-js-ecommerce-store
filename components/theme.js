@@ -5,7 +5,7 @@ const theme = {
     xSmall: '.8rem',
     small: '',
     medium: '1rem',
-    large: '',
+    large: '2rem',
     xLarge: '2.65rem',
   },
 };

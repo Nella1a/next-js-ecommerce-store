@@ -1,20 +1,8 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-
-const styleSectionProducts = css`
-  display: flex;
-  gap: 48px;
-  h2 {
-    margin: 8px 0;
-    font-size: 16px;
-  }
-
-  img {
-    display: block;
-    border: 5px solid grey;
-  }
-`;
+import { Fragment } from 'react';
+import { styleSectionProducts } from '../components/elements';
 
 const imgStyle = css`
   display: block;
@@ -31,33 +19,35 @@ type Props = {
   plants: Plants[];
 };
 
+const img = css`
+//width: 15.56rem;
+`;
+
+// width: 393, height: 491,5
 export default function ProductsComponent(props: Props) {
+
+
+
   return (
-    <section css={styleSectionProducts}>
-      {/* {console.log('ProductComponent Cookie:', props.cartCookie)} */}
-      {/* {console.log('ProductComponent1 props.plants:', props.plants)} */}
-      {console.log(typeof props.plants)}
+    <Fragment>
       {props.plants.map((event) => {
         return (
-          <div key={`guest-${event.id}`}>
-            {console.log('event.id', event.id)}
-            <Link href={`/Products/${event.id}`} passHref>
-              <a>
-                <Image
-                  src={`/image0${event.id}.jpeg`}
-                  width="393"
-                  height="491,5"
-                  alt="succulenten1"
-                  css={imgStyle}
-                />
-              </a>
-            </Link>
-
-            <h2>{event.name}</h2>
-            <p>€{event.price}</p>
-          </div>
+          <article key={`guest-${event.id}`} css={styleSectionProducts}>
+              <div>
+                {event.id === 1 && <span>Easy Care</span>}
+                {event.id === 4 && <span>Pet-Friendly</span>}
+                <a href={`/Products/${event.id} `}>
+                  <img src={`/image0${event.id}.jpeg`} alt="succulenten1" css={img}
+                  />
+                </a>
+              </div>
+              <div>
+                <h3>{event.name}</h3>
+                <p>€{event.price}</p>
+              </div>
+          </article>
         );
       })}
-    </section>
+    </Fragment>
   );
 }
