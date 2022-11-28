@@ -4,12 +4,11 @@ import Link from 'next/link';
 import { Fragment, useEffect, useState } from 'react';
 import shoppingBag from '../public/shopping-bag.png';
 import { getParsedCookie } from '../util/cookies';
-import BurgerMenue from './BurgerMenue';
 import { headerStyle, shoppingBagStyle } from './elements';
+import MobileMenu from './MobileMenu';
 
 // get window width
 const GetScreenSize = () => {
-
   const [screenSize, setScreenSize] = useState(0);
 
   useEffect(() => {
@@ -34,16 +33,16 @@ const GetScreenSize = () => {
 
 export default function Header(props) {
   const [sumOfcartItems, setSumOfcartItems] = useState(0);
-  const screenwidth = GetScreenSize()
-  const [showBurger, setShowBurger] = useState(false)
-
+  const screenwidth = GetScreenSize();
+  const [showHamburgerIcon, setShowHamburgerIcon] = useState(false);
 
 
   /* read cookies: return cookie or [] */
   const currentCookies = getParsedCookie('cart');
 
-  /* check if cookie is set; sum up quantity of items and update stateVariable */
   useEffect(() => {
+    /* check if cookie is set; sum up quantity of items and update stateVariable */
+
     if (currentCookies !== undefined) {
       const abc = currentCookies.map((event) => event.quantity);
       const reducedAbc = abc.reduce((a, b) => a + b, 0);
@@ -57,30 +56,23 @@ export default function Header(props) {
   }, [currentCookies]);
 
   console.log("WIDTH HEADER: ",screenwidth)
-  console.log("SHOWBURGER: ", showBurger)
-  // console.log("Props.RespMenue: ", props.showRespMenue)
+  console.log("SHOWBURGER: ", showHamburgerIcon)
+  console.log("Props.RespMenue Typeof: ", typeof(props.setShowGrayLayer))
 
 
-   // show responsive menue bar & display grey layer over body
-    function handleShowBurger(){
-      setShowBurger(true)
-      props.setShowRespMenue(true)
+    function handleShowMobileMenu(){
+      // show responsive menue bar & display grey layer over body
+      setShowHamburgerIcon(true)
+      props.setShowGrayLayer(true)
     }
-
-
-
-
-
-
 
 
   return (
     <Fragment>
-    <BurgerMenue
-      showBurger={showBurger}
-      setShowBurger={setShowBurger}
-      setShowRespMenue={props.setShowRespMenue}
-
+    <MobileMenu
+      showBurger={showHamburgerIcon}
+      setShowBurger={setShowHamburgerIcon}
+      setShowGrayLayer={props.setShowGrayLayer}
     />
 
     <header css={headerStyle}>
@@ -110,8 +102,8 @@ export default function Header(props) {
             </> :
             <button>
             <span
-            onClick={handleShowBurger}
-            onKeyDown={handleShowBurger}
+            onClick={handleShowMobileMenu}
+            onKeyDown={handleShowMobileMenu}
             role="menu"
             tabIndex={0}
             >
