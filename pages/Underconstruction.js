@@ -1,11 +1,16 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Layout from '../components/Layout';
 import { underConstruction } from '../components/elements';
+import Layout from '../components/Layout';
+import { disableGrayLayer } from '../hooks';
 
-export default function UnderConstruction() {
+export default function UnderConstruction(props) {
+  disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer)
   return (
-    <Layout>
+    <Layout
+    showGrayLayer={props.showGrayLayer}
+    setShowGrayLayer={props.setShowGrayLayer}
+    >
       <Head>
         <title>under construction</title>
         <meta name="description" content="site is under construction" />

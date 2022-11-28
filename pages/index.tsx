@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import BackGImage from '../components/BackGImage';
+import ButtonCallToAction from '../components/ButtonCallToAction';
 /* import ButtonCallToAction from '../components/ButtonCallToAction';
  */
 import Delivery from '../components/DeliveryInfos';
@@ -44,6 +45,9 @@ type CartCookie = {
 type Props = {
   plants: Plants[];
   cartCookies: CartCookie[];
+  showGrayLayer: boolean;
+  setShowGrayLayer: Function;
+
 };
 
 // get window width
@@ -76,15 +80,15 @@ export default function Home(props: Props) {
 
   console.log('Index_props.database typeopf:', typeof props.plants);
   console.log('Index_cartCookie: typeof', typeof props.cartCookies);
-  console.log("Props.RespMenue: ", props.showRespMenue)
+  console.log("Props.RespMenue: ", props.showGrayLayer)
 
-
+  const buttonInHeroImage = <ButtonCallToAction innerText="View All Plants" />
 
 
   return (
     <Layout
-      showRespMenue={props.showRespMenue}
-      setShowRespMenue={props.setShowRespMenue}
+    showGrayLayer={props.showGrayLayer}
+    setShowGrayLayer={props.setShowGrayLayer}
 
     >
       <Head>
@@ -97,6 +101,7 @@ export default function Home(props: Props) {
         firstText="Delivering Plants,"
         secondText="Delivering Happiness!"
         bgImage={bgImageHero}
+        buttonInHeroImage={buttonInHeroImage}
         />
 
       <section css={bestSellerStyle}>

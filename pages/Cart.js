@@ -9,6 +9,7 @@ import {
   underConstruction,
 } from '../components/elements';
 import Layout from '../components/Layout';
+import { disableGrayLayer } from '../hooks';
 import { deleteCookie, setParsedCookie } from '../util/cookies';
 import { readPlants } from '../util/database';
 import {
@@ -22,6 +23,10 @@ export default function ShoppingCart(props) {
   const [cookieOfCartItems, setCookieOfCartItems] = useState(
     props.cartCookie,
   );
+
+  disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer)
+
+
 
   let singlePlantPriceTotal = 0;
   const cartSubTotalPrice = [];
@@ -85,7 +90,10 @@ export default function ShoppingCart(props) {
   // case: no cookie set
   if (cookieOfCartItems === undefined || !cookieOfCartItems.length) {
     return (
-      <Layout>
+      <Layout
+      showGrayLayer={props.showRespMenue}
+      setShowGrayLayer={props.setShowRespMenue}
+      >
         <Head>
           <title>Shopping Cart Items</title>
           <meta name="description" content="Your Shopping Cart" />
@@ -102,7 +110,11 @@ export default function ShoppingCart(props) {
 
  // case: cookie set
   return (
-    <Layout>
+    <Layout
+    showGrayLayer={props.showGrayLayer}
+    setShowGrayLayer={props.setShowGrayLayer}
+
+    >
       <Head>
         <title>Shopping Cart Items</title>
         <meta name="description" content="Your Shopping Cart" />
