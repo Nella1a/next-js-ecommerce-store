@@ -1,12 +1,19 @@
+import { css } from '@emotion/react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect } from 'react';
+import BackGImage from '../components/BackGImage';
 import Delivery from '../components/DeliveryInfos';
-import { bestSellerStyle } from '../components/elements';
+import {
+  bestSellerStyle,
+  productsComponentStyle,
+} from '../components/elements';
 import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 import ProductsComponent from '../components/ProductComponent';
+import { disableGrayLayer } from '../hooks';
 import { readPlants } from '../util/database';
 
 type Plants = {
@@ -17,23 +24,44 @@ type Plants = {
 
 type Props = {
   plants: Plants[];
+  showGrayLayer: boolean;
+  setShowGrayLayer: Function;
 };
 
 export default function Products(props: Props) {
-  console.log('props:', props);
+
+disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer)
+
+const bgImageHero = css`
+  background: no-repeat center url("indexHeroImg.jpeg");
+  background-size: cover;
+`;
+
+
   return (
-    <Layout>
+    <Layout
+    showGrayLayer={props.showGrayLayer}
+    setShowGrayLayer={props.setShowGrayLayer}
+    >
       <Head>
         <title>View all Plants</title>
         <meta name="description" content="View all Plants" />
       </Head>
-      <section css={bestSellerStyle}>
+      <BackGImage
+
+//firstText="Delivering Plants,"
+//secondText="Delivering Happiness!"
+bgImage={bgImageHero}
+/>
+      <section css={productsComponentStyle}>
         <h2>Products</h2>
-        <div>
-          <ProductsComponent plants={props.plants} />
-          <ProductsComponent plants={props.plants} />
-          <ProductsComponent plants={props.plants} />
-        </div>
+
+         <article>
+            <ProductsComponent plants={props.plants} />
+            <ProductsComponent plants={props.plants} />
+            <ProductsComponent plants={props.plants} />
+         </article>
+
 
 
 

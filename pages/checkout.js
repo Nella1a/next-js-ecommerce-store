@@ -4,10 +4,13 @@ import Link from 'next/link';
 // import { useState } from 'react';
 import { flexStyle, formStyle } from '../components/elements';
 import Layout from '../components/Layout';
+import { disableGrayLayer } from '../hooks';
 import { deleteCookie } from '../util/cookies';
 
-export default function CheckOut() {
+export default function CheckOut(props) {
   // const [required, setRequired] = useState(true);
+
+  disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer)
 
   const required = true;
   function checkform(event) {
@@ -17,7 +20,10 @@ export default function CheckOut() {
   }
 
   return (
-    <Layout>
+    <Layout
+    showGrayLayer={props.showGrayLayer}
+    setShowGrayLayer={props.setShowGrayLayer}
+    >
       <Head>
         <title>Checkout</title>
         <meta name="checkout" content="shipping and payment details" />
