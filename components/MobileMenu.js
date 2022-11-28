@@ -2,7 +2,7 @@ import { useOnClickOutside } from '/hooks';
 // import { burgerMenue } from './elements';
 import { css } from '@emotion/react';
 import Link from 'next/link';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const mobileMenuStyle = (showBurger) => css`
 display: none;
@@ -20,8 +20,6 @@ display: none;
   flex-direction: column;
   width: 60%;
   background-color: rgb(249,248,247);
-
-
 
   div {
     display: flex;
@@ -46,15 +44,17 @@ export default function MobileMenu(props) {
   const node = useRef();
   useOnClickOutside(node, () => {
     props.setShowBurger(false)
-    props.setShowRespMenue(false)
+    props.setShowGrayLayer(false)
   });
 
 
-// hide responsive menue bar & grey layer over body
+
 function hideMobileMenue(){
+  // hide responsive menu bar & grey layer over body
   props.setShowBurger(false)
-  props.setShowRespMenue(false)
+  props.setShowGrayLayer(false)
 }
+
 
 return(
 <article css={mobileMenuStyle(props.showBurger)} ref={node}>
