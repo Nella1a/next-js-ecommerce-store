@@ -233,29 +233,46 @@ export const shoppingBagStyle = (theme) => css`
 /* *************************** */
 
 export const footerStyle = css`
+
   gap: 4rem;
   height: auto;
-  background-color: #fff;
-  width: 1400px;
+  //background-color: rgb(249,248,247);
+  //background-color: #009a7b;
+  background-color: rgba(0, 154, 123, .1);
+
+  width: 100%;
   margin: auto auto;
   //border: 1px solid red;
-  margin-top: 56px;
+  padding-top: 40px 40px 80px 40px;
 
 
-    div {
-      display: flex;
-      justify-content: space-around;
+   > div {
+      max-width: 1400px;
+      //display: flex;
+      //justify-content: space-around;
+
       padding: 3rem 0;
+      padding-left: 48px;
       margin: 0 auto;
-      max-width:inherit;
+
 
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 3fr 1fr;
+      //border: 1px solid blue;
+      border-top: .5px solid lightgray;
 
       @media screen and (max-width: 480px) {
         flex-direction: column;
       }
-      //gap: 2.5rem;
+
+        div { display: flex;
+          //border: 1px solid red;
+          gap: 100px;
+          margin-left: 400px;
+
+        }
+
+
     }
 
     article {
@@ -295,7 +312,6 @@ export const footerStyle = css`
     }
 
     }
-
 
 
     @media screen and (max-width: 480px) {
@@ -456,17 +472,17 @@ export const bestSellerStyle  = (theme) => css`
       gap: 4px;
       grid-template-columns: 1fr;
       }
-
-
-
 }
-
 `;
 
 export const styleComp = css`
   display: flex;
   flex-direction: column;
 `;
+
+
+
+
 
 
 
@@ -594,6 +610,46 @@ export const separator = css`
 /*         Products.js         */
 /* *************************** */
 
+
+export const productsComponentStyle  = (theme) => css`
+  gap: 48px;
+  padding: 0 48px;
+ margin-top: 10rem;
+  margin-bottom: 10rem;
+
+
+
+  h2 {
+    //text-align: center;
+    font-size: ${theme.typography.large};
+    margin-top: 5.5rem;
+    margin-bottom: 3.5rem;
+  }
+
+  > article:first-of-type {
+
+      display: grid;
+      gap: 30px;
+      grid-template-columns: repeat(4, 1fr);
+
+      @media screen and (max-width: 1024px) {
+        gap: 24px;
+      }
+
+      @media screen and (max-width: 800px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      @media screen and (max-width: 480px) {
+      gap: 4px;
+      grid-template-columns: 1fr;
+      }
+}
+`;
+
+
+
 export const styleSectionProducts = css`
   display: flex;
   flex-direction: column;
@@ -673,6 +729,8 @@ export const singleProductPageStyle = css`
  grid-template-columns: minmax(0, 150px) 2fr;
   max-width: 1000px;
   margin-top: 10rem;
+  margin-bottom: 10rem;
+
 
   > div:first-of-type {
     display: flex;
@@ -959,17 +1017,47 @@ margin-top: 5rem;
 /* *************************** */
 
 export const deliveryInfos = (theme) => css`
-  height: 200px;
-  background-color: #DFDFDB;
+  //height: 400px;
+  //background-color: #DFDFDB;
+  //background-color: #009a7b;
+  background-color: rgba(0, 154, 123, .1);
+
   color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+ // justify-content: center;
+
   font-size: ${theme.typography.large};
-  margin: 2rem 0;
+  //margin: 2rem 0;
   max-width: unset;
   width: 100%;
-  background-color: rgb(249,248,247);
+  //background-color: rgb(249,248,247);
+  padding: 50px;
+
+  > div {
+    width: 1400px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    justify-content: start;
+    gap: 3rem;
+    margin: 0 auto;
+    //border: 1px solid green;
+    padding-left: 10px;
+
+    article {
+    width: 180px;
+    height: 180px;
+    background-color: lightgrey;
+    border-radius: 50%;
+  }
+
+
+  }
+
+
+
+
 `;
 
 /* *************************** */
