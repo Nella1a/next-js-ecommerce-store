@@ -24,18 +24,12 @@ export default function ShoppingCart(props) {
     props.cartCookie,
   );
 
-  disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer)
-
-
-
   let singlePlantPriceTotal = 0;
   const cartSubTotalPrice = [];
 
   let sumOfProducts = 0
   cookieOfCartItems.forEach((product) => {
      sumOfProducts += product.quantity;
-
-
 
   })
 
@@ -86,13 +80,14 @@ export default function ShoppingCart(props) {
      setParsedCookie('cart', newCookie);
 }
 
+disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer)
 
   // case: no cookie set
   if (cookieOfCartItems === undefined || !cookieOfCartItems.length) {
     return (
       <Layout
-      showGrayLayer={props.showRespMenue}
-      setShowGrayLayer={props.setShowRespMenue}
+      showGrayLayer={props.showGrayLayer}
+      setShowGrayLayer={props.setShowGrayLayer}
       >
         <Head>
           <title>Shopping Cart Items</title>
@@ -113,7 +108,6 @@ export default function ShoppingCart(props) {
     <Layout
     showGrayLayer={props.showGrayLayer}
     setShowGrayLayer={props.setShowGrayLayer}
-
     >
       <Head>
         <title>Shopping Cart Items</title>
