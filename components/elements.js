@@ -31,8 +31,8 @@ export const globalStyleBody = (theme) => css`
 
 h2 {
   font-size: 2rem;
-    margin-top: 5.5rem;
-    margin-bottom: 3.5rem;
+    //margin-top: 5.5rem;
+    margin-bottom: 1.5rem;
 }
 
 
@@ -74,19 +74,10 @@ h2 {
   }
 
   section {
-    margin: 0 auto;
+    margin: 8rem 0rem auto;
     max-width: 1400px;
     display: flex;
     flex-direction: column;
-    //align-items: center;
-    //gap: 4rem;
-    //width: 87rem;
-    //border: 3px solid pink;
-  /*   max-width: 1400px;
-    margin: 0 auto;
-    padding-left: 3rem;
-    padding-right: 3rem; */
-
   }
 
   button {
@@ -442,15 +433,15 @@ export const bgImgInnerContainer = (theme) => css`
 `;
 
 export const bestSellerStyle  = (theme) => css`
-  gap: 48px;
+  //gap: 48px;
   //margin-top: 4rem;
 
 
   h2 {
     //text-align: center;
     font-size: ${theme.typography.large};
-    margin-top: 5.5rem;
-    margin-bottom: 3.5rem;
+    //margin-top: 5.5rem;
+   // margin-bottom: 3.5rem;
   }
 
    > div {
@@ -552,8 +543,8 @@ export const indexTextImageComp = css`
   border: 2px solid green;
   display: grid;
   grid-template-columns: 3fr 2fr;
-  margin-top: 64px;
-  margin-bottom: 56px;
+  //margin-top: 64px;
+  //margin-bottom: 56px;
   gap: 2rem;
 
   > div:first-of-type{
@@ -612,18 +603,18 @@ export const separator = css`
 
 
 export const productsComponentStyle  = (theme) => css`
-  gap: 48px;
-  padding: 0 48px;
- margin-top: 10rem;
-  margin-bottom: 10rem;
+  //gap: 48px;
+  //padding: 0 48px;
+ //margin-top: 10rem;
+  //margin-bottom: 10rem;
 
 
 
   h2 {
     //text-align: center;
     font-size: ${theme.typography.large};
-    margin-top: 5.5rem;
-    margin-bottom: 3.5rem;
+   // margin-top: 5.5rem;
+   // margin-bottom: 3.5rem;
   }
 
   > article:first-of-type {
@@ -728,8 +719,8 @@ export const singleProductPageStyle = css`
  display: grid;
  grid-template-columns: minmax(0, 150px) 2fr;
   max-width: 1000px;
-  margin-top: 10rem;
-  margin-bottom: 10rem;
+  //margin-top: 10rem;
+  //margin-bottom: 10rem;
 
 
   > div:first-of-type {
@@ -807,14 +798,15 @@ export const singleProductPageStyleSecondArticle = css`
 /* *************************** */
 
 export const shoppingCartSectionHeader = css`
-margin-top: 5rem;
-margin-bottom: 5rem;
+margin-top: 8rem;
+//margin-bottom: 5rem;
 text-align: left;
 
 `;
 
 
 export const shoppingCartStyle = css`
+  margin-top: 4rem;
   display: grid;
   gap: 60px;
   grid-template-columns: 2fr 1fr;
