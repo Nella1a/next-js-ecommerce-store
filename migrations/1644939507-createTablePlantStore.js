@@ -3,7 +3,7 @@ exports.up = async (sql) => {
 	CREATE TABLE  Plants (
 	id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	name varchar(50) NOT NULL,
-	price NUMERIC (10,2) NOT NULL,
+	price DECIMAL(10,2) NOT NULL,
 	description text NOT NULL
 );
 	`;
