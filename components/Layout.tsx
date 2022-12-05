@@ -3,12 +3,15 @@ import Header from './Header';
 
 type Props = {
   children?: React.ReactNode;
+  showGrayLayer: boolean;
+  setShowGrayLayer: Function;
 
 };
 
 
 
 export default function Layout(props: Props) {
+
   return (
     <>
       <Head>
@@ -16,10 +19,8 @@ export default function Layout(props: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header
-         showRespMenue={props.showRespMenue}
-         setShowRespMenue={props.setShowRespMenue}
-
-
+         showGrayLayer={props.showGrayLayer}
+         setShowGrayLayer={props.setShowGrayLayer}
       />
       <main>
           {props.children}
