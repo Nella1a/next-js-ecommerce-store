@@ -1,8 +1,8 @@
-import { useOnClickOutside } from '/hooks';
 // import { burgerMenue } from './elements';
 import { css } from '@emotion/react';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
+import { useOnClickOutside } from '../hooks';
 
 const mobileMenuStyle = (showBurger) => css`
 display: none;
@@ -49,11 +49,12 @@ export default function MobileMenu(props) {
 
 
 
-function hideMobileMenue(){
+const hideMobileMenue = () => {
   // hide responsive menu bar & grey layer over body
   props.setShowBurger(false)
   props.setShowGrayLayer(false)
 }
+
 
 
 return(
