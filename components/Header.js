@@ -6,6 +6,7 @@ import shoppingBag from '../public/shopping-bag.png';
 import { getParsedCookie } from '../util/cookies';
 import { headerStyle, shoppingBagStyle } from './elements';
 import MobileMenu from './MobileMenu';
+import NavMenu from './NavMenu';
 
 // get window width
 const GetScreenSize = () => {
@@ -83,23 +84,9 @@ export default function Header(props) {
               <img src="/logo_shelovesplants.svg" alt="logo she loves plants" />
             </a>
           </Link>
-
           {/* conditional rendering */}
-            {screenwidth > 768 ?
-            <>
-              <Link href="/Products">
-                <a data-test-id="products-link">Plants</a>
-              </Link>
-              <Link href="/Underconstruction">
-                <a>Inspiration</a>
-              </Link>
-              <Link href="/Underconstruction">
-                <a>Sale</a>
-              </Link>
-              <Link href="/Underconstruction">
-                <a>Contact</a>
-              </Link>
-            </> :
+            {screenwidth > 768 ? <NavMenu />
+           :
             <button>
             <span
             onClick={handleShowMobileMenu}
