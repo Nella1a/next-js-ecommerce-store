@@ -41,17 +41,8 @@ export default function CheckOut(props) {
           <section>
             <h2>Delivery to: </h2>
             <p>
-              <strong>
-                Required fields are followed by
-                <abbr title="required ">*</abbr>
-              </strong>
-            </p>
-            <p>
               <label htmlFor="email">
                 <span>E-mail: </span>
-                <strong>
-                  <abbr title="required">*</abbr>
-                </strong>
               </label>
               <input
                 id="email"
@@ -65,13 +56,6 @@ export default function CheckOut(props) {
               <p>
                 <label htmlFor="firstName">
                   <span>First Name: </span>
-
-                  <strong>
-                    <abbr title="required" aria-label="required">
-                      *
-                    </abbr>
-                  </strong>
-
                   <input
                     // id="firstName"
                     name="lastName"
@@ -83,11 +67,6 @@ export default function CheckOut(props) {
               <p>
                 <label htmlFor="lastName">
                   <span>Last Name </span>
-                  <strong>
-                    <abbr title="required" aria-label="required">
-                      *
-                    </abbr>
-                  </strong>
                 </label>
                 <input
                   id="lastName"
@@ -101,11 +80,6 @@ export default function CheckOut(props) {
               <p>
                 <label htmlFor="adress">
                   <span>Adress: </span>
-                  <strong>
-                    <abbr title="required" aria-label="required">
-                      *
-                    </abbr>
-                  </strong>
                 </label>
                 <input
                   id="adress"
@@ -117,11 +91,6 @@ export default function CheckOut(props) {
               <p>
                 <label htmlFor="city">
                   <span>City: </span>
-                  <strong>
-                    <abbr title="required" aria-label="required">
-                      *
-                    </abbr>
-                  </strong>
                 </label>
                 <input
                   id="city"
@@ -135,11 +104,6 @@ export default function CheckOut(props) {
               <p>
                 <label htmlFor="postalCode">
                   <span>Postal Code: </span>
-                  <strong>
-                    <abbr title="required" aria-label="required">
-                      *
-                    </abbr>
-                  </strong>
                 </label>
                 {/* <input  id="postalCode" name="postalCode" type="number" /> */}
                 <input
@@ -154,11 +118,6 @@ export default function CheckOut(props) {
               <p>
                 <label htmlFor="country">
                   <span>Country: </span>
-                  <strong>
-                    <abbr title="required" aria-label="required">
-                      *
-                    </abbr>
-                  </strong>
                 </label>
                 <input
                   id="country"
@@ -189,11 +148,6 @@ export default function CheckOut(props) {
             <p>
               <label htmlFor="cardNumber">
                 <span>Card number:</span>
-                <strong>
-                  <abbr title="required" aria-label="required">
-                    *
-                  </abbr>
-                </strong>
               </label>
               <input
                 type="tel"
@@ -211,11 +165,6 @@ export default function CheckOut(props) {
             <p>
               <label htmlFor="nameOncard">
                 <span>Name on card:</span>
-                <strong>
-                  <abbr title="required" aria-label="required">
-                    *
-                  </abbr>
-                </strong>
               </label>
               <input
                 id="nameOncard"
@@ -228,11 +177,6 @@ export default function CheckOut(props) {
               <p>
                 <label htmlFor="expiration">
                   <span>Expiry Date:</span>
-                  <strong>
-                    <abbr title="required" aria-label="required">
-                      *
-                    </abbr>
-                  </strong>
                 </label>
                 <input
                   id="expiration"
@@ -245,11 +189,6 @@ export default function CheckOut(props) {
               <p>
                 <label htmlFor="securityCode">
                   <span>Security Code</span>
-                  <strong>
-                    <abbr title="required" aria-label="required">
-                      *
-                    </abbr>
-                  </strong>
                 </label>
                 <input
                   id="securityCode"
