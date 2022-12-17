@@ -9,6 +9,7 @@ import {
   underConstruction,
 } from '../components/elements';
 import Layout from '../components/Layout';
+import OrderSummeryCart from '../components/OrderSummaryCart';
 import { disableGrayLayer } from '../hooks';
 import {
   deleteCookie,
@@ -114,10 +115,6 @@ const options = [
      setParsedCookie('cart', newCookie);
 }
 
-
-
-
-
   // case: no cookie set
   if (cartProducts === undefined || !cartProducts.length) {
     return (
@@ -208,30 +205,7 @@ const options = [
                 );
           })}
         </article>
-        <article>
-          <div>
-            <h2>Total</h2>
-            <div>
-              <p>
-                <span>Subtotal</span>
-                <span>{totalPrice.toFixed(2)}</span>
-              </p>
-              <p>
-                <span>Delivery</span>
-                <span>€ 0.00</span>
-              </p>
-            </div>
-            <div>
-            <p>
-              <span>Total (VAT included)</span>
-              <span>€ {totalPrice.toFixed(2)}</span>
-            </p>
-            <Link href="/checkout" passHref>
-              <button data-test-id="cart-checkout">Go to checkout</button>
-            </Link>
-            </div>
-          </div>
-        </article>
+        <OrderSummeryCart totalPrice ={totalPrice.toFixed(2)} />
       </section>
     </Layout>
   );
