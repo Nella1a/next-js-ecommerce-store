@@ -1,5 +1,5 @@
 import { css, Global, ThemeProvider } from '@emotion/react';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { globalStyleBody } from '../components/elements';
 import theme from '../components/theme';
 
