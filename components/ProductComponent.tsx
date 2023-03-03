@@ -1,13 +1,6 @@
 import { css } from '@emotion/react';
-import Image from 'next/image';
-import Link from 'next/link';
 import { Fragment } from 'react';
 import { styleSectionProducts } from '../components/elements';
-
-const imgStyle = css`
-  display: block;
-  border: 5px solid grey;
-`;
 
 type Plants = {
   id: number;
@@ -25,9 +18,6 @@ const img = css`
 
 // width: 393, height: 491,5
 export default function ProductsComponent(props: Props) {
-
-
-
   return (
     <Fragment>
       {props.plants.map((event) => {
