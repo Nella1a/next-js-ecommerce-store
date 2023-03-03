@@ -41,7 +41,7 @@ h2 {
     line-height: 1.5; /* default for browser: 1.4 tends to be very small*/
     font-size: ${theme.typography.medium};
     min-height: 100vh;
-    width: 100vw;
+    //max-width: 1400px;
     font-family: ${theme.font};
     background-color: var(--backgroundColorWhite);
     position: relative;
@@ -118,17 +118,20 @@ const size = (width = '100%', height = '100%') => {
 /* *************************** */
 
 export const headerStyle = css`
-  max-width: 100%;
+  width: 100vw;
   position: fixed;
   background-color: #fff;
-  left: 0;
-  right: 0;
+
+  //left: 0;
+  //right: 0;
   top: 0;
   z-index: 1;
+ // background-color: green;
 
   nav {
     max-width: 1400px;
     ${marginCenter}
+    // background-color: yellow;
 
     position: relative;
     left: 0;
@@ -224,52 +227,49 @@ export const shoppingBagStyle = (theme) => css`
 /* *************************** */
 
 export const footerStyle = css`
-
   gap: 4rem;
   height: auto;
-  //background-color: rgb(249,248,247);
-  //background-color: #009a7b;
   background-color: rgba(0, 154, 123, .1);
-
   width: 100%;
   margin: auto auto;
-  //border: 1px solid red;
-  padding-top: 40px 40px 80px 40px;
+  padding: 2.5rem 2.5rem 5rem 5rem;
 
-
-   > div {
+   div {
       max-width: 1400px;
-      //display: flex;
-      //justify-content: space-around;
-
       padding: 3rem 0;
-      padding-left: 48px;
+      //padding-left: 3rem;
       margin: 0 auto;
-
-
-      display: grid;
+      gap: 4.25rem;
+      /* display: grid;
       grid-template-columns: 3fr 1fr;
-      //border: 1px solid blue;
-      border-top: .5px solid lightgray;
+      border-top: 0.031rem solid lightgray; */
+      display: flex;
+      justify-content: center;
 
-      @media screen and (max-width: 480px) {
-        flex-direction: column;
-      }
 
-        div { display: flex;
+      /* div {
+          display: flex;
           //border: 1px solid red;
-          gap: 100px;
-          margin-left: 400px;
+          gap: 6.25rem;
+          //margin-left: 25rem;
+          justify-content: flex-end;
 
-        }
+          @media screen and (max-width: 1024px) {
+            justify-content: flex-start;
+            //gap: 5rem;
+          }
+       } */
+
+       /* article:first-of-type {
+        margin-left: auto;
+       } */
 
 
-    }
 
-    article {
+       article {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.063rem;
       p:first-of-type {
       font-weight: bold;
     }
@@ -299,31 +299,53 @@ export const footerStyle = css`
       &:hover {
         background-color: #ff6900;
       }
-
     }
 
     }
-
-
-    @media screen and (max-width: 480px) {
-      align-items: center;
-      gap: 0.5rem;
-    }
-
    }
 
+   @media screen and (max-width: 768px){
+    display: grid;
+    grid-template-columns: repeat(3,minmax(100px,1fr));
 
-  article:nth-of-type(2) {
-    display: flex;
-    //align-items: center;
-    gap: 1rem;
   }
+
+
+
+  @media screen and (max-width: 480px) {
+    grid-template-columns: minmax(100px,1fr);
+    text-align: center;
+    }
+
+       /* @media screen and (max-width: 1024px){
+       // grid-template-columns: 1fr;
+        padding: unset;
+        gap: unset;
+       } */
+
+
+
+    }
+
+
+
+  //article:nth-of-type(2) {
+  //  display: flex;
+    //align-items: center;
+  //  gap: 1rem;
+ // }
 
 
   a {
     text-decoration: none;
     display: block;
   }
+
+  @media screen and (max-width: 1024px) {
+    padding: 2.5rem 2.5rem;
+  }
+
+
 
 
 `;
@@ -871,7 +893,7 @@ export const shoppingCartStyle = css`
 
   article:nth-of-type(2) {
     display: flex;
-    align-items: center;
+   // align-items: center;
     width: 100%;
 
 
@@ -947,7 +969,7 @@ export const plantName = css`
 
 export const formStyle = css`
   section {
-    width: 50%;
+   // width: 50%;
   }
 
   p,
@@ -980,6 +1002,12 @@ export const flexStyle = css`
     }
   }
 `;
+
+
+
+
+
+
 /* *************************** */
 /*    Underconstruction        */
 /* *************************** */
@@ -1013,7 +1041,6 @@ export const deliveryInfos = (theme) => css`
   //background-color: #DFDFDB;
   //background-color: #009a7b;
   background-color: rgba(0, 154, 123, .1);
-
   color: #000;
 
  // justify-content: center;
@@ -1023,7 +1050,8 @@ export const deliveryInfos = (theme) => css`
   max-width: unset;
   width: 100%;
   //background-color: rgb(249,248,247);
-  padding: 50px;
+  //padding: 50px;
+  overflow: hidden;
 
   > div {
     width: 1400px;
@@ -1034,40 +1062,31 @@ export const deliveryInfos = (theme) => css`
     justify-content: start;
     gap: 3rem;
     margin: 0 auto;
-    //border: 1px solid green;
-    padding-left: 10px;
+    border: 1px solid green;
+    padding-left: .65rem;
+
 
     article {
-    width: 180px;
-    height: 180px;
+    width: 11.25rem;
+    height: 11.25rem;
     background-color: lightgrey;
     border-radius: 50%;
   }
 
 
+  div {
+
+  @media screen and (max-width: 1024px){
+    h4 {
+      font-size: 1.5rem;
+    }
   }
 
-
-
-
-`;
-
-/* *************************** */
-/*    BurgerMenue.js       */
-/* *************************** */
-/* export const burgerMenue = css`
-position: absolute;
-right: 0;
-top: 100px;
-z-index: 1 ;
-height: 100vh;
-width: 80%;
-background-color: rgb(249,248,247);
-display: none;
-
-@media (max-width: 768px) {
-  display: block;
-
-}
-
-`; */
+  @media screen and (max-width: 768px){
+    h4 {
+      font-size: 1.3rem;
+    }
+  }
+  }
+  }
+  `;
