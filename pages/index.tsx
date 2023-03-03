@@ -7,13 +7,14 @@ import ButtonCallToAction from '../components/ButtonCallToAction';
  */
 import Delivery from '../components/DeliveryInfos';
 import { bestSellerStyle, indexTextImageComp } from '../components/elements';
-import Footer from '../components/Footer';
+import Footer from '../components/footer/footer';
 import IndexTextImage from '../components/IndexTextImage';
 import Layout from '../components/Layout';
 /* import PlantComp from '../components/PlantComp';
  */
 import ProductsComponent from '../components/ProductComponent';
-import { readPlants } from '../util/database.js';
+import { readPlants } from '../util/database';
+import { PropsTypePlantsCartCookieLayer } from './types';
 
 const bgImageHero = css`
   background: no-repeat center url("indexHeroImg.jpeg");
@@ -30,25 +31,9 @@ const buttonCallToActionIndex = css`
 ` */
 
 
-type Plants = {
-  id: number;
-  name: string;
-  price: number;
-};
 
-type CartCookie = {
-  plantId: number;
-  name: string;
-  price?: number;
-};
 
-type Props = {
-  plants: Plants[];
-  cartCookies: CartCookie[];
-  showGrayLayer: boolean;
-  setShowGrayLayer: Function;
 
-};
 
 // get window width
 /* const GetScreenSize = () => {
@@ -75,7 +60,7 @@ type Props = {
  */
 
 
-export default function Home(props: Props) {
+export default function Home(props: PropsTypePlantsCartCookieLayer) {
 
 
   console.log('Index_props.database typeopf:', typeof props.plants);
