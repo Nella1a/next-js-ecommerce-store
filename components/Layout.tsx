@@ -1,16 +1,8 @@
 import Head from 'next/head';
+import { PropsTypeChildrenLayer } from '../pages/types';
 import Header from './Header';
 
-type Props = {
-  children?: React.ReactNode;
-  showGrayLayer: boolean;
-  setShowGrayLayer: Function;
-
-};
-
-
-
-export default function Layout(props: Props) {
+export default function Layout(props: PropsTypeChildrenLayer) {
 
   return (
     <>
