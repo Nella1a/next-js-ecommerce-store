@@ -1,11 +1,10 @@
 import Head from 'next/head';
-import { PropsTypeChildrenLayer } from '../pages/types';
+import { PropsLayoutCart } from '../pages/types';
 import Delivery from './DeliveryInfos';
 import Footer from './footer/footer';
-import { Header } from './Header';
 import Navigation from './Navigation';
 
-export default function Layout(props: PropsTypeChildrenLayer ) {
+export default function LayoutCart(props: PropsLayoutCart  ) {
 
   return (
     <>
@@ -16,12 +15,6 @@ export default function Layout(props: PropsTypeChildrenLayer ) {
       <Navigation
          showGrayLayer={props.showGrayLayer}
          setShowGrayLayer={props.setShowGrayLayer}
-      />
-      <Header
-        firstText="Delivering Plants,"
-        secondText="Delivering Happiness!"
-        bgImageHero={props.bgImageHero}
-    buttonInHeroImage={props.buttonInHeroImage}
       />
 
       <main>

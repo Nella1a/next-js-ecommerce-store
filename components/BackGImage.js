@@ -7,7 +7,7 @@ const buttonCallToActionIndex = css`
 `
 export default function BackGImage(props) {
   return (
-    <div css={[bgImgContainer, props.bgImage]} >
+    <div css={[bgImgContainer, props.bgImageHero]} >
      <div css={bgImgInnerContainer}>
         <p>{props.firstText}</p>
         <p>{props.secondText}</p>

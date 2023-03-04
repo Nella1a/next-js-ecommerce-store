@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { flexStyle, formStyle } from '../components/elements';
-import Layout from '../components/Layout';
+import LayoutNoHeader from '../components/LayoutNoHeader';
 import { disableGrayLayer } from '../hooks';
 import { deleteCookie } from '../util/cookies';
 import { PropsTypeGrayLayer } from './types';
@@ -19,7 +19,7 @@ export default function CheckOut({showGrayLayer, setShowGrayLayer}: PropsTypeGra
   }
 
   return (
-    <Layout
+    <LayoutNoHeader
     showGrayLayer={showGrayLayer}
     setShowGrayLayer={setShowGrayLayer}
     >
@@ -232,6 +232,6 @@ export default function CheckOut({showGrayLayer, setShowGrayLayer}: PropsTypeGra
         </form>
 
       </section>
-    </Layout>
+    </LayoutNoHeader>
   );
 }

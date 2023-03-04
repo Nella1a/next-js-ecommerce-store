@@ -140,7 +140,7 @@ export const headerStyle = css`
   z-index: 1;
  // background-color: green;
 
-  nav {
+  > div {
     max-width: 1400px;
     ${marginCenter}
     // background-color: yellow;

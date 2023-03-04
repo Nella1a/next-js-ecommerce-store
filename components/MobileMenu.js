@@ -102,7 +102,7 @@ const hideMobileMenue = () => {
 
 
 return(
-<article css={mobileMenuStyle(props.showBurger)} ref={node}>
+<nav css={mobileMenuStyle(props.showBurger)} ref={node}>
 
   <ul>
     <li>
@@ -139,6 +139,6 @@ return(
     </li>
   </ul>
 
-</article>
+</nav>
 )
 }
