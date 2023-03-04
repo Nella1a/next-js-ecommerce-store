@@ -1,12 +1,8 @@
 import { css } from '@emotion/react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import BackGImage from '../components/BackGImage';
 import ButtonCallToAction from '../components/ButtonCallToAction';
-import Delivery from '../components/DeliveryInfos';
 import { bestSellerStyle, indexTextImageComp } from '../components/elements';
-import Footer from '../components/footer/footer';
-import { Header } from '../components/Header';
 import IndexTextImage from '../components/IndexTextImage';
 import Layout from '../components/Layout';
 import ProductsComponent from '../components/ProductComponent';
