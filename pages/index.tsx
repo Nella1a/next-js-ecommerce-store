@@ -6,6 +6,7 @@ import ButtonCallToAction from '../components/ButtonCallToAction';
 import Delivery from '../components/DeliveryInfos';
 import { bestSellerStyle, indexTextImageComp } from '../components/elements';
 import Footer from '../components/footer/footer';
+import { Header } from '../components/Header';
 import IndexTextImage from '../components/IndexTextImage';
 import Layout from '../components/Layout';
 import ProductsComponent from '../components/ProductComponent';
@@ -33,6 +34,8 @@ export default function Home(props: PropsTypePlantsCartCookieLayer) {
     <Layout
     showGrayLayer={props.showGrayLayer}
     setShowGrayLayer={props.setShowGrayLayer}
+    bgImageHero={bgImageHero}
+    buttonInHeroImage={buttonInHeroImage}
 
     >
       <Head>
@@ -40,13 +43,6 @@ export default function Home(props: PropsTypePlantsCartCookieLayer) {
         <meta name="description" content="Plant Shop" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <BackGImage
-        firstText="Delivering Plants,"
-        secondText="Delivering Happiness!"
-        bgImage={bgImageHero}
-        buttonInHeroImage={buttonInHeroImage}
-        />
 
       <section css={bestSellerStyle}>
         <h2>Best Sellers</h2>
@@ -61,9 +57,6 @@ export default function Home(props: PropsTypePlantsCartCookieLayer) {
           <IndexTextImage plants={props.plants} />
         </div>
       </section>
-      <Delivery />
-    <Footer />
-      {/* <Footer2 /> */}
     </Layout>
   );
 }
