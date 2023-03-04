@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import Head from 'next/head';
 import Link from 'next/link';
-// import { useState } from 'react';
 import { flexStyle, formStyle } from '../components/elements';
 import Layout from '../components/Layout';
 import { disableGrayLayer } from '../hooks';
@@ -10,15 +8,13 @@ import { PropsTypeGrayLayer } from './types';
 
 export default function CheckOut({showGrayLayer, setShowGrayLayer}: PropsTypeGrayLayer ) {
 
-  // const [required, setRequired] = useState(true);
 
   disableGrayLayer(showGrayLayer, setShowGrayLayer)
 
   const required = true;
   const checkform = (event: React.SyntheticEvent): void => {
     event.preventDefault()
-    // console.log(`So your name is ${event.target.name.value}?`);
-    // event.preventDefault();
+
     deleteCookie('cart');
   }
 
