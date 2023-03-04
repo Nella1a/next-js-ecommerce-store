@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import BackGImage from '../components/BackGImage';
+import ButtonCallToAction from '../components/ButtonCallToAction';
 import Delivery from '../components/DeliveryInfos';
 import { productsComponentStyle } from '../components/elements';
 import Footer from '../components/footer/footer';
@@ -19,23 +20,19 @@ const bgImageHero = css`
   background: no-repeat center url("indexHeroImg.jpeg");
   background-size: cover;
 `;
-
+const buttonInHeroImage = <ButtonCallToAction innerText="View All Plants" />
 
   return (
     <Layout
     showGrayLayer={props.showGrayLayer}
     setShowGrayLayer={props.setShowGrayLayer}
+    bgImageHero={bgImageHero}
+   // buttonInHeroImage={buttonInHeroImage}
     >
       <Head>
         <title>View all Plants</title>
         <meta name="description" content="View all Plants" />
       </Head>
-      <BackGImage
-
-// firstText="Delivering Plants,"
-// secondText="Delivering Happiness!"
-bgImage={bgImageHero}
-/>
       <section css={productsComponentStyle}>
         <h2>Products</h2>
          <article>
@@ -44,8 +41,6 @@ bgImage={bgImageHero}
             <ProductsComponent plants={props.plants} />
          </article>
       </section>
-      <Delivery />
-      <Footer />
     </Layout>
   );
 }
