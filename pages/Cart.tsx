@@ -9,8 +9,7 @@ import {
   shoppingCartStyle,
   underConstruction,
 } from '../components/elements';
-import Footer from '../components/footer/footer';
-import Layout from '../components/Layout';
+import LayoutCart from '../components/LayoutNoHeader';
 import OrderSummeryCart from '../components/OrderSummaryCart';
 import { disableGrayLayer } from '../hooks';
 import {
@@ -136,7 +135,7 @@ const options = [
   // case: no cookie set
   if (!cartProducts.length) {
     return (
-      <Layout
+      <LayoutCart
       showGrayLayer={props.showGrayLayer}
       setShowGrayLayer={props.setShowGrayLayer}
       >
@@ -150,13 +149,13 @@ const options = [
             <button>Continue Shopping</button>
           </Link>
         </section>
-      </Layout>
+      </LayoutCart>
     );
   }
 
  // case: cookie set
   return (
-    <Layout
+    <LayoutCart
     showGrayLayer={props.showGrayLayer}
     setShowGrayLayer={props.setShowGrayLayer}
     >
@@ -225,8 +224,7 @@ const options = [
         </article>
         <OrderSummeryCart totalPrice ={Number(totalPrice.toFixed(2))} />
       </section>
-      <Footer />
-    </Layout>
+    </LayoutCart>
   );
 }
 
