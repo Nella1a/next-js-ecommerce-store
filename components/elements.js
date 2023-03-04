@@ -8,6 +8,7 @@ export const globalStyleBody = (theme) => css`
   :root {
     --backgroundColor: #e4e8e7;
     --backgroundColorWhite: #fff;
+    --footerBackGroundColor: #f5f5f5;
   }
 
   /* Reset sizing   */
@@ -40,7 +41,7 @@ h2 {
   body {
     line-height: 1.5; /* default for browser: 1.4 tends to be very small*/
     font-size: ${theme.typography.medium};
-    min-height: 100vh;
+    //min-height: 100vh;
     //max-width: 1400px;
     font-family: ${theme.font};
     background-color: var(--backgroundColorWhite);
@@ -74,8 +75,19 @@ h2 {
   }
 
   section {
-    margin: 8rem 0rem auto;
-    max-width: 1400px;
+  /*
+  - max-width instead of width: ensure that the img gets narrow when viewoprt shrinks
+  - "width: 100%":allows it to take up the entire available space
+  - margin set to auto
+  */
+    margin: auto;
+    max-width: 1920px;
+    width: 100%;
+
+
+    padding: 0 3rem;
+
+
     display: flex;
     flex-direction: column;
   }
@@ -120,7 +132,7 @@ const size = (width = '100%', height = '100%') => {
 export const headerStyle = css`
   width: 100vw;
   position: fixed;
-  background-color: #fff;
+  background-color: var(--backgroundColorWhite);
 
   //left: 0;
   //right: 0;
@@ -228,55 +240,37 @@ export const shoppingBagStyle = (theme) => css`
 
 export const footerStyle = css`
   gap: 4rem;
-  height: auto;
-  background-color: rgba(0, 154, 123, .1);
+  background-color: var(--footerBackGroundColor);
   width: 100%;
-  margin: auto auto;
-  padding: 2.5rem 2.5rem 5rem 5rem;
+  margin: 8rem 0rem auto;
 
    div {
-      max-width: 1400px;
-      padding: 3rem 0;
-      //padding-left: 3rem;
-      margin: 0 auto;
+    max-width: 1920px;
+   // border: 1px red solid;
+      padding: 3rem 3rem;
+    margin: 0 auto;
       gap: 4.25rem;
-      /* display: grid;
-      grid-template-columns: 3fr 1fr;
-      border-top: 0.031rem solid lightgray; */
-      display: flex;
-      justify-content: center;
-
-
-      /* div {
-          display: flex;
-          //border: 1px solid red;
-          gap: 6.25rem;
-          //margin-left: 25rem;
-          justify-content: flex-end;
-
-          @media screen and (max-width: 1024px) {
-            justify-content: flex-start;
-            //gap: 5rem;
-          }
-       } */
-
-       /* article:first-of-type {
-        margin-left: auto;
-       } */
-
-
+    display: flex;
+    justify-content: space-between ;
 
        article {
+        //border: 1px dotted red;
+
       display: flex;
       flex-direction: column;
       gap: 0.063rem;
       p:first-of-type {
       font-weight: bold;
+
     }
+    line-height: 2.5rem;
 
     form {
       display: flex;
       flex-direction: column;
+      max-width: 100%;
+
+
 
       input {
         ${size('17.65rem', '1.47rem')}
@@ -286,13 +280,15 @@ export const footerStyle = css`
         font-weight: bold;
         font-size: 0.75rem;
         display: block;
-        min-height: 2.5rem;
+        height: 3.5rem;
+        width: 100%;
         padding: 0.625rem 1rem;
         color: #000;
       }
 
       button {
-      ${size('17.65rem', '1.47rem')}
+      height: 3.5rem;
+      width: 100%;
       background-color: #ed943b;
       border: none;
 
@@ -304,36 +300,31 @@ export const footerStyle = css`
     }
    }
 
-   @media screen and (max-width: 768px){
-    display: grid;
-    grid-template-columns: repeat(3,minmax(100px,1fr));
+   article:nth-of-type(5){
+   // border: 2px solid green;
+    flex-basis: 30%;
 
+    p {
+      font-size: large;
+
+    }
+   }
+
+
+   @media screen and (max-width: 1051px){
+    gap: 1.5rem;
   }
 
 
-
-  @media screen and (max-width: 480px) {
-    grid-template-columns: minmax(100px,1fr);
-    text-align: center;
-    }
-
-       /* @media screen and (max-width: 1024px){
-       // grid-template-columns: 1fr;
-        padding: unset;
-        gap: unset;
-       } */
+   @media screen and (max-width: 768px){
+    flex-direction: column-reverse;
+    padding: 3rem 0rem;
 
 
+  }
 
     }
 
-
-
-  //article:nth-of-type(2) {
-  //  display: flex;
-    //align-items: center;
-  //  gap: 1rem;
- // }
 
 
   a {
@@ -345,10 +336,12 @@ export const footerStyle = css`
     padding: 2.5rem 2.5rem;
   }
 
-
-
-
 `;
+
+
+
+
+
 
 export const styleLargeButton = css`
 display: flex;
@@ -1037,44 +1030,54 @@ margin-top: 5rem;
 /* *************************** */
 
 export const deliveryInfos = (theme) => css`
-  //height: 400px;
-  //background-color: #DFDFDB;
-  //background-color: #009a7b;
-  background-color: rgba(0, 154, 123, .1);
+
+  // background-color: rgba(0, 154, 123, .1);
+  background-color: #709F7A;
   color: #000;
+  height: 10rem;
 
- // justify-content: center;
-
-  font-size: ${theme.typography.large};
-  //margin: 2rem 0;
+  // font-size: ${theme.typography.large};
   max-width: unset;
   width: 100%;
-  //background-color: rgb(249,248,247);
-  //padding: 50px;
+  display: flex;
+  justify-content: center;
+
   overflow: hidden;
 
   > div {
-    width: 1400px;
+
+    max-width: 1920px;
+    width: 100%;
+
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    justify-content: start;
+    justify-content: space-between;
     gap: 3rem;
-    margin: 0 auto;
+    margin: auto;
     border: 1px solid green;
-    padding-left: .65rem;
-
+    padding: 0 3rem;
 
     article {
-    width: 11.25rem;
-    height: 11.25rem;
+    width: 5.25rem;
+    height: 5.25rem;
     background-color: lightgrey;
     border-radius: 50%;
+
   }
 
+  >div {
+    display: flex;
+    justify-content: center;
 
-  div {
+
+
+div {
+
+}
+
+
+
 
   @media screen and (max-width: 1024px){
     h4 {
