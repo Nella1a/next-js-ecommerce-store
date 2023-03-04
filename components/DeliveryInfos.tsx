@@ -2,16 +2,32 @@ import { deliveryInfos } from './elements';
 
 export default function Delivery(){
   return(
-    <section css={deliveryInfos}>
+     <section css={deliveryInfos}>
       <div>
-        <article>x
-        </article>
+      <div>
+        <article />
         <div>
-          <h4>Free standard delivery on orders over €50</h4>
+        <p>lorem ipsum lorem</p>
+        </div>
+      </div>
+      <div>
+        <article />
+        <div>
+          <p>lorem ipsum lorem</p>
           <p>lorem ipsum lorem</p>
         </div>
       </div>
+      <div>
+        <article />
+        <div>
+        <p>lorem ipsum lorem</p>
+        <p>lorem ipsum lorem</p>
+        </div>
+      </div>
+      </div>
     </section>
+
+
   );
 
 }
