@@ -9,6 +9,7 @@ import {
   shoppingCartStyle,
   underConstruction,
 } from '../components/elements';
+import Footer from '../components/footer/footer';
 import Layout from '../components/Layout';
 import OrderSummeryCart from '../components/OrderSummaryCart';
 import { disableGrayLayer } from '../hooks';
@@ -224,6 +225,7 @@ const options = [
         </article>
         <OrderSummeryCart totalPrice ={Number(totalPrice.toFixed(2))} />
       </section>
+      <Footer />
     </Layout>
   );
 }
