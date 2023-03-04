@@ -48,6 +48,17 @@ export interface PropsTypeGrayLayer {
 
 export interface PropsTypeChildrenLayer extends PropsTypeGrayLayer  {
   children?: React.ReactNode;
+  bgImageHero?: any;
+  buttonInHeroImage?: any;
+
+
+};
+
+
+export interface PropsLayoutCart extends PropsTypeGrayLayer  {
+  children?: React.ReactNode;
+
+
 };
 
 
