@@ -19,6 +19,12 @@ export default function Footer() {
               <p>Blog</p>
             </article>
             <article>
+              <p>Explore</p>
+              <p>Careers</p>
+              <p>Locations</p>
+              <p>Blog</p>
+            </article>
+            <article>
               <p>Terms</p>
               <Link href="http://localhost:3000/">
                 <a>Refund Policy</a>
@@ -34,7 +40,8 @@ export default function Footer() {
             <article>
                 <p>Join Us</p>
                 <p>Subscribe to our newsletter</p>
-                <form>
+
+                 <form>
                   <p>
                       <input
                         id="email"
@@ -45,6 +52,7 @@ export default function Footer() {
                     </p>
                   <button>Sign Up</button>
                 </form>
+
             </article>
       </div>
     </footer>

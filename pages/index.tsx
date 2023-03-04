@@ -3,15 +3,11 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import BackGImage from '../components/BackGImage';
 import ButtonCallToAction from '../components/ButtonCallToAction';
-/* import ButtonCallToAction from '../components/ButtonCallToAction';
- */
 import Delivery from '../components/DeliveryInfos';
 import { bestSellerStyle, indexTextImageComp } from '../components/elements';
 import Footer from '../components/footer/footer';
 import IndexTextImage from '../components/IndexTextImage';
 import Layout from '../components/Layout';
-/* import PlantComp from '../components/PlantComp';
- */
 import ProductsComponent from '../components/ProductComponent';
 import { readPlants } from '../util/database';
 import { PropsTypePlantsCartCookieLayer } from './types';
@@ -21,43 +17,6 @@ const bgImageHero = css`
   background-size: cover;
 `;
 
-/* const bgImageSale = css`
-  background: url("placeholder_sale.jpg") no-repeat right -100px bottom;
-  background-size: 1600px;
-`;
-
-const buttonCallToActionIndex = css`
-  border-radius: 10rem;
-` */
-
-
-
-
-
-
-// get window width
-/* const GetScreenSize = () => {
-
-  const [screenSize, setScreenSize] = useState(0);
-
-  useEffect(() => {
-    function handleScreenResize(){
-      setScreenSize(window.innerWidth);
-    }
-
-    window.addEventListener("resize", handleScreenResize);
-
-    handleScreenResize()
-
-    return () => {
-      window.removeEventListener("resize", handleScreenResize);
-    };
-
-  }, [setScreenSize]);
-
- return screenSize
-}
- */
 
 
 export default function Home(props: PropsTypePlantsCartCookieLayer) {
@@ -103,33 +62,8 @@ export default function Home(props: PropsTypePlantsCartCookieLayer) {
         </div>
       </section>
       <Delivery />
-      <Footer />
-
-
-
-
-
-
-
-      {/*   <ButtonCallToAction styleButton={styleLargeButton} innerText="Shop Bestsellers" styleb={buttonCallToActionIndex}/> */}
-
-
-{/*       <BackGImage bgImage={bgImageSale} />
- */}
-    {/*   <section css={bestSellerStyle}>
-        <h2>Sale</h2>
-        <div>
-          <ProductsComponent plants={props.plants} />
-        </div>
-        <ButtonCallToAction styleButton={styleLargeButton} innerText="Shop Sales Items" styleb={buttonCallToActionIndex}/>
-      </section> */}
-   {/*    <section>
-        <Delivery />
-      </section>
-
-
- */}
-
+    <Footer />
+      {/* <Footer2 /> */}
     </Layout>
   );
 }
@@ -143,9 +77,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const cartCookies = context.req.cookies.cart || '[]';
 
   const allCartCookies = JSON.parse(cartCookies);
-  // console.log('Index_ServerSide_Cookies:', allCartCookies);
 
-  /* return plants via props to frontend */
   return {
     props: {
       plants: plants,
