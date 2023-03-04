@@ -1,7 +1,6 @@
-// import { burgerMenue } from './elements';
 import { css } from '@emotion/react';
 import Link from 'next/link';
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useOnClickOutside } from '../hooks';
 
 const mobileMenuStyle = (showBurger) => css`
