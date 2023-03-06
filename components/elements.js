@@ -33,7 +33,7 @@ export const globalStyleBody = (theme) => css`
 h2 {
   font-size: 2rem;
     //margin-top: 5.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 
@@ -50,7 +50,7 @@ h2 {
   }
 
   main {
-    margin-top: 4rem;
+   // margin-top: 4rem;
     height: auto;
     margin: auto auto;
     display: flex;
@@ -81,13 +81,10 @@ h2 {
   - margin set to auto
   */
     margin: auto;
+    margin-top: 4.5rem;
     max-width: 1920px;
     width: 100%;
-
-
     padding: 0 3rem;
-
-
     display: flex;
     flex-direction: column;
   }
