@@ -1026,54 +1026,37 @@ margin-top: 5rem;
 /*    DeliveryInfos.js       */
 /* *************************** */
 
-export const deliveryInfos = (theme) => css`
+export const deliveryInfos = () => css`
 
-  // background-color: rgba(0, 154, 123, .1);
+  border: 1px solid red;
   background-color: #709F7A;
   color: #000;
-  height: 10rem;
-
-  // font-size: ${theme.typography.large};
-  max-width: unset;
+  height: 8rem;
+  //max-width: 1920px;
   width: 100%;
   display: flex;
   justify-content: center;
 
-  overflow: hidden;
-
-  > div {
-
-    max-width: 1920px;
+   div {
+    height: inherit;
     width: 100%;
-
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    gap: 3rem;
-    margin: auto;
-    border: 1px solid green;
-    padding: 0 3rem;
+    justify-content: center;
+    align-items: center;
 
-    article {
-    width: 5.25rem;
-    height: 5.25rem;
-    background-color: lightgrey;
-    border-radius: 50%;
+
+    > div {
+      gap: 1rem;
+      article {
+        width: 3rem;
+        height: 3rem;
+        background-color: lightgrey;
+        border-radius: 50%;
+      }
 
   }
-
-  >div {
-    display: flex;
-    justify-content: center;
-
-
-
-div {
-
-}
-
-
 
 
   @media screen and (max-width: 1024px){
@@ -1088,5 +1071,5 @@ div {
     }
   }
   }
-  }
+
   `;
