@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import BackGImage from './BackGImage';
 
 export function Header(props) {

@@ -14,10 +14,7 @@ export default function Delivery(){
       </div>
       <div>
         <article />
-
         <p>lorem ipsum lorem</p>
-
-
       </div>
       </div>
     </section>
