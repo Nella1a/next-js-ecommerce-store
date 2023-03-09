@@ -1,11 +1,7 @@
 import { css } from '@emotion/react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import BackGImage from '../components/BackGImage';
-import ButtonCallToAction from '../components/ButtonCallToAction';
-import Delivery from '../components/DeliveryInfos';
 import { productsComponentStyle } from '../components/elements';
-import Footer from '../components/footer/footer';
 import Layout from '../components/Layout';
 import ProductsComponent from '../components/ProductComponent';
 import { disableGrayLayer } from '../hooks';
@@ -20,7 +16,6 @@ const bgImageHero = css`
   background: no-repeat center url("indexHeroImg.jpeg");
   background-size: cover;
 `;
-const buttonInHeroImage = <ButtonCallToAction innerText="View All Plants" />
 
   return (
     <Layout
