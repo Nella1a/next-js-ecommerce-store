@@ -27,6 +27,7 @@
   },
   "include": [
     "**/.eslintrc.cjs",
+    "**/.eslintrc.yml",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
