@@ -13,33 +13,29 @@ const GetScreenSize = () => {
   const [screenSize, setScreenSize] = useState(0);
 
   useEffect(() => {
-    function handleScreenResize(){
+    function handleScreenResize() {
       setScreenSize(window.innerWidth);
     }
 
-    window.addEventListener("resize", handleScreenResize);
+    window.addEventListener('resize', handleScreenResize);
 
-    handleScreenResize()
+    handleScreenResize();
 
     return () => {
-      window.removeEventListener("resize", handleScreenResize);
+      window.removeEventListener('resize', handleScreenResize);
     };
-
   }, []);
 
- return screenSize
-}
-
-
+  return screenSize;
+};
 
 export default function Navigation(props: PropsTypeGrayLayer) {
   const [sumOfcartItems, setSumOfcartItems] = useState(0);
   const screenwidth = GetScreenSize();
   const [showHamburgerIcon, setShowHamburgerIcon] = useState(false);
 
-
   /* read cookies: return cookie or [] */
-  const currentCookies = getParsedCookie("cart");
+  const currentCookies = getParsedCookie('cart');
 
   useEffect(() => {
     /* check if cookie is set; sum up quantity of items and update stateVariable */
@@ -49,6 +45,7 @@ export default function Navigation(props: PropsTypeGrayLayer) {
       const reducedAbc = abc.reduce((a, b) => a + b, 0);
       const reducer = (previousValue: number, currentValue: number) =>
         previousValue + currentValue;
+      console.log('REDUCER: ', reducer);
       setSumOfcartItems(abc.reduce(reducer));
       setSumOfcartItems(reducedAbc);
     } else {
@@ -56,68 +53,58 @@ export default function Navigation(props: PropsTypeGrayLayer) {
     }
   }, [currentCookies]);
 
-  console.log("WIDTH HEADER: ",screenwidth)
-  console.log("SHOWBURGER: ", showHamburgerIcon)
-  console.log("Props.RespMenue Typeof: ", typeof(props.setShowGrayLayer))
+  console.log('WIDTH HEADER: ', screenwidth);
+  console.log('SHOWBURGER: ', showHamburgerIcon);
+  console.log('Props.RespMenue Typeof: ', typeof props.setShowGrayLayer);
 
-
-    function handleShowMobileMenu(){
-      // show responsive menue bar & display grey layer over body
-      setShowHamburgerIcon(true)
-      props.setShowGrayLayer(true)
-    }
-
+  function handleShowMobileMenu() {
+    // show responsive menue bar & display grey layer over body
+    setShowHamburgerIcon(true);
+    props.setShowGrayLayer(true);
+  }
 
   return (
     <Fragment>
-    <MobileMenu
-      showBurger={showHamburgerIcon}
-      setShowBurger={setShowHamburgerIcon}
-      setShowGrayLayer={props.setShowGrayLayer}
-    />
+      <MobileMenu
+        showBurger={showHamburgerIcon}
+        setShowBurger={setShowHamburgerIcon}
+        setShowGrayLayer={props.setShowGrayLayer}
+      />
 
-    <nav css={headerStyle}>
-      <div>
-
+      <nav css={headerStyle}>
+        <div>
           <Link href="/" passHref>
             <a>
               <img src="/logo_shelovesplants.svg" alt="logo she loves plants" />
             </a>
           </Link>
           {/* conditional rendering */}
-            {screenwidth > 768 ? <NavMenu />
-           :
+          {screenwidth > 768 ? (
+            <NavMenu />
+          ) : (
             <button>
-            <span
-            onClick={handleShowMobileMenu}
-            onKeyDown={handleShowMobileMenu}
-            role="menu"
-            tabIndex={0}
-            >
-              <Image
-                src="/menu.png"
-                width= "29"
-                height= "29"
-                alt="menu icon"
-              />
-            </span>
-
+              <span
+                onClick={handleShowMobileMenu}
+                onKeyDown={handleShowMobileMenu}
+                role="menu"
+                tabIndex={0}
+              >
+                <Image src="/menu.png" width="29" height="29" alt="menu icon" />
+              </span>
             </button>
-          }
-        <Link href="/Cart" passHref>
-          <div css={shoppingBagStyle}>
-            <div>
-              <Image src={shoppingBag} alt="shopping cart icon" />
+          )}
+          <Link href="/Cart" passHref>
+            <div css={shoppingBagStyle}>
               <div>
-                <span data-test-id="cart-count">{sumOfcartItems}</span>
+                <Image src={shoppingBag} alt="shopping cart icon" />
+                <div>
+                  <span data-test-id="cart-count">{sumOfcartItems}</span>
+                </div>
               </div>
             </div>
-          </div>
-        </Link>
-
-      </div>
-    </nav>
+          </Link>
+        </div>
+      </nav>
     </Fragment>
-
   );
 }
