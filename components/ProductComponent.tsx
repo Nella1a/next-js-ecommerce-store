@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import Link from 'next/link';
 import { Fragment } from 'react';
 import { styleSectionProducts } from '../components/elements';
 
@@ -26,13 +27,15 @@ export default function ProductsComponent(props: Props) {
             <div>
               {event.id === 1 && <span>Easy Care</span>}
               {event.id === 4 && <span>Pet-Friendly</span>}
-              <a href={`/products/${event.id} `}>
-                <img
-                  src={`/image0${event.id}.jpeg`}
-                  alt="succulenten1"
-                  css={img}
-                />
-              </a>
+              <Link href="/product/[plantID]" as={`/product/${event.id}`}>
+                <a>
+                  <img
+                    src={`/image0${event.id}.jpeg`}
+                    alt="succulenten1"
+                    css={img}
+                  />
+                </a>
+              </Link>
             </div>
             <div>
               <h3>{event.name}</h3>
