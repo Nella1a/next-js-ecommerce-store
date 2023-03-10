@@ -8,9 +8,10 @@ export default function ProductImageSmall(props: Props) {
   return (
     <Image
       src={props.src}
-      width="131"
-      height="163,4"
+      width="19,65"
+      height="24,575"
       data-test-id="product-image"
+      layout="responsive"
     />
   );
 }
