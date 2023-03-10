@@ -1,12 +1,11 @@
 import Head from 'next/head';
 import { PropsTypeChildrenLayer } from '../pages/types';
 import Delivery from './DeliveryInfos';
-import Footer from './footer/footer';
+import Footer from './Footer';
 import { Header } from './Header';
 import Navigation from './Navigation';
 
-export default function Layout(props: PropsTypeChildrenLayer ) {
-
+export default function Layout(props: PropsTypeChildrenLayer) {
   return (
     <>
       <Head>
@@ -14,22 +13,21 @@ export default function Layout(props: PropsTypeChildrenLayer ) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation
-         showGrayLayer={props.showGrayLayer}
-         setShowGrayLayer={props.setShowGrayLayer}
+        showGrayLayer={props.showGrayLayer}
+        setShowGrayLayer={props.setShowGrayLayer}
       />
       <Header
         firstText="Delivering Plants,"
         secondText="Delivering Happiness!"
         bgImageHero={props.bgImageHero}
-    buttonInHeroImage={props.buttonInHeroImage}
+        buttonInHeroImage={props.buttonInHeroImage}
       />
 
       <main>
-          {props.children}
-          <Delivery />
+        {props.children}
+        <Delivery />
       </main>
       <Footer />
-
     </>
   );
 }
