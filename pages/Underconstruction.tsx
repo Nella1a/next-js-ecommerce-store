@@ -6,11 +6,11 @@ import { disableGrayLayer } from '../hooks';
 import { PropsTypeGrayLayer } from './types';
 
 export default function UnderConstruction(props: PropsTypeGrayLayer) {
-  disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer)
+  disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer);
   return (
     <Layout
-    showGrayLayer={props.showGrayLayer}
-    setShowGrayLayer={props.setShowGrayLayer}
+      showGrayLayer={props.showGrayLayer}
+      setShowGrayLayer={props.setShowGrayLayer}
     >
       <Head>
         <title>under construction</title>
@@ -19,7 +19,7 @@ export default function UnderConstruction(props: PropsTypeGrayLayer) {
 
       <section css={underConstruction}>
         <h1>Under Construction</h1>
-        <Link href="/Products" passHref>
+        <Link href="/products" passHref>
           <button>Continue Shopping</button>
         </Link>
       </section>

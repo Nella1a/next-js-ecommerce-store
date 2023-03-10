@@ -13,7 +13,7 @@ type Props = {
 };
 
 const img = css`
-//width: 15.56rem;
+  //width: 15.56rem;
 `;
 
 // width: 393, height: 491,5
@@ -23,18 +23,21 @@ export default function ProductsComponent(props: Props) {
       {props.plants.map((event) => {
         return (
           <article key={`guest-${event.id}`} css={styleSectionProducts}>
-              <div>
-                {event.id === 1 && <span>Easy Care</span>}
-                {event.id === 4 && <span>Pet-Friendly</span>}
-                <a href={`/Products/${event.id} `}>
-                  <img src={`/image0${event.id}.jpeg`} alt="succulenten1" css={img}
-                  />
-                </a>
-              </div>
-              <div>
-                <h3>{event.name}</h3>
-                <p>€{event.price}</p>
-              </div>
+            <div>
+              {event.id === 1 && <span>Easy Care</span>}
+              {event.id === 4 && <span>Pet-Friendly</span>}
+              <a href={`/products/${event.id} `}>
+                <img
+                  src={`/image0${event.id}.jpeg`}
+                  alt="succulenten1"
+                  css={img}
+                />
+              </a>
+            </div>
+            <div>
+              <h3>{event.name}</h3>
+              <p>€{event.price}</p>
+            </div>
           </article>
         );
       })}

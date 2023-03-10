@@ -93,7 +93,7 @@ export default function Navigation(props: PropsTypeGrayLayer) {
               </span>
             </button>
           )}
-          <Link href="/Cart" passHref>
+          <Link href="/cart" passHref>
             <div css={shoppingBagStyle}>
               <div>
                 <Image src={shoppingBag} alt="shopping cart icon" />
