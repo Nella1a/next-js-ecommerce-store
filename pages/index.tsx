@@ -16,7 +16,6 @@ const bgImageHero = css`
 
 export default function Home(props: PropsTypePlantsCartCookieLayer) {
   console.log('Index_props.database typeopf:', typeof props.plants);
-  console.log('Index_cartCookie: typeof', typeof props.cartCookies);
   console.log('Props.RespMenue: ', props.showGrayLayer);
 
   const buttonInHeroImage = <ButtonCallToAction innerText="View All Plants" />;
@@ -64,20 +63,13 @@ export default function Home(props: PropsTypePlantsCartCookieLayer) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   // read plants from database
   const plants = await readPlants();
-
-  // if the cookie is undefined it is going to return an empty array
-  // If it is defined it will return everything inside of it
-  const cartCookies = context.req.cookies.cart || '[]';
-
-  const allCartCookies = JSON.parse(cartCookies);
 
   return {
     props: {
       plants: plants,
-      cartCookies: allCartCookies || null,
     },
   };
 };
