@@ -79,7 +79,6 @@ export async function getPlantsById(id: number[]): Promise<PlantsTwo[]> {
     const result: PlantsTwo[] = await sql`
     SELECT * FROM plants WHERE id = ${id[i]};
   `;
-    console.log('result_DB_XXX: ', result);
 
     plantsIds.push(...result);
     console.log('plantsIds_DB: ', plantsIds);
