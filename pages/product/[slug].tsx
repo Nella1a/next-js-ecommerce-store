@@ -2,13 +2,12 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Head from 'next/head';
 import { useState } from 'react';
 import ChangeCartQuantity from '../../components/ChangeCartQuantity';
-import Delivery from '../../components/DeliveryInfos';
 import { singleProductPageStyle } from '../../components/elements';
 import LayoutNoHeader from '../../components/LayoutNoHeader';
 import ProductImage from '../../components/ProductImage';
 import ProductImageSmall from '../../components/ProductImageSmall';
 import { setParsedCookie } from '../../util/cookies';
-import { getPlantById } from '../../util/database';
+import { getPlantByName } from '../../util/database';
 import { addAndUpdateQuantityInCookie } from '../../util/functions';
 import { CartCookieTwo, PropsTypePlantsCartCookieLayerPlantId } from '../types';
 
@@ -81,27 +80,20 @@ export async function getServerSideProps(
   context: GetServerSidePropsContext,
 ): Promise<
   GetServerSidePropsResult<{
-    // plantID: string | string[] | undefined;
-    plant: { id: number; name: string; price: number; description: string }[];
-    // cart: {plantId: string, quantity: string}[];
+    plant: { id: number; name: string; price: number; description: string };
     cartCookie: CartCookieTwo[];
   }>
 > {
-  /* get current plant id from ../product/id */
-  const plantID = Number(context.query.plantID);
-  console.log('plantID', plantID);
-  console.log('typeof plantID', typeof plantID);
+  // get current plant via slug in url
+  const plantSlug = String(context.query.slug);
 
-  /* get the plantID from database */
-  const plant = await getPlantById(plantID);
+  const plantName = plantSlug.replace(/\-+/g, ' ');
+  const plant = await getPlantByName(plantName);
 
   /* read current cookie; if no cookie return [] */
   const cartCookie: CartCookieTwo[] = JSON.parse(
     context.req.cookies.cart || '[]',
   );
-  console.log('CCCCART: ', cartCookie);
-
-  /*  return singlePlant and plantID via props to frontend */
 
   return {
     props: {
