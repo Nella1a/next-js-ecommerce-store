@@ -84,7 +84,7 @@ export async function getServerSideProps(
     cartCookie: CartCookieTwo[];
   }>
 > {
-  // get plant name via url
+  // get current plant via slug in url
   const plantSlug = String(context.query.slug);
 
   const plantName = plantSlug.replace(/\-+/g, ' ');

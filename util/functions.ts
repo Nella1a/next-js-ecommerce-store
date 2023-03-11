@@ -1,13 +1,12 @@
 import { CartCookieTwo } from '../pages/types';
 
-/* +++++++ calculates subtotal price +++++++ */
+// calculates subtotal price
 export function multiplePriceAndQuantity(price: number, quantity: number) {
   return price * quantity;
 }
 
-/* +++++++ calculates total price  +++++++ */
+// calculates total price
 export function cartTotalPrice(totalPrice: number[]) {
-
   if (typeof totalPrice !== 'object') {
     throw new Error('parameter is not an array');
   }
@@ -20,20 +19,12 @@ export function cartTotalPrice(totalPrice: number[]) {
   }
 }
 
-// type CartCookie = {
-//   plantId: number | string;
-//   quantity: number | string;
-// }
-
-
-/* +++++++ add and update quantity in cookie  ++++++ */
+// add and update quantity in cookie
 export function addAndUpdateQuantityInCookie(
   PlantId: number,
-  NewPlantQuantity:number,
+  NewPlantQuantity: number,
   cartCookie: CartCookieTwo[],
-):{plantId: number, quantity: number}[] {
-
-
+): { plantId: number; quantity: number }[] {
   /* new quantity and id of item to set in cart cookie  */
   const value: CartCookieTwo[] = [];
   value.push({
@@ -41,14 +32,12 @@ export function addAndUpdateQuantityInCookie(
     quantity: NewPlantQuantity,
   });
 
-
-
   let newCookie;
 
   // check if a cookie is set
   if (cartCookie.length !== 0) {
-    console.log("typeof cartCookie: ", typeof cartCookie)
-    console.log(cartCookie)
+    console.log('typeof cartCookie: ', typeof cartCookie);
+    console.log(cartCookie);
 
     // check if plant is aready in cart
     const checkifPlantIsAlreadyInCart = cartCookie.some(
@@ -58,13 +47,9 @@ export function addAndUpdateQuantityInCookie(
     // if plant is aready in cart update quantity of plant; else: add new plant to cookie
     if (checkifPlantIsAlreadyInCart) {
       const newCartCookie = cartCookie.map((element) => {
-
-        if (element.plantId === PlantId ) {
-              element.quantity = NewPlantQuantity;
+        if (element.plantId === PlantId) {
+          element.quantity = NewPlantQuantity;
         }
-      // if(element.plantId === PlantId) {
-      //     element.quantity = element.quantity + NewPlantQuantity;
-      //   }
         return element;
       });
 
@@ -74,11 +59,10 @@ export function addAndUpdateQuantityInCookie(
         ...cartCookie,
         { plantId: PlantId, quantity: NewPlantQuantity },
       ];
-      console.log("NEWCOOKIE:", newCookie)
+      console.log('NEWCOOKIE:', newCookie);
       return newCookie;
     }
   } else {
-   return value;
-
+    return value;
   }
 }
