@@ -113,13 +113,13 @@ export default function ShoppingCart(props: Props) {
       );
 
       // update products in carts
-      const newCartQuantity = cartProducts.map((e) => {
-        if (e.id === plantId) {
-          e.quantity = newCookie.find(
-            (ecookie) => ecookie.plantId === plantId,
+      const newCartQuantity = cartProducts.map((product) => {
+        if (product.id === plantId) {
+          product.quantity = newCookie.find(
+            (cookie) => cookie.plantId === plantId,
           )?.quantity;
         }
-        return e;
+        return product;
       });
       setCartProducts(newCartQuantity);
       setParsedCookie('cart', newCookie);
