@@ -66,7 +66,7 @@ export default function ShoppingCart(props: Props) {
     0,
   );
 
-  const options = [
+  /*   const options = [
     { value: '1', text: 1 },
     { value: '2', text: 2 },
     { value: '3', text: 3 },
@@ -77,7 +77,13 @@ export default function ShoppingCart(props: Props) {
     { value: '8', text: 8 },
     { value: '9', text: 9 },
     { value: '10', text: 10 },
-  ];
+  ]; */
+
+  //Use map to generate the options for the select element, instead of manually typing them out.
+  const options = Array.from({ length: 10 }, (_, i) => i + 1).map((i) => ({
+    value: i.toString(),
+    text: i,
+  }));
 
   const RemoveProductFromCart = (id: number) => {
     // filter current cookie
