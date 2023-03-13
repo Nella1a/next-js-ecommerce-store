@@ -40,21 +40,20 @@ export default function ShoppingCart(props: Props) {
 
   useEffect(() => {
     // Update cart
-    const updateProducts = cartProducts;
-    const updateCookie = getParsedCookie('cart');
-
-    updateProducts.forEach((e) => {
-      e.quantity = updateCookie?.find(
-        (c) => Number(c.plantId) === e.id,
+    const updateProducts = cartProducts.map((product) => {
+      const updateCookie = getParsedCookie('cart');
+      product.quantity = updateCookie?.find(
+        (cookie) => Number(cookie.plantId) === product.id,
       )?.quantity;
+      return product;
     });
     setCartProducts(updateProducts);
-  }, [cartProducts]);
+  }, []);
 
   useEffect(() => {
     // update amount of products in cart
     const sumOfProducts = cartProducts.reduce(
-      (accumulator, product) => accumulator + (product.quantity || 0),
+      (accumulator, product) => accumulator + (product.quantity ?? 0),
       0,
     );
     setAmountOfProducts(sumOfProducts);
