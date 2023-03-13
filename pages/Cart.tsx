@@ -104,8 +104,8 @@ export default function ShoppingCart(props: Props) {
 
   const updateCartQuantity = (plantId: number, newPlantQuantity: number) => {
     // update quantity
-    const cartCookie: CartCookieTwo[] | undefined = getParsedCookie('cart');
-    if (cartCookie !== undefined) {
+    const cartCookie = getParsedCookie('cart');
+    if (cartCookie) {
       const newCookie = addAndUpdateQuantityInCookie(
         plantId,
         newPlantQuantity,
