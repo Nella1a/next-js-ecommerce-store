@@ -39,18 +39,6 @@ export default function ShoppingCart(props: Props) {
   console.log('cartPPPLants: ', cartProducts);
 
   useEffect(() => {
-    // Update cart
-    const updateProducts = cartProducts.map((product) => {
-      const updateCookie = getParsedCookie('cart');
-      product.quantity = updateCookie?.find(
-        (cookie) => Number(cookie.plantId) === product.id,
-      )?.quantity;
-      return product;
-    });
-    setCartProducts(updateProducts);
-  }, []);
-
-  useEffect(() => {
     // update amount of products in cart
     const sumOfProducts = cartProducts.reduce(
       (accumulator, product) => accumulator + (product.quantity ?? 0),
@@ -66,19 +54,6 @@ export default function ShoppingCart(props: Props) {
     0,
   );
 
-  /*   const options = [
-    { value: '1', text: 1 },
-    { value: '2', text: 2 },
-    { value: '3', text: 3 },
-    { value: '4', text: 4 },
-    { value: '5', text: 5 },
-    { value: '6', text: 6 },
-    { value: '7', text: 7 },
-    { value: '8', text: 8 },
-    { value: '9', text: 9 },
-    { value: '10', text: 10 },
-  ]; */
-
   //Use map to generate the options for the select element, instead of manually typing them out.
   const options = Array.from({ length: 10 }, (_, i) => i + 1).map((i) => ({
     value: i.toString(),
@@ -86,26 +61,23 @@ export default function ShoppingCart(props: Props) {
   }));
 
   const RemoveProductFromCart = (id: number) => {
-    // filter current cookie
+    // cookie
     const currentCookie = getParsedCookie('cart');
     const updateCookie =
       currentCookie?.filter((plant) => Number(plant.plantId) !== id) ?? [];
 
-    // filter cart
-    const updateCartItems = cartProducts.filter(
-      (plant) => Number(plant.id) !== id,
-    );
-
-    // update cart
-    setCartProducts(updateCartItems);
-
-    // update cookie
     if (updateCookie?.length) {
       setParsedCookie('cart', updateCookie);
     } else {
       deleteCookie('cart');
       setCartProducts([]);
     }
+
+    //cart
+    const updateCartItems = cartProducts.filter(
+      (plant) => Number(plant.id) !== id,
+    );
+    setCartProducts(updateCartItems);
   };
 
   const updateCartQuantity = (plantId: number, newPlantQuantity: number) => {
@@ -118,12 +90,10 @@ export default function ShoppingCart(props: Props) {
         cartCookie,
       );
 
-      // update products in carts
+      // cart
       const newCartQuantity = cartProducts.map((product) => {
         if (product.id === plantId) {
-          product.quantity = newCookie.find(
-            (cookie) => cookie.plantId === plantId,
-          )?.quantity;
+          product.quantity = newPlantQuantity;
         }
         return product;
       });
