@@ -45,17 +45,17 @@ export default function Navigation(props: PropsTypeGrayLayer) {
       const reducedAbc = abc.reduce((a, b) => a + b, 0);
       const reducer = (previousValue: number, currentValue: number) =>
         previousValue + currentValue;
-      console.log('REDUCER: ', reducer);
-      setSumOfcartItems(abc.reduce(reducer));
+      // console.log('REDUCER: ', reducer);
+      setSumOfcartItems(abc.reduce(reducer, 0));
       setSumOfcartItems(reducedAbc);
     } else {
       setSumOfcartItems(0);
     }
   }, [currentCookies]);
 
-  console.log('WIDTH HEADER: ', screenwidth);
+  /*   console.log('WIDTH HEADER: ', screenwidth);
   console.log('SHOWBURGER: ', showHamburgerIcon);
-  console.log('Props.RespMenue Typeof: ', typeof props.setShowGrayLayer);
+  console.log('Props.RespMenue Typeof: ', typeof props.setShowGrayLayer); */
 
   function handleShowMobileMenu() {
     // show responsive menue bar & display grey layer over body
