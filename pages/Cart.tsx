@@ -1,29 +1,18 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import CartItems from '../components/CartItems';
 import {
-  plantName,
   shoppingCartSectionHeader,
   shoppingCartStyle,
   underConstruction,
 } from '../components/elements';
 import LayoutCart from '../components/LayoutNoHeader';
-import OrderSummeryCart from '../components/OrderSummaryCart';
-import ProductImageSmall from '../components/ProductImageSmall';
+import OrderSummaryCart from '../components/OrderSummaryCart';
 import { disableGrayLayer } from '../hooks';
-import {
-  deleteCookie,
-  getParsedCookie,
-  setParsedCookie,
-} from '../util/cookies';
 import { getPlantsById } from '../util/database';
-import {
-  addAndUpdateQuantityInCookie,
-  multiplePriceAndQuantity,
-} from '../util/functions';
-import { CartCookieTwo, PlantsAndQuantity } from './types';
+import { PlantsAndQuantity } from './types';
 
 type Props = {
   plants: PlantsAndQuantity[];
@@ -33,10 +22,9 @@ type Props = {
 
 export default function ShoppingCart(props: Props) {
   const [cartProducts, setCartProducts] = useState(props.plants);
-  const [amountOfProducts, setAmountOfProducts] = useState(0);
+  const [totalQuantity, setTotalQuantity] = useState(0);
 
   disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer);
-  console.log('cartPPPLants: ', cartProducts);
 
   useEffect(() => {
     // update amount of products in cart
@@ -44,63 +32,14 @@ export default function ShoppingCart(props: Props) {
       (accumulator, product) => accumulator + (product.quantity ?? 0),
       0,
     );
-    setAmountOfProducts(sumOfProducts);
+    setTotalQuantity(sumOfProducts);
   }, [cartProducts]);
 
   // calculate total price
-  const totalPrice = cartProducts.reduce(
-    (accumulator, product) =>
-      accumulator + product.price * (product.quantity || 0),
+  let totalPrice = cartProducts.reduce(
+    (accumulator, plant) => accumulator + plant.price * (plant.quantity || 0),
     0,
   );
-
-  //Use map to generate the options for the select element, instead of manually typing them out.
-  const options = Array.from({ length: 10 }, (_, i) => i + 1).map((i) => ({
-    value: i.toString(),
-    text: i,
-  }));
-
-  const RemoveProductFromCart = (id: number) => {
-    // cookie
-    const currentCookie = getParsedCookie('cart');
-    const updateCookie =
-      currentCookie?.filter((plant) => Number(plant.plantId) !== id) ?? [];
-
-    if (updateCookie?.length) {
-      setParsedCookie('cart', updateCookie);
-    } else {
-      deleteCookie('cart');
-      setCartProducts([]);
-    }
-
-    //cart
-    const updateCartItems = cartProducts.filter(
-      (plant) => Number(plant.id) !== id,
-    );
-    setCartProducts(updateCartItems);
-  };
-
-  const updateCartQuantity = (plantId: number, newPlantQuantity: number) => {
-    // update quantity
-    const cartCookie = getParsedCookie('cart');
-    if (cartCookie) {
-      const newCookie = addAndUpdateQuantityInCookie(
-        plantId,
-        newPlantQuantity,
-        cartCookie,
-      );
-
-      // cart
-      const newCartQuantity = cartProducts.map((product) => {
-        if (product.id === plantId) {
-          product.quantity = newPlantQuantity;
-        }
-        return product;
-      });
-      setCartProducts(newCartQuantity);
-      setParsedCookie('cart', newCookie);
-    }
-  };
 
   // case: no cookie set
   if (!cartProducts.length) {
@@ -123,16 +62,12 @@ export default function ShoppingCart(props: Props) {
     );
   }
 
-  cartProducts.map((plant) => {
-    plant.slugName = plant.name.toLowerCase().replace(/\s+/g, '-');
-  });
-  const cartItems = (
+  const cartHeader = (
     <section css={shoppingCartSectionHeader}>
-      {amountOfProducts > 1 ? (
-        <h1>Your Cart ({amountOfProducts} Products)</h1>
-      ) : (
-        <h1>Your Cart ({amountOfProducts} Product)</h1>
-      )}
+      <h1>
+        Your Cart ({totalQuantity}{' '}
+        {totalQuantity === 1 ? 'Product' : 'Products'})
+      </h1>
     </section>
   );
 
@@ -146,57 +81,13 @@ export default function ShoppingCart(props: Props) {
         <title>Shopping Cart Items</title>
         <meta name="description" content="Your Shopping Cart" />
       </Head>
-      {cartItems}
+      {cartHeader}
       <section css={shoppingCartStyle}>
-        <article>
-          {cartProducts.map((plant) => {
-            return (
-              <div key={`cartItems_${plant.id}`}>
-                <div>
-                  <Link href={`/product/${plant.slugName}`} passHref>
-                    <a>
-                      <ProductImageSmall src={`/image0${plant.id}.jpeg`} />
-                    </a>
-                  </Link>
-                </div>
-                <div>
-                  <div css={plantName}>{plant.name}</div>
-                  <div>
-                    <select
-                      value={plant.quantity}
-                      onChange={(e) =>
-                        updateCartQuantity(
-                          Number(plant.id),
-                          Number(e.target.value),
-                        )
-                      }
-                    >
-                      {options.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.text}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    €
-                    {multiplePriceAndQuantity(
-                      Number(plant.price),
-                      Number(plant.quantity),
-                    ).toFixed(2)}
-                  </div>
-                  <button
-                    data-test-id="delete item from cart"
-                    onClick={() => RemoveProductFromCart(plant.id)}
-                  >
-                    remove
-                  </button>
-                </div>
-              </div>
-            );
-          })}
-        </article>
-        <OrderSummeryCart totalPrice={Number(totalPrice.toFixed(2))} />
+        <CartItems
+          cartProducts={cartProducts}
+          setCartProducts={setCartProducts}
+        />
+        <OrderSummaryCart totalPrice={Number(totalPrice.toFixed(2))} />
       </section>
     </LayoutCart>
   );
@@ -208,8 +99,6 @@ export async function getServerSideProps(
   const cartCookie: { plantId: number; quantity: number }[] = JSON.parse(
     context.req.cookies.cart || '[]',
   );
-
-  console.log('second cartCookies: ', cartCookie);
 
   // typescript narrowing
   if (typeof cartCookie === 'undefined') {
@@ -226,7 +115,6 @@ export async function getServerSideProps(
   const plants = await getPlantsById(plantIds);
   // combine db-product info with cookie info:
   console.log('PLANTS: ', plants);
-  console.log('typeof PLANTS: ', typeof plants);
 
   const plantsAndQuantity = plants.map((plant) => {
     return {
