@@ -1,124 +1,155 @@
-import { Field } from 'react-final-form';
+import { css } from '@emotion/react';
+import { useState } from 'react';
 import { flexStyle, formStyle } from './elements';
 
-export default function CheckOutForm(props: any) {
-  console.log('# form', props.form);
-  console.log('# values', props.values);
+export default function CheckOutForm({
+  register,
+  handleSubmit,
+  errors,
+  setFocus,
+}: any) {
+  const errorArray: [string, { [key: string]: string }][] =
+    Object.entries(errors);
 
-  const composeValidators =
-    (...validators: any[]) =>
-    (value: string) =>
-      validators.reduce(
-        (error, validator) => error || validator(value),
-        undefined,
-      );
-
-  function isRequired(value: string): string | undefined {
-    return value ? undefined : 'Required';
-  }
-
-  function isValidEmail(value: string): string | undefined {
-    return /\S+@\S+\.\S+/.test(value) ? undefined : 'Invalid Email';
-  }
+  console.log('---A: ', errors.email);
 
   return (
-    <form action="/thankyou" css={formStyle} onSubmit={props.handleSubmit}>
-      <section>
-        <h2>Delivery to: </h2>
+    <section>
+      <h2>Delivery to: </h2>
+      <p>
+        <label htmlFor="email">
+          <span>Email </span>
+        </label>
+        <input
+          {...register('email', {
+            required: 'Email is required',
+            pattern: /^[\w.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+          })}
+          aria-invalid={errors.email ? 'true' : 'false'}
+          data-test-id="checkout-email"
+          css={errors.email?.type === 'required' && { border: '1px solid red' }}
+        />
+      </p>
+      <div css={flexStyle}>
         <p>
-          <label htmlFor="email">
-            <span>E-mail: </span>
+          <label htmlFor="firstName">
+            <span>First Name: </span>
           </label>
-          <Field
-            name="usermail"
-            component="input"
-            type="email"
-            data-test-id="checkout-email"
-            validate={composeValidators(isRequired, isValidEmail)}
+          <input
+            {...register('firstName', {
+              required: 'first name is required',
+            })}
+            aria-invalid={errors.firstName ? 'true' : 'false'}
+            data-test-id="checkout-first-name"
+            css={
+              errors.firstName?.type === 'required' && {
+                border: '1px solid red',
+              }
+            }
           />
         </p>
-        <div css={flexStyle}>
-          <p>
-            <label htmlFor="firstName">
-              <span>First Name: </span>
-            </label>
-            <Field
-              name="firstName"
-              component="input"
-              type="text"
-              data-test-id="checkout-first-name"
-              validate={isRequired}
-            />
-          </p>
-          <p>
-            <label htmlFor="lastName">
-              <span>Last Name </span>
-            </label>
-            <Field
-              name="lastName"
-              component="input"
-              type="text"
-              data-test-id="checkout-last-name"
-              validate={isRequired}
-            />
-          </p>
-        </div>
-        <div css={flexStyle}>
-          <p>
-            <label htmlFor="adress">
-              <span>Adress: </span>
-            </label>
-            <Field
-              name="adress"
-              component="input"
-              type="text"
-              data-test-id="checkout-address"
-              validate={isRequired}
-            />
-          </p>
-          <p>
-            <label htmlFor="city">
-              <span>City: </span>
-            </label>
-            <Field
-              name="city"
-              component="input"
-              type="text"
-              data-test-id="checkout-city"
-            />
-          </p>
-        </div>
-        <div css={flexStyle}>
-          <p>
-            <label htmlFor="postalCode">
-              <span>Postal Code: </span>
-            </label>
-            <Field
-              name="postalCode"
-              component="input"
-              type="number"
-              data-test-id="checkout-postal-code"
-            />
-          </p>
-          <p>
-            <label htmlFor="country">
-              <span>Country: </span>
-            </label>
-            <Field
-              name="coutry"
-              component="input"
-              type="text"
-              data-test-id="checkout-country"
-            />
-          </p>
-        </div>
-        <input
-          type="submit"
-          data-test-id="checkout-confirm-order"
-          value="Complete payment"
-          onClick={props.handleSubmit}
-        />{' '}
-      </section>
-    </form>
+
+        <p>
+          <label htmlFor="lastName">
+            <span>Last Name </span>
+          </label>
+          <input
+            {...register('lastName', {
+              required: 'Last name is required',
+            })}
+            aria-invalid={errors.lastName ? 'true' : 'false'}
+            data-test-id="checkout-last-name"
+            css={
+              errors.lastName?.type === 'required' && {
+                border: '1px solid red',
+              }
+            }
+          />
+        </p>
+      </div>
+      <div css={flexStyle}>
+        <p>
+          <label htmlFor="street">
+            <span>Street: </span>
+          </label>
+          <input
+            {...register('street', {
+              required: 'Street name is required.',
+              min: 1,
+            })}
+            aria-invalid={errors.street ? 'true' : 'false'}
+            data-test-id="checkout-street"
+            css={
+              errors.street?.type === 'required' && { border: '1px solid red' }
+            }
+          />
+        </p>
+
+        <p>
+          <label htmlFor="city">
+            <span>City: </span>
+          </label>
+          <input
+            {...register('city', {
+              required: 'City is required.',
+              pattern: /^[a-zA-Z ]+$/,
+            })}
+            aria-invalid={errors.city ? 'true' : 'false'}
+            data-test-id="checkout-city"
+            css={
+              errors.city?.type === 'required' && { border: '1px solid red' }
+            }
+          />
+        </p>
+      </div>
+      <div css={flexStyle}>
+        <p>
+          <label htmlFor="postalCode">
+            <span>Postal Code: </span>
+          </label>
+          <input
+            {...register('postalCode', {
+              required: 'Postal/ZIP code is required.',
+              pattern: /^\d{4}$/,
+            })}
+            aria-invalid={errors.postCode ? 'true' : 'false'}
+            data-test-id="checkout-postal-code"
+            css={
+              errors.postalCode?.type === 'required' && {
+                border: '1px solid red',
+              }
+            }
+          />
+        </p>
+
+        <p>
+          <label htmlFor="country">
+            <span>Country: </span>
+          </label>
+          <input
+            {...register('country', {
+              required: 'Country name is required.',
+              pattern: /^[a-zA-Z ]+$/,
+            })}
+            aria-invalid={errors.country ? 'true' : 'false'}
+            data-test-id="checkout-country"
+            css={
+              errors.country?.type === 'required' && { border: '1px solid red' }
+            }
+          />
+        </p>
+      </div>
+      <div>
+        {errorArray.length > 0 && (
+          <ul>
+            {errorArray.map(([name, { message }]) => (
+              <li key={name} css={{ color: 'red' }}>
+                {message}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
   );
 }
