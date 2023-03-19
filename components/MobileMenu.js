@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import Link from 'next/link';
 import { useRef } from 'react';
 import { useOnClickOutside } from '../hooks';
+import NavMenu from './NavMenu';
 
 const mobileMenuStyle = (showBurger) => css`
   display: none;
@@ -105,26 +105,7 @@ export default function MobileMenu(props) {
             </button>
           </div>
         </li>
-        <li>
-          <Link href="/products">
-            <a data-test-id="products-link">Plants</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/underconstruction">
-            <a>Inspiration</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/underconstruction">
-            <a>Sale</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/underconstruction">
-            <a>Contact</a>
-          </Link>
-        </li>
+        <NavMenu />
       </ul>
     </nav>
   );
