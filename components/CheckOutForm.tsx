@@ -1,9 +1,7 @@
 import { Field } from 'react-final-form';
-import { deleteCookie } from '../util/cookies';
 import { flexStyle, formStyle } from './elements';
 
 export default function CheckOutForm(props: any) {
-  deleteCookie('cart');
   console.log('# form', props.form);
   console.log('# values', props.values);
 
