@@ -5,9 +5,14 @@ import BackGImage from '../components/BackGImage';
 import Layout from '../components/Layout';
 import { PropsTypeGrayLayer } from './types';
 
-const bgImageSale = css`
-  background: url('placeholder_sale.jpg') no-repeat right -100px bottom;
+/* const bgImageSale = css`
+  background: url('BgImageSale.jpeg') no-repeat right -100px bottom;
   background-size: 1600px;
+`;
+ */
+const bgImageSale = css`
+  background: no-repeat center url('bgImageSale.jpeg');
+  background-size: cover;
 `;
 
 export default function Sale({
@@ -15,13 +20,17 @@ export default function Sale({
   setShowGrayLayer,
 }: PropsTypeGrayLayer) {
   return (
-    <Layout showGrayLayer={showGrayLayer} setShowGrayLayer={setShowGrayLayer}>
+    <Layout
+      showGrayLayer={showGrayLayer}
+      setShowGrayLayer={setShowGrayLayer}
+      bgImageHero={bgImageSale}
+    >
       <Head>
         <title>Sale</title>
         <meta name="description" content="site is under construction" />
       </Head>
-
-      <BackGImage bgImage={bgImageSale} />
+      {/*       <BackGImage bgImage={bgImageSale} />
+       */}{' '}
     </Layout>
   );
 }

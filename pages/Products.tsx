@@ -12,7 +12,7 @@ export default function Products(props: PropsTypePlantsLayer) {
   disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer);
 
   const bgImageHero = css`
-    background: no-repeat center url('indexHeroImg.jpeg');
+    background: no-repeat center url('productsHeroImage.jpeg');
     background-size: cover;
   `;
 

@@ -6,10 +6,10 @@ export default function NavMenu() {
       <Link href="/products">
         <a data-test-id="products-link">Plants</a>
       </Link>
-      <Link href="/underconstruction">
+      <Link href="/inspiration">
         <a>Inspiration</a>
       </Link>
-      <Link href="/underconstruction">
+      <Link href="/sale">
         <a>Sale</a>
       </Link>
       <Link href="/underconstruction">
