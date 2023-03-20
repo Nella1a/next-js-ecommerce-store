@@ -454,64 +454,8 @@ export const styleComp = css`
 /*     indexTextImage.js       */
 /* *************************** */
 
-/*
 export const indexTextImageComp = css`
-
-
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  margin-top: 64px;
-  margin-bottom: 56px;
-  gap: 2rem;
-
-  div {
-    margin: 3rem 0;
-  }
-
-  div:first-of-type{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 40px;
-    //flex-basis: 33.33%;
-    border: 1px solid red;
-
-    h2 {
-      font-size: 2rem;
-      margin-top: 0;
-    }
-
-    button {
-      width: 10.65rem;
-      height: 1.47rem;
-      background-color: #ed943b;
-      border: none;
-      border-radius: 20px;
-    }
-
-    }
-
-  div:nth-of-type(2){
-
-    width: 100%;
-  }
-
- @media (max-width: 768px){
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  div {
-    margin: .5rem 0;
-  }
-
- }
-`;
-*/
-
-export const indexTextImageComp = css`
-  border: 2px solid green;
+  // border: 2px solid green;
   display: grid;
   grid-template-columns: 3fr 2fr;
   //margin-top: 64px;
@@ -594,7 +538,7 @@ export const styleSectionProducts = css`
   display: flex;
   flex-direction: column;
   gap: 1px;
-  border: 1px solid green;
+  //  border: 1px solid green;
 
   div {
     width: 100%;

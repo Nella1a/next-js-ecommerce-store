@@ -6,7 +6,6 @@ type Plants = {
   price: number;
 };
 
-
 export interface PlantsTwo {
   id: number;
   name: string;
@@ -25,8 +24,6 @@ export interface CartCookieTwo {
   quantity: number;
 }
 
-
-
 export interface PlantsAndDescription extends Plants {
   description: string;
 }
@@ -37,42 +34,38 @@ export interface PlantsAndQuantity {
   name: string;
   price: number;
   description: string;
-
+  slugName?: string;
 }
 
 export interface PropsTypeGrayLayer {
   showGrayLayer: boolean;
   setShowGrayLayer: Dispatch<SetStateAction<boolean>>;
+  sumOfcart?: number;
 }
 
-
-export interface PropsTypeChildrenLayer extends PropsTypeGrayLayer  {
+export interface PropsTypeChildrenLayer extends PropsTypeGrayLayer {
   children?: React.ReactNode;
   bgImageHero?: any;
   buttonInHeroImage?: any;
+}
 
-
-};
-
-
-export interface PropsLayoutCart extends PropsTypeGrayLayer  {
+export interface PropsLayoutCart extends PropsTypeGrayLayer {
   children?: React.ReactNode;
-
-
-};
-
+}
 
 export interface PropsTypePlantsCartCookieLayer extends PropsTypeGrayLayer {
   plants: Plants[];
   cartCookies: CartCookie[];
-};
+}
 
 export interface PropsTypePlantsLayer extends PropsTypeGrayLayer {
   plants: Plants[];
-};
+}
 
-export interface PropsTypePlantsCartCookieLayerPlantId extends PropsTypeGrayLayer {
+export interface PropsTypePlantsCartCookieLayerPlantId
+  extends PropsTypeGrayLayer {
   // plantID: number;
   plant: PlantsAndDescription;
-  cartCookie: {plantId: number, quantity: number}[];
-};
+  cartCookie: { plantId: number; quantity: number }[];
+  setCookieGlogal?: any;
+}
