@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import CheckOutForm from '../components/CheckOutForm';
-import { flexStyle, formStyle } from '../components/elements';
+import { formStyle } from '../components/elements';
 import LayoutNoHeader from '../components/LayoutNoHeader';
 import { disableGrayLayer } from '../hooks';
 import { PropsTypeGrayLayer } from './types';
@@ -17,7 +17,7 @@ interface DefaultFormValues {
 }
 
 const defaultValues = {
-  userMail: '',
+  mail: '',
   firstName: '',
   lastName: '',
   street: '',
@@ -38,6 +38,8 @@ export default function CheckOut({
     formState: { errors },
     reset,
     setFocus,
+    setError,
+    getFieldState,
   } = useForm({ defaultValues });
 
   return (
@@ -54,24 +56,31 @@ export default function CheckOut({
         {' '}
         <h1>Your Details</h1>
         <div>
-          <form
-            action="/thankyou"
-            css={formStyle}
-            onSubmit={handleSubmit((values) => {
-              console.log('FormValues: ', values);
-            })}
+          <FormProvider
+            {...{
+              register,
+              handleSubmit,
+              formState: { errors },
+              reset,
+              setFocus,
+              setError,
+              getFieldState,
+            }}
           >
-            <CheckOutForm
-              register={register}
-              handleSubmit={handleSubmit}
-              errors={errors}
-              setFocus={setFocus}
-            />
-            <div>
-              <input type="submit" value="Submit" />{' '}
-              <button onClick={() => reset()}>clear fields</button>
-            </div>
-          </form>
+            <form
+              action="/thankyou"
+              css={formStyle}
+              onSubmit={handleSubmit((values) => {
+                console.log('FormValues: ', values);
+              })}
+            >
+              <CheckOutForm />
+              <div>
+                <input type="submit" value="Submit" />{' '}
+                <button onClick={() => reset()}>clear fields</button>
+              </div>
+            </form>
+          </FormProvider>
         </div>
       </section>
     </LayoutNoHeader>
