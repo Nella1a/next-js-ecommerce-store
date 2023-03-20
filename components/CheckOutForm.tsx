@@ -15,14 +15,14 @@ export default function CheckOutForm({
 
   return (
     <section>
-      <h2>Delivery to: </h2>
+      <h2>Shipping Address </h2>
       <p>
         <label htmlFor="email">
           <span>Email </span>
         </label>
         <input
           {...register('email', {
-            required: 'Email is required',
+            required: 'Email is required.',
             pattern: /^[\w.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
           })}
           aria-invalid={errors.email ? 'true' : 'false'}
@@ -33,11 +33,11 @@ export default function CheckOutForm({
       <div css={flexStyle}>
         <p>
           <label htmlFor="firstName">
-            <span>First Name: </span>
+            <span>First name </span>
           </label>
           <input
             {...register('firstName', {
-              required: 'first name is required',
+              required: 'First name is required.',
             })}
             aria-invalid={errors.firstName ? 'true' : 'false'}
             data-test-id="checkout-first-name"
@@ -51,11 +51,11 @@ export default function CheckOutForm({
 
         <p>
           <label htmlFor="lastName">
-            <span>Last Name </span>
+            <span>Last name</span>
           </label>
           <input
             {...register('lastName', {
-              required: 'Last name is required',
+              required: 'Last name is required.',
             })}
             aria-invalid={errors.lastName ? 'true' : 'false'}
             data-test-id="checkout-last-name"
@@ -70,11 +70,11 @@ export default function CheckOutForm({
       <div css={flexStyle}>
         <p>
           <label htmlFor="street">
-            <span>Street: </span>
+            <span>Street</span>
           </label>
           <input
             {...register('street', {
-              required: 'Street name is required.',
+              required: 'Street is required.',
               min: 1,
             })}
             aria-invalid={errors.street ? 'true' : 'false'}
@@ -87,7 +87,7 @@ export default function CheckOutForm({
 
         <p>
           <label htmlFor="city">
-            <span>City: </span>
+            <span>City</span>
           </label>
           <input
             {...register('city', {
@@ -105,7 +105,7 @@ export default function CheckOutForm({
       <div css={flexStyle}>
         <p>
           <label htmlFor="postalCode">
-            <span>Postal Code: </span>
+            <span>Postal/ZIP code</span>
           </label>
           <input
             {...register('postalCode', {
@@ -124,11 +124,11 @@ export default function CheckOutForm({
 
         <p>
           <label htmlFor="country">
-            <span>Country: </span>
+            <span>Country </span>
           </label>
           <input
             {...register('country', {
-              required: 'Country name is required.',
+              required: 'Country is required.',
               pattern: /^[a-zA-Z ]+$/,
             })}
             aria-invalid={errors.country ? 'true' : 'false'}

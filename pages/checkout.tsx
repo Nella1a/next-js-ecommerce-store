@@ -52,7 +52,7 @@ export default function CheckOut({
 
       <section>
         {' '}
-        <h1>Shipping Information</h1>
+        <h1>Your Details</h1>
         <div>
           <form
             action="/thankyou"
