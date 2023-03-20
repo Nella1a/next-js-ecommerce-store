@@ -1,18 +1,24 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { flexStyle, formStyle } from './elements';
 
-export default function CheckOutForm({
-  register,
-  handleSubmit,
-  errors,
-  setFocus,
-}: any) {
-  const errorArray: [string, { [key: string]: string }][] =
-    Object.entries(errors);
+export default function CheckOutForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    setFocus,
+    setError,
+    getFieldState,
+  } = useFormContext();
 
-  console.log('---A: ', errors.email);
+  const errorArray = Object.entries(errors);
+  const { error, invalid, isDirty, isTouched } = getFieldState('email');
 
+  console.log('REGISTER: ', register('email'));
+  console.log('FieldState Email: ', getFieldState('email'));
   return (
     <section>
       <h2>Shipping Address </h2>
@@ -24,6 +30,7 @@ export default function CheckOutForm({
           {...register('email', {
             required: 'Email is required.',
             pattern: /^[\w.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+            validate: (value, pattern) => value !== pattern,
           })}
           aria-invalid={errors.email ? 'true' : 'false'}
           data-test-id="checkout-email"
@@ -111,6 +118,7 @@ export default function CheckOutForm({
             {...register('postalCode', {
               required: 'Postal/ZIP code is required.',
               pattern: /^\d{4}$/,
+              setValueAs: (v) => parseInt(v),
             })}
             aria-invalid={errors.postCode ? 'true' : 'false'}
             data-test-id="checkout-postal-code"
@@ -142,9 +150,12 @@ export default function CheckOutForm({
       <div>
         {errorArray.length > 0 && (
           <ul>
-            {errorArray.map(([name, { message }]) => (
+            {errorArray.map(([name, message]) => (
               <li key={name} css={{ color: 'red' }}>
-                {message}
+                {message?.message}
+                {name === 'email' && !errors.email?.message && invalid && (
+                  <p>Please provide a valid email</p>
+                )}
               </li>
             ))}
           </ul>
