@@ -1,12 +1,12 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Head from 'next/head';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ChangeCartQuantity from '../../components/ChangeCartQuantity';
 import { singleProductPageStyle } from '../../components/elements';
 import LayoutNoHeader from '../../components/LayoutNoHeader';
 import ProductImage from '../../components/ProductImage';
 import ProductImageSmall from '../../components/ProductImageSmall';
-import { setParsedCookie } from '../../util/cookies';
+import { getParsedCookie, setParsedCookie } from '../../util/cookies';
 import { getPlantByName } from '../../util/database';
 import { addAndUpdateQuantityInCookie } from '../../util/functions';
 import { CartCookieTwo, PropsTypePlantsCartCookieLayerPlantId } from '../types';
@@ -17,15 +17,20 @@ export default function SingleProduct(
   const [quantity, setQuantity] = useState(1);
   const [cartCookie, setCartCookie] = useState(props.cartCookie);
 
+  useEffect(() => {
+    if (cartCookie?.length) {
+      setParsedCookie('cart', cartCookie);
+      props.setCookieGlogal(cartCookie);
+    }
+  }, [cartCookie, quantity]);
+
   const updateCartQuantity = () => {
     const updateCookie = addAndUpdateQuantityInCookie(
       props.plant.id,
       quantity,
       cartCookie,
     );
-    console.log('newCookie: ', updateCookie);
     setCartCookie(updateCookie);
-    setParsedCookie('cart', updateCookie);
   };
 
   return (
@@ -95,6 +100,7 @@ export async function getServerSideProps(
     context.req.cookies.cart || '[]',
   );
 
+  console.log('---> cartCookie: ', cartCookie);
   return {
     props: {
       plant: plant,

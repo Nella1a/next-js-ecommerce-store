@@ -14,6 +14,7 @@ export default function LayoutCart(props: PropsLayoutCart) {
       <Navigation
         showGrayLayer={props.showGrayLayer}
         setShowGrayLayer={props.setShowGrayLayer}
+        sumOfcart={props.sumOfcart}
       />
 
       <main>

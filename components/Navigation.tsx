@@ -30,32 +30,26 @@ const GetScreenSize = () => {
 };
 
 export default function Navigation(props: PropsTypeGrayLayer) {
-  const [sumOfcartItems, setSumOfcartItems] = useState(0);
+  const [sumOfcartItems, setSumOfcartItems] = useState(props.sumOfcart);
   const screenwidth = GetScreenSize();
   const [showHamburgerIcon, setShowHamburgerIcon] = useState(false);
 
-  /* read cookies: return cookie or [] */
-  const currentCookies = getParsedCookie('cart');
+  const currentCookie = getParsedCookie('cart');
 
   useEffect(() => {
-    /* check if cookie is set; sum up quantity of items and update stateVariable */
+    if (currentCookie?.length) {
+      const quantities = currentCookie.map((cookie) => cookie.quantity);
+      const initialValue = 0;
+      const sumOfQuantities = quantities.reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+        initialValue,
+      );
 
-    if (currentCookies?.length !== undefined) {
-      const abc = currentCookies.map((event) => event.quantity);
-      const reducedAbc = abc.reduce((a, b) => a + b, 0);
-      const reducer = (previousValue: number, currentValue: number) =>
-        previousValue + currentValue;
-      // console.log('REDUCER: ', reducer);
-      setSumOfcartItems(abc.reduce(reducer, 0));
-      setSumOfcartItems(reducedAbc);
+      setSumOfcartItems(sumOfQuantities);
     } else {
       setSumOfcartItems(0);
     }
-  }, [currentCookies]);
-
-  /*   console.log('WIDTH HEADER: ', screenwidth);
-  console.log('SHOWBURGER: ', showHamburgerIcon);
-  console.log('Props.RespMenue Typeof: ', typeof props.setShowGrayLayer); */
+  }, [currentCookie]);
 
   function handleShowMobileMenu() {
     // show responsive menue bar & display grey layer over body

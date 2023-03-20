@@ -20,7 +20,7 @@ export default function CartItems({ cartProducts, setCartProducts }: Props) {
       text: i,
     })),
   );
-
+  const singlePlant = false;
   const updateCart = (plantId: number, newPlantQuantity: number = 0) => {
     const newCartQuantity = cartProducts.map((plant) => {
       if (plant.id === plantId) {
@@ -55,6 +55,7 @@ export default function CartItems({ cartProducts, setCartProducts }: Props) {
         plantId,
         newPlantQuantity,
         currentCookie,
+        singlePlant,
       );
       setParsedCookie('cart', newCookie);
     }

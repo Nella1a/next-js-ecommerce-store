@@ -15,6 +15,7 @@ export default function Layout(props: PropsTypeChildrenLayer) {
       <Navigation
         showGrayLayer={props.showGrayLayer}
         setShowGrayLayer={props.setShowGrayLayer}
+        sumOfcart={props.sumOfcart}
       />
       <Header
         firstText="Delivering Plants,"
