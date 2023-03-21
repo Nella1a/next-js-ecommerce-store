@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { flexStyle, formStyle } from './elements';
+import OrderSummaryCart from './OrderSummaryCart';
 
 export default function CheckOutForm() {
   const {
@@ -15,12 +16,12 @@ export default function CheckOutForm() {
   } = useFormContext();
 
   const errorArray = Object.entries(errors);
-  const { error, invalid, isDirty, isTouched } = getFieldState('email');
+  const { invalid } = getFieldState('email');
 
   console.log('REGISTER: ', register('email'));
   console.log('FieldState Email: ', getFieldState('email'));
   return (
-    <section>
+    <>
       <h2>Shipping Address </h2>
       <p>
         <label htmlFor="email">
@@ -87,7 +88,9 @@ export default function CheckOutForm() {
             aria-invalid={errors.street ? 'true' : 'false'}
             data-test-id="checkout-street"
             css={
-              errors.street?.type === 'required' && { border: '1px solid red' }
+              errors.street?.type === 'required' && {
+                border: '1px solid red',
+              }
             }
           />
         </p>
@@ -142,7 +145,9 @@ export default function CheckOutForm() {
             aria-invalid={errors.country ? 'true' : 'false'}
             data-test-id="checkout-country"
             css={
-              errors.country?.type === 'required' && { border: '1px solid red' }
+              errors.country?.type === 'required' && {
+                border: '1px solid red',
+              }
             }
           />
         </p>
@@ -154,13 +159,13 @@ export default function CheckOutForm() {
               <li key={name} css={{ color: 'red' }}>
                 {message?.message}
                 {name === 'email' && !errors.email?.message && invalid && (
-                  <p>Please provide a valid email</p>
+                  <span>Please provide a valid email</span>
                 )}
               </li>
             ))}
           </ul>
         )}
       </div>
-    </section>
+    </>
   );
 }
