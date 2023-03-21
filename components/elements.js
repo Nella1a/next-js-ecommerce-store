@@ -156,7 +156,7 @@ export const headerStyle = css`
     z-index: 1;
     height: 4rem;
     color: #43964f;
-    //border: 3px solid green;
+    //border-bottom: 2px solid lightgray;
 
     button {
       all: unset;
@@ -424,6 +424,9 @@ export const bestSellerStyle = (theme) => css`
     // margin-bottom: 3.5rem;
   }
 
+  h3 {
+    margin-bottom: unset;
+  }
   > div {
     display: grid;
     gap: 30px;
@@ -461,6 +464,10 @@ export const indexTextImageComp = css`
   //margin-top: 64px;
   //margin-bottom: 56px;
   gap: 2rem;
+
+  h3 {
+    margin-bottom: unset;
+  }
 
   > div:first-of-type {
     height: 100%;
@@ -511,6 +518,10 @@ export const separator = css`
 export const productsComponentStyle = (theme) => css`
   h2 {
     font-size: ${theme.typography.large};
+  }
+
+  h3 {
+    margin-bottom: unset;
   }
 
   > article:first-of-type {
@@ -731,12 +742,14 @@ export const shoppingCartStyle = css`
   gap: 60px;
   grid-template-columns: 2fr 1fr;
   background-color: #f8f8f8;
+  border: 1px solid red;
 
   article:first-of-type {
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
     margin-top: 1rem;
+    border: 1px solid green;
     > div {
       display: grid;
       grid-template-columns: 1fr 3fr;
@@ -849,11 +862,50 @@ export const plantName = css`
 /*         checkout.js         */
 /* *************************** */
 
-export const formStyle = css`
-  section {
-    // width: 50%;
-  }
+export const cartStyle = css`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 2px solid blue;
+  gap: 2rem;
 
+  article:nth-of-type(2) {
+    display: flex;
+    > div {
+      width: 100%;
+      flex-direction: column;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-around;
+      background-color: #e0e0e0;
+      padding: 1rem;
+
+      div {
+        width: inherit;
+      }
+
+      div:nth-of-type(2) {
+        p {
+          margin-top: 0.5rem;
+          margin-bottom: 2rem;
+          font-weight: 600;
+        }
+
+        border-top: 1px solid grey;
+      }
+    }
+    button {
+      ${size('17.65rem', '1.47rem')}
+      background-color: #ed943b;
+      border: none;
+
+      &:hover {
+        background-color: #ff6900;
+      }
+    }
+  }
+`;
+
+export const formStyle = css`
   p,
   label,
   input {
@@ -864,6 +916,19 @@ export const formStyle = css`
   select {
     width: 100%;
     height: 48px;
+  }
+
+  div:last-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2rem;
+
+    input {
+      width: 30%;
+      margin: unset;
+      height: 51px;
+    }
   }
 `;
 

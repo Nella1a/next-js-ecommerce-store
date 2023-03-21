@@ -1,8 +1,9 @@
 import Head from 'next/head';
 import { FormProvider, useForm } from 'react-hook-form';
 import CheckOutForm from '../components/CheckOutForm';
-import { formStyle } from '../components/elements';
+import { cartStyle, formStyle } from '../components/elements';
 import LayoutNoHeader from '../components/LayoutNoHeader';
+import OrderSummaryCart from '../components/OrderSummaryCart';
 import { disableGrayLayer } from '../hooks';
 import { PropsTypeGrayLayer } from './types';
 
@@ -53,34 +54,36 @@ export default function CheckOut({
       </Head>
 
       <section>
-        {' '}
-        <h1>Your Details</h1>
-        <div>
-          <FormProvider
-            {...{
-              register,
-              handleSubmit,
-              formState: { errors },
-              reset,
-              setFocus,
-              setError,
-              getFieldState,
-            }}
-          >
-            <form
-              action="/thankyou"
-              css={formStyle}
-              onSubmit={handleSubmit((values) => {
-                console.log('FormValues: ', values);
-              })}
+        <h1>Your Details</h1>{' '}
+        <div css={cartStyle}>
+          <article>
+            <FormProvider
+              {...{
+                register,
+                handleSubmit,
+                formState: { errors },
+                reset,
+                setFocus,
+                setError,
+                getFieldState,
+              }}
             >
-              <CheckOutForm />
-              <div>
-                <input type="submit" value="Submit" />{' '}
-                <button onClick={() => reset()}>clear fields</button>
-              </div>
-            </form>
-          </FormProvider>
+              <form
+                action="/thankyou"
+                css={formStyle}
+                onSubmit={handleSubmit((values) => {
+                  console.log('FormValues: ', values);
+                })}
+              >
+                <CheckOutForm />
+                <div>
+                  <input type="submit" value="Submit" />{' '}
+                </div>
+              </form>
+            </FormProvider>
+          </article>
+
+          <OrderSummaryCart totalPrice={60} />
         </div>
       </section>
     </LayoutNoHeader>
