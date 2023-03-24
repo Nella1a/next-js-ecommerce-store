@@ -919,7 +919,7 @@ export const formStyle = css`
   select {
     width: 100%;
     height: 48px;
-    border: 1px solid lightgray;
+    // border: 1px solid lightgray;
     border-radius: 5px;
   }
   div > input ~ p {
