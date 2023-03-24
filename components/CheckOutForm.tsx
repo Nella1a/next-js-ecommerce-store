@@ -4,6 +4,10 @@ import { useFormContext } from 'react-hook-form';
 import { flexStyle, formStyle } from './elements';
 import OrderSummaryCart from './OrderSummaryCart';
 
+const errorStyle = (error: any) => css`
+  border: ${error === 'required' ? '2px solid red' : '1px solid lightgray'};
+`;
+
 export default function CheckOutForm() {
   const {
     register,
@@ -33,11 +37,7 @@ export default function CheckOutForm() {
           })}
           aria-invalid={errors.email ? 'true' : 'false'}
           data-test-id="checkout-email"
-          css={
-            errors.email?.type === 'required' && {
-              border: '1px solid red',
-            }
-          }
+          css={errorStyle(errors.email?.type)}
         />
         <p>
           <span>{errors.email?.message}</span>
@@ -61,11 +61,7 @@ export default function CheckOutForm() {
             })}
             aria-invalid={errors.firstName ? 'true' : 'false'}
             data-test-id="checkout-first-name"
-            css={
-              errors.firstName?.type === 'required' && {
-                border: '1px solid red',
-              }
-            }
+            css={errorStyle(errors.firstName?.type)}
           />
           <span>{errors.firstName?.message}</span>
         </p>
@@ -80,11 +76,7 @@ export default function CheckOutForm() {
             })}
             aria-invalid={errors.lastName ? 'true' : 'false'}
             data-test-id="checkout-last-name"
-            css={
-              errors.lastName?.type === 'required' && {
-                border: '2px solid red',
-              }
-            }
+            css={errorStyle(errors.lastName?.type)}
           />
           <span>{errors.lastName?.message}</span>
         </p>
@@ -101,11 +93,7 @@ export default function CheckOutForm() {
             })}
             aria-invalid={errors.street ? 'true' : 'false'}
             data-test-id="checkout-street"
-            css={
-              errors.street?.type === 'required' && {
-                border: '2px solid red',
-              }
-            }
+            css={errorStyle(errors.street?.type)}
           />
           <span>{errors.street?.message}</span>
         </p>
@@ -121,9 +109,7 @@ export default function CheckOutForm() {
             })}
             aria-invalid={errors.city ? 'true' : 'false'}
             data-test-id="checkout-city"
-            css={
-              errors.city?.type === 'required' && { border: '2px solid red' }
-            }
+            css={errorStyle(errors.city?.type)}
           />
           <span>{errors.city?.message}</span>
         </p>
@@ -141,11 +127,7 @@ export default function CheckOutForm() {
             })}
             aria-invalid={errors.postCode ? 'true' : 'false'}
             data-test-id="checkout-postal-code"
-            css={
-              errors.postalCode?.type === 'required' && {
-                border: '2px solid red',
-              }
-            }
+            css={errorStyle(errors.postalCode?.type)}
           />
           <span>{errors.postalCode?.message}</span>
         </p>
@@ -161,29 +143,11 @@ export default function CheckOutForm() {
             })}
             aria-invalid={errors.country ? 'true' : 'false'}
             data-test-id="checkout-country"
-            css={
-              errors.country?.type === 'required' && {
-                border: '2px solid red',
-              }
-            }
+            css={errorStyle(errors.country?.type)}
           />
           <span>{errors.country?.message}</span>
         </p>
       </div>
-      {/*       <div>
-        {errorArray.length > 0 && (
-          <ul>
-            {errorArray.map(([name, message]) => (
-              <li key={name} css={{ color: 'red' }}>
-                {message?.message}
-                {name === 'email' && !errors.email?.message && invalid && (
-                  <span>Please provide a valid email</span>
-                )}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div> */}
     </>
   );
 }
