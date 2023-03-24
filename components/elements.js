@@ -909,13 +909,28 @@ export const formStyle = css`
   p,
   label,
   input {
-    margin-bottom: 16px;
+    margin-bottom: 6px;
+  }
+  h2 {
+    font-size: 18px;
   }
 
   input,
   select {
     width: 100%;
     height: 48px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+  }
+  div > input ~ p {
+    color: red;
+  }
+
+  div > p > input ~ span {
+    color: red;
+  }
+  div {
+    margin-bottom: 2rem;
   }
 
   div:last-of-type {
