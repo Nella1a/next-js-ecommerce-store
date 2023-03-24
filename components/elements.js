@@ -868,6 +868,11 @@ export const cartStyle = css`
   border: 2px solid blue;
   gap: 2rem;
 
+  @media screen and (max-width: 1000px) {
+    display: flex;
+    flex-direction: column;
+  }
+
   article:nth-of-type(2) {
     display: flex;
     > div {
