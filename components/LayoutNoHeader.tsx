@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { PropsLayoutCart } from '../pages/types';
 import Delivery from './DeliveryInfos';
 import Footer from './Footer';
+import MobileFooter from './Footer/MobileFooter';
 import Navigation from './Navigation';
 
 export default function LayoutCart(props: PropsLayoutCart) {
@@ -22,6 +23,7 @@ export default function LayoutCart(props: PropsLayoutCart) {
         <Delivery />
       </main>
       <Footer />
+      <MobileFooter />
     </>
   );
 }

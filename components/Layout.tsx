@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { PropsTypeChildrenLayer } from '../pages/types';
 import Delivery from './DeliveryInfos';
 import Footer from './Footer';
+import MobileFooter from './Footer/MobileFooter';
 import { Header } from './Header';
 import Navigation from './Navigation';
 
@@ -29,6 +30,7 @@ export default function Layout(props: PropsTypeChildrenLayer) {
         <Delivery />
       </main>
       <Footer />
+      <MobileFooter />
     </>
   );
 }
