@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { PropsLayoutCart } from '../pages/types';
 import Delivery from './DeliveryInfos';
-import Footer from './Footer';
+import Footer from './Footer/Footer';
 import MobileFooter from './Footer/MobileFooter';
 import Navigation from './Navigation';
 

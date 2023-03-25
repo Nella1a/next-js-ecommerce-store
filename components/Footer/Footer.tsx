@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { footerStyle } from './elements';
+import { footerStyle } from '../elements';
 
 export default function Footer() {
   return (
