@@ -306,6 +306,7 @@ export const footerStyle = css`
     }
 
     @media screen and (max-width: 768px) {
+      display: none;
       flex-direction: column-reverse;
       padding: 3rem 0rem;
     }
@@ -333,6 +334,123 @@ export const styleLargeButton = css`
     &:hover {
       background-color: #ff6900;
     }
+  }
+`;
+
+/* *************************** */
+/*         Mobile-Footer       */
+/* *************************** */
+
+export const MobileFooterStyle = css`
+  gap: 4rem;
+  background-color: var(--footerBackGroundColor);
+  width: 100%;
+  margin: 8rem 0rem auto;
+  display: none;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column-reverse;
+    padding: 3rem 0rem;
+    display: block;
+  }
+
+  div {
+    max-width: 1920px;
+    // border: 1px red solid;
+    padding: 3rem 3rem;
+    margin: 0 auto;
+    gap: 4.25rem;
+    display: flex;
+    justify-content: space-between;
+
+    article {
+      display: flex;
+      flex-direction: column;
+      gap: 0.063rem;
+
+      ul {
+        list-style-type: none;
+        list-style-position: inside;
+        margin: 0;
+        padding: 0;
+
+        p:first-of-type {
+          font-weight: bold;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 1px solid lightgrey;
+          padding: 0.5rem 0;
+
+          span {
+            //display: block;
+            font-size: 20px;
+            font-weight: 400;
+            color: gray;
+          }
+        }
+      }
+
+      line-height: 2.5rem;
+
+      form {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+
+        input {
+          ${size('17.65rem', '1.47rem')}
+          letter-spacing: 0.031rem;
+          line-height: 1.125rem;
+          text-transform: uppercase;
+          font-weight: bold;
+          font-size: 0.75rem;
+          display: block;
+          height: 3.5rem;
+          width: 100%;
+          padding: 0.625rem 1rem;
+          color: #000;
+        }
+
+        button {
+          height: 3.5rem;
+          width: 100%;
+          background-color: #ed943b;
+          border: none;
+
+          &:hover {
+            background-color: #ff6900;
+          }
+        }
+      }
+    }
+
+    article:nth-of-type(5) {
+      // border: 2px solid green;
+      flex-basis: 30%;
+
+      p {
+        font-size: large;
+      }
+    }
+
+    @media screen and (max-width: 1051px) {
+      gap: 1.5rem;
+    }
+
+    @media screen and (max-width: 768px) {
+      flex-direction: column-reverse;
+      padding: 3rem 0rem;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    display: block;
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 2.5rem 2.5rem;
   }
 `;
 

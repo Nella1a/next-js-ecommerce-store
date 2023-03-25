@@ -3,6 +3,7 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import ButtonCallToAction from '../components/ButtonCallToAction';
 import { bestSellerStyle, indexTextImageComp } from '../components/elements';
+import MobileFooter from '../components/Footer/MobileFooter';
 import IndexTextImage from '../components/IndexTextImage';
 import Layout from '../components/Layout';
 import ProductsComponent from '../components/ProductComponent';
