@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, useEffect, useState } from 'react';
@@ -72,9 +73,13 @@ export default function Navigation(props: PropsTypeGrayLayer) {
               <img src="/logo_shelovesplants.svg" alt="logo she loves plants" />
             </a>
           </Link>
+        </div>
+        <div>
           {/* conditional rendering */}
           {screenwidth > 768 ? (
-            <NavMenu />
+            <ul>
+              <NavMenu />
+            </ul>
           ) : (
             <button>
               <span
@@ -88,14 +93,16 @@ export default function Navigation(props: PropsTypeGrayLayer) {
             </button>
           )}
           <Link href="/cart" passHref>
-            <div css={shoppingBagStyle}>
-              <div>
-                <Image src={shoppingBag} alt="shopping cart icon" />
+            <a>
+              <div css={shoppingBagStyle}>
                 <div>
-                  <span data-test-id="cart-count">{sumOfcartItems}</span>
+                  <Image src={shoppingBag} alt="shopping cart icon" />
+                  <div>
+                    <span data-test-id="cart-count">{sumOfcartItems}</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            </a>
           </Link>
         </div>
       </nav>
