@@ -126,78 +126,87 @@ const size = (width = '100%', height = '100%') => {
 /* *************************** */
 
 export const headerStyle = css`
-  //width: 100vw;
   max-width: 1920px;
   width: 100%;
   position: fixed;
   background-color: var(--backgroundColorWhite);
-
-  //left: 0;
-  //right: 0;
   top: 0;
   z-index: 1;
-  // background-color: green;
+  margin: auto;
+  display: flex;
+  padding: 0 3rem;
+  border-bottom: 0px solid lightgrey;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 15px 10px -20px;
 
-  > div {
-    //max-width: 1400px;
+  > div:first-of-type {
     width: 100%;
     ${marginCenter}
-    // background-color: yellow;
+    // background-color: lightblue;
     margin: auto;
 
     position: relative;
-    //left: 0;
-    //right: 0;
-    top: 4px;
+    top: 0px;
     gap: 2rem;
     align-items: center;
     display: flex;
     justify-content: space-between;
     z-index: 1;
     height: 4rem;
-    color: #43964f;
-    //border-bottom: 2px solid lightgray;
-
-    button {
-      all: unset;
-    }
 
     img {
       width: 80%;
       height: auto;
     }
+  }
+  > div:nth-of-type(2) {
+    width: 100%;
+    ${marginCenter}
+    // background-color: yellow;
+    margin: auto;
 
-    a {
-      text-decoration: none;
-      display: block;
-      font-weight: bold;
-      color: black;
+    position: relative;
+    top: 0px;
+    gap: 2rem;
+    align-items: center;
+    display: flex;
+    justify-content: end;
+    z-index: 1;
+    height: 4rem;
+    color: #43964f;
+
+    ul {
+      list-style-type: none;
+      list-style-position: inside;
+      display: flex;
+      gap: 3rem;
+
+      a {
+        text-decoration: none;
+        display: block;
+        font-weight: bold;
+        color: black;
+
+        &:hover {
+          border-bottom: 3px solid #ed943b;
+        }
+      }
     }
 
     @media (max-width: 1200px) {
       gap: 1rem;
-      padding-left: 3rem;
-      padding-right: 3rem;
+      // padding-left: 3rem;
+      //  padding-right: 3rem;
     }
 
     @media (max-width: 768px) {
       button {
+        all: unset;
         display: block;
         margin-left: auto;
         position: relative;
-        top: 3px;
+        top: 6px;
       }
       gap: 0.5rem;
-    }
-  }
-
-  a:nth-of-type(2) {
-    margin-left: auto;
-  }
-
-  a:nth-of-type(n + 2) {
-    &:hover {
-      border-bottom: 3px solid #ed943b;
     }
   }
 `;
