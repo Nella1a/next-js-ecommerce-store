@@ -19,10 +19,9 @@ export default function CheckOutForm() {
     getFieldState,
   } = useFormContext();
 
-  const errorArray = Object.entries(errors);
   const { invalid } = getFieldState('email');
 
-  console.log('REGISTER: ', register('email'));
+  console.log('REGISTER: shipping.', register('shipping.email'));
   console.log('FieldState Email: ', getFieldState('email'));
   return (
     <>
@@ -30,7 +29,7 @@ export default function CheckOutForm() {
       <div>
         <label htmlFor="email">Email</label>
         <input
-          {...register('email', {
+          {...register('shipping.email', {
             required: 'Email is required.',
             pattern: /^[\w.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
             validate: (value, pattern) => value !== pattern,
@@ -56,7 +55,7 @@ export default function CheckOutForm() {
             <span>First name </span>
           </label>
           <input
-            {...register('firstName', {
+            {...register('shipping.firstName', {
               required: 'First name is required.',
             })}
             aria-invalid={errors.firstName ? 'true' : 'false'}
@@ -71,7 +70,7 @@ export default function CheckOutForm() {
             <span>Last name</span>
           </label>
           <input
-            {...register('lastName', {
+            {...register('shipping.lastName', {
               required: 'Last name is required.',
             })}
             aria-invalid={errors.lastName ? 'true' : 'false'}
@@ -87,7 +86,7 @@ export default function CheckOutForm() {
             <span>Street</span>
           </label>
           <input
-            {...register('street', {
+            {...register('shipping.street', {
               required: 'Street is required.',
               min: 1,
             })}
@@ -103,7 +102,7 @@ export default function CheckOutForm() {
             <span>City</span>
           </label>
           <input
-            {...register('city', {
+            {...register('shipping.city', {
               required: 'City is required.',
               pattern: /^[a-zA-Z ]+$/,
             })}
@@ -120,7 +119,7 @@ export default function CheckOutForm() {
             <span>Postal/ZIP code</span>
           </label>
           <input
-            {...register('postalCode', {
+            {...register('shipping.postalCode', {
               required: 'Postal/ZIP code is required.',
               pattern: /^\d{4}$/,
               setValueAs: (v) => parseInt(v),
@@ -137,7 +136,7 @@ export default function CheckOutForm() {
             <span>Country </span>
           </label>
           <input
-            {...register('country', {
+            {...register('shipping.country', {
               required: 'Country is required.',
               pattern: /^[a-zA-Z ]+$/,
             })}
@@ -148,6 +147,13 @@ export default function CheckOutForm() {
           <span>{errors.country?.message}</span>
         </p>
       </div>
+      {/*   <div>
+        <input
+          {...register('shipping.button')}
+          type="button"
+          value="Continue to Shipping"
+        />{' '}
+      </div> */}
     </>
   );
 }

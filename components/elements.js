@@ -194,8 +194,6 @@ export const headerStyle = css`
 
     @media (max-width: 1200px) {
       gap: 1rem;
-      // padding-left: 3rem;
-      //  padding-right: 3rem;
     }
 
     @media (max-width: 768px) {
@@ -683,7 +681,7 @@ export const styleSectionProducts = css`
   }
 
   div:first-of-type {
-    height: auto;
+    // height: auto;
     position: relative;
 
     span {
@@ -712,7 +710,7 @@ export const styleSectionProducts = css`
 
   h3 {
     font-size: 18px;
-    margin: 0.5rem 0;
+    margin-top: 0.5rem;
   }
 
   @media (max-width: 1024px) {

@@ -8,23 +8,31 @@ import { disableGrayLayer } from '../hooks';
 import { PropsTypeGrayLayer } from './types';
 
 interface DefaultFormValues {
-  userMail: string;
-  firstName: string;
-  lastName: string;
-  street: string;
-  country: string;
-  postalCode: string;
-  city: string;
+  shipping: {
+    userMail: string;
+    firstName: string;
+    lastName: string;
+    street: string;
+    country: string;
+    postalCode: string;
+    city: string;
+    button: boolean;
+  };
+  payment: {};
 }
 
 const defaultValues = {
-  mail: '',
-  firstName: '',
-  lastName: '',
-  street: '',
-  country: '',
-  postalCode: '',
-  city: '',
+  shipping: {
+    mail: '',
+    firstName: '',
+    lastName: '',
+    street: '',
+    country: '',
+    postalCode: '',
+    city: '',
+    button: false,
+  },
+  payment: {},
 };
 
 export default function CheckOut({
@@ -41,7 +49,11 @@ export default function CheckOut({
     setFocus,
     setError,
     getFieldState,
-  } = useForm({ defaultValues });
+  } = useForm<DefaultFormValues>({ defaultValues });
+
+  const onSubmit = (data: DefaultFormValues): void => {
+    console.log(data);
+  };
 
   return (
     <LayoutNoHeader
@@ -71,14 +83,22 @@ export default function CheckOut({
               <form
                 action="/thankyou"
                 css={formStyle}
-                onSubmit={handleSubmit((values) => {
-                  console.log('FormValues: ', values);
-                })}
+                onSubmit={handleSubmit(onSubmit)}
               >
                 <CheckOutForm />
-                <div>
-                  <input type="submit" value="Submit" />{' '}
-                </div>
+                {!errors.shipping ? (
+                  <div>
+                    <input
+                      {...register('shipping.button')}
+                      type="button"
+                      value="Continue to Shipping"
+                    />{' '}
+                  </div>
+                ) : (
+                  <div>
+                    <input type="submit" value="Submit" />{' '}
+                  </div>
+                )}
               </form>
             </FormProvider>
           </article>
