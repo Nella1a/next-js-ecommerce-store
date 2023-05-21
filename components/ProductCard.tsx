@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import { Fragment } from 'react';
 import { styleSectionProducts } from '../components/elements';
-import ProductImage from './ProductImage';
-import ProductImageSmall from './ProductImageSmall';
 
 type Plants = {
   id: number;
@@ -15,7 +13,7 @@ type Props = {
   plants: Plants[];
 };
 
-export default function ProductsComponent(props: Props) {
+export default function ProductCard(props: Props) {
   // slug-name
   props.plants.map((plant) => {
     plant.slugName = plant.name.toLowerCase().replace(/\s+/g, '-');
