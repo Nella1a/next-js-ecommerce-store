@@ -1,10 +1,9 @@
 import Link from 'next/link';
+import { useContext } from 'react';
+import { CartContext } from '../util/context/cartContext';
 
-type Props = {
-  totalPrice: number;
-};
-
-export default function OrderSummaryCart(props: Props) {
+export default function OrderSummaryCart() {
+  const { totalPrice } = useContext(CartContext);
   return (
     <article>
       <div>
@@ -12,7 +11,7 @@ export default function OrderSummaryCart(props: Props) {
         <div>
           <p>
             <span>Subtotal</span>
-            <span>{props.totalPrice}</span>
+            <span>{totalPrice}</span>
           </p>
           <p>
             <span>Delivery</span>
@@ -22,7 +21,7 @@ export default function OrderSummaryCart(props: Props) {
         <div>
           <p>
             <span>Total (VAT included)</span>
-            <span>€ {props.totalPrice}</span>
+            <span>€ {totalPrice}</span>
           </p>
           <Link href="/checkout" passHref>
             <button data-test-id="cart-checkout">Go to checkout</button>

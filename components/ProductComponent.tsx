@@ -1,18 +1,12 @@
 import Link from 'next/link';
 import { Fragment } from 'react';
 import { styleSectionProducts } from '../components/elements';
+import { Plant } from '../pages/types';
 import ProductImage from './ProductImage';
 import ProductImageSmall from './ProductImageSmall';
 
-type Plants = {
-  id: number;
-  name: string;
-  price: number;
-  slugName?: string;
-};
-
 type Props = {
-  plants: Plants[];
+  plants: Plant[];
 };
 
 export default function ProductsComponent(props: Props) {

@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
+import { useContext } from 'react';
 import { productsComponentStyle } from '../components/elements';
 import Layout from '../components/Layout';
 import ProductsComponent from '../components/ProductComponent';
@@ -9,7 +10,7 @@ import { readPlants } from '../util/database';
 import { PropsTypePlantsLayer } from './types';
 
 export default function Products(props: PropsTypePlantsLayer) {
-  disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer);
+  // disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer);
 
   const bgImageHero = css`
     background: no-repeat center url('productsHeroImage.jpeg');
@@ -18,8 +19,6 @@ export default function Products(props: PropsTypePlantsLayer) {
 
   return (
     <Layout
-      showGrayLayer={props.showGrayLayer}
-      setShowGrayLayer={props.setShowGrayLayer}
       bgImageHero={bgImageHero}
       // buttonInHeroImage={buttonInHeroImage}
     >

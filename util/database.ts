@@ -3,7 +3,7 @@ import camelcaseKeys from 'camelcase-keys';
 import { config } from 'dotenv-safe';
 // 1. Import postgres (= client library which connects to DBMS)
 import postgres from 'postgres';
-import { PlantsTwo } from '../pages/types.js';
+import { Plant, PlantsTwo } from '../pages/types.js';
 import setPostgresDefaultsOnHeroku from './setPostgresDefaultsOnHeroku.js';
 
 type Global = typeof globalThis & {
@@ -40,12 +40,7 @@ function connectOneTimeToDatabase() {
 const sql = connectOneTimeToDatabase();
 
 export async function readPlants() {
-  const plants: {
-    id: number;
-    price: number;
-    name: string;
-    description: string;
-  }[] = await sql`
+  const plants: Plant[] = await sql`
   SELECT * FROM plants;
   `;
   return plants.map((plant) => camelcaseKeys(plant));

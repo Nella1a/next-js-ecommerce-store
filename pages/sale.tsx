@@ -3,7 +3,6 @@ import Head from 'next/head';
 // import Link from 'next/link';
 import BackGImage from '../components/BackGImage';
 import Layout from '../components/Layout';
-import { PropsTypeGrayLayer } from './types';
 
 /* const bgImageSale = css`
   background: url('BgImageSale.jpeg') no-repeat right -100px bottom;
@@ -15,16 +14,9 @@ const bgImageSale = css`
   background-size: cover;
 `;
 
-export default function Sale({
-  showGrayLayer,
-  setShowGrayLayer,
-}: PropsTypeGrayLayer) {
+export default function Sale({}) {
   return (
-    <Layout
-      showGrayLayer={showGrayLayer}
-      setShowGrayLayer={setShowGrayLayer}
-      bgImageHero={bgImageSale}
-    >
+    <Layout bgImageHero={bgImageSale}>
       <Head>
         <title>Sale</title>
         <meta name="description" content="site is under construction" />
