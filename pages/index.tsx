@@ -16,17 +16,11 @@ const bgImageHero = css`
 
 export default function Home(props: PropsTypePlantsCartCookieLayer) {
   console.log('Index_props.database typeopf:', typeof props.plants);
-  console.log('Props.RespMenue: ', props.showGrayLayer);
 
   const buttonInHeroImage = <ButtonCallToAction innerText="View All Plants" />;
 
   return (
-    <Layout
-      showGrayLayer={props.showGrayLayer}
-      setShowGrayLayer={props.setShowGrayLayer}
-      bgImageHero={bgImageHero}
-      buttonInHeroImage={buttonInHeroImage}
-    >
+    <Layout bgImageHero={bgImageHero} buttonInHeroImage={buttonInHeroImage}>
       <Head>
         <title>Plant Love</title>
         <meta name="description" content="Plant Shop" />

@@ -13,11 +13,7 @@ export default function Layout(props: PropsTypeChildrenLayer) {
         {' '}
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navigation
-        showGrayLayer={props.showGrayLayer}
-        setShowGrayLayer={props.setShowGrayLayer}
-        sumOfcart={props.sumOfcart}
-      />
+      <Navigation />
       <Header
         firstText="Delivering Plants,"
         secondText="Delivering Happiness!"

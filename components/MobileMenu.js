@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 import { useOnClickOutside } from '../hooks';
+import { GrayLayerContext } from '../util/context/grayLayerContext';
 import NavMenu from './NavMenu';
 
 const mobileMenuStyle = (showBurger) => css`
@@ -108,15 +109,17 @@ const mobileMenuStyle = (showBurger) => css`
 
 export default function MobileMenu(props) {
   const node = useRef();
+  const { toggleGrayLayer } = useContext(GrayLayerContext);
+
   useOnClickOutside(node, () => {
     props.setShowBurger(false);
-    props.setShowGrayLayer(false);
+    //toggleGrayLayer();
   });
 
   const hideMobileMenue = () => {
     // hide responsive menu bar & grey layer over body
     props.setShowBurger(false);
-    props.setShowGrayLayer(false);
+    //toggleGrayLayer();
   };
 
   return (

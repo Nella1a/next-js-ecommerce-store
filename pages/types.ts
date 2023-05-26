@@ -13,59 +13,65 @@ export interface PlantsTwo {
   description: string;
 }
 
-type CartCookie = {
-  plantId: number;
+export type Plant = {
+  id: number;
   name: string;
-  price?: number;
+  price: number;
+  description: string;
+  slugName?: string;
 };
 
-export interface CartCookieTwo {
-  plantId: number;
+export interface Cookie {
+  id: number;
   quantity: number;
+}
+
+export interface Cart {
+  id: number;
+  quantity: number;
+  price: number;
+  name: string;
 }
 
 export interface PlantsAndDescription extends Plants {
   description: string;
 }
 
+// actually same as CART
 export interface PlantsAndQuantity {
-  quantity?: number;
+  quantity: number;
   id: number;
   name: string;
   price: number;
-  description: string;
+  description?: string;
   slugName?: string;
 }
 
-export interface PropsTypeGrayLayer {
-  showGrayLayer: boolean;
-  setShowGrayLayer: Dispatch<SetStateAction<boolean>>;
-  sumOfcart?: number;
-}
+// export interface PropsTypeGrayLayer {
+//   showGrayLayer: boolean;
+//   setShowGrayLayer: Dispatch<SetStateAction<boolean>>;
+// }
 
-export interface PropsTypeChildrenLayer extends PropsTypeGrayLayer {
+export interface PropsTypeChildrenLayer {
   children?: React.ReactNode;
   bgImageHero?: any;
   buttonInHeroImage?: any;
 }
 
-export interface PropsLayoutCart extends PropsTypeGrayLayer {
+export interface PropsLayoutCart {
   children?: React.ReactNode;
 }
 
-export interface PropsTypePlantsCartCookieLayer extends PropsTypeGrayLayer {
-  plants: Plants[];
-  cartCookies: CartCookie[];
+export interface PropsTypePlantsCartCookieLayer {
+  plants: Plant[];
+  cartCookies: Plant[];
 }
 
-export interface PropsTypePlantsLayer extends PropsTypeGrayLayer {
-  plants: Plants[];
+export interface PropsTypePlantsLayer {
+  plants: Plant[];
 }
 
-export interface PropsTypePlantsCartCookieLayerPlantId
-  extends PropsTypeGrayLayer {
-  // plantID: number;
-  plant: PlantsAndDescription;
-  cartCookie: { plantId: number; quantity: number }[];
-  setCookieGlogal?: any;
+export interface PropsTypePlantsCartCookieLayerPlantId {
+  plant: Plant;
+  cartCookie: Cookie[];
 }

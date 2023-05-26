@@ -1,43 +1,41 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ChangeCartQuantity from '../../components/ChangeCartQuantity';
 import { singleProductPageStyle } from '../../components/elements';
 import LayoutNoHeader from '../../components/LayoutNoHeader';
 import ProductImage from '../../components/ProductImage';
 import ProductImageSmall from '../../components/ProductImageSmall';
-import { getParsedCookie, setParsedCookie } from '../../util/cookies';
+import { CartContext } from '../../util/context/cartContext';
+import { CartCookieContext } from '../../util/context/cookieContext';
 import { getPlantByName } from '../../util/database';
-import { addAndUpdateQuantityInCookie } from '../../util/functions';
-import { CartCookieTwo, PropsTypePlantsCartCookieLayerPlantId } from '../types';
+import { Cookie, Plant, PropsTypePlantsCartCookieLayerPlantId } from '../types';
 
 export default function SingleProduct(
   props: PropsTypePlantsCartCookieLayerPlantId,
 ) {
-  const [quantity, setQuantity] = useState(1);
-  const [cartCookie, setCartCookie] = useState(props.cartCookie);
+  const [quantity, setQuantity] = useState<number>(1);
+
+  const incrementHandler = () => setQuantity(() => quantity + 1);
+  const decrementHandler = () => setQuantity(() => quantity - 1);
+
+  const { setParsedCookie, updateCartQuantity } = useContext(CartCookieContext);
+  const { updateCart } = useContext(CartContext);
 
   useEffect(() => {
-    if (cartCookie?.length) {
-      setParsedCookie('cart', cartCookie);
-      props.setCookieGlogal(cartCookie);
-    }
-  }, [cartCookie, quantity]);
+    setParsedCookie(props.cartCookie);
+  }, []);
 
-  const updateCartQuantity = () => {
-    const updateCookie = addAndUpdateQuantityInCookie(
-      props.plant.id,
-      quantity,
-      cartCookie,
-    );
-    setCartCookie(updateCookie);
+  const { id, price, name } = props.plant;
+
+  const updateCartAndCookieHandler = () => {
+    updateCartQuantity(id, quantity);
+
+    updateCart(id, price, quantity, name);
   };
 
   return (
-    <LayoutNoHeader
-      showGrayLayer={props.showGrayLayer}
-      setShowGrayLayer={props.setShowGrayLayer}
-    >
+    <LayoutNoHeader>
       <Head>
         <title>Plant</title>
         <meta name="Plant with a smile" content="View all Plants" />
@@ -65,11 +63,12 @@ export default function SingleProduct(
             <div>
               <ChangeCartQuantity
                 quantity={quantity}
-                setQuantity={setQuantity}
+                increment={incrementHandler}
+                decrement={decrementHandler}
               />
               <button
                 data-test-id="product-add-to-cart"
-                onClick={updateCartQuantity}
+                onClick={updateCartAndCookieHandler}
               >
                 Add to cart
               </button>
@@ -85,8 +84,8 @@ export async function getServerSideProps(
   context: GetServerSidePropsContext,
 ): Promise<
   GetServerSidePropsResult<{
-    plant: { id: number; name: string; price: number; description: string };
-    cartCookie: CartCookieTwo[];
+    plant: Plant;
+    cartCookie: Cookie[];
   }>
 > {
   // get current plant via slug in url
@@ -95,10 +94,7 @@ export async function getServerSideProps(
   const plantName = plantSlug.replace(/\-+/g, ' ');
   const plant = await getPlantByName(plantName);
 
-  /* read current cookie; if no cookie return [] */
-  const cartCookie: CartCookieTwo[] = JSON.parse(
-    context.req.cookies.cart || '[]',
-  );
+  const cartCookie: Cookie[] = JSON.parse(context.req.cookies.cart || '[]');
 
   console.log('---> cartCookie: ', cartCookie);
   return {

@@ -5,7 +5,6 @@ import { cartStyle, formStyle } from '../components/elements';
 import LayoutNoHeader from '../components/LayoutNoHeader';
 import OrderSummaryCart from '../components/OrderSummaryCart';
 import { disableGrayLayer } from '../hooks';
-import { PropsTypeGrayLayer } from './types';
 
 interface DefaultFormValues {
   shipping: {
@@ -35,12 +34,7 @@ const defaultValues = {
   payment: {},
 };
 
-export default function CheckOut({
-  showGrayLayer,
-  setShowGrayLayer,
-}: PropsTypeGrayLayer) {
-  disableGrayLayer(showGrayLayer, setShowGrayLayer);
-
+export default function CheckOut({}) {
   const {
     register,
     handleSubmit,
@@ -56,10 +50,7 @@ export default function CheckOut({
   };
 
   return (
-    <LayoutNoHeader
-      showGrayLayer={showGrayLayer}
-      setShowGrayLayer={setShowGrayLayer}
-    >
+    <LayoutNoHeader>
       <Head>
         <title>Checkout</title>
         <meta name="checkout" content="shipping and payment details" />
@@ -103,7 +94,7 @@ export default function CheckOut({
             </FormProvider>
           </article>
 
-          <OrderSummaryCart totalPrice={60} />
+          <OrderSummaryCart />
         </div>
       </section>
     </LayoutNoHeader>
