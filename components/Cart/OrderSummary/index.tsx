@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { useContext } from 'react';
-import { CartContext } from '../util/context/cartContext';
+import { CartContext } from '../../../util/context/cartContext';
 
-export default function OrderSummaryCart() {
+export default function OrderSummary() {
   const { totalPrice } = useContext(CartContext);
   return (
     <article>

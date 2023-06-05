@@ -4,12 +4,12 @@ import Head from 'next/head';
 import { useContext } from 'react';
 import { productsComponentStyle } from '../components/elements';
 import Layout from '../components/Layout';
-import ProductsComponent from '../components/ProductComponent';
+import Products from '../components/Products';
 import { disableGrayLayer } from '../hooks';
 import { readPlants } from '../util/database';
 import { PropsTypePlantsLayer } from './types';
 
-export default function Products(props: PropsTypePlantsLayer) {
+export default function Directory(props: PropsTypePlantsLayer) {
   // disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer);
 
   const bgImageHero = css`
@@ -29,9 +29,9 @@ export default function Products(props: PropsTypePlantsLayer) {
       <section css={productsComponentStyle}>
         <h2>Products</h2>
         <article>
-          <ProductsComponent plants={props.plants} />
-          <ProductsComponent plants={props.plants} />
-          <ProductsComponent plants={props.plants} />
+          <Products plants={props.plants} />
+          <Products plants={props.plants} />
+          <Products plants={props.plants} />
         </article>
       </section>
     </Layout>

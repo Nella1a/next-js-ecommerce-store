@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import { FormProvider, useForm } from 'react-hook-form';
-import CheckOutForm from '../components/CheckOutForm';
+import OrderSummary from '../components/Cart/OrderSummary';
+import CheckOutForm from '../components/CheckoutForm';
 import { cartStyle, formStyle } from '../components/elements';
-import LayoutNoHeader from '../components/LayoutNoHeader';
-import OrderSummaryCart from '../components/OrderSummaryCart';
+import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import { disableGrayLayer } from '../hooks';
 
 interface DefaultFormValues {
@@ -94,7 +94,7 @@ export default function CheckOut({}) {
             </FormProvider>
           </article>
 
-          <OrderSummaryCart />
+          <OrderSummary />
         </div>
       </section>
     </LayoutNoHeader>

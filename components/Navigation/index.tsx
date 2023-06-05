@@ -2,11 +2,11 @@ import { css } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, useContext, useEffect, useState } from 'react';
-import shoppingBag from '../public/shopping-bag.png';
-import { CartCookieContext } from '../util/context/cookieContext';
-import { GrayLayerContext } from '../util/context/grayLayerContext';
-import { headerStyle, shoppingBagStyle } from './elements';
-import MobileMenu from './MobileMenu';
+import shoppingBag from '../../public/shopping-bag.png';
+import { CartCookieContext } from '../../util/context/cookieContext';
+import { GrayLayerContext } from '../../util/context/grayLayerContext';
+import { headerStyle, shoppingBagStyle } from '../elements';
+import MobileMenu from '../Mobile/MobileMenu';
 import NavMenu from './NavMenu';
 
 // get window width
@@ -39,7 +39,7 @@ export default function Navigation() {
   const handleShowMobileMenu = () => {
     // show responsive menue bar & display grey layer over body
     setShowHamburgerIcon(true);
-    toggleGrayLayer(true);
+    //toggleGrayLayer(false);
   };
 
   return (

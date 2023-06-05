@@ -8,14 +8,14 @@ import {
   useEffect,
   useState,
 } from 'react';
+import CartProducts from '../components/Cart/CartProducts';
+import OrderSummary from '../components/Cart/OrderSummary';
 import {
   shoppingCartSectionHeader,
   shoppingCartStyle,
   underConstruction,
 } from '../components/elements';
-import LayoutCart from '../components/LayoutNoHeader';
-import OrderSummaryCart from '../components/OrderSummaryCart';
-import ProductsCard from '../components/ProductsCard';
+import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import { disableGrayLayer } from '../hooks';
 import { CartContext } from '../util/context/cartContext';
 import { CartCookieContext } from '../util/context/cookieContext';
@@ -39,7 +39,7 @@ export default function ShoppingCart(props: Props) {
   // case: no cookie set
   if (!cartProducts.length || !cartCount) {
     return (
-      <LayoutCart>
+      <LayoutNoHeader>
         <Head>
           <title>Shopping Cart Items</title>
           <meta name="description" content="Your Shopping Cart" />
@@ -50,7 +50,7 @@ export default function ShoppingCart(props: Props) {
             <button>Continue Shopping</button>
           </Link>
         </section>
-      </LayoutCart>
+      </LayoutNoHeader>
     );
   }
 
@@ -64,17 +64,17 @@ export default function ShoppingCart(props: Props) {
 
   // case: cookie set
   return (
-    <LayoutCart>
+    <LayoutNoHeader>
       <Head>
         <title>Shopping Cart Items</title>
         <meta name="description" content="Your Shopping Cart" />
       </Head>
       {cartHeader}
       <section css={shoppingCartStyle}>
-        <ProductsCard />
-        <OrderSummaryCart />
+        <CartProducts />
+        <OrderSummary />
       </section>
-    </LayoutCart>
+    </LayoutNoHeader>
   );
 }
 
