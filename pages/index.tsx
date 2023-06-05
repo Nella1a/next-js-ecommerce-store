@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import ButtonCallToAction from '../components/ButtonCallToAction';
+import ButtonCallToAction from '../components/Buttons/ButtonCallToAction';
 import { bestSellerStyle, indexTextImageComp } from '../components/elements';
-import IndexTextImage from '../components/IndexTextImage';
+import IndexTextImage from '../components/Images/IndexTextImage';
 import Layout from '../components/Layout';
-import ProductsComponent from '../components/ProductComponent';
+import Products from '../components/Products';
 import { readPlants } from '../util/database';
 import { PropsTypePlantsCartCookieLayer } from './types';
 
@@ -30,14 +30,14 @@ export default function Home(props: PropsTypePlantsCartCookieLayer) {
       <section css={bestSellerStyle}>
         <h2>Best Sellers</h2>
         <div>
-          <ProductsComponent plants={props.plants} />
+          <Products plants={props.plants} />
         </div>
       </section>
 
       <section css={bestSellerStyle}>
         <h2>Best Sellers</h2>
         <div>
-          <ProductsComponent plants={props.plants} />
+          <Products plants={props.plants} />
         </div>
       </section>
 
@@ -50,7 +50,7 @@ export default function Home(props: PropsTypePlantsCartCookieLayer) {
       <section css={bestSellerStyle}>
         <h2>On Sale</h2>
         <div>
-          <ProductsComponent plants={props.plants} />
+          <Products plants={props.plants} />
         </div>
       </section>
     </Layout>

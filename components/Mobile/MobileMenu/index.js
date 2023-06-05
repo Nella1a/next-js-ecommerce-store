@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { useContext, useRef } from 'react';
-import { useOnClickOutside } from '../hooks';
-import { GrayLayerContext } from '../util/context/grayLayerContext';
-import NavMenu from './NavMenu';
+import { useOnClickOutside } from '../../../hooks';
+import { GrayLayerContext } from '../../../util/context/grayLayerContext';
+import NavMenu from '../../Navigation/NavMenu';
 
 const mobileMenuStyle = (showBurger) => css`
   display: none;

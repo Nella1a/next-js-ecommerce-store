@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { flexStyle, formStyle } from './elements';
-import OrderSummaryCart from './OrderSummaryCart';
+import OrderSummary from '../Cart/OrderSummary';
+import { flexStyle, formStyle } from '../elements';
 
 const errorStyle = (error: any) => css`
   border: ${error === 'required' ? '2px solid red' : '1px solid lightgray'};

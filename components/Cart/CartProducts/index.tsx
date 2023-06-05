@@ -1,13 +1,13 @@
 import { Dispatch, SetStateAction, useContext } from 'react';
-import { PlantsAndQuantity } from '../pages/types';
-import { CartContext } from '../util/context/cartContext';
-import CartProductCard from './CartProductCard/CartProductCard';
+import { PlantsAndQuantity } from '../../../pages/types';
+import { CartContext } from '../../../util/context/cartContext';
+import CartProductCard from '../CartProductCard';
 
 type Props = {
   setCartProducts: Dispatch<SetStateAction<PlantsAndQuantity[]>>;
 };
 
-export default function ProductsCard() {
+export default function CartProducts() {
   const { currentCartItems } = useContext(CartContext);
 
   return (

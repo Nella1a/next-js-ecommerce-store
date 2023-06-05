@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
 // import Link from 'next/link';
-import BackGImage from '../components/BackGImage';
+import BackGImage from '../components/Images/BackGImage';
 import Layout from '../components/Layout';
 
 const bgImageIns = css`
