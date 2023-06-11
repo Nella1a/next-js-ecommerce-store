@@ -13,11 +13,7 @@ export default function CartProducts() {
   return (
     <article>
       {currentCartItems.map((plant) => (
-        <div
-          key={`cartItems_${plant.id}`}
-          className="ProductCart-Container"
-          style={{ display: 'flex', gap: '.8rem' }}
-        >
+        <div key={`cartItems_${plant.id}`}>
           <CartProductCard plant={plant} />
         </div>
       ))}
