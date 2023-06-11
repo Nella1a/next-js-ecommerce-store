@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import { CartCookieTwo } from '../pages/types';
+import { Cookie } from '../pages/types';
 
 // read cookie
 export function getParsedCookie(
@@ -13,7 +13,7 @@ export function getParsedCookie(
 }
 
 // set cookie
-export function setParsedCookie(key: string, value: CartCookieTwo[]) {
+export function setParsedCookie(key: string, value: Cookie[]) {
   Cookies.set(key, JSON.stringify(value));
 }
 

@@ -194,8 +194,6 @@ export const headerStyle = css`
 
     @media (max-width: 1200px) {
       gap: 1rem;
-      // padding-left: 3rem;
-      //  padding-right: 3rem;
     }
 
     @media (max-width: 768px) {
@@ -683,7 +681,7 @@ export const styleSectionProducts = css`
   }
 
   div:first-of-type {
-    height: auto;
+    // height: auto;
     position: relative;
 
     span {
@@ -712,7 +710,7 @@ export const styleSectionProducts = css`
 
   h3 {
     font-size: 18px;
-    margin: 0.5rem 0;
+    margin-top: 0.5rem;
   }
 
   @media (max-width: 1024px) {
@@ -859,74 +857,55 @@ export const singleProductPageStyleSecondArticle = css`
 
 export const shoppingCartSectionHeader = css`
   margin-top: 8rem;
-  //margin-bottom: 5rem;
   text-align: left;
 `;
 
 export const shoppingCartStyle = css`
   margin-top: 4rem;
   display: grid;
-  gap: 60px;
-  grid-template-columns: 2fr 1fr;
-  background-color: #f8f8f8;
-  border: 1px solid red;
+  gap: 30px;
+  grid-template-columns: 1fr 1fr;
+  background-color: #f3f3f3;
+  border: 2px solid red;
 
   article:first-of-type {
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
-    margin-top: 1rem;
-    border: 1px solid green;
+    gap: 1.5rem;
+    background-color: #fff;
+    //border: 2px solid blue;
     > div {
-      display: grid;
-      grid-template-columns: 1fr 3fr;
+      //background-color: #e9e9e9;
+      background-color: #fff;
+      //border-bottom: 1px solid black;
 
-      a {
-        display: block;
-        text-align: right;
+      // border: 3px solid pink;
+      display: flex;
+      gap: 2rem;
+
+      > div:first-of-type {
+        margin-right: 1rem;
+        flex-basis: 30%;
       }
 
-      div {
-        display: grid;
+      > div:last-of-type {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        gap: 1rem;
 
-        grid-template-areas:
-          'area1 .'
-          'area2  area4'
-          'area3  .';
-
-        div:first-of-type {
-          grid-area: area1;
-          margin-left: unset;
-        }
-
-        div:nth-of-type(2) {
-          grid-area: area2;
-          select {
-            height: 2.47rem;
-            padding: 0.75rem 0.5rem 0.75rem 0.75rem;
-            text-align: center;
-            width: 8.825rem;
-            height: 3rem;
-          }
-        }
-
-        div:nth-of-type(3) {
-          grid-area: area4;
-        }
-
-        button {
+        > div > button {
           all: unset;
-          grid-area: area3;
           color: gray;
         }
       }
     }
   }
-
   article:nth-of-type(2) {
     display: flex;
-    // align-items: center;
     width: 100%;
+    height: 300px;
+    //border: 2px solid blue;
 
     h2 {
       margin-top: 1rem;
@@ -935,26 +914,34 @@ export const shoppingCartStyle = css`
     }
 
     > div {
+      // border: 1px solid red;
       width: 100%;
       flex-direction: column;
       display: flex;
       align-items: flex-start;
       justify-content: space-around;
-      background-color: #e0e0e0;
-      padding: 1rem;
+      // background-color: #e0e0e0;
+      background-color: #fff;
+
+      padding: 4rem;
 
       div {
         width: inherit;
       }
 
       div:nth-of-type(2) {
-        p {
+        > p:first-of-type {
           margin-top: 0.5rem;
           margin-bottom: 2rem;
           font-weight: 600;
         }
 
         border-top: 1px solid grey;
+        > p:last-of-type {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
       }
     }
 
@@ -970,10 +957,9 @@ export const shoppingCartStyle = css`
     }
 
     button {
-      ${size('17.65rem', '1.47rem')}
+      ${size('25.65rem', '1.47rem')}
       background-color: #ed943b;
       border: none;
-
       &:hover {
         background-color: #ff6900;
       }
@@ -982,7 +968,7 @@ export const shoppingCartStyle = css`
 `;
 
 export const plantName = css`
-  margin-left: 1rem;
+  margin-top: 0.5rem;
 `;
 
 /* *************************** */

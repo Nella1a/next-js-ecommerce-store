@@ -1,15 +1,11 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import { disableGrayLayer } from '../hooks';
-import { PropsTypeGrayLayer } from './types';
 
-export default function ThankYouPage(props: PropsTypeGrayLayer) {
-  disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer)
+export default function ThankYouPage() {
+  // disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer);
   return (
-    <Layout
-    showGrayLayer={props.showGrayLayer}
-    setShowGrayLayer={props.setShowGrayLayer}
-    >
+    <Layout>
       <Head>
         <title>Thank you for your order</title>
         <meta name="description" content="checkout thank you page" />

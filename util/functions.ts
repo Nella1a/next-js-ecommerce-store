@@ -1,4 +1,4 @@
-import { CartCookieTwo } from '../pages/types';
+import { Cookie } from '../pages/types';
 import { setParsedCookie } from './cookies';
 
 // calculates subtotal price
@@ -24,7 +24,7 @@ export function cartTotalPrice(totalPrice: number[]) {
 export function addAndUpdateQuantityInCookie(
   PlantId: number,
   NewPlantQuantity: number,
-  cartCookie: CartCookieTwo[] | undefined,
+  cartCookie: Cookie[] | undefined,
   singlePlant: boolean = true,
 ): { plantId: number; quantity: number }[] {
   /* new quantity and id of item to set in cart cookie  */
@@ -58,7 +58,7 @@ export function addAndUpdateQuantityInCookie(
       return [...cartCookie, { plantId: PlantId, quantity: NewPlantQuantity }];
     }
   } else {
-    const value: CartCookieTwo[] = [];
+    const value: Cookie[] = [];
     value.push({
       plantId: PlantId,
       quantity: NewPlantQuantity,

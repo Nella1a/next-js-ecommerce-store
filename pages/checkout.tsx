@@ -1,53 +1,84 @@
 import Head from 'next/head';
+import Router from 'next/router';
+import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import CheckOutForm from '../components/CheckOutForm';
+import OrderSummary from '../components/Cart/OrderSummary';
+import Payment from '../components/CheckoutForm/Payment';
+import Shipping from '../components/CheckoutForm/Shipping';
 import { cartStyle, formStyle } from '../components/elements';
-import LayoutNoHeader from '../components/LayoutNoHeader';
-import OrderSummaryCart from '../components/OrderSummaryCart';
+import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import { disableGrayLayer } from '../hooks';
-import { PropsTypeGrayLayer } from './types';
 
-interface DefaultFormValues {
-  userMail: string;
-  firstName: string;
-  lastName: string;
-  street: string;
-  country: string;
-  postalCode: string;
-  city: string;
+export interface DefaultFormValues {
+  shipping: {
+    userEmail: string;
+    firstName: string;
+    lastName: string;
+    street: string;
+    country: string;
+    postalCode: string;
+    city: string;
+    button: string;
+  };
+  payment: {
+    cartType: string;
+    cardNumber: number;
+    nameOnCard: string;
+    expiryDate: string;
+    securityCode: number;
+  };
 }
 
-const defaultValues = {
-  mail: '',
-  firstName: '',
-  lastName: '',
-  street: '',
-  country: '',
-  postalCode: '',
-  city: '',
-};
+const defaultValues = {};
 
-export default function CheckOut({
-  showGrayLayer,
-  setShowGrayLayer,
-}: PropsTypeGrayLayer) {
-  disableGrayLayer(showGrayLayer, setShowGrayLayer);
+export default function CheckOut({}) {
+  const [toNextStep, setToNextStep] = useState(false);
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    reset,
-    setFocus,
-    setError,
+    formState: { isSubmitSuccessful, errors },
     getFieldState,
-  } = useForm({ defaultValues });
+    trigger,
+  } = useForm<DefaultFormValues>({ defaultValues });
+
+  const onSubmit = (data: DefaultFormValues): void => {
+    console.log('----> Form Values: ', data);
+  };
+
+  const submitShippingInfosHandler = async (event: any) => {
+    const noErrors = await trigger('shipping');
+    if (noErrors) {
+      setToNextStep(true);
+    }
+  };
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      const { pathname } = Router;
+
+      if (pathname == '/checkout') {
+        Router.push('/thankyou');
+      }
+    }
+  }, [isSubmitSuccessful]);
+
+  const ButtonContinueToPayment = () => (
+    <div>
+      <button type="button" onClick={submitShippingInfosHandler}>
+        Continue to Shipping
+      </button>
+    </div>
+  );
+
+  const ButtonSumitFormValues = () => (
+    <div>
+      <button type="submit">Submit</button>
+    </div>
+  );
 
   return (
-    <LayoutNoHeader
-      showGrayLayer={showGrayLayer}
-      setShowGrayLayer={setShowGrayLayer}
-    >
+    <LayoutNoHeader>
       <Head>
         <title>Checkout</title>
         <meta name="checkout" content="shipping and payment details" />
@@ -57,33 +88,33 @@ export default function CheckOut({
         <h1>Your Details</h1>{' '}
         <div css={cartStyle}>
           <article>
-            <FormProvider
-              {...{
-                register,
-                handleSubmit,
-                formState: { errors },
-                reset,
-                setFocus,
-                setError,
-                getFieldState,
-              }}
+            <form
+              action="/api"
+              css={formStyle}
+              onSubmit={handleSubmit(onSubmit)}
             >
-              <form
-                action="/thankyou"
-                css={formStyle}
-                onSubmit={handleSubmit((values) => {
-                  console.log('FormValues: ', values);
-                })}
-              >
-                <CheckOutForm />
-                <div>
-                  <input type="submit" value="Submit" />{' '}
-                </div>
-              </form>
-            </FormProvider>
+              {!toNextStep ? (
+                <>
+                  <Shipping
+                    register={register}
+                    errors={errors}
+                    getFieldState={getFieldState}
+                  />
+                  <ButtonContinueToPayment />
+                </>
+              ) : (
+                <section>
+                  <Payment
+                    register={register}
+                    errors={errors}
+                    getFieldState={getFieldState}
+                  />
+                  <ButtonSumitFormValues />
+                </section>
+              )}
+            </form>
           </article>
-
-          <OrderSummaryCart totalPrice={60} />
+          <OrderSummary />
         </div>
       </section>
     </LayoutNoHeader>
