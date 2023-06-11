@@ -23,9 +23,11 @@ export default function OrderSummary() {
             <span>Total (VAT included)</span>
             <span>€ {totalPrice}</span>
           </p>
-          <Link href="/checkout" passHref>
-            <button data-test-id="cart-checkout">Go to checkout</button>
-          </Link>
+          <p>
+            <Link href="/checkout" passHref>
+              <button data-test-id="cart-checkout">Go to checkout</button>
+            </Link>
+          </p>
         </div>
       </div>
     </article>
