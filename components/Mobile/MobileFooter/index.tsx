@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { MobileFooterStyle } from '../elements';
-import MobileFooterInfo from './MobileFooterInfo';
+import { MobileFooterStyle } from '../../elements';
+import MobileFooterInfo from '../MobileFooterInfo/MobileFooterInfo';
 
 export default function MobileFooter() {
   const [displayMenu, setDisplayMenu] = useState(false);
@@ -38,7 +38,7 @@ export default function MobileFooter() {
       <div>
         {footerInfos.map((info, index) => {
           return (
-            <article>
+            <article key={index}>
               <ul>
                 <p
                   key={`infos-header-${index}`}

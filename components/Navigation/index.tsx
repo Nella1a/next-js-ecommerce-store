@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Fragment, useEffect, useState } from 'react';
-import { PropsTypeGrayLayer } from '../pages/types';
-import shoppingBag from '../public/shopping-bag.png';
-import { getParsedCookie } from '../util/cookies';
-import { headerStyle, shoppingBagStyle } from './elements';
-import MobileMenu from './MobileMenu';
+import { Fragment, useContext, useEffect, useState } from 'react';
+import shoppingBag from '../../public/shopping-bag.png';
+import { CartCookieContext } from '../../util/context/cookieContext';
+import { GrayLayerContext } from '../../util/context/grayLayerContext';
+import { headerStyle, shoppingBagStyle } from '../elements';
+import MobileMenu from '../Mobile/MobileMenu';
 import NavMenu from './NavMenu';
 
 // get window width
@@ -30,40 +30,23 @@ const GetScreenSize = () => {
   return screenSize;
 };
 
-export default function Navigation(props: PropsTypeGrayLayer) {
-  const [sumOfcartItems, setSumOfcartItems] = useState(props.sumOfcart);
+export default function Navigation() {
   const screenwidth = GetScreenSize();
   const [showHamburgerIcon, setShowHamburgerIcon] = useState(false);
+  const { cartCount } = useContext(CartCookieContext);
+  const { toggleGrayLayer } = useContext(GrayLayerContext);
 
-  const currentCookie = getParsedCookie('cart');
-
-  useEffect(() => {
-    if (currentCookie?.length) {
-      const quantities = currentCookie.map((cookie) => cookie.quantity);
-      const initialValue = 0;
-      const sumOfQuantities = quantities.reduce(
-        (accumulator, currentValue) => accumulator + currentValue,
-        initialValue,
-      );
-
-      setSumOfcartItems(sumOfQuantities);
-    } else {
-      setSumOfcartItems(0);
-    }
-  }, [currentCookie]);
-
-  function handleShowMobileMenu() {
+  const handleShowMobileMenu = () => {
     // show responsive menue bar & display grey layer over body
     setShowHamburgerIcon(true);
-    props.setShowGrayLayer(true);
-  }
+    //toggleGrayLayer(false);
+  };
 
   return (
     <Fragment>
       <MobileMenu
         showBurger={showHamburgerIcon}
         setShowBurger={setShowHamburgerIcon}
-        setShowGrayLayer={props.setShowGrayLayer}
       />
 
       <nav css={headerStyle}>
@@ -98,7 +81,7 @@ export default function Navigation(props: PropsTypeGrayLayer) {
                 <div>
                   <Image src={shoppingBag} alt="shopping cart icon" />
                   <div>
-                    <span data-test-id="cart-count">{sumOfcartItems}</span>
+                    <span data-test-id="cart-count">{cartCount}</span>
                   </div>
                 </div>
               </div>

@@ -1,53 +1,45 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import CartItems from '../components/CartItems';
+import {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import CartProducts from '../components/Cart/CartProducts';
+import OrderSummary from '../components/Cart/OrderSummary';
 import {
   shoppingCartSectionHeader,
   shoppingCartStyle,
   underConstruction,
 } from '../components/elements';
-import LayoutCart from '../components/LayoutNoHeader';
-import OrderSummaryCart from '../components/OrderSummaryCart';
+import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import { disableGrayLayer } from '../hooks';
+import { CartContext } from '../util/context/cartContext';
+import { CartCookieContext } from '../util/context/cookieContext';
 import { getPlantsById } from '../util/database';
-import { PlantsAndQuantity } from './types';
+import { Cookie, PlantsAndQuantity } from './types';
 
 type Props = {
   plants: PlantsAndQuantity[];
-  showGrayLayer: boolean;
-  setShowGrayLayer: Dispatch<SetStateAction<boolean>>;
 };
 
 export default function ShoppingCart(props: Props) {
-  const [cartProducts, setCartProducts] = useState(props.plants);
-  const [totalQuantity, setTotalQuantity] = useState(0);
+  const [cartProducts] = useState(props.plants);
+  const { cartCount } = useContext(CartCookieContext);
 
-  disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer);
+  const { cartItems } = useContext(CartContext);
 
   useEffect(() => {
-    // update amount of products in cart
-    const sumOfProducts = cartProducts.reduce(
-      (accumulator, product) => accumulator + (product.quantity ?? 0),
-      0,
-    );
-    setTotalQuantity(sumOfProducts);
-  }, [cartProducts]);
-
-  // calculate total price
-  let totalPrice = cartProducts.reduce(
-    (accumulator, plant) => accumulator + plant.price * (plant.quantity || 0),
-    0,
-  );
+    cartItems(props.plants);
+  }, []);
 
   // case: no cookie set
-  if (!cartProducts.length) {
+  if (!cartProducts.length || !cartCount) {
     return (
-      <LayoutCart
-        showGrayLayer={props.showGrayLayer}
-        setShowGrayLayer={props.setShowGrayLayer}
-      >
+      <LayoutNoHeader>
         <Head>
           <title>Shopping Cart Items</title>
           <meta name="description" content="Your Shopping Cart" />
@@ -58,47 +50,38 @@ export default function ShoppingCart(props: Props) {
             <button>Continue Shopping</button>
           </Link>
         </section>
-      </LayoutCart>
+      </LayoutNoHeader>
     );
   }
 
   const cartHeader = (
     <section css={shoppingCartSectionHeader}>
       <h1>
-        Your Cart ({totalQuantity}{' '}
-        {totalQuantity === 1 ? 'Product' : 'Products'})
+        Your Cart ({cartCount} {cartCount === 1 ? 'Product' : 'Products'})
       </h1>
     </section>
   );
 
   // case: cookie set
   return (
-    <LayoutCart
-      showGrayLayer={props.showGrayLayer}
-      setShowGrayLayer={props.setShowGrayLayer}
-    >
+    <LayoutNoHeader>
       <Head>
         <title>Shopping Cart Items</title>
         <meta name="description" content="Your Shopping Cart" />
       </Head>
       {cartHeader}
       <section css={shoppingCartStyle}>
-        <CartItems
-          cartProducts={cartProducts}
-          setCartProducts={setCartProducts}
-        />
-        <OrderSummaryCart totalPrice={Number(totalPrice.toFixed(2))} />
+        <CartProducts />
+        <OrderSummary />
       </section>
-    </LayoutCart>
+    </LayoutNoHeader>
   );
 }
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext,
 ): Promise<GetServerSidePropsResult<{ plants: PlantsAndQuantity[] }>> {
-  const cartCookie: { plantId: number; quantity: number }[] = JSON.parse(
-    context.req.cookies.cart || '[]',
-  );
+  const cartCookie: Cookie[] = JSON.parse(context.req.cookies.cart || '[]');
 
   // typescript narrowing
   if (typeof cartCookie === 'undefined') {
@@ -110,7 +93,7 @@ export async function getServerSideProps(
   }
 
   // get current products in cookie from db by ids
-  const plantIds = cartCookie.map((event) => event.plantId);
+  const plantIds = cartCookie.map((event) => event.id);
 
   const plants = await getPlantsById(plantIds);
   // combine db-product info with cookie info:
@@ -120,7 +103,7 @@ export async function getServerSideProps(
     return {
       ...plant,
       quantity:
-        cartCookie.find((productObject) => plant.id === productObject.plantId)
+        cartCookie.find((productObject) => plant.id === productObject.id)
           ?.quantity || 0,
     };
   });

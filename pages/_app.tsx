@@ -1,11 +1,15 @@
 import { css, Global, ThemeProvider } from '@emotion/react';
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { globalStyleBody } from '../components/elements';
 import theme from '../components/theme';
-import { getParsedCookie } from '../util/cookies';
-import { CartCookieTwo } from './types';
+import { CartContextProvider } from '../util/context/cartContext';
+import { CartCookieProvider } from '../util/context/cookieContext';
+import {
+  GrayLayerContext,
+  GrayLayerProvider,
+} from '../util/context/grayLayerContext';
 
-const bodyGreyLayer = (showGrayLayer: any) => css`
+const bodyGreyLayer = (showGrayLayer: boolean) => css`
   width: 100%;
   height: 100%;
   background-color: rgba(105, 105, 105, 0.6);
@@ -16,45 +20,22 @@ const bodyGreyLayer = (showGrayLayer: any) => css`
 `;
 
 function MyApp({ Component, pageProps }: any) {
-  const [showGrayLayer, setShowGrayLayer] = useState(false);
-  const [sumOfcart, setSumOfcart] = useState(0);
-  const [cookieGlobal, setCookieGlogal] = useState<CartCookieTwo[]>([]);
-
-  useEffect(() => {
-    const cookie = getParsedCookie('cart');
-    setCookieGlogal(cookie);
-  }, [sumOfcart]);
-
-  useEffect(() => {
-    if (cookieGlobal?.length) {
-      const quantities = cookieGlobal.map((cookie) => cookie.quantity);
-      const initialValue = 0;
-      const sumOfQuantities = quantities.reduce(
-        (accumulator, currentValue) => accumulator + currentValue,
-        initialValue,
-      );
-
-      setSumOfcart(sumOfQuantities);
-    } else {
-      setSumOfcart(0);
-    }
-  }, [cookieGlobal]);
-
+  //const [showGrayLayer, setShowGrayLayer] = useState(true);
+  const { showGrayLayer } = useContext(GrayLayerContext);
+  console.log('grayLayer: ', showGrayLayer);
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <Global styles={globalStyleBody(theme)} />
-        <div css={bodyGreyLayer(showGrayLayer)} />
-        <Component
-          {...pageProps}
-          showGrayLayer={showGrayLayer}
-          setShowGrayLayer={setShowGrayLayer}
-          sumOfcart={sumOfcart}
-          setSumOfcart={setSumOfcart}
-          setCookieGlogal={setCookieGlogal}
-        />
-      </ThemeProvider>
-      ;
+      <CartContextProvider>
+        <CartCookieProvider>
+          <ThemeProvider theme={theme}>
+            <GrayLayerProvider>
+              <Global styles={globalStyleBody(theme)} />
+              <div css={bodyGreyLayer(showGrayLayer)} />
+              <Component {...pageProps} />
+            </GrayLayerProvider>
+          </ThemeProvider>
+        </CartCookieProvider>
+      </CartContextProvider>
     </>
   );
 }
