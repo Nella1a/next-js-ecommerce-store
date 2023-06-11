@@ -40,27 +40,25 @@ export default function CartProductCard(props: Props) {
         <CartItem plant={plant} />
       </div>
       <div className="Quantity">
-        <div css={plantName}>{name}</div>
-
+        <p css={plantName}>{name}</p>
+        <div className="Price">
+          €
+          {multiplePriceAndQuantity(Number(price), Number(quantity)).toFixed(2)}
+        </div>
         <ChangeCartQuantity
           quantity={quantity}
           increment={incrementHandler}
           decrement={decrementHandler}
         />
-      </div>
-      <div className="Price">
-        <div>
-          €
-          {multiplePriceAndQuantity(Number(price), Number(quantity)).toFixed(2)}
+
+        <div className="removeButton">
+          <button
+            data-test-id="delete item from cart"
+            onClick={() => onClickHandler(id)}
+          >
+            remove
+          </button>
         </div>
-      </div>
-      <div className="removeButton">
-        <button
-          data-test-id="delete item from cart"
-          onClick={() => onClickHandler(id)}
-        >
-          remove
-        </button>
       </div>
     </>
   );
