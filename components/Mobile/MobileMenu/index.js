@@ -114,10 +114,11 @@ export default function MobileMenu() {
   const { toggleMobileMenu, toggleMenu } = useContext(CartContext);
 
   useOnClickOutside(node, () => {
+    // TODO:
     //toggleGrayLayer();
-    if (toggleMenu) {
-      toggleMobileMenu();
-    }
+    // if (toggleMenu) {
+    //   toggleMobileMenu();
+    // }
   });
 
   const toggleMobileMenuHandler = () => {
