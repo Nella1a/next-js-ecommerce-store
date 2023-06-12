@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Fragment, useContext, useEffect, useState } from 'react';
+import { Fragment, useContext, useEffect, useReducer, useState } from 'react';
 import shoppingBag from '../../public/shopping-bag.png';
+import { CartContext } from '../../util/context/cartContext';
 import { CartCookieContext } from '../../util/context/cookieContext';
 import { GrayLayerContext } from '../../util/context/grayLayerContext';
 import { headerStyle, shoppingBagStyle } from '../elements';
@@ -32,22 +33,18 @@ const GetScreenSize = () => {
 
 export default function Navigation() {
   const screenwidth = GetScreenSize();
-  const [showHamburgerIcon, setShowHamburgerIcon] = useState(false);
   const { cartCount } = useContext(CartCookieContext);
   const { toggleGrayLayer } = useContext(GrayLayerContext);
+  const { toggleMobileMenu } = useContext(CartContext);
 
-  const handleShowMobileMenu = () => {
-    // show responsive menue bar & display grey layer over body
-    setShowHamburgerIcon(true);
+  const toggleMobileMenuHandler = () => {
     //toggleGrayLayer(false);
+    toggleMobileMenu();
   };
 
   return (
     <Fragment>
-      <MobileMenu
-        showBurger={showHamburgerIcon}
-        setShowBurger={setShowHamburgerIcon}
-      />
+      <MobileMenu />
 
       <nav css={headerStyle}>
         <div>
@@ -66,8 +63,8 @@ export default function Navigation() {
           ) : (
             <button>
               <span
-                onClick={handleShowMobileMenu}
-                onKeyDown={handleShowMobileMenu}
+                onClick={toggleMobileMenuHandler}
+                onKeyDown={toggleMobileMenuHandler}
                 role="menu"
                 tabIndex={0}
               >
