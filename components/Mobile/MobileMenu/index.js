@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { useContext, useRef } from 'react';
 import { useOnClickOutside } from '../../../hooks';
+import { CartContext } from '../../../util/context/cartContext';
 import { GrayLayerContext } from '../../../util/context/grayLayerContext';
 import NavMenu from '../../Navigation/NavMenu';
 
@@ -107,30 +108,32 @@ const mobileMenuStyle = (showBurger) => css`
   }
 `;
 
-export default function MobileMenu(props) {
+export default function MobileMenu() {
   const node = useRef();
   const { toggleGrayLayer } = useContext(GrayLayerContext);
+  const { toggleMobileMenu, toggleMenu } = useContext(CartContext);
 
   useOnClickOutside(node, () => {
-    props.setShowBurger(false);
+    // TODO:
     //toggleGrayLayer();
+    // if (toggleMenu) {
+    //   toggleMobileMenu();
+    // }
   });
 
-  const hideMobileMenue = () => {
-    // hide responsive menu bar & grey layer over body
-    props.setShowBurger(false);
-    //toggleGrayLayer();
+  const toggleMobileMenuHandler = () => {
+    //toggleGrayLayer(false);
+    toggleMobileMenu();
   };
-
   return (
-    <nav css={mobileMenuStyle(props.showBurger)} ref={node}>
+    <nav css={mobileMenuStyle(toggleMenu)} ref={node}>
       <ul>
         <li>
           <div>
             <h2>Menu</h2>
             <span
-              onClick={hideMobileMenue}
-              onKeyDown={hideMobileMenue}
+              onClick={toggleMobileMenuHandler}
+              onKeyDown={toggleMobileMenuHandler}
               role="menu"
               tabIndex={0}
             >
