@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useReducer, useState } from 'react';
 import { Cart } from '../../pages/types';
 
 type UpdateCart = {
@@ -86,9 +86,12 @@ export const CartContext = createContext({
     decrementFlag: boolean,
   ) => {},
   deleteProductFromCart: (emoveProductId: number) => {},
+  toggleMenu: false,
+  toggleMobileMenu: () => {},
 });
 
 export const CartContextProvider = ({ children }: any) => {
+  const [toggleMenu, setToggleMenu] = useState(false);
   const [currentCartItems, setCurrentCartItems] = useState<Cart[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const cartItems = (cartItems: Cart[]) => {
@@ -150,6 +153,10 @@ export const CartContextProvider = ({ children }: any) => {
     setCurrentCartItems([...newCart]);
   };
 
+  const toggleMobileMenu = () => {
+    setToggleMenu(!toggleMenu);
+  };
+
   const value = {
     currentCartItems,
     updateCart,
@@ -157,6 +164,8 @@ export const CartContextProvider = ({ children }: any) => {
     updateCartProduct,
     totalPrice,
     deleteProductFromCart,
+    toggleMenu,
+    toggleMobileMenu,
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
