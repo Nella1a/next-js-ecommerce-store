@@ -868,21 +868,22 @@ export const shoppingCartSectionHeader = css`
 export const shoppingCartStyle = css`
   margin-top: 4rem;
   display: grid;
-  gap: 30px;
-  grid-template-columns: 1fr 1fr;
-  background-color: #f3f3f3;
+  gap: 100px;
+  grid-template-columns: 2fr 1fr;
   border: 2px solid red;
+  position: relative;
 
   article:first-of-type {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     background-color: #fff;
-    //border: 2px solid blue;
+
     > div {
       //background-color: #e9e9e9;
       background-color: #fff;
-      //border-bottom: 1px solid black;
+      padding-bottom: 1.5rem;
+      border-bottom: 0.5px solid lightgray;
 
       // border: 3px solid pink;
       display: flex;
@@ -910,7 +911,10 @@ export const shoppingCartStyle = css`
     display: flex;
     width: 100%;
     height: 300px;
-    //border: 2px solid blue;
+    background-color: #e0e0e0;
+    position: sticky;
+    top: 69px;
+    border: 1px solid blue;
 
     h2 {
       margin-top: 1rem;
@@ -919,14 +923,11 @@ export const shoppingCartStyle = css`
     }
 
     > div {
-      // border: 1px solid red;
       width: 100%;
       flex-direction: column;
       display: flex;
       align-items: flex-start;
       justify-content: space-around;
-      // background-color: #e0e0e0;
-      background-color: #fff;
 
       padding: 4rem;
 
