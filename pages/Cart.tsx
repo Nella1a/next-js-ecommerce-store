@@ -1,13 +1,7 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import {
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { useContext, useEffect, useState } from 'react';
 import CartProducts from '../components/Cart/CartProducts';
 import OrderSummary from '../components/Cart/OrderSummary';
 import {
@@ -16,7 +10,7 @@ import {
   underConstruction,
 } from '../components/elements';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
-import { disableGrayLayer } from '../hooks';
+//import { disableGrayLayer } from '../hooks';
 import { CartContext } from '../util/context/cartContext';
 import { CartCookieContext } from '../util/context/cookieContext';
 import { getPlantsById } from '../util/database';
