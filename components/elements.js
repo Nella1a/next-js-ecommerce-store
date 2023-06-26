@@ -756,6 +756,7 @@ export const singleProductPageStyle = css`
 
   div:nth-of-type(2) {
     display: flex;
+
     gap: 1.5rem;
 
     @media screen and (max-width: 768px) {
@@ -775,20 +776,28 @@ export const singleProductPageStyle = css`
         width: 100%;
       }
     }
+
+    // info outerContainer
     article {
       display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      height: 500px;
+      justify-content: center;
+      align-items: center;
       width: 50%;
+
+      // info innerContainer
+      > div:first-child {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        h1 {
+          font-size: 24px;
+        }
+      }
+
       @media screen and (max-width: 768px) {
         width: 100%;
         padding: 0 1rem;
-      }
-
-      gap: 1rem;
-      h1 {
-        font-size: 24px;
       }
 
       > div {
@@ -797,13 +806,12 @@ export const singleProductPageStyle = css`
         justify-content: flex-end;
         gap: 1.2rem;
 
+        // quantity container
         div {
           display: flex;
           justify-content: flex-start;
           align-items: center;
           gap: 0.8rem;
-          //width: 17.65rem;
-          //font-size: 16px;
 
           button {
             background-color: rgba(243, 244, 243);
@@ -811,9 +819,6 @@ export const singleProductPageStyle = css`
             :hover {
               background-color: rgba(237, 148, 59, 0.6);
             }
-          }
-          > div {
-            // font-size: 25px;
           }
         }
 
