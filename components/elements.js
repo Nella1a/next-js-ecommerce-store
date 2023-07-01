@@ -872,7 +872,7 @@ export const shoppingCartStyle = css`
   grid-template-columns: 2fr 1fr;
   position: relative;
 
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 960px) {
     display: flex;
     flex-direction: column;
   }
@@ -937,7 +937,7 @@ export const shoppingCartStyle = css`
       div:first-of-type {
         width: inherit;
 
-        @media screen and (max-width: 1200px) {
+        @media screen and (max-width: 960px) {
           padding: 0rem 2rem;
         }
 
@@ -987,43 +987,49 @@ export const cartStyle = css`
   border: 2px solid blue;
   gap: 2rem;
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 960px) {
     display: flex;
     flex-direction: column;
   }
 
   article:nth-of-type(2) {
-    display: flex;
+    width: 100%;
+    //height: 322px;
+    background-color: #e0e0e0;
+    position: sticky;
+    top: 69px;
+    padding: 1.5rem;
+    border: 2px solid blue;
+
+    h2 {
+      margin-bottom: 2rem;
+      width: inherit;
+    }
+
     > div {
-      width: 100%;
-      flex-direction: column;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-around;
-      background-color: #e0e0e0;
-      padding: 1rem;
-
-      div {
+      div:first-of-type {
         width: inherit;
-      }
 
-      div:nth-of-type(2) {
-        p {
-          margin-top: 0.5rem;
-          margin-bottom: 2rem;
-          font-weight: 600;
+        @media screen and (max-width: 960px) {
+          padding: 0rem 2rem;
         }
 
-        border-top: 1px solid grey;
-      }
-    }
-    button {
-      ${size('17.65rem', '1.47rem')}
-      background-color: #ed943b;
-      border: none;
+        p {
+          width: inherit;
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 1rem;
 
-      &:hover {
-        background-color: #ff6900;
+          span {
+            display: block;
+          }
+        }
+
+        p:last-of-type {
+          padding-top: 1rem;
+          font-weight: 600;
+          border-top: 1px solid lightgray;
+        }
       }
     }
   }
@@ -1038,12 +1044,11 @@ export const formStyle = css`
   h2 {
     font-size: 18px;
   }
-
+  margin-top: 3rem;
   input,
   select {
     width: 100%;
     height: 48px;
-    // border: 1px solid lightgray;
     border-radius: 5px;
   }
   div > input ~ p {
@@ -1067,6 +1072,18 @@ export const formStyle = css`
       width: 30%;
       margin: unset;
       height: 51px;
+    }
+  }
+  button {
+    ${size('17.65rem', '1.47rem')}
+    background-color: #ed943b;
+    border: none;
+    &:hover {
+      background-color: #ff6900;
+    }
+
+    @media screen and (max-width: 960px) {
+      width: 100%;
     }
   }
 `;
@@ -1093,14 +1110,12 @@ export const flexStyle = css`
 /*    Underconstruction        */
 /* *************************** */
 export const underConstruction = css`
-  margin-top: 5rem;
+  // margin-top: 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  h1 {
-    margin-top: 3rem;
-  }
+  height: 50vh;
 
   button {
     ${size('15rem', '1.47rem')}
