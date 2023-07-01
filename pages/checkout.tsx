@@ -1,6 +1,7 @@
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Head from 'next/head';
 import Router from 'next/router';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import OrderSummary from '../components/Cart/OrderSummary';
 import Payment from '../components/CheckoutForm/Payment';
@@ -8,6 +9,9 @@ import Shipping from '../components/CheckoutForm/Shipping';
 import { cartStyle, formStyle } from '../components/elements';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import { disableGrayLayer } from '../hooks';
+import { CartContext } from '../util/context/cartContext';
+import { getPlantsById } from '../util/database';
+import { Cookie, PlantsAndQuantity } from './types';
 
 export interface DefaultFormValues {
   shipping: {
@@ -31,8 +35,18 @@ export interface DefaultFormValues {
 
 const defaultValues = {};
 
-export default function CheckOut({}) {
+type Props = {
+  plants: PlantsAndQuantity[];
+};
+
+export default function CheckOut(props: Props) {
   const [toNextStep, setToNextStep] = useState(false);
+
+  const { cartItems } = useContext(CartContext);
+
+  useEffect(() => {
+    cartItems(props.plants);
+  }, []);
 
   const {
     register,
@@ -114,9 +128,52 @@ export default function CheckOut({}) {
               )}
             </form>
           </article>
-          <OrderSummary />
+          <article>
+            <OrderSummary />
+          </article>
         </div>
       </section>
     </LayoutNoHeader>
   );
+}
+
+export async function getServerSideProps(
+  context: GetServerSidePropsContext,
+): Promise<GetServerSidePropsResult<{ plants: PlantsAndQuantity[] }>> {
+  const cartCookie: Cookie[] = JSON.parse(context.req.cookies.cart || '[]');
+
+  // typescript narrowing
+  if (typeof cartCookie === 'undefined') {
+    return {
+      props: {
+        plants: [],
+      },
+    };
+  }
+
+  // get current products in cookie from db by ids
+  const plantIds = cartCookie.map((event) => event.id);
+
+  const plants = await getPlantsById(plantIds);
+  // combine db-product info with cookie info:
+  console.log('PLANTS: ', plants);
+
+  const plantsAndQuantity = plants.map((plant) => {
+    return {
+      ...plant,
+      quantity:
+        cartCookie.find((productObject) => plant.id === productObject.id)
+          ?.quantity || 0,
+    };
+  });
+
+  console.log('plantsAndQuantity', plantsAndQuantity);
+
+  // todo: plants return is: [[{}],[{}]]
+
+  return {
+    props: {
+      plants: plantsAndQuantity,
+    },
+  };
 }
