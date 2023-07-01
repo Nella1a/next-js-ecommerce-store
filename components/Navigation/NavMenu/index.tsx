@@ -21,7 +21,7 @@ export default function NavMenu() {
       </li>
       <li>
         {' '}
-        <Link href="/underconstruction">
+        <Link href="/contact">
           <a>Contact</a>
         </Link>
       </li>
