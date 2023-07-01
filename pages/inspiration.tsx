@@ -1,8 +1,7 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
-// import Link from 'next/link';
-import BackGImage from '../components/Images/BackGImage';
 import Layout from '../components/Layout';
+import UnderConstruction from '../components/underConstruction';
 
 const bgImageIns = css`
   background: no-repeat bottom url('inspirationHeroImage.jpeg');
@@ -16,6 +15,7 @@ export default function Inspiration({}) {
         <title>Sale</title>
         <meta name="description" content="site is under construction" />
       </Head>
+      <UnderConstruction />
     </Layout>
   );
 }

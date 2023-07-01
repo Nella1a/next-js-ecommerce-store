@@ -1,10 +1,9 @@
 import Head from 'next/head';
-import Link from 'next/link';
-import { underConstruction } from '../components/elements';
 import Layout from '../components/Layout';
+import UnderConstruction from '../components/underConstruction';
 import { disableGrayLayer } from '../hooks';
 
-export default function UnderConstruction() {
+export default function Contact() {
   // disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer);
   return (
     <Layout>
@@ -12,13 +11,7 @@ export default function UnderConstruction() {
         <title>under construction</title>
         <meta name="description" content="site is under construction" />
       </Head>
-
-      <section css={underConstruction}>
-        <h1>Under Construction</h1>
-        <Link href="/products" passHref>
-          <button>Continue Shopping</button>
-        </Link>
-      </section>
+      <UnderConstruction />
     </Layout>
   );
 }

@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import { Cart } from '../../../pages/types';
 import { CartContext } from '../../../util/context/cartContext';
 import { CartCookieContext } from '../../../util/context/cookieContext';
-import { multiplePriceAndQuantity } from '../../../util/functions';
 import ChangeCartQuantity from '../../ChangeCartQuantity';
 import { plantName } from '../../elements';
 import CartItem from '../CartItem';
@@ -10,6 +9,11 @@ import CartItem from '../CartItem';
 type Props = {
   plant: Cart;
 };
+
+// calculates subtotal price
+export function multiplePriceAndQuantity(price: number, quantity: number) {
+  return price * quantity;
+}
 
 export default function CartProductCard(props: Props) {
   const { id, name, price, quantity } = props.plant;
@@ -39,18 +43,23 @@ export default function CartProductCard(props: Props) {
       <div className="Image">
         <CartItem plant={plant} />
       </div>
-      <div className="Quantity">
-        <p css={plantName}>{name}</p>
-        <div className="Price">
-          €
-          {multiplePriceAndQuantity(Number(price), Number(quantity)).toFixed(2)}
-        </div>
-        <ChangeCartQuantity
-          quantity={quantity}
-          increment={incrementHandler}
-          decrement={decrementHandler}
-        />
 
+      <div className="ProductInfoContainer">
+        <div className="Quantity">
+          <p css={plantName}>{name}</p>
+          <p className="Price">
+            €
+            {multiplePriceAndQuantity(Number(price), Number(quantity)).toFixed(
+              2,
+            )}
+          </p>
+
+          <ChangeCartQuantity
+            quantity={quantity}
+            increment={incrementHandler}
+            decrement={decrementHandler}
+          />
+        </div>
         <div className="removeButton">
           <button
             data-test-id="delete item from cart"
