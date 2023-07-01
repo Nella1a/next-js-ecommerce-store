@@ -66,7 +66,14 @@ export default function ShoppingCart(props: Props) {
       {cartHeader}
       <section css={shoppingCartStyle}>
         <CartProducts />
-        <OrderSummary />
+        <article>
+          <OrderSummary />
+          <div>
+            <Link href="/checkout" passHref>
+              <button data-test-id="cart-checkout">Go to checkout</button>
+            </Link>
+          </div>
+        </article>
       </section>
     </LayoutNoHeader>
   );
