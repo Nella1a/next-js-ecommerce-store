@@ -2,7 +2,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Head from 'next/head';
 import Router from 'next/router';
 import { useContext, useEffect, useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import OrderSummary from '../components/Cart/OrderSummary';
 import Payment from '../components/CheckoutForm/Payment';
 import Shipping from '../components/CheckoutForm/Shipping';
@@ -99,7 +99,7 @@ export default function CheckOut(props: Props) {
       </Head>
 
       <section>
-        <h1>Your Details</h1>{' '}
+        <h1 css={{ marginTop: '4.5rem' }}>Your Details</h1>{' '}
         <div css={cartStyle}>
           <article>
             <form
