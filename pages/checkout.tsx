@@ -10,6 +10,7 @@ import { cartStyle, formStyle } from '../components/elements';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import { disableGrayLayer } from '../hooks';
 import { CartContext } from '../util/context/cartContext';
+import { CartCookieContext } from '../util/context/cookieContext';
 import { getPlantsById } from '../util/database';
 import { Cookie, PlantsAndQuantity } from './types';
 
@@ -43,6 +44,7 @@ export default function CheckOut(props: Props) {
   const [toNextStep, setToNextStep] = useState(false);
 
   const { cartItems } = useContext(CartContext);
+  const { deleteCookie } = useContext(CartCookieContext);
 
   useEffect(() => {
     cartItems(props.plants);
@@ -57,6 +59,7 @@ export default function CheckOut(props: Props) {
   } = useForm<DefaultFormValues>({ defaultValues });
 
   const onSubmit = (data: DefaultFormValues): void => {
+    deleteCookie('cart');
     console.log('----> Form Values: ', data);
   };
 
