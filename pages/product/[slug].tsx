@@ -57,21 +57,23 @@ export default function SingleProduct(
             <ProductImage src={`/image0${props.plant.id}.jpeg`} />
           </div>
           <article>
-            <h1>{props.plant.name}</h1>
-            <p data-test-id="product-price"> €{props.plant.price}</p>
-            <p>{props.plant.description}</p>
             <div>
-              <ChangeCartQuantity
-                quantity={quantity}
-                increment={incrementHandler}
-                decrement={decrementHandler}
-              />
-              <button
-                data-test-id="product-add-to-cart"
-                onClick={updateCartAndCookieHandler}
-              >
-                Add to cart
-              </button>
+              <h1>{props.plant.name}</h1>
+              <p data-test-id="product-price"> €{props.plant.price}</p>
+              <p>{props.plant.description}</p>
+              <div>
+                <ChangeCartQuantity
+                  quantity={quantity}
+                  increment={incrementHandler}
+                  decrement={decrementHandler}
+                />
+                <button
+                  data-test-id="product-add-to-cart"
+                  onClick={updateCartAndCookieHandler}
+                >
+                  Add to cart
+                </button>
+              </div>
             </div>
           </article>
         </div>
@@ -96,7 +98,6 @@ export async function getServerSideProps(
 
   const cartCookie: Cookie[] = JSON.parse(context.req.cookies.cart || '[]');
 
-  console.log('---> cartCookie: ', cartCookie);
   return {
     props: {
       plant: plant,
