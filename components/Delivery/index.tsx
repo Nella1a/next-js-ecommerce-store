@@ -6,15 +6,15 @@ export default function Delivery() {
       <div>
         <div>
           <article />
-          <p>lorem ipsum lorem</p>
+          <p>Free Standard Shipping</p>
         </div>
         <div>
           <article />
-          <p>lorem ipsum lorem ipsum</p>
+          <p>30 Day Guarantee</p>
         </div>
         <div>
           <article />
-          <p>lorem ipsum lorem</p>
+          <p>Best Quality</p>
         </div>
       </div>
     </section>
