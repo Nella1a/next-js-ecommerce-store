@@ -276,7 +276,7 @@ export const footerStyle = css`
           ${size('17.65rem', '1.47rem')}
           letter-spacing: 0.031rem;
           line-height: 1.125rem;
-          text-transform: uppercase;
+          // text-transform: uppercase;
           font-weight: bold;
           font-size: 0.75rem;
           display: block;

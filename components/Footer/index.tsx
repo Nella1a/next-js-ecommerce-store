@@ -1,7 +1,10 @@
 import Link from 'next/link';
+import { useState } from 'react';
 import { footerStyle } from '../elements';
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+
   return (
     <footer css={footerStyle}>
       <div>
@@ -40,13 +43,23 @@ export default function Footer() {
           <p>Join Us</p>
           <p>Subscribe to our newsletter</p>
 
-          <form>
+          <form
+            action="#"
+            onSubmit={(e) => {
+              e.preventDefault();
+              setEmail('');
+            }}
+          >
             <p>
               <input
                 id="email"
                 type="email"
                 name="usermail"
                 placeholder="Your Email"
+                value={email}
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
               />
             </p>
             <button>Sign Up</button>
