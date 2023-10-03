@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import Link from 'next/link';
 import { Fragment, useContext, useEffect, useState } from 'react';
 import shoppingBag from '../../public/shopping-bag.png';
@@ -49,9 +49,9 @@ export default function Navigation() {
       <nav css={headerStyle}>
         <div>
           <Link href="/" passHref>
-            <a>
-              <img src="/logo_shelovesplants.svg" alt="logo she loves plants" />
-            </a>
+
+            <img src="/logo_shelovesplants.svg" alt="logo she loves plants" />
+
           </Link>
         </div>
         <div>
@@ -73,16 +73,16 @@ export default function Navigation() {
             </button>
           )}
           <Link href="/cart" passHref>
-            <a>
-              <div css={shoppingBagStyle}>
+
+            <div css={shoppingBagStyle}>
+              <div>
+                <Image src={shoppingBag} alt="shopping cart icon" />
                 <div>
-                  <Image src={shoppingBag} alt="shopping cart icon" />
-                  <div>
-                    <span data-test-id="cart-count">{cartCount}</span>
-                  </div>
+                  <span data-test-id="cart-count">{cartCount}</span>
                 </div>
               </div>
-            </a>
+            </div>
+
           </Link>
         </div>
       </nav>
