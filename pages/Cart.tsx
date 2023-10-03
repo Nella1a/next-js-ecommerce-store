@@ -40,7 +40,7 @@ export default function ShoppingCart(props: Props) {
         </Head>
         <section css={underConstruction}>
           <h1> Your cart is currently empty.</h1>
-          <Link href="/products" passHref>
+          <Link href="/products" passHref legacyBehavior>
             <button>Continue Shopping</button>
           </Link>
         </section>
@@ -69,7 +69,7 @@ export default function ShoppingCart(props: Props) {
         <article>
           <OrderSummary />
           <div>
-            <Link href="/checkout" passHref>
+            <Link href="/checkout" passHref legacyBehavior>
               <button data-test-id="cart-checkout">Go to checkout</button>
             </Link>
           </div>
