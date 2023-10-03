@@ -12,9 +12,9 @@ export default function CartItem({ plant }: Props) {
   return (
     <div>
       <Link href={`/product/${slugName}`} passHref>
-        <a>
-          <ProductImageSmall src={`/image0${plant.id}.jpeg`} />
-        </a>
+
+        <ProductImageSmall src={`/image0${plant.id}.jpeg`} />
+
       </Link>
     </div>
   );

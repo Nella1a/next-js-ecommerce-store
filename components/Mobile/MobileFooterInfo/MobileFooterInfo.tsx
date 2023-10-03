@@ -10,20 +10,20 @@ export default function MobileFooterInfo(props: Props) {
   return (
     <p key={`infos-body-${index}`}>
       <Link href="http://localhost:3000/">
-        <a>
-          <li key={`header-${index}-${info.infoOne}`}>{info.infoOne}</li>
-        </a>
+
+        <li key={`header-${index}-${info.infoOne}`}>{info.infoOne}</li>
+
       </Link>
       <Link href="http://localhost:3000/">
-        <a>
-          {' '}
-          <li key={`header-${index}-${info.infoTwo}`}>{info.infoTwo}</li>
-        </a>
+
+        {' '}
+        <li key={`header-${index}-${info.infoTwo}`}>{info.infoTwo}</li>
+
       </Link>
       <Link href="http://localhost:3000/">
-        <a>
-          <li key={`header-${index}-${info.infoThree}`}>{info.infoThree}</li>
-        </a>
+
+        <li key={`header-${index}-${info.infoThree}`}>{info.infoThree}</li>
+
       </Link>
     </p>
   );
