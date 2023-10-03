@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import Link from 'next/link';
 import { Fragment, useContext, useEffect, useState } from 'react';
 import shoppingBag from '../../public/shopping-bag.png';

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 type Props = {
   src: string;
