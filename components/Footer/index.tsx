@@ -29,13 +29,13 @@ export default function Footer() {
         <article>
           <p>Terms</p>
           <Link href="http://localhost:3000/">
-            <a>Refund Policy</a>
+            Refund Policy
           </Link>
           <Link href="http://localhost:3000/">
-            <a>Terms of Service</a>
+            Terms of Service
           </Link>
           <Link href="http://localhost:3000/">
-            <a>Delivery and Schipping</a>
+            Delivery and Schipping
           </Link>
         </article>
 
