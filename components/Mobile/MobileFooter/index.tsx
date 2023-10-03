@@ -40,18 +40,18 @@ export default function MobileFooter() {
           return (
             <article key={index}>
               <ul>
-                <p
-                  key={`infos-header-${index}`}
+                <li
+                  key={`header-${index}-${info.header}`}
                   onClick={() => {
                     setDisplayMenu(!displayMenu);
                     setToggle(index);
                   }}
                 >
-                  <li key={`header-${index}-${info.header}`}>{info.header}</li>
-                  <span key={`info-toggle-${index}`}>
-                    {displayMenu && toggle === index ? '-' : '+'}
-                  </span>
-                </p>
+                  {info.header}
+                </li>
+                <span key={`info-toggle-${index}`}>
+                  {displayMenu && toggle === index ? '-' : '+'}
+                </span>
 
                 {displayMenu && toggle === index && (
                   <MobileFooterInfo index={index} info={info} />
