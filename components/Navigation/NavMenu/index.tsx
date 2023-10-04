@@ -8,10 +8,6 @@ export default function NavMenu() {
           Plants
         </Link>
       </li>
-      <li>
-        {' '}
-        <Link href="/contact">Contact</Link>
-      </li>
     </>
   );
 }
