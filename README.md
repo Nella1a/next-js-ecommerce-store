@@ -1,6 +1,6 @@
 # ecommerce store for plants
 
-## Description
+<!-- ## Description
 
 - landing page
 - products-overview page
@@ -32,9 +32,9 @@ CREATE USER <username> WITH ENCRYPTED PASSWORD '<pw>';
 GRANT ALL PRIVILEGES ON DATABASE <database name> TO <user name>;
 ```
 
-Create a .env file and include all information for the database (eg password, username). Use yarn migrate up/down to run migrations.
+Create a .env file and include all information for the database (eg password, username). Use yarn migrate up/down to run migrations. -->
 
-## Screenshots of the project
+<!-- ## Screenshots of the project
 
 <p>
   <img src="./public/landingPage.png" width="400" alt="screenhot of original landig page">
@@ -44,4 +44,4 @@ Create a .env file and include all information for the database (eg password, us
 </p>
 <p>
   <img src="./public/shoppingCart.png" width="400" alt="screenhot of original landig page">
-</p>
+</p> -->
