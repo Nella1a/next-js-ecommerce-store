@@ -9,9 +9,6 @@ export default function NavMenu() {
         </Link>
       </li>
       <li>
-        <Link href="/sale">Sale</Link>
-      </li>
-      <li>
         {' '}
         <Link href="/contact">Contact</Link>
       </li>
