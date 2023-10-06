@@ -17,7 +17,13 @@ export default function SingleProduct(
   const [quantity, setQuantity] = useState<number>(1);
 
   const incrementHandler = () => setQuantity(() => quantity + 1);
-  const decrementHandler = () => setQuantity(() => quantity - 1);
+  //const decrementHandler = () => setQuantity(() => quantity - 1);
+
+  const decrementHandler = () => {
+    if (quantity > 1) {
+      setQuantity(() => quantity - 1);
+    }
+  };
 
   const { setParsedCookie, updateCartQuantity } = useContext(CartCookieContext);
   const { updateCart } = useContext(CartContext);
