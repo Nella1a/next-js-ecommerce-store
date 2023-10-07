@@ -1,16 +1,14 @@
 import camelcaseKeys from 'camelcase-keys';
-// 2. Connect to database by importing environment variables
+// 1. Connect to database by importing environment variables
 import { config } from 'dotenv-safe';
-// 1. Import postgres (= client library which connects to DBMS)
+// 2. Import postgres (= client library which connects to DBMS)
 import postgres from 'postgres';
 import { Plant, PlantsTwo } from '../pages/types.js';
-import setPostgresDefaultsOnHeroku from './setPostgresDefaultsOnHeroku.js';
 
 type Global = typeof globalThis & {
   postgresSqlClient?: any;
 };
 
-setPostgresDefaultsOnHeroku();
 config();
 
 // Type needed for the connection function below
@@ -18,21 +16,13 @@ config();
 function connectOneTimeToDatabase() {
   let sql;
 
-  // production:
-  if (process.env.NODE_ENV === 'production' && process.env.DATABASE_URL) {
-    // Heroku needs SSL connections but
-    // has an "unauthorized" certificate
-    // https://devcenter.heroku.com/changelog-items/852
-    sql = postgres({ ssl: { rejectUnauthorized: false } });
-  }
   // local environment:
-  else {
-    const globalWithSqlClient: Global = globalThis;
-    if (!globalWithSqlClient.postgresSqlClient) {
-      globalWithSqlClient.postgresSqlClient = postgres();
-    }
-    sql = globalWithSqlClient.postgresSqlClient;
+  const globalWithSqlClient: Global = globalThis;
+  if (!globalWithSqlClient.postgresSqlClient) {
+    globalWithSqlClient.postgresSqlClient = postgres();
   }
+  sql = globalWithSqlClient.postgresSqlClient;
+
   return sql;
 }
 
