@@ -3,7 +3,8 @@ exports.up = async (sql) => {
 	INSERT INTO user_roles(role_name)
 	VALUES
 		('admin'),
-		('user')
+		('user'),
+		('guest')
 
 	`;
 };
