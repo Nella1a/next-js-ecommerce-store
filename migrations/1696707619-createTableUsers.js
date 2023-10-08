@@ -8,7 +8,7 @@ exports.up = async (sql) => {
 		username varchar(30),
 		first_name varchar(50),
 		last_name varchar(50),
-		role_id integer REFERENCES user_roles(id) ON UPDATE CASCADE
+		role_id integer REFERENCES user_roles(id) ON DELETE CASCADE ON UPDATE CASCADE
 	)
 	`;
 };
