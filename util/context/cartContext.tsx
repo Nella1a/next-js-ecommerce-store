@@ -5,7 +5,7 @@ type UpdateCart = {
   id: number;
   price: number;
   quantity: number;
-  name: string;
+  title: string;
   decrementFlag?: boolean;
 };
 
@@ -49,11 +49,11 @@ const addNewProductToCart = (
   productId: number,
   quantity: number,
   price: number,
-  name: string,
+  title: string,
 ) => {
   return [
     ...cartItems,
-    { id: productId, quantity: quantity, price: price, name: name },
+    { id: productId, quantity: quantity, price: price, title: title },
   ];
 };
 
@@ -68,14 +68,14 @@ export const CartContext = createContext({
       id: 0,
       quantity: 0,
       price: 0,
-      name: '',
+      title: '',
     },
   ],
   updateCart: (
     id: number,
     price: number,
     quantity: number,
-    name: string,
+    title: string,
     decrementFlag: boolean = false,
   ) => {},
   cartItems: (cartItems: Cart[]) => {},
@@ -110,7 +110,7 @@ export const CartContextProvider = ({ children }: any) => {
     id: number,
     price: number,
     quantity: number,
-    name: string,
+    title: string,
     decrementFlag = false,
   ) => {
     let updatedCartItems: Cart[] = [];
@@ -127,7 +127,7 @@ export const CartContextProvider = ({ children }: any) => {
         id,
         quantity,
         price,
-        name,
+        title,
       );
     }
     setCurrentCartItems([...updatedCartItems]);
