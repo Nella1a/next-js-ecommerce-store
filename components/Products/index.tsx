@@ -4,7 +4,7 @@ import ProductCard from '../ProductCard';
 
 type Plants = {
   id: number;
-  name: string;
+  title: string;
   price: number;
   slugName?: string;
 };
@@ -16,7 +16,7 @@ type Props = {
 export default function Products(props: Props) {
   // slug-name
   props.plants.map((plant) => {
-    plant.slugName = plant.name.toLowerCase().replace(/\s+/g, '-');
+    plant.slugName = plant.title.toLowerCase().replace(/\s+/g, '-');
   });
 
   return (

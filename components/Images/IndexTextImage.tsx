@@ -8,7 +8,7 @@ type Props = {
 
 type Plants = {
   id: number;
-  name: string;
+  title: string;
   price: number;
 };
 

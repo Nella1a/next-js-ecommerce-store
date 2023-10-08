@@ -7,14 +7,12 @@ type Props = {
 };
 
 export default function CartItem({ plant }: Props) {
-  const slugName = plant.name.toLowerCase().replace(/\s+/g, '-');
+  const slugName = plant.title.toLowerCase().replace(/\s+/g, '-');
 
   return (
     <div>
       <Link href={`/product/${slugName}`} passHref>
-
         <ProductImageSmall src={`/image0${plant.id}.jpeg`} />
-
       </Link>
     </div>
   );
