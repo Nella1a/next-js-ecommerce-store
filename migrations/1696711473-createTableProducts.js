@@ -1,15 +1,16 @@
 exports.up = async (sql) => {
   await sql`
-	CREATE TABLE  Plants (
+	CREATE TABLE products(
 	id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-	name varchar(50) NOT NULL,
+	title varchar(50) NOT NULL,
 	price DECIMAL(10,2) NOT NULL,
-	description text NOT NULL
+	descr text NOT NULL,
+	slug varchar(50)
 );
 	`;
 };
 
 exports.down = async (sql) => {
   await sql`
-DROP TABLE plants`;
+DROP TABLE products`;
 };

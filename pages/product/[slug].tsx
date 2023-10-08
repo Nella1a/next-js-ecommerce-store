@@ -32,12 +32,12 @@ export default function SingleProduct(
     setParsedCookie(props.cartCookie);
   }, []);
 
-  const { id, price, name } = props.plant;
+  const { id, price, title } = props.plant;
 
   const updateCartAndCookieHandler = () => {
     updateCartQuantity(id, quantity);
 
-    updateCart(id, price, quantity, name);
+    updateCart(id, price, quantity, title);
   };
 
   return (
@@ -64,9 +64,9 @@ export default function SingleProduct(
           </div>
           <article>
             <div>
-              <h1>{props.plant.name}</h1>
+              <h1>{props.plant.title}</h1>
               <p data-test-id="product-price"> €{props.plant.price}</p>
-              <p>{props.plant.description}</p>
+              <p>{props.plant.descr}</p>
               <div>
                 <ChangeCartQuantity
                   quantity={quantity}

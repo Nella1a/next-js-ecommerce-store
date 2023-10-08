@@ -31,7 +31,7 @@ const sql = connectOneTimeToDatabase();
 
 export async function readPlants() {
   const plants: Plant[] = await sql`
-  SELECT * FROM plants;
+  SELECT * FROM products;
   `;
   return plants.map((plant) => camelcaseKeys(plant));
 }
@@ -39,19 +39,19 @@ export async function readPlants() {
 /* Select record in plants based on ID, returns = single value or undefined */
 export async function getPlantById(
   id: number,
-): Promise<{ id: number; price: number; name: string; description: string }> {
+): Promise<{ id: number; price: number; title: string; descr: string }> {
   const [plant] = await sql`
-    SELECT * FROM plants WHERE id = ${id};
+    SELECT * FROM products WHERE id = ${id};
   `;
   return camelcaseKeys(plant);
 }
 
 /* Select record in plants based on Name */
 export async function getPlantByName(
-  name: string,
-): Promise<{ id: number; price: number; name: string; description: string }> {
+  title: string,
+): Promise<{ id: number; price: number; title: string; descr: string }> {
   const [plant] = await sql`
-    SELECT * FROM plants WHERE Lower(name) = Lower(${name});
+    SELECT * FROM products WHERE Lower(title) = Lower(${title});
   `;
   return camelcaseKeys(plant);
 }
@@ -62,7 +62,7 @@ export async function getPlantsById(id: number[]): Promise<PlantsTwo[]> {
 
   for (let i = 0; i <= id.length - 1; i++) {
     const result: PlantsTwo[] = await sql`
-    SELECT * FROM plants WHERE id = ${id[i]};
+    SELECT * FROM products WHERE id = ${id[i]};
   `;
 
     plantsIds.push(...result);
