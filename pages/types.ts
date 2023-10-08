@@ -2,22 +2,22 @@ import { Dispatch, SetStateAction } from 'react';
 
 type Plants = {
   id: number;
-  name: string;
+  title: string;
   price: number;
 };
 
 export interface PlantsTwo {
   id: number;
-  name: string;
+  title: string;
   price: number;
-  description: string;
+  descr: string;
 }
 
 export type Plant = {
   id: number;
-  name: string;
+  title: string;
   price: number;
-  description: string;
+  descr: string;
   slugName?: string;
 };
 
@@ -30,20 +30,20 @@ export interface Cart {
   id: number;
   quantity: number;
   price: number;
-  name: string;
+  title: string;
 }
 
 export interface PlantsAndDescription extends Plants {
-  description: string;
+  descr: string;
 }
 
 // actually same as CART
 export interface PlantsAndQuantity {
   quantity: number;
   id: number;
-  name: string;
+  title: string;
   price: number;
-  description?: string;
+  descr?: string;
   slugName?: string;
 }
 
