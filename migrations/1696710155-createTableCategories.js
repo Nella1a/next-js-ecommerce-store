@@ -2,9 +2,7 @@ exports.up = async (sql) => {
   await sql`
 	CREATE TABLE categories(
 		id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-		best_for_beginners boolean,
-		pet_friendly boolean,
-		easy_care boolean
+		name varchar(60) NOT NULL
 	)
 	`;
 };
