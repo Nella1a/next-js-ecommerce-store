@@ -6,7 +6,6 @@ export default function OrderSummary() {
   const { totalPrice } = useContext(CartContext);
   return (
     <div>
-      <h2>Total</h2>
       <div>
         <p>
           <span>Subtotal</span>

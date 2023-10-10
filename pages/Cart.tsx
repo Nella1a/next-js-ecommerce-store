@@ -67,6 +67,7 @@ export default function ShoppingCart(props: Props) {
       <section css={shoppingCartStyle}>
         <CartProducts />
         <article>
+          <h2>Total</h2>
           <OrderSummary />
           <div>
             <Link href="/checkout" passHref legacyBehavior>
