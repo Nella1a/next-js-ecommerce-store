@@ -16,7 +16,7 @@ export function multiplePriceAndQuantity(price: number, quantity: number) {
 }
 
 export default function CartProductCard(props: Props) {
-  const { id, name, price, quantity } = props.plant;
+  const { id, title, price, quantity } = props.plant;
   const { plant } = props;
   const { updateCartQuantity, deleteProductFromCookie } =
     useContext(CartCookieContext);
@@ -46,7 +46,7 @@ export default function CartProductCard(props: Props) {
 
       <div className="ProductInfoContainer">
         <div className="Quantity">
-          <p css={plantName}>{name}</p>
+          <p css={plantName}>{title}</p>
           <p className="Price">
             €
             {multiplePriceAndQuantity(Number(price), Number(quantity)).toFixed(
