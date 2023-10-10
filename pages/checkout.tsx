@@ -3,10 +3,13 @@ import Head from 'next/head';
 import Router from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import CartItem from '../components/Cart/CartItem';
 import OrderSummary from '../components/Cart/OrderSummary';
 import Payment from '../components/CheckoutForm/Payment';
 import Shipping from '../components/CheckoutForm/Shipping';
-import { cartStyle, formStyle } from '../components/elements';
+import CheckoutProductCard from '../components/CheckoutProductCard';
+import { checkoutPageStyle, formStyle } from '../components/elements';
+import ProductImageSmall from '../components/Images/ProductImageSmall';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import { disableGrayLayer } from '../hooks';
 import { CartContext } from '../util/context/cartContext';
@@ -103,7 +106,7 @@ export default function CheckOut(props: Props) {
 
       <section>
         <h1 css={{ marginTop: '4.5rem' }}>Your Details</h1>{' '}
-        <div css={cartStyle}>
+        <div css={checkoutPageStyle}>
           <article>
             <form
               action="/api"
@@ -132,6 +135,12 @@ export default function CheckOut(props: Props) {
             </form>
           </article>
           <article>
+            <div>
+              {props.plants.map((plant) => (
+                <CheckoutProductCard plant={plant} />
+              ))}
+            </div>
+
             <OrderSummary />
           </article>
         </div>
