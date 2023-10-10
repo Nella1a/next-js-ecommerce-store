@@ -877,6 +877,7 @@ export const shoppingCartStyle = css`
     flex-direction: column;
   }
 
+  // cartproducts
   article:first-of-type {
     display: flex;
     flex-direction: column;
@@ -919,6 +920,7 @@ export const shoppingCartStyle = css`
       }
     }
   }
+
   // OrderSummary
   article:nth-of-type(2) {
     width: 100%;
@@ -981,54 +983,62 @@ export const plantName = css`
 /*         checkout.js         */
 /* *************************** */
 
-export const cartStyle = css`
+export const checkoutPageStyle = css`
+  // form and orderSummary
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border: 2px solid blue;
   gap: 2rem;
 
   @media screen and (max-width: 960px) {
     display: flex;
     flex-direction: column;
   }
+  article:first-of-type {
+    border: 2px solid #e0e0e0;
+    padding: 0 1.5rem;
+  }
 
   article:nth-of-type(2) {
-    width: 100%;
-    //height: 322px;
-    background-color: #e0e0e0;
-    position: sticky;
-    top: 69px;
-    padding: 1.5rem;
-    border: 2px solid blue;
+    padding: 2rem;
+    padding-top: unset;
+    display: flex;
+    flex-direction: column;
 
-    h2 {
-      margin-bottom: 2rem;
-      width: inherit;
+    //gap: 1rem;
+
+    > div:first-of-type {
+      width: 100%;
+      height: auto;
+      border: 2px solid #e0e0e0;
+      padding-top: 1rem;
+
+      > div {
+        // checkoutProductCart
+        width: inherit;
+        padding: 0 1.5rem;
+        margin-bottom: 0.5rem;
+      }
     }
 
-    > div {
-      div:first-of-type {
-        width: inherit;
+    > div:last-of-type {
+      // orderSummary
+      background-color: #e0e0e0;
+      height: auto;
+      width: 100%;
+      padding: 1.5rem;
 
-        @media screen and (max-width: 960px) {
-          padding: 0rem 2rem;
-        }
-
+      > div {
         p {
           width: inherit;
           display: flex;
           justify-content: space-between;
           margin-bottom: 1rem;
-
-          span {
-            display: block;
-          }
         }
 
         p:last-of-type {
           padding-top: 1rem;
           font-weight: 600;
-          border-top: 1px solid lightgray;
+          font-size: 20px;
         }
       }
     }
