@@ -105,7 +105,6 @@ export default function CheckOut(props: Props) {
       </Head>
 
       <section>
-        <h1 css={{ marginTop: '4.5rem' }}>Your Details</h1>{' '}
         <div css={checkoutPageStyle}>
           <article>
             <form
