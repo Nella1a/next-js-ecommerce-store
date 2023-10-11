@@ -9,7 +9,7 @@ export default function NavMenu() {
         </Link>
       </li>
       <li>
-        <Link href="/#" data-test-id="products-link">
+        <Link href="/login/" data-test-id="login-link">
           Login
         </Link>
       </li>
