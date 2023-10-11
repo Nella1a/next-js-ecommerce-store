@@ -8,6 +8,11 @@ export default function NavMenu() {
           Plants
         </Link>
       </li>
+      <li>
+        <Link href="/#" data-test-id="products-link">
+          Login
+        </Link>
+      </li>
     </>
   );
 }
