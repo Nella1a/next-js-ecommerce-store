@@ -1,0 +1,144 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model cart_items {
+  id              Int               @id @default(autoincrement())
+  product_id      Int
+  quantity        Int?
+  created_at      DateTime?         @default(now()) @db.Timestamptz(6)
+  products        products          @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  carts_and_items carts_and_items[]
+}
+
+model carts {
+  id              Int               @id @default(autoincrement())
+  session_id      Int?
+  created_at      DateTime?         @default(now()) @db.Timestamptz(6)
+  user_sessions   user_sessions?    @relation(fields: [session_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  carts_and_items carts_and_items[]
+}
+
+model carts_and_items {
+  cart_id      Int
+  cart_item_id Int
+  carts        carts      @relation(fields: [cart_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  cart_items   cart_items @relation(fields: [cart_item_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([cart_id, cart_item_id], map: "carts_and_items_pk")
+}
+
+model categories {
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.VarChar(60)
+  product_categories product_categories[]
+}
+
+model migrations {
+  id         Int      @id @default(autoincrement())
+  name       String   @db.VarChar(255)
+  created_at DateTime @db.Timestamp(6)
+}
+
+model order_status {
+  id     Int      @id @default(autoincrement())
+  name   String   @db.VarChar(60)
+  orders orders[]
+}
+
+model orders {
+  id             Int              @id @default(autoincrement())
+  created_at     DateTime         @default(now()) @db.Timestamptz(6)
+  quantity       Int
+  user_id        Int
+  total_price    Decimal          @db.Decimal(10, 2)
+  status_id      Int?
+  order_status   order_status?    @relation(fields: [status_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users          users            @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  product_orders product_orders[]
+}
+
+model product_categories {
+  product_id  Int
+  category_id Int
+  categories  categories @relation(fields: [category_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  products    products   @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([product_id, category_id], map: "product_categories_pk")
+}
+
+model product_orders {
+  product_id Int
+  order_id   Int
+  orders     orders   @relation(fields: [order_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  products   products @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([product_id, order_id], map: "product_orders_pk")
+}
+
+model products {
+  id                 Int                  @id @default(autoincrement())
+  title              String               @db.VarChar(50)
+  price              Decimal              @db.Decimal(10, 2)
+  descr              String
+  slug               String?              @db.VarChar(50)
+  cart_items         cart_items[]
+  product_categories product_categories[]
+  product_orders     product_orders[]
+}
+
+model shipping_address {
+  id           Int     @id @default(autoincrement())
+  user_id      Int?
+  address_line String? @db.VarChar(255)
+  city         String? @db.VarChar(255)
+  zip_code     String? @db.VarChar(255)
+  country      String? @db.VarChar(255)
+  company      String? @db.VarChar(255)
+  users        users?  @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model user_roles {
+  id        Int     @id @default(autoincrement())
+  role_name String  @db.VarChar(30)
+  users     users[]
+}
+
+model user_sessions {
+  id               Int      @id @default(autoincrement())
+  token            String   @unique @db.VarChar(90)
+  expiry_timestamp DateTime @default(dbgenerated("(now() + '24:00:00'::interval)")) @db.Timestamp(6)
+  user_id          Int?
+  carts            carts[]
+  users            users?   @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model users {
+  id               Int                @id @default(autoincrement())
+  created_at       DateTime           @default(now()) @db.Timestamptz(6)
+  email            String             @unique @db.VarChar(30)
+  password_hash    String             @db.VarChar(60)
+  username         String?            @db.VarChar(30)
+  first_name       String?            @db.VarChar(50)
+  last_name        String?            @db.VarChar(50)
+  role_id          Int?
+  orders           orders[]
+  shipping_address shipping_address[]
+  user_sessions    user_sessions[]
+  user_roles       user_roles?        @relation(fields: [role_id], references: [id], onDelete: Cascade)
+  users_payment    users_payment[]
+}
+
+model users_payment {
+  id           Int       @id @default(autoincrement())
+  user_id      Int
+  card_type_id Int?
+  cardnumber   Int?
+  date_expire  DateTime? @db.Date
+  users        users     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
