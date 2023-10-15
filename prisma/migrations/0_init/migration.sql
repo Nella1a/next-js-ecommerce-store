@@ -114,7 +114,7 @@ CREATE TABLE "user_roles" (
 CREATE TABLE "user_sessions" (
     "id" SERIAL NOT NULL,
     "token" VARCHAR(90) NOT NULL,
-    "expiry_timestamp" TIMESTAMP(6) NOT NULL DEFAULT (now() + '12:00:00'::interval),
+    "expire_at" TIMESTAMP(6) NOT NULL DEFAULT (now() + '12:00:00'::interval),
     "user_id" INTEGER,
 
     CONSTRAINT "user_sessions_pkey" PRIMARY KEY ("id")
@@ -140,7 +140,7 @@ CREATE TABLE "users_payment" (
     "user_id" INTEGER NOT NULL,
     "card_type_id" INTEGER,
     "cardnumber" INTEGER,
-    "date_expire" DATE,
+    "expire_at" DATE,
 
     CONSTRAINT "users_payment_pkey" PRIMARY KEY ("id")
 );
@@ -192,3 +192,4 @@ ALTER TABLE "users" ADD CONSTRAINT "users_role_id_fkey" FOREIGN KEY ("role_id") 
 
 -- AddForeignKey
 ALTER TABLE "users_payment" ADD CONSTRAINT "users_payment_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE NO ACTION;
+
