@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, GetStaticProps } from 'next';
 import Head from 'next/head';
 import ButtonCallToAction from '../components/Buttons/ButtonCallToAction';
 import { bestSellerStyle, indexTextImageComp } from '../components/elements';
 import IndexTextImage from '../components/Images/IndexTextImage';
 import Layout from '../components/Layout';
 import Products from '../components/Products';
+import prisma from '../prisma';
 import { readPlants } from '../util/database';
 import { PropsTypePlantsCartCookieLayer } from './types';
 
@@ -57,13 +58,18 @@ export default function Home(props: PropsTypePlantsCartCookieLayer) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  // read plants from database
-  const plants = await readPlants();
+export const getStaticProps: GetStaticProps = async () => {
+  const products = await prisma.products.findMany();
+
+  const cleanedProducts = products.map((product) => ({
+    ...product,
+    // solves error: object Decimal cannot be serialized as JSON
+    price: product.price.toNumber(),
+  }));
 
   return {
     props: {
-      plants: plants,
+      plants: cleanedProducts,
     },
   };
 };
