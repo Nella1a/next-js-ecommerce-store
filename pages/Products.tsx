@@ -1,15 +1,11 @@
 import { css } from '@emotion/react';
-import { GetServerSideProps, GetStaticProps } from 'next';
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
-//import { product } from 'puppeteer';
-import { useContext } from 'react';
-import { json } from 'stream/consumers';
 import { productsComponentStyle } from '../components/elements';
 import Layout from '../components/Layout';
 import Products from '../components/Products';
-import { disableGrayLayer } from '../hooks';
 import prisma from '../prisma';
-import { readPlants } from '../util/database';
+import { cleanedProducts } from '../util/database';
 import { PropsTypePlantsLayer } from './types';
 
 export default function Directory(props: PropsTypePlantsLayer) {
@@ -43,16 +39,11 @@ export default function Directory(props: PropsTypePlantsLayer) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const products = await prisma.product.findMany();
-
-  const cleanedProducts = products.map((product) => ({
-    ...product,
-    // solves error: object Decimal cannot be serialized as JSON
-    price: product.price.toNumber(),
-  }));
+  const plantsSerializedPrice = cleanedProducts(products);
 
   return {
     props: {
-      plants: cleanedProducts,
+      plants: plantsSerializedPrice,
     },
   };
 };

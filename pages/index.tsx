@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { GetServerSideProps, GetStaticProps } from 'next';
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import ButtonCallToAction from '../components/Buttons/ButtonCallToAction';
 import { bestSellerStyle, indexTextImageComp } from '../components/elements';
@@ -7,7 +7,7 @@ import IndexTextImage from '../components/Images/IndexTextImage';
 import Layout from '../components/Layout';
 import Products from '../components/Products';
 import prisma from '../prisma';
-import { readPlants } from '../util/database';
+import { cleanedProducts } from '../util/database';
 import { PropsTypePlantsCartCookieLayer } from './types';
 
 const bgImageHero = css`
@@ -60,17 +60,11 @@ export default function Home(props: PropsTypePlantsCartCookieLayer) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const products = await prisma.product.findMany({});
-  console.log('products: ', products);
-
-  const cleanedProducts = products.map((product) => ({
-    ...product,
-    // solves error: object Decimal cannot be serialized as JSON
-    price: product.price.toNumber(),
-  }));
+  const plantsSerializedPrice = cleanedProducts(products);
 
   return {
     props: {
-      plants: cleanedProducts,
+      plants: plantsSerializedPrice,
     },
   };
 };
