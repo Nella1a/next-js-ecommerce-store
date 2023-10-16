@@ -6,9 +6,10 @@ import { singleProductPageStyle } from '../../components/elements';
 import ProductImage from '../../components/Images/ProductImage';
 import ProductImageSmall from '../../components/Images/ProductImageSmall';
 import LayoutNoHeader from '../../components/Layout/LayoutNoHeader';
+import prisma from '../../prisma';
 import { CartContext } from '../../util/context/cartContext';
 import { CartCookieContext } from '../../util/context/cookieContext';
-import { getPlantByName } from '../../util/database';
+import { cleanedProducts } from '../../util/database';
 import { Cookie, Plant, PropsTypePlantsCartCookieLayerPlantId } from '../types';
 
 export default function SingleProduct(
@@ -98,15 +99,16 @@ export async function getServerSideProps(
 > {
   // get current plant via slug in url
   const plantSlug = String(context.query.slug);
-
-  const plantName = plantSlug.replace(/\-+/g, ' ');
-  const plant = await getPlantByName(plantName);
+  const plant = await prisma.product.findMany({
+    where: { slug: plantSlug },
+  });
+  const [plantSerializedPrice] = cleanedProducts(plant);
 
   const cartCookie: Cookie[] = JSON.parse(context.req.cookies.cart || '[]');
 
   return {
     props: {
-      plant: plant,
+      plant: plantSerializedPrice,
       cartCookie: cartCookie,
     },
   };

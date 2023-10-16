@@ -1,9 +1,10 @@
+import { Decimal } from '@prisma/client/runtime/library.js';
 import camelcaseKeys from 'camelcase-keys';
 // 1. Connect to database by importing environment variables
 import { config } from 'dotenv-safe';
 // 2. Import postgres (= client library which connects to DBMS)
 import postgres from 'postgres';
-import { Plant, PlantsTwo } from '../pages/types.js';
+import { PlantsTwo } from '../pages/types.js';
 
 type Global = typeof globalThis & {
   postgresSqlClient?: any;
@@ -70,3 +71,18 @@ export async function getPlantsById(id: number[]): Promise<PlantsTwo[]> {
   }
   return plantsIds.map((plant) => camelcaseKeys(plant));
 }
+
+export type Plant = {
+  id: number;
+  title: string;
+  price: Decimal;
+  descr: string;
+  slug: string;
+};
+
+export const cleanedProducts = (products: Plant[]) =>
+  products.map((product) => ({
+    ...product,
+    // solves error: object Decimal cannot be serialized as JSON
+    price: product.price.toNumber(),
+  }));
