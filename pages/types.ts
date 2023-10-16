@@ -1,6 +1,3 @@
-import { Decimal } from '@prisma/client/runtime/library';
-import { Dispatch, SetStateAction } from 'react';
-
 type Plants = {
   id: number;
   title: string;
@@ -47,11 +44,6 @@ export interface PlantsAndQuantity {
   descr?: string;
   slug?: string;
 }
-
-// export interface PropsTypeGrayLayer {
-//   showGrayLayer: boolean;
-//   setShowGrayLayer: Dispatch<SetStateAction<boolean>>;
-// }
 
 export interface PropsTypeChildrenLayer {
   children?: React.ReactNode;
