@@ -3,18 +3,16 @@ import Head from 'next/head';
 import Router from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import CartItem from '../components/Cart/CartItem';
 import OrderSummary from '../components/Cart/OrderSummary';
 import Payment from '../components/CheckoutForm/Payment';
 import Shipping from '../components/CheckoutForm/Shipping';
 import CheckoutProductCard from '../components/CheckoutProductCard';
 import { checkoutPageStyle, formStyle } from '../components/elements';
-import ProductImageSmall from '../components/Images/ProductImageSmall';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
-import { disableGrayLayer } from '../hooks';
+import prisma from '../prisma';
 import { CartContext } from '../util/context/cartContext';
 import { CartCookieContext } from '../util/context/cookieContext';
-import { getPlantsById } from '../util/database';
+import { cleanedProducts } from '../util/database';
 import { Cookie, PlantsAndQuantity } from './types';
 
 export interface DefaultFormValues {
@@ -165,11 +163,20 @@ export async function getServerSideProps(
   // get current products in cookie from db by ids
   const plantIds = cartCookie.map((event) => event.id);
 
-  const plants = await getPlantsById(plantIds);
-  // combine db-product info with cookie info:
-  console.log('PLANTS: ', plants);
+  // query db
+  const plants = await prisma.product.findMany({
+    where: {
+      id: {
+        in: plantIds,
+      },
+    },
+  });
 
-  const plantsAndQuantity = plants.map((plant) => {
+  // serialize price
+  const plantsSerializedPrice = cleanedProducts(plants);
+
+  // combine db-product info with cookie info:
+  const plantsAndQuantity = plantsSerializedPrice.map((plant) => {
     return {
       ...plant,
       quantity:
@@ -177,10 +184,6 @@ export async function getServerSideProps(
           ?.quantity || 0,
     };
   });
-
-  console.log('plantsAndQuantity', plantsAndQuantity);
-
-  // todo: plants return is: [[{}],[{}]]
 
   return {
     props: {
