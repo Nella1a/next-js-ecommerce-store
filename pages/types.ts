@@ -1,3 +1,4 @@
+import { Decimal } from '@prisma/client/runtime/library';
 import { Dispatch, SetStateAction } from 'react';
 
 type Plants = {
@@ -18,7 +19,7 @@ export type Plant = {
   title: string;
   price: number;
   descr: string;
-  slugName?: string;
+  slug: string;
 };
 
 export interface Cookie {
@@ -44,7 +45,7 @@ export interface PlantsAndQuantity {
   title: string;
   price: number;
   descr?: string;
-  slugName?: string;
+  slug?: string;
 }
 
 // export interface PropsTypeGrayLayer {

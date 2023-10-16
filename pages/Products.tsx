@@ -42,7 +42,7 @@ export default function Directory(props: PropsTypePlantsLayer) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const products = await prisma.products.findMany();
+  const products = await prisma.product.findMany();
 
   const cleanedProducts = products.map((product) => ({
     ...product,

@@ -59,7 +59,8 @@ export default function Home(props: PropsTypePlantsCartCookieLayer) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const products = await prisma.products.findMany();
+  const products = await prisma.product.findMany({});
+  console.log('products: ', products);
 
   const cleanedProducts = products.map((product) => ({
     ...product,
