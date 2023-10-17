@@ -1,6 +1,20 @@
+import { css } from '@emotion/react';
 import { useForm } from 'react-hook-form';
 import { errorStyle } from '../CheckoutForm/Shipping';
 import LayoutNoHeader from '../Layout/LayoutNoHeader';
+
+const registerStyle = css`
+  background-color: lightgray;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  width: 450px;
+  padding: 0 36px;
+  height: 100vh;
+  z-index: 10;
+  margin: 0;
+`;
 
 export interface DefaultFormValues {
   userEmail: string;
@@ -26,7 +40,7 @@ export default function Register() {
 
   return (
     <LayoutNoHeader>
-      <section>
+      <section css={registerStyle}>
         <h1>Create Your SheLovesPlants Account </h1>
         <form action="/api" css={''} onSubmit={handleSubmit(onSubmit)}>
           <div>
