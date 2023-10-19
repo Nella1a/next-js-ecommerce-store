@@ -75,7 +75,7 @@ export default function RegisterForm() {
   return (
     <LayoutNoHeader>
       <section css={registerStyle}>
-        <h1>Create Your SheLovesPlants Account </h1>
+        <h1>Create Your Account </h1>
         <p>
           lorem ipsum lorem ipsum lorem ipsum lorem ipsum ipsum lorem ipsum
           lorem ipsum lorem.

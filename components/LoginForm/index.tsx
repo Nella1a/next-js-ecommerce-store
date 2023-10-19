@@ -11,7 +11,7 @@ const registerStyle = css`
   right: 0;
   top: 0;
   width: 518px;
-  padding: 0 40px;
+  padding: 0 42px;
   height: 100vh;
   z-index: 10;
   margin: 0;
@@ -75,7 +75,7 @@ export default function LoginForm() {
   return (
     <LayoutNoHeader>
       <section css={registerStyle}>
-        <h1>Welcome To Your SheLovesPlants Account </h1>
+        <h1>Welcome Back</h1>
         <p>
           lorem ipsum lorem ipsum lorem ipsum lorem ipsum ipsum lorem ipsum.
         </p>
