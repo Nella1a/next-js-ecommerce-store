@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { errorStyle } from '../CheckoutForm/Shipping';
 import LayoutNoHeader from '../Layout/LayoutNoHeader';
@@ -29,7 +30,7 @@ const registerStyle = css`
     display: flex;
     flex-direction: column;
     border: 1px solid green;
-    //margin-bottom: 2rem;
+    margin-bottom: 2rem;
 
     input,
     button {
@@ -44,6 +45,7 @@ const registerStyle = css`
 
     button {
       margin-top: 0;
+      font-weight: unset;
     }
   }
 `;
@@ -56,7 +58,7 @@ export interface DefaultFormValues {
   password: string;
 }
 
-export default function Register() {
+export default function RegisterForm() {
   const defaultValues = {};
   const {
     register,
@@ -112,7 +114,10 @@ export default function Register() {
           <button type="submit">Create Account</button>
         </form>
         <div>
-          Already have an account? <span>Log in</span>{' '}
+          Already have an account?{' '}
+          <Link href="#">
+            <span>Log in</span>{' '}
+          </Link>
         </div>
       </section>
     </LayoutNoHeader>
