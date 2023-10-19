@@ -44,7 +44,7 @@ export default function Register() {
         <h1>Create Your SheLovesPlants Account </h1>
         <form action="/api" css={''} onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <label htmlFor="userName">Username</label>
+            <label htmlFor="userName" />
             <input
               {...register('userName', {
                 required: 'username is required.',
@@ -52,10 +52,11 @@ export default function Register() {
               aria-invalid={errors.userName ? 'true' : 'false'}
               data-test-id="userName"
               css={errorStyle(errors.userName?.type)}
+              placeholder="Username"
             />
           </div>
           <div>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password" />
             <input
               {...register('password', {
                 required: 'password is required.',
@@ -63,10 +64,11 @@ export default function Register() {
               aria-invalid={errors.password ? 'true' : 'false'}
               data-test-id="password"
               css={errorStyle(errors.password?.type)}
+              placeholder="Password"
             />
           </div>
           <div>
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email" />
             <input
               {...register('userEmail', {
                 required: 'email is required.',
@@ -74,10 +76,14 @@ export default function Register() {
               aria-invalid={errors.userEmail ? 'true' : 'false'}
               data-test-id="userEmail"
               css={errorStyle(errors.userEmail?.type)}
+              placeholder="Email"
             />
           </div>
           <button type="submit">Create Account</button>
         </form>
+        <div>
+          Already have an account? <span>Log in</span>{' '}
+        </div>
       </section>
     </LayoutNoHeader>
   );
