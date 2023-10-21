@@ -1,10 +1,12 @@
 import { css } from '@emotion/react';
 import Link from 'next/link';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { OverlayContext } from '../../util/context/overlayContext';
 import { errorStyle } from '../CheckoutForm/Shipping';
 import LayoutNoHeader from '../Layout/LayoutNoHeader';
 
-const registerStyle = css`
+const registerStyle = (toggle: boolean) => css`
   background-color: lightgray;
   position: absolute;
   bottom: 0;
@@ -15,6 +17,7 @@ const registerStyle = css`
   height: 100vh;
   z-index: 10;
   margin: 0;
+  display: ${toggle ? 'block' : 'none'};
 
   h1 {
     padding-top: 2.25rem;
@@ -68,13 +71,16 @@ export default function RegisterForm() {
     trigger,
   } = useForm<DefaultFormValues>({ defaultValues });
 
+  const { toggle } = useContext(OverlayContext);
+
+  console.log('TOGGLE: ', toggle);
   const onSubmit = (data: DefaultFormValues): void => {
     console.log('----> Form Values: ', data);
   };
 
   return (
     <LayoutNoHeader>
-      <section css={registerStyle}>
+      <section css={registerStyle(toggle)}>
         <h1>Create Your Account </h1>
         <p>
           lorem ipsum lorem ipsum lorem ipsum lorem ipsum ipsum lorem ipsum
