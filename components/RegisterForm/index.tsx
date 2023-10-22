@@ -7,7 +7,8 @@ import { errorStyle } from '../CheckoutForm/Shipping';
 import LayoutNoHeader from '../Layout/LayoutNoHeader';
 
 const registerStyle = (toggle: boolean) => css`
-  background-color: lightgray;
+  background-color: #f9f8f7;
+  opacity: 1;
   position: absolute;
   bottom: 0;
   right: 0;
@@ -15,13 +16,23 @@ const registerStyle = (toggle: boolean) => css`
   width: 518px;
   padding: 0 40px;
   height: 100vh;
-  z-index: 10;
+  z-index: 40;
   margin: 0;
   display: ${toggle ? 'block' : 'none'};
 
   h1 {
     padding-top: 2.25rem;
     padding-bottom: 1rem;
+  }
+
+  > button {
+    position: absolute;
+    top: 0;
+    right: 0.5rem;
+    width: 55px;
+    height: auto;
+    background-color: transparent;
+    border: none;
   }
 
   p {
@@ -36,7 +47,7 @@ const registerStyle = (toggle: boolean) => css`
     margin-bottom: 2rem;
 
     input,
-    button {
+    > button {
       width: 100%;
       border-width: 1px;
       width: 100%;
@@ -44,9 +55,6 @@ const registerStyle = (toggle: boolean) => css`
       padding: 1.2rem;
       line-height: 1.25rem;
       font-size: 100%;
-    }
-
-    button {
       margin-top: 0;
       font-weight: unset;
     }
@@ -71,17 +79,24 @@ export default function RegisterForm() {
     trigger,
   } = useForm<DefaultFormValues>({ defaultValues });
 
-  const { toggle } = useContext(OverlayContext);
+  const { toggle, toggleLayover } = useContext(OverlayContext);
 
   console.log('TOGGLE: ', toggle);
   const onSubmit = (data: DefaultFormValues): void => {
     console.log('----> Form Values: ', data);
   };
 
+  const onClickHandler = () => {
+    toggleLayover();
+  };
+
   return (
     <LayoutNoHeader>
       <section css={registerStyle(toggle)}>
         <h1>Create Your Account </h1>
+        <button type="button" onClick={onClickHandler}>
+          <img src="/closeIcon.svg" alt="close overlay icon" />
+        </button>
         <p>
           lorem ipsum lorem ipsum lorem ipsum lorem ipsum ipsum lorem ipsum
           lorem ipsum lorem.
