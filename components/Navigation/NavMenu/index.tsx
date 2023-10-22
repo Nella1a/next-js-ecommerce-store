@@ -1,6 +1,15 @@
 import Link from 'next/link';
+import { Dispatch, SetStateAction, useContext } from 'react';
+import { OverlayContext } from '../../../util/context/overlayContext';
+import RegisterForm from '../../RegisterForm';
 
 export default function NavMenu() {
+  const { toggleLayover, toggle } = useContext(OverlayContext);
+  const onClickHandler = () => {
+    console.log('HELLO');
+    toggleLayover();
+  };
+
   return (
     <>
       <li>
@@ -9,9 +18,10 @@ export default function NavMenu() {
         </Link>
       </li>
       <li>
-        <Link href="/login/" data-test-id="login-link">
+        <button data-test-id="login-button" onClick={onClickHandler}>
+          {' '}
           Login
-        </Link>
+        </button>
       </li>
     </>
   );
