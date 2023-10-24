@@ -1,54 +1,9 @@
-import { css } from '@emotion/react';
 import Link from 'next/link';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { OverlayContext } from '../../util/context/overlayContext';
 import { errorStyle } from '../CheckoutForm/Shipping';
-import LayoutNoHeader from '../Layout/LayoutNoHeader';
-
-const registerStyle = css`
-  background-color: lightgray;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  top: 0;
-  width: 518px;
-  padding: 0 42px;
-  height: 100vh;
-  z-index: 10;
-  margin: 0;
-
-  h1 {
-    padding-top: 2.25rem;
-    padding-bottom: 1rem;
-  }
-
-  p {
-    margin-top: unset;
-    margin-bottom: 1rem;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid green;
-    margin-bottom: 2rem;
-
-    input,
-    button {
-      width: 100%;
-      border-width: 1px;
-      width: 100%;
-      margin-bottom: 1rem;
-      padding: 1.2rem;
-      line-height: 1.25rem;
-      font-size: 100%;
-    }
-
-    button {
-      margin-top: 0;
-      font-weight: unset;
-    }
-  }
-`;
+import { registerStyle } from '../RegisterForm';
 
 export interface DefaultFormValues {
   userEmail: string;
@@ -68,14 +23,26 @@ export default function LoginForm() {
     trigger,
   } = useForm<DefaultFormValues>({ defaultValues });
 
+  const { toggleLogin, toggleLoginLayover, toggleLayover } =
+    useContext(OverlayContext);
+
   const onSubmit = (data: DefaultFormValues): void => {
-    console.log('----> Form Values: ', data);
+    console.log('----> LoginForm Values: ', data);
   };
 
+  const onClickHandler = () => {
+    toggleLoginLayover();
+  };
+
+  const onClickRegisterFormHandler = () => toggleLayover();
+
   return (
-    <LayoutNoHeader>
-      <section css={registerStyle}>
+    <section css={registerStyle(toggleLogin)}>
+      <div>
         <h1>Welcome Back</h1>
+        <button type="button" onClick={onClickHandler}>
+          <img src="/closeIcon.svg" alt="close overlay icon" />
+        </button>
         <p>
           lorem ipsum lorem ipsum lorem ipsum lorem ipsum ipsum lorem ipsum.
         </p>
@@ -104,11 +71,11 @@ export default function LoginForm() {
         </form>
         <div>
           New Here?
-          <Link href="#">
-            <span> Create an Account</span>{' '}
-          </Link>
+          <button type="button" onClick={onClickRegisterFormHandler}>
+            <span> Create an Account</span>
+          </button>
         </div>
-      </section>
-    </LayoutNoHeader>
+      </div>
+    </section>
   );
 }

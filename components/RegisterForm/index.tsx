@@ -1,62 +1,71 @@
 import { css } from '@emotion/react';
-import Link from 'next/link';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { OverlayContext } from '../../util/context/overlayContext';
 import { errorStyle } from '../CheckoutForm/Shipping';
-import LayoutNoHeader from '../Layout/LayoutNoHeader';
 
-const registerStyle = (toggle: boolean) => css`
-  background-color: #f9f8f7;
-  opacity: 1;
-  position: absolute;
+export const registerStyle = (toggle: boolean) => css`
+  background-color: rgba(0, 0, 0, 0.25);
+  position: fixed;
   bottom: 0;
   right: 0;
   top: 0;
-  width: 518px;
-  padding: 0 40px;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   z-index: 40;
   margin: 0;
   display: ${toggle ? 'block' : 'none'};
 
-  h1 {
-    padding-top: 2.25rem;
-    padding-bottom: 1rem;
-  }
-
-  > button {
+  > div {
+    background-color: #f9f8f7;
     position: absolute;
+    bottom: 0;
+    right: 0;
     top: 0;
-    right: 0.5rem;
-    width: 55px;
-    height: auto;
-    background-color: transparent;
-    border: none;
-  }
+    width: 518px;
+    padding: 0 40px;
+    height: 100vh;
+    z-index: 44;
+    margin: 0;
 
-  p {
-    margin-top: unset;
-    margin-bottom: 1rem;
-  }
+    h1 {
+      padding-top: 2.25rem;
+      padding-bottom: 1rem;
+    }
 
-  form {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid green;
-    margin-bottom: 2rem;
-
-    input,
     > button {
-      width: 100%;
-      border-width: 1px;
-      width: 100%;
+      position: absolute;
+      top: 0;
+      right: 0.5rem;
+      width: 55px;
+      height: auto;
+      background-color: transparent;
+      border: none;
+    }
+
+    p {
+      margin-top: unset;
       margin-bottom: 1rem;
-      padding: 1.2rem;
-      line-height: 1.25rem;
-      font-size: 100%;
-      margin-top: 0;
-      font-weight: unset;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid green;
+      margin-bottom: 2rem;
+
+      input,
+      > button {
+        width: 100%;
+        border-width: 1px;
+        width: 100%;
+        margin-bottom: 1rem;
+        padding: 1.2rem;
+        line-height: 1.25rem;
+        font-size: 100%;
+        margin-top: 0;
+        font-weight: unset;
+      }
     }
   }
 `;
@@ -79,20 +88,22 @@ export default function RegisterForm() {
     trigger,
   } = useForm<DefaultFormValues>({ defaultValues });
 
-  const { toggle, toggleLayover } = useContext(OverlayContext);
+  const { toggle, toggleLayover, toggleLoginLayover } =
+    useContext(OverlayContext);
 
-  console.log('TOGGLE: ', toggle);
   const onSubmit = (data: DefaultFormValues): void => {
-    console.log('----> Form Values: ', data);
+    console.log('----> RegisterForm Values: ', data);
   };
 
   const onClickHandler = () => {
     toggleLayover();
   };
 
+  const onClickLoginFormHandler = () => toggleLoginLayover();
+
   return (
-    <LayoutNoHeader>
-      <section css={registerStyle(toggle)}>
+    <section css={registerStyle(toggle)}>
+      <div>
         <h1>Create Your Account </h1>
         <button type="button" onClick={onClickHandler}>
           <img src="/closeIcon.svg" alt="close overlay icon" />
@@ -136,11 +147,11 @@ export default function RegisterForm() {
         </form>
         <div>
           Already have an account?{' '}
-          <Link href="#">
+          <button type="button" onClick={onClickLoginFormHandler}>
             <span>Log in</span>{' '}
-          </Link>
+          </button>
         </div>
-      </section>
-    </LayoutNoHeader>
+      </div>
+    </section>
   );
 }
