@@ -1,11 +1,9 @@
-import { css } from '@emotion/react';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 import { Fragment, useContext, useEffect, useState } from 'react';
 import shoppingBag from '../../public/shopping-bag.png';
 import { CartContext } from '../../util/context/cartContext';
 import { CartCookieContext } from '../../util/context/cookieContext';
-import { GrayLayerContext } from '../../util/context/grayLayerContext';
 import { headerStyle, shoppingBagStyle } from '../elements';
 import MobileMenu from '../Mobile/MobileMenu';
 import NavMenu from './NavMenu';
@@ -34,11 +32,10 @@ const GetScreenSize = () => {
 export default function Navigation() {
   const screenwidth = GetScreenSize();
   const { cartCount } = useContext(CartCookieContext);
-  const { toggleGrayLayer } = useContext(GrayLayerContext);
+
   const { toggleMobileMenu } = useContext(CartContext);
 
   const toggleMobileMenuHandler = () => {
-    //toggleGrayLayer(false);
     toggleMobileMenu();
   };
 
@@ -49,9 +46,7 @@ export default function Navigation() {
       <nav css={headerStyle}>
         <div>
           <Link href="/" passHref>
-
             <img src="/logo_shelovesplants.svg" alt="logo she loves plants" />
-
           </Link>
         </div>
         <div>
@@ -73,7 +68,6 @@ export default function Navigation() {
             </button>
           )}
           <Link href="/cart" passHref>
-
             <div css={shoppingBagStyle}>
               <div>
                 <Image src={shoppingBag} alt="shopping cart icon" />
@@ -82,7 +76,6 @@ export default function Navigation() {
                 </div>
               </div>
             </div>
-
           </Link>
         </div>
       </nav>

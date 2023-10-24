@@ -1,8 +1,6 @@
 import { css } from '@emotion/react';
 import { useContext, useRef } from 'react';
-import { useOnClickOutside } from '../../../hooks';
 import { CartContext } from '../../../util/context/cartContext';
-import { GrayLayerContext } from '../../../util/context/grayLayerContext';
 import NavMenu from '../../Navigation/NavMenu';
 
 const mobileMenuStyle = (showBurger) => css`
@@ -110,19 +108,10 @@ const mobileMenuStyle = (showBurger) => css`
 
 export default function MobileMenu() {
   const node = useRef();
-  const { toggleGrayLayer } = useContext(GrayLayerContext);
+
   const { toggleMobileMenu, toggleMenu } = useContext(CartContext);
 
-  useOnClickOutside(node, () => {
-    // TODO:
-    //toggleGrayLayer();
-    // if (toggleMenu) {
-    //   toggleMobileMenu();
-    // }
-  });
-
   const toggleMobileMenuHandler = () => {
-    //toggleGrayLayer(false);
     toggleMobileMenu();
   };
   return (
