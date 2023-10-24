@@ -1,6 +1,7 @@
 import { css, Global, ThemeProvider } from '@emotion/react';
 import { useContext, useState } from 'react';
 import { globalStyleBody } from '../components/elements';
+import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
 import theme from '../components/theme';
 import { CartContextProvider } from '../util/context/cartContext';
@@ -37,6 +38,7 @@ function MyApp({ Component, pageProps }: any) {
                 <div css={bodyGreyLayer(showGrayLayer)} />
                 <Component {...pageProps} />
                 <RegisterForm />
+                <LoginForm />
               </GrayLayerProvider>
             </ThemeProvider>
           </CartCookieProvider>
