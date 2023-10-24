@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 export const useOnClickOutside = (ref, handler) => {
   useEffect(() => {
-    const listener = event => {
+    const listener = (event) => {
       if (!ref.current || ref.current.contains(event.target)) {
         return;
       }
@@ -11,18 +11,6 @@ export const useOnClickOutside = (ref, handler) => {
     document.addEventListener('mousedown', listener);
     return () => {
       document.removeEventListener('mousedown', listener);
-
     };
-  },
-  [ref, handler],
-  );
-
+  }, [ref, handler]);
 };
-
-// Hide gray layer over body
-export const disableGrayLayer = (value, changeValue) => {
-  useEffect(() => {
-    value && changeValue(false)
-  },[])
-
-}
