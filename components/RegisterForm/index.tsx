@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { OverlayContext } from '../../util/context/overlayContext';
 import { errorStyle } from '../CheckoutForm/Shipping';
@@ -70,11 +70,16 @@ export const registerStyle = (toggle: boolean) => css`
   }
 `;
 
+const apiErrorStyle = css`
+  padding: 10px 0;
+  color: red;
+`;
+
 export interface DefaultFormValues {
-  userEmail: string;
+  email: string;
   firstName?: string;
   lastName?: string;
-  userName: string;
+  username: string;
   password: string;
 }
 
@@ -90,9 +95,25 @@ export default function RegisterForm() {
 
   const { toggle, toggleLayover, toggleLoginLayover } =
     useContext(OverlayContext);
+  const [error, setError] = useState(undefined);
 
-  const onSubmit = (data: DefaultFormValues): void => {
+  const onSubmit = async (data: DefaultFormValues) => {
     console.log('----> RegisterForm Values: ', data);
+
+    const res = await fetch('/api/user/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    const response = await res.json();
+
+    if ('error' in response) {
+      setError(response.error);
+      console.log('response: ', response);
+    }
   };
 
   const onClickHandler = () => {
@@ -114,12 +135,12 @@ export default function RegisterForm() {
         </p>
         <form action="/api" css={''} onSubmit={handleSubmit(onSubmit)}>
           <input
-            {...register('userName', {
+            {...register('username', {
               required: 'username is required.',
             })}
-            aria-invalid={errors.userName ? 'true' : 'false'}
-            data-test-id="userName"
-            css={errorStyle(errors.userName?.type)}
+            aria-invalid={errors.username ? 'true' : 'false'}
+            data-test-id="username"
+            css={errorStyle(errors.username?.type)}
             placeholder="Username"
           />
 
@@ -134,17 +155,18 @@ export default function RegisterForm() {
           />
 
           <input
-            {...register('userEmail', {
+            {...register('email', {
               required: 'email is required.',
             })}
-            aria-invalid={errors.userEmail ? 'true' : 'false'}
+            aria-invalid={errors.email ? 'true' : 'false'}
             data-test-id="userEmail"
-            css={errorStyle(errors.userEmail?.type)}
+            css={errorStyle(errors.email?.type)}
             placeholder="Email"
           />
 
           <button type="submit">Create Account</button>
         </form>
+        {error && <div css={apiErrorStyle}>{error}</div>}
         <div>
           Already have an account?{' '}
           <button type="button" onClick={onClickLoginFormHandler}>
