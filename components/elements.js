@@ -141,7 +141,6 @@ export const headerStyle = css`
   > div:first-of-type {
     width: 100%;
     ${marginCenter}
-    // background-color: lightblue;
     margin: auto;
 
     position: relative;
@@ -161,7 +160,6 @@ export const headerStyle = css`
   > div:nth-of-type(2) {
     width: 100%;
     ${marginCenter}
-    // background-color: yellow;
     margin: auto;
 
     position: relative;
