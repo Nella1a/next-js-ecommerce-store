@@ -29,6 +29,8 @@ const GetScreenSize = () => {
   return screenSize;
 };
 
+const BREAKPOINT = 768;
+
 export default function Navigation() {
   const screenwidth = GetScreenSize();
   const { cartCount } = useContext(CartCookieContext);
@@ -50,8 +52,7 @@ export default function Navigation() {
           </Link>
         </div>
         <div>
-          {/* conditional rendering */}
-          {screenwidth > 768 ? (
+          {screenwidth > BREAKPOINT ? (
             <ul>
               <NavMenu />
             </ul>
