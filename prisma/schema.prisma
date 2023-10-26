@@ -144,20 +144,21 @@ model UserSession {
 
 model User {
   id               Int                @id @default(autoincrement())
-  created_at       DateTime           @default(now()) @db.Timestamptz(6)
+  createdAt       DateTime           @default(now()) @db.Timestamptz(6)
   email            String             @unique @db.VarChar(30)
-  password_hash    String             @db.VarChar(60)
-  username         String?            @db.VarChar(30)
-  first_name       String?            @db.VarChar(50)
-  last_name        String?            @db.VarChar(50)
+  passwordHash    String             @db.VarChar(60)
+  username         String             @db.VarChar(30)
+  firstName       String?            @db.VarChar(50)
+  lastName        String?            @db.VarChar(50)
   role_id          Int?
   orders           Order[]
-  shipping_address ShippingAddress[]
-  user_sessions    UserSession[]
-  user_roles       UserRole?        @relation(fields: [role_id], references: [id], onDelete: Cascade)
-  users_payment    UserPayment[]
+  shippingAddress ShippingAddress[]
+  userSessions    UserSession[]
+  userRoles       UserRole?        @relation(fields: [role_id], references: [id], onDelete: Cascade)
+  usersPayment    UserPayment[]
 
   @@map("users")
+  @@unique(fields:[email,username], name: "userCredentials")
 }
 
 model UserPayment {
