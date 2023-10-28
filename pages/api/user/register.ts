@@ -11,7 +11,6 @@ type ResponseData = {
 };
 
 export type Error = { errors: { message: string }[] };
-const maxPWLength = 6;
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,7 +18,6 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     console.log('request.body', req.body);
-    let error = undefined;
     const { username, email, password } = req.body;
 
     // validation: fields are not empty
@@ -37,10 +35,13 @@ export default async function handler(
     // validation: check if username already exists in database
     const alreadyExists = await prisma.user.findUnique({
       where: {
-        userCredentials: {
-          email: email,
-          username: username,
-        },
+        email: email,
+      },
+      select: {
+        id: true,
+        email: true,
+        username: true,
+        password_hash: true,
       },
     });
 
@@ -60,7 +61,7 @@ export default async function handler(
         data: {
           username: username,
           email: email,
-          passwordHash: passwordHash,
+          password_hash: passwordHash,
         },
       });
       return res.status(201).json({
