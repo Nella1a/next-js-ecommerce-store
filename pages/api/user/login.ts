@@ -41,14 +41,14 @@ export default async function handler(
         select: {
           id: true,
           email: true,
-          passwordHash: true,
+          password_hash: true,
           username: true,
         },
       });
 
       // check password
       if (user) {
-        const passwordHash = await bcrypt.compare(user.passwordHash, password);
+        const passwordHash = await bcrypt.compare(user.password_hash, password);
         if (passwordHash) {
           return res.status(201).json({
             id: user.id,
