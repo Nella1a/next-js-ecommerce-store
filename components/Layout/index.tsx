@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { PropsTypeChildrenLayer } from '../../pages/types';
+import { PropsTypeChildrenLayer } from '../../util/types';
 import Delivery from '../Delivery';
 import Footer from '../Footer';
 import { Header } from '../Header';

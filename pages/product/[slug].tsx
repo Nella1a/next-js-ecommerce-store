@@ -10,7 +10,11 @@ import prisma from '../../prisma';
 import { CartContext } from '../../util/context/cartContext';
 import { CartCookieContext } from '../../util/context/cookieContext';
 import { cleanedProducts } from '../../util/database';
-import { Cookie, Plant, PropsTypePlantsCartCookieLayerPlantId } from '../types';
+import {
+  Cookie,
+  Plant,
+  PropsTypePlantsCartCookieLayerPlantId,
+} from '../../util/types';
 
 export default function SingleProduct(
   props: PropsTypePlantsCartCookieLayerPlantId,

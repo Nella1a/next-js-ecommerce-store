@@ -1,5 +1,5 @@
 import { createContext, useEffect, useReducer, useState } from 'react';
-import { Cart } from '../../pages/types';
+import { Cart } from '../types';
 
 type UpdateCart = {
   id: number;

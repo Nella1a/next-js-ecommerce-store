@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { PlantsAndQuantity } from '../../../pages/types';
+import { PlantsAndQuantity } from '../../../util/types';
 import ProductImageSmall from '../../Images/ProductImageSmall';
 
 type Props = {
