@@ -1,7 +1,5 @@
 import { Global, ThemeProvider } from '@emotion/react';
 import { globalStyleBody } from '../components/elements';
-import LoginForm from '../components/LoginForm';
-import RegisterForm from '../components/RegisterForm';
 import theme from '../components/theme';
 import { CartContextProvider } from '../util/context/cartContext';
 import { CartCookieProvider } from '../util/context/cookieContext';
@@ -16,8 +14,6 @@ function MyApp({ Component, pageProps }: any) {
             <ThemeProvider theme={theme}>
               <Global styles={globalStyleBody(theme)} />
               <Component {...pageProps} />
-              <RegisterForm />
-              <LoginForm />
             </ThemeProvider>
           </CartCookieProvider>
         </CartContextProvider>
