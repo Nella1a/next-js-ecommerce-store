@@ -3,6 +3,7 @@ import { Prisma } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../prisma';
+import { verifyCsrfToken } from '../../../util/auth';
 
 type ResponseData = {
   id: number;
@@ -17,15 +18,29 @@ export default async function handler(
   res: NextApiResponse<ResponseData | Error>,
 ) {
   if (req.method === 'POST') {
-    console.log('request.body', req.body);
-    const { username, email, password } = req.body;
+    console.log('request.body REGISTER', req.body);
+    const { username, email, password, csrfToken } = req.body;
 
     // validation: fields are not empty
-    if (!username || !email || !password) {
+    if (!username || !email || !password || !csrfToken) {
       res.status(400).json({
         errors: [
           {
             message: 'Username, password, email or CSRF token are not provided',
+          },
+        ],
+      });
+      return;
+    }
+
+    // Verify CSRF Token
+    const csrfTokenMatches = verifyCsrfToken(csrfToken);
+
+    if (!csrfTokenMatches) {
+      res.status(403).json({
+        errors: [
+          {
+            message: 'Invalid CSRF token',
           },
         ],
       });
@@ -53,7 +68,7 @@ export default async function handler(
     }
 
     // create passwordHash
-    const passwordHash = await bcrypt.hash(req.body.password, 12);
+    const passwordHash = await bcrypt.hash(password, 12);
 
     // add new user to db
     try {
@@ -64,11 +79,24 @@ export default async function handler(
           password_hash: passwordHash,
         },
       });
-      return res.status(201).json({
+
+      // 1. Create a unique token (use node crypto)
+      const token = crypto.randomBytes(64).toString('base64');
+      const session = await prisma.userSession.create({
+        data: {
+          token: token,
+          user_id: user.id,
+        },
+      });
+
+      console.log('session.token: ', session.token);
+
+      res.status(201).setHeader('Set-Cookie', session.token).json({
         id: user.id,
         username: user.username,
         email: user.email,
       });
+      return;
     } catch (e) {
       if (e instanceof Prisma.PrismaClientKnownRequestError) {
         if (e.code === 'P2002') {
