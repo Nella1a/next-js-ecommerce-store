@@ -15,7 +15,7 @@ import prisma from '../prisma';
 import { CartContext } from '../util/context/cartContext';
 import { CartCookieContext } from '../util/context/cookieContext';
 import { cleanedProducts, Plant } from '../util/database';
-import { Cookie, PlantsAndQuantity } from './types';
+import { Cookie, PlantsAndQuantity } from '../util/types';
 
 type Props = {
   plants: PlantsAndQuantity[];
