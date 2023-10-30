@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { signIn } from 'next-auth/react';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { OverlayContext } from '../../util/context/overlayContext';
@@ -95,12 +96,12 @@ export default function RegisterForm(props: Props) {
   const onSubmit = async (data: DefaultFormValues) => {
     console.log('----> RegisterForm Values: ', data);
 
-    const res = await fetch('/api/user/register', {
+    const res = await fetch('/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ ...data, csrfToken: props.token }),
+      body: JSON.stringify({ ...data }),
     });
 
     const response = await res.json();
@@ -108,10 +109,14 @@ export default function RegisterForm(props: Props) {
     if ('error' in response) {
       setError(response.error);
       console.log('response: ', response);
-    } else {
-      setRegisterOkay(true);
-      setUser(response);
+      return null;
     }
+    setRegisterOkay(true);
+    setUser(response);
+    signIn('credentials', {
+      ...data,
+      callbackUrl: '/',
+    });
   };
 
   return (
