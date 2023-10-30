@@ -1,3 +1,5 @@
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { OverlayContext } from '../../util/context/overlayContext';
@@ -14,6 +16,7 @@ type Props = {
 
 export default function LoginForm(props: Props) {
   const defaultValues = {};
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -33,23 +36,11 @@ export default function LoginForm(props: Props) {
 
   const onSubmit = async (data: DefaultFormValues) => {
     console.log('----> LoginForm Values: ', data);
-    const res = await fetch('/api/user/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ ...data, csrfToken: props.token }),
+
+    signIn('credentials', {
+      ...data,
+      callbackUrl: '/',
     });
-
-    const response = await res.json();
-
-    if ('error' in response) {
-      setError(response.error);
-      console.log('response: ', res);
-    } else {
-      setRegisterOkay(true);
-      setUser(response);
-    }
   };
 
   return (
