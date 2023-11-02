@@ -16,7 +16,7 @@ export const authOptions = {
         const { email, password } = credentials;
         console.log('user: ');
 
-        // check is user exists in db
+        // check if user exists in db
         const user = await prisma.user.findUnique({
           where: {
             email,
@@ -42,9 +42,6 @@ export const authOptions = {
     strategy: 'jwt',
     maxAge: 14 * 24 * 60 * 60, // 14 days
     updateAge: 24 * 60 * 60, // 24 hours
-    generateSessionToken: () => {
-      return randomUUID?.() ?? randomBytes(32).toString('hex');
-    },
   },
 
   jwt: {
@@ -60,20 +57,27 @@ export const authOptions = {
   },
 
   callbacks: {
-    session({ session, token }) {
-      session.user.id = token.id;
-      session.user.username = token.username;
-
-      return session;
-    },
-
-    jwt({ token, account, user }) {
-      if (account) {
+    async jwt({ token, user, account }) {
+      //stores user response in token
+      if (user) {
         token.accessToken = account.access_token;
         token.id = user.id;
         token.username = user.username;
+        token.email = user.email;
       }
       return token;
+    },
+    async session({ session, token, user }) {
+      // add the token to cookies in user session
+      // use the useSession hook provided by auth.js in the client-side to get information that is passed to session object.
+      if (token) {
+        session.user.id = token.id;
+        session.user.username = token.username;
+        session.user.email = token.email;
+        session.user.accessToken = token.accessToken;
+      }
+
+      return session;
     },
   },
 };
