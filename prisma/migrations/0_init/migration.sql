@@ -3,7 +3,9 @@ CREATE TABLE "cart_items" (
     "id" SERIAL NOT NULL,
     "product_id" INTEGER NOT NULL,
     "quantity" INTEGER,
-    "created_at" TIMESTAMPTZ(6) DEFAULT CURRENT_TIMESTAMP,
+    "price" DECIMAL(10,2),
+    "total_price" DECIMAL(10,2),
+    "cart_id" INTEGER,
 
     CONSTRAINT "cart_items_pkey" PRIMARY KEY ("id")
 );
@@ -11,18 +13,13 @@ CREATE TABLE "cart_items" (
 -- CreateTable
 CREATE TABLE "carts" (
     "id" SERIAL NOT NULL,
-    "session_id" INTEGER,
-    "created_at" TIMESTAMPTZ(6) DEFAULT CURRENT_TIMESTAMP,
+    "created_at" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "modified_at" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "user_id" INTEGER,
+    "total_price" DECIMAL(10,2),
+    "is_order" BIT(1),
 
     CONSTRAINT "carts_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "carts_and_items" (
-    "cart_id" INTEGER NOT NULL,
-    "cart_item_id" INTEGER NOT NULL,
-
-    CONSTRAINT "carts_and_items_pk" PRIMARY KEY ("cart_id","cart_item_id")
 );
 
 -- CreateTable
@@ -31,15 +28,6 @@ CREATE TABLE "categories" (
     "name" VARCHAR(60) NOT NULL,
 
     CONSTRAINT "categories_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "migrations" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "created_at" TIMESTAMP(6) NOT NULL,
-
-    CONSTRAINT "migrations_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -58,6 +46,7 @@ CREATE TABLE "orders" (
     "user_id" INTEGER NOT NULL,
     "total_price" DECIMAL(10,2) NOT NULL,
     "status_id" INTEGER,
+    "modified_at" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "orders_pkey" PRIMARY KEY ("id")
 );
@@ -74,6 +63,9 @@ CREATE TABLE "product_categories" (
 CREATE TABLE "product_orders" (
     "product_id" INTEGER NOT NULL,
     "order_id" INTEGER NOT NULL,
+    "quantity" INTEGER,
+    "price" DECIMAL(10,2),
+    "total_price" DECIMAL(10,2),
 
     CONSTRAINT "product_orders_pk" PRIMARY KEY ("product_id","order_id")
 );
@@ -84,22 +76,23 @@ CREATE TABLE "products" (
     "title" VARCHAR(50) NOT NULL,
     "price" DECIMAL(10,2) NOT NULL,
     "descr" TEXT NOT NULL,
-    "slug" VARCHAR(50),
+    "slug" VARCHAR(50) NOT NULL,
 
     CONSTRAINT "products_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "shipping_address" (
+CREATE TABLE "user_details" (
     "id" SERIAL NOT NULL,
+    "first_name" VARCHAR(50),
+    "last_name" VARCHAR(50),
+    "address" VARCHAR(100),
+    "city" VARCHAR(100),
+    "zip_code" VARCHAR(10),
+    "country" VARCHAR(100),
     "user_id" INTEGER,
-    "address_line" VARCHAR(255),
-    "city" VARCHAR(255),
-    "zip_code" VARCHAR(255),
-    "country" VARCHAR(255),
-    "company" VARCHAR(255),
 
-    CONSTRAINT "shipping_address_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "user_details_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -111,25 +104,13 @@ CREATE TABLE "user_roles" (
 );
 
 -- CreateTable
-CREATE TABLE "user_sessions" (
-    "id" SERIAL NOT NULL,
-    "token" VARCHAR(90) NOT NULL,
-    "expire_at" TIMESTAMP(6) NOT NULL DEFAULT (now() + '12:00:00'::interval),
-    "user_id" INTEGER,
-
-    CONSTRAINT "user_sessions_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "users" (
     "id" SERIAL NOT NULL,
-    "created_at" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "email" VARCHAR(30) NOT NULL,
-    "password_hash" VARCHAR(60) NOT NULL,
-    "username" VARCHAR(30),
-    "first_name" VARCHAR(50),
-    "last_name" VARCHAR(50),
+    "username" VARCHAR(30) NOT NULL,
     "role_id" INTEGER,
+    "created_at" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "password_hash" VARCHAR(60) NOT NULL,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
@@ -146,22 +127,31 @@ CREATE TABLE "users_payment" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "user_sessions_token_key" ON "user_sessions"("token");
+CREATE UNIQUE INDEX "cart_items_cart_id_key" ON "cart_items"("cart_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "carts_user_id_key" ON "carts"("user_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "products_slug_key" ON "products"("slug");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "user_details_user_id_key" ON "user_details"("user_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "users_email_username_key" ON "users"("email", "username");
+
+-- AddForeignKey
+ALTER TABLE "cart_items" ADD CONSTRAINT "cart_items_cart_id_fkey" FOREIGN KEY ("cart_id") REFERENCES "carts"("id") ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
 ALTER TABLE "cart_items" ADD CONSTRAINT "cart_items_product_id_fkey" FOREIGN KEY ("product_id") REFERENCES "products"("id") ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE "carts" ADD CONSTRAINT "carts_session_id_fkey" FOREIGN KEY ("session_id") REFERENCES "user_sessions"("id") ON DELETE CASCADE ON UPDATE NO ACTION;
-
--- AddForeignKey
-ALTER TABLE "carts_and_items" ADD CONSTRAINT "carts_and_items_cart_id_fkey" FOREIGN KEY ("cart_id") REFERENCES "carts"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- AddForeignKey
-ALTER TABLE "carts_and_items" ADD CONSTRAINT "carts_and_items_cart_item_id_fkey" FOREIGN KEY ("cart_item_id") REFERENCES "cart_items"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "carts" ADD CONSTRAINT "carts_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "orders" ADD CONSTRAINT "orders_status_id_fkey" FOREIGN KEY ("status_id") REFERENCES "order_status"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -182,10 +172,7 @@ ALTER TABLE "product_orders" ADD CONSTRAINT "product_orders_order_id_fkey" FOREI
 ALTER TABLE "product_orders" ADD CONSTRAINT "product_orders_product_id_fkey" FOREIGN KEY ("product_id") REFERENCES "products"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
-ALTER TABLE "shipping_address" ADD CONSTRAINT "shipping_address_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE NO ACTION;
-
--- AddForeignKey
-ALTER TABLE "user_sessions" ADD CONSTRAINT "user_sessions_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE NO ACTION;
+ALTER TABLE "user_details" ADD CONSTRAINT "user_details_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "users" ADD CONSTRAINT "users_role_id_fkey" FOREIGN KEY ("role_id") REFERENCES "user_roles"("id") ON DELETE CASCADE ON UPDATE CASCADE;
