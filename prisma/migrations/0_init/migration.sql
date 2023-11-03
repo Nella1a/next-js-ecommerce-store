@@ -2,9 +2,6 @@
 CREATE TABLE "cart_items" (
     "id" SERIAL NOT NULL,
     "product_id" INTEGER NOT NULL,
-    "quantity" INTEGER,
-    "price" DECIMAL(10,2),
-    "total_price" DECIMAL(10,2),
     "cart_id" INTEGER,
 
     CONSTRAINT "cart_items_pkey" PRIMARY KEY ("id")
@@ -18,6 +15,7 @@ CREATE TABLE "carts" (
     "user_id" INTEGER,
     "total_price" DECIMAL(10,2),
     "is_order" BIT(1),
+    "quantity" INTEGER,
 
     CONSTRAINT "carts_pkey" PRIMARY KEY ("id")
 );
@@ -63,9 +61,6 @@ CREATE TABLE "product_categories" (
 CREATE TABLE "product_orders" (
     "product_id" INTEGER NOT NULL,
     "order_id" INTEGER NOT NULL,
-    "quantity" INTEGER,
-    "price" DECIMAL(10,2),
-    "total_price" DECIMAL(10,2),
 
     CONSTRAINT "product_orders_pk" PRIMARY KEY ("product_id","order_id")
 );
