@@ -7,16 +7,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model CartItem {
-  id          Int      @id @default(autoincrement())
-  product_id  Int
-  quantity    Int?
-  price       Decimal? @db.Decimal(10, 2)
-  total_price Decimal? @db.Decimal(10, 2)
-  cart_id     Int?     @unique
-  carts       Cart?   @relation(fields: [cart_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  products    Product  @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id         Int      @id @default(autoincrement())
+  product_id Int
+  cart_id    Int?     @unique
+  carts      Cart?   @relation(fields: [cart_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  products   Product @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@map("cart_items")
 }
@@ -28,6 +24,7 @@ model Cart {
   user_id     Int?        @unique
   total_price Decimal?    @db.Decimal(10, 2)
   is_order    String?     @db.Bit(1)
+  quantity    Int?
   cart_items  CartItem?
   users       User?      @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
@@ -72,19 +69,18 @@ model ProductCategory {
   products    Product   @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@id([product_id, category_id], map: "product_categories_pk")
+
   @@map("product_categories")
 }
 
 model ProductOrder {
-  product_id  Int
-  order_id    Int
-  quantity    Int?
-  price       Decimal? @db.Decimal(10, 2)
-  total_price Decimal? @db.Decimal(10, 2)
-  orders      Order   @relation(fields: [order_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  products    Product @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  product_id Int
+  order_id   Int
+  orders     Order   @relation(fields: [order_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  products   Product @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([product_id, order_id], map: "product_orders_pk")
+
   @@map("product_orders")
 }
 
@@ -93,7 +89,7 @@ model Product {
   title              String               @db.VarChar(50)
   price              Decimal              @db.Decimal(10, 2)
   descr              String
-  slug               String               @unique @db.VarChar(50)
+  slug               String               @db.VarChar(50)
   cart_items         CartItem[]
   product_categories ProductCategory[]
   product_orders     ProductOrder[]
@@ -137,6 +133,7 @@ model User {
   users_payment UserPayment[]
 
   @@unique([email, username])
+
   @@map("users")
 }
 
