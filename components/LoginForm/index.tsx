@@ -44,7 +44,7 @@ export default function LoginForm(props: Props) {
   };
 
   return (
-    <article css={registerStyle}>
+    <div css={registerStyle}>
       <h1>Welcome Back</h1>
 
       <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum ipsum lorem ipsum.</p>
@@ -77,6 +77,6 @@ export default function LoginForm(props: Props) {
           Hello USER: {user.username}, {user.email}, {user.id}
         </>
       )}
-    </article>
+    </div>
   );
 }
