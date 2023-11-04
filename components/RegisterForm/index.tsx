@@ -12,7 +12,7 @@ export const registerStyle = css`
   right: 0;
   top: 0; */
   //width: 50%;
-  height: 100%;
+  //height: 100%;
   //z-index: 40;
   // margin: 0;
 
