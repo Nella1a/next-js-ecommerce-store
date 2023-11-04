@@ -5,10 +5,12 @@ import { getSession, useSession } from 'next-auth/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
+import { useContext, useEffect } from 'react';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import RegisterForm from '../components/RegisterForm';
 import prisma from '../prisma';
 import { createCsrfToken } from '../util/auth';
+import { OverlayContext } from '../util/context/overlayContext';
 import { authOptions } from './api/auth/[...nextauth]';
 
 const accountStyle = css`
@@ -26,6 +28,14 @@ type Props = {
 
 export default function register(props: Props) {
   const { data, status } = useSession();
+  const { loginLayover, toggleLoginLayover } = useContext(OverlayContext);
+
+  useEffect(() => {
+    if (loginLayover) {
+      toggleLoginLayover();
+    }
+  }, []);
+
   console.log('props.session: ', props.session);
   console.log('props.test: ', props);
 
