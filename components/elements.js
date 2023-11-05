@@ -135,9 +135,11 @@ export const headerStyle = css`
   margin: auto;
   display: flex;
   padding: 0 3rem;
+  padding-top: 0.5rem;
   border-bottom: 0px solid lightgrey;
   box-shadow: rgba(0, 0, 0, 0.45) 0px 15px 10px -20px;
 
+  // shelovesPlants logo
   > div:first-of-type {
     width: 100%;
     ${marginCenter}
@@ -157,6 +159,7 @@ export const headerStyle = css`
       height: auto;
     }
   }
+  // links
   > div:nth-of-type(2) {
     width: 100%;
     ${marginCenter}
@@ -177,16 +180,27 @@ export const headerStyle = css`
       list-style-position: inside;
       display: flex;
       gap: 3rem;
+      margin: 0;
+
+      li {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        //  border: 2px solid blue;
+      }
+
+      button {
+        all: unset;
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+      }
 
       a {
         text-decoration: none;
         display: block;
         font-weight: bold;
         color: black;
-
-        &:hover {
-          border-bottom: 3px solid #ed943b;
-        }
       }
     }
 
@@ -195,26 +209,40 @@ export const headerStyle = css`
     }
 
     @media (max-width: 768px) {
+      ul {
+        gap: 2rem;
+      }
       button {
         all: unset;
         display: block;
         margin-left: auto;
         position: relative;
         top: 6px;
+
+        > span {
+          display: flex;
+          flex-direction: column;
+
+          padding-top: 0.5rem;
+        }
       }
-      gap: 0.5rem;
+      gap: 2rem;
     }
   }
 `;
 
 export const shoppingBagStyle = (theme) => css`
+  all: unset;
   ${size('3.76rem', '3.76rem')}
   position: relative;
-  ${flexCenter}
+  // ${flexCenter}
 
+  // container
   div:first-of-type {
     ${size('1.88rem', '1.88rem')}
+    //  border: 1px solid red;
 
+    // circle
     div {
       ${size('1.41rem', '1.41rem')}
       border-radius: 50%;
@@ -222,9 +250,10 @@ export const shoppingBagStyle = (theme) => css`
       color: #fff;
       position: absolute;
       text-align: center;
-      top: 0px;
-      right: 3px;
+      top: 5px;
+      right: -11px;
 
+      // quantity inside of the circle
       span {
         position: relative;
         top: 0px;

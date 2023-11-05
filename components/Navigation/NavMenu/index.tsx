@@ -16,14 +16,14 @@ export default function NavMenu() {
   };
 
   const loginButton = () => (
-    <button data-test-id="login-button" onClick={onClickLoginHandler}>
+    <button data-test-id="login-link" onClick={onClickLoginHandler}>
       {' '}
       Login
     </button>
   );
 
   const logoutButton = () => (
-    <button data-test-id="login-button" onClick={onClickLogoutHandler}>
+    <button data-test-id="logout-link" onClick={onClickLogoutHandler}>
       {' '}
       Logout
     </button>

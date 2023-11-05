@@ -19,7 +19,6 @@ const mobileMenuStyle = (showBurger) => css`
     display: ${showBurger ? 'block' : 'none'};
 
     nav {
-      border: 2px solid red;
       background-color: #f9f8f7;
       position: absolute;
       bottom: 0;
@@ -56,7 +55,16 @@ const mobileMenuStyle = (showBurger) => css`
           justify-content: space-between;
           a {
             text-decoration: none;
-            display: inline-block;
+            display: block;
+            font-weight: bold;
+            color: black;
+          }
+
+          button {
+            all: unset;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
           }
         }
 
@@ -104,6 +112,7 @@ const mobileMenuStyle = (showBurger) => css`
         display: inline-block;
         font-size: 25px;
         font-weight: 100;
+        cursor: pointer;
       }
     }
   }
@@ -133,7 +142,6 @@ export default function MobileMenu() {
               </span>
             </div>
           </li>
-
           <NavMenu />
         </ul>
       </nav>
