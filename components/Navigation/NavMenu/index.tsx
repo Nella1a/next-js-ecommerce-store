@@ -1,13 +1,33 @@
+import { getSession, useSession } from 'next-auth/react';
 import Link from 'next/link';
+import Router from 'next/router';
 import { useContext } from 'react';
 import { OverlayContext } from '../../../util/context/overlayContext';
 
 export default function NavMenu() {
   const { toggleLoginLayover } = useContext(OverlayContext);
-  const onClickHandler = () => {
+  const { status } = useSession();
+  const onClickLoginHandler = () => {
     toggleLoginLayover();
   };
 
+  const onClickLogoutHandler = () => {
+    Router.push('/');
+  };
+
+  const loginButton = () => (
+    <button data-test-id="login-button" onClick={onClickLoginHandler}>
+      {' '}
+      Login
+    </button>
+  );
+
+  const logoutButton = () => (
+    <button data-test-id="login-button" onClick={onClickLogoutHandler}>
+      {' '}
+      Logout
+    </button>
+  );
   return (
     <>
       <li>
@@ -15,12 +35,7 @@ export default function NavMenu() {
           Plants
         </Link>
       </li>
-      <li>
-        <button data-test-id="login-button" onClick={onClickHandler}>
-          {' '}
-          Login
-        </button>
-      </li>
+      <li>{status === 'authenticated' ? logoutButton() : loginButton()}</li>
     </>
   );
 }
