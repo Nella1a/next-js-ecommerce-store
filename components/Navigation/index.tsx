@@ -1,7 +1,7 @@
 import Image from 'next/legacy/image';
 import Link from 'next/link';
 import { Fragment, useContext, useEffect, useState } from 'react';
-import shoppingBag from '../../public/shopping-bag.png';
+import shoppingBag from '../../public/shoppingBag.png';
 import { CartContext } from '../../util/context/cartContext';
 import { CartCookieContext } from '../../util/context/cookieContext';
 import { headerStyle, shoppingBagStyle } from '../elements';
@@ -41,6 +41,18 @@ export default function Navigation() {
     toggleMobileMenu();
   };
 
+  const shoppingBagIcon = () => (
+    <button css={shoppingBagStyle}>
+      <Link href="/cart" passHref>
+        <div>
+          <Image src={shoppingBag} alt="shopping cart icon" />
+          <div>
+            <span data-test-id="cart-count">{cartCount}</span>
+          </div>
+        </div>
+      </Link>
+    </button>
+  );
   return (
     <Fragment>
       <MobileMenu />
@@ -55,29 +67,30 @@ export default function Navigation() {
           {screenwidth > BREAKPOINT ? (
             <ul>
               <NavMenu />
+              <li>{shoppingBagIcon()}</li>
             </ul>
           ) : (
-            <button>
-              <span
-                onClick={toggleMobileMenuHandler}
-                onKeyDown={toggleMobileMenuHandler}
-                role="menu"
-                tabIndex={0}
-              >
-                <Image src="/menu.png" width="29" height="29" alt="menu icon" />
-              </span>
-            </button>
+            <ul>
+              <li>
+                <button>
+                  <span
+                    onClick={toggleMobileMenuHandler}
+                    onKeyDown={toggleMobileMenuHandler}
+                    role="menu"
+                    tabIndex={0}
+                  >
+                    <Image
+                      src="/menu.png"
+                      width="29"
+                      height="29"
+                      alt="menu icon"
+                    />
+                  </span>
+                </button>
+              </li>
+              <li>{shoppingBagIcon()}</li>
+            </ul>
           )}
-          <Link href="/cart" passHref>
-            <div css={shoppingBagStyle}>
-              <div>
-                <Image src={shoppingBag} alt="shopping cart icon" />
-                <div>
-                  <span data-test-id="cart-count">{cartCount}</span>
-                </div>
-              </div>
-            </div>
-          </Link>
         </div>
       </nav>
     </Fragment>
