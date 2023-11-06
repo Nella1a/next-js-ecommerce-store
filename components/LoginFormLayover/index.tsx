@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import Link from 'next/link';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { OverlayContext } from '../../util/context/overlayContext';
 import LoginForm from '../LoginForm';
 
@@ -32,6 +32,14 @@ type Props = {
 export default function LoginInFormLayover(props: Props) {
   const { toggle, toggleLayover, loginLayover, toggleLoginLayover } =
     useContext(OverlayContext);
+
+  useEffect(() => {
+    if (loginLayover) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'scroll';
+    }
+  }, [loginLayover]);
 
   const onClickHandler = () => {
     toggleLoginLayover();
