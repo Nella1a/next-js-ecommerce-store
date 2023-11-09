@@ -289,6 +289,7 @@ export const footerStyle = css`
       display: flex;
       flex-direction: column;
       gap: 0.063rem;
+
       p:first-of-type {
         font-weight: bold;
       }
@@ -389,7 +390,7 @@ export const MobileFooterStyle = css`
 
     div {
       max-width: 1920px;
-      // border: 1px red solid;
+      //border: 1px red solid;
       padding: 3rem 3rem;
       margin: 0 auto;
       gap: 4.25rem;
@@ -400,7 +401,7 @@ export const MobileFooterStyle = css`
         display: flex;
         flex-direction: column;
         gap: 0.063rem;
-
+        // border: 2px solid yellow;
         > ul {
           list-style-type: none;
           list-style-position: inside;
@@ -434,12 +435,12 @@ export const MobileFooterStyle = css`
           display: flex;
           flex-direction: column;
           max-width: 100%;
-          border: 2px solid red;
+
           input {
             ${size('17.65rem', '1.47rem')}
             letter-spacing: 0.031rem;
             line-height: 1.125rem;
-            text-transform: uppercase;
+            // text-transform: uppercase;
             font-weight: bold;
             font-size: 0.75rem;
             display: block;
@@ -464,11 +465,17 @@ export const MobileFooterStyle = css`
 
       // container subscribe to newsletter form
       article:nth-of-type(5) {
-        border: 2px solid green;
+        // border: 2px solid green;
         flex-basis: 30%;
+        padding-bottom: 1rem;
+        p {
+        }
 
         p {
           font-size: large;
+          span {
+            font-weight: bold;
+          }
         }
       }
 
@@ -478,7 +485,7 @@ export const MobileFooterStyle = css`
 
       @media screen and (max-width: 768px) {
         flex-direction: column-reverse;
-        padding: 3rem 0rem;
+        padding: 0rem 0rem;
       }
     }
 
@@ -488,7 +495,7 @@ export const MobileFooterStyle = css`
     }
 
     @media screen and (max-width: 1024px) {
-      padding: 2.5rem 2.5rem;
+      padding: 0rem 2.5rem;
     }
   }
 `;
