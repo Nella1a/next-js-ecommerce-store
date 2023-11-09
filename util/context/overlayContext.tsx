@@ -1,34 +1,28 @@
-import { Children, createContext, useEffect, useState } from 'react';
+import { Children, createContext, useState } from 'react';
 
 export const OverlayContext = createContext({
   toggle: false,
   toggleLayover: () => {},
-  toggleLogin: false,
+  loginLayover: false,
   toggleLoginLayover: () => {},
 });
 
 export const OverLayContextProvider = ({ children }: any) => {
   const [toggle, setToggle] = useState(false);
-  const [toggleLogin, setToggleLogin] = useState(false);
+
+  const [loginLayover, setLoginLayover] = useState(false);
 
   const toggleLayover = () => {
-    if (toggleLogin) {
-      setToggleLogin(false);
-    }
     setToggle(!toggle);
   };
 
   const toggleLoginLayover = () => {
-    if (toggle) {
-      setToggle(false);
-    }
-    setToggleLogin(!toggleLogin);
+    setLoginLayover(!loginLayover);
   };
-
   const value = {
     toggle,
     toggleLayover,
-    toggleLogin,
+    loginLayover,
     toggleLoginLayover,
   };
   return (

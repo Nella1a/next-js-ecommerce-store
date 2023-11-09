@@ -1,19 +1,22 @@
-import { useContext } from 'react';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { OverlayContext } from '../../util/context/overlayContext';
 import { errorStyle } from '../CheckoutForm/Shipping';
 import { registerStyle } from '../RegisterForm';
 
 export interface DefaultFormValues {
-  userEmail: string;
-  firstName?: string;
-  lastName?: string;
-  userName: string;
+  email: string;
   password: string;
 }
+type Props = {
+  token: string;
+};
 
-export default function LoginForm() {
+export default function LoginForm(props: Props) {
   const defaultValues = {};
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -22,59 +25,58 @@ export default function LoginForm() {
     trigger,
   } = useForm<DefaultFormValues>({ defaultValues });
 
-  const { toggleLogin, toggleLoginLayover, toggleLayover } =
-    useContext(OverlayContext);
+  const { toggleLayover } = useContext(OverlayContext);
+  const [error, setError] = useState(undefined);
+  const [registerOkay, setRegisterOkay] = useState(false);
+  const [user, setUser] = useState({
+    username: undefined,
+    email: undefined,
+    id: undefined,
+  });
 
-  const onSubmit = (data: DefaultFormValues): void => {
+  const onSubmit = async (data: DefaultFormValues) => {
     console.log('----> LoginForm Values: ', data);
-  };
 
-  const onClickHandler = () => {
-    toggleLoginLayover();
+    signIn('credentials', {
+      ...data,
+      callbackUrl: '/',
+    });
   };
-
-  const onClickRegisterFormHandler = () => toggleLayover();
 
   return (
-    <section css={registerStyle(toggleLogin)}>
-      <div>
-        <h1>Welcome Back</h1>
-        <button type="button" onClick={onClickHandler}>
-          <img src="/closeIcon.svg" alt="close overlay icon" />
-        </button>
-        <p>
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum ipsum lorem ipsum.
-        </p>
-        <form action="/api" css={''} onSubmit={handleSubmit(onSubmit)}>
-          <input
-            {...register('userName', {
-              required: 'username is required.',
-            })}
-            aria-invalid={errors.userName ? 'true' : 'false'}
-            data-test-id="userName"
-            css={errorStyle(errors.userName?.type)}
-            placeholder="Username"
-          />
+    <div css={registerStyle}>
+      <h1>Welcome Back</h1>
 
-          <input
-            {...register('password', {
-              required: 'password is required.',
-            })}
-            aria-invalid={errors.password ? 'true' : 'false'}
-            data-test-id="password"
-            css={errorStyle(errors.password?.type)}
-            placeholder="Password"
-          />
+      <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum ipsum lorem ipsum.</p>
+      <form action="/api" css={''} onSubmit={handleSubmit(onSubmit)}>
+        <input
+          {...register('email', {
+            required: 'Email is required.',
+          })}
+          aria-invalid={errors.email ? 'true' : 'false'}
+          data-test-id="email"
+          css={errorStyle(errors.email?.type)}
+          placeholder="email"
+        />
 
-          <button type="submit">Login</button>
-        </form>
-        <div>
-          New Here?
-          <button type="button" onClick={onClickRegisterFormHandler}>
-            <span> Create an Account</span>
-          </button>
-        </div>
-      </div>
-    </section>
+        <input
+          {...register('password', {
+            required: 'password is required.',
+          })}
+          aria-invalid={errors.password ? 'true' : 'false'}
+          data-test-id="password"
+          css={errorStyle(errors.password?.type)}
+          placeholder="Password"
+        />
+
+        <button type="submit">Login</button>
+      </form>
+
+      {registerOkay && (
+        <>
+          Hello USER: {user.username}, {user.email}, {user.id}
+        </>
+      )}
+    </div>
   );
 }

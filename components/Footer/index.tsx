@@ -28,20 +28,14 @@ export default function Footer() {
         </article>
         <article>
           <p>Terms</p>
-          <Link href="http://localhost:3000/">
-            Refund Policy
-          </Link>
-          <Link href="http://localhost:3000/">
-            Terms of Service
-          </Link>
-          <Link href="http://localhost:3000/">
-            Delivery and Schipping
-          </Link>
+          <Link href="http://localhost:3000/">Refund Policy</Link>
+          <Link href="http://localhost:3000/">Terms of Service</Link>
+          <Link href="http://localhost:3000/">Delivery and Schipping</Link>
         </article>
 
         <article>
-          <p>Join Us</p>
-          <p>Subscribe to our newsletter</p>
+          <p>Join us!</p>
+          <p>Subscribe to our newsletter.</p>
 
           <form
             action="#"

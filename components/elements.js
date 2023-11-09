@@ -135,9 +135,11 @@ export const headerStyle = css`
   margin: auto;
   display: flex;
   padding: 0 3rem;
+  padding-top: 0.5rem;
   border-bottom: 0px solid lightgrey;
   box-shadow: rgba(0, 0, 0, 0.45) 0px 15px 10px -20px;
 
+  // shelovesPlants logo
   > div:first-of-type {
     width: 100%;
     ${marginCenter}
@@ -157,6 +159,7 @@ export const headerStyle = css`
       height: auto;
     }
   }
+  // links
   > div:nth-of-type(2) {
     width: 100%;
     ${marginCenter}
@@ -177,16 +180,27 @@ export const headerStyle = css`
       list-style-position: inside;
       display: flex;
       gap: 3rem;
+      margin: 0;
+
+      li {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        //  border: 2px solid blue;
+      }
+
+      button {
+        all: unset;
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+      }
 
       a {
         text-decoration: none;
         display: block;
         font-weight: bold;
         color: black;
-
-        &:hover {
-          border-bottom: 3px solid #ed943b;
-        }
       }
     }
 
@@ -195,26 +209,40 @@ export const headerStyle = css`
     }
 
     @media (max-width: 768px) {
+      ul {
+        gap: 2rem;
+      }
       button {
         all: unset;
         display: block;
         margin-left: auto;
         position: relative;
         top: 6px;
+
+        > span {
+          display: flex;
+          flex-direction: column;
+
+          padding-top: 0.5rem;
+        }
       }
-      gap: 0.5rem;
+      gap: 2rem;
     }
   }
 `;
 
 export const shoppingBagStyle = (theme) => css`
+  all: unset;
   ${size('3.76rem', '3.76rem')}
   position: relative;
-  ${flexCenter}
+  // ${flexCenter}
 
+  // container
   div:first-of-type {
     ${size('1.88rem', '1.88rem')}
+    //  border: 1px solid red;
 
+    // circle
     div {
       ${size('1.41rem', '1.41rem')}
       border-radius: 50%;
@@ -222,9 +250,10 @@ export const shoppingBagStyle = (theme) => css`
       color: #fff;
       position: absolute;
       text-align: center;
-      top: 0px;
-      right: 3px;
+      top: 5px;
+      right: -11px;
 
+      // quantity inside of the circle
       span {
         position: relative;
         top: 0px;
@@ -260,6 +289,7 @@ export const footerStyle = css`
       display: flex;
       flex-direction: column;
       gap: 0.063rem;
+
       p:first-of-type {
         font-weight: bold;
       }
@@ -357,105 +387,116 @@ export const MobileFooterStyle = css`
     flex-direction: column-reverse;
     padding: 3rem 0rem;
     display: block;
-  }
 
-  div {
-    max-width: 1920px;
-    // border: 1px red solid;
-    padding: 3rem 3rem;
-    margin: 0 auto;
-    gap: 4.25rem;
-    display: flex;
-    justify-content: space-between;
-
-    article {
+    div {
+      max-width: 1920px;
+      //border: 1px red solid;
+      padding: 3rem 3rem;
+      margin: 0 auto;
+      gap: 4.25rem;
       display: flex;
-      flex-direction: column;
-      gap: 0.063rem;
+      justify-content: space-between;
 
-      ul {
-        list-style-type: none;
-        list-style-position: inside;
-        margin: 0;
-        padding: 0;
-
-        p:first-of-type {
-          font-weight: bold;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          border-bottom: 1px solid lightgrey;
-          padding: 0.5rem 0;
-
-          span {
-            //display: block;
-            font-size: 20px;
-            font-weight: 400;
-            color: gray;
-          }
-        }
-      }
-
-      line-height: 2.5rem;
-
-      form {
+      article {
         display: flex;
         flex-direction: column;
-        max-width: 100%;
+        gap: 0.063rem;
+        // border: 2px solid yellow;
+        > ul {
+          list-style-type: none;
+          list-style-position: inside;
+          margin: 0;
+          padding: 0;
 
-        input {
-          ${size('17.65rem', '1.47rem')}
-          letter-spacing: 0.031rem;
-          line-height: 1.125rem;
-          text-transform: uppercase;
-          font-weight: bold;
-          font-size: 0.75rem;
-          display: block;
-          height: 3.5rem;
-          width: 100%;
-          padding: 0.625rem 1rem;
-          color: #000;
+          > li:first-of-type {
+            display: flex;
+            justify-content: space-between;
+
+            span {
+              display: inline-block;
+              font-weight: bold;
+            }
+          }
+
+          > li:nth-of-type(2) {
+            border-bottom: 1px solid lightgrey;
+
+            > ul {
+              width: 100%;
+              padding-left: 1rem;
+              list-style-type: none;
+            }
+          }
         }
 
-        button {
-          height: 3.5rem;
-          width: 100%;
-          background-color: #ed943b;
-          border: none;
+        line-height: 2.5rem;
 
-          &:hover {
-            background-color: #ff6900;
+        form {
+          display: flex;
+          flex-direction: column;
+          max-width: 100%;
+
+          input {
+            ${size('17.65rem', '1.47rem')}
+            letter-spacing: 0.031rem;
+            line-height: 1.125rem;
+            // text-transform: uppercase;
+            font-weight: bold;
+            font-size: 0.75rem;
+            display: block;
+            height: 3.5rem;
+            width: 100%;
+            padding: 0.625rem 1rem;
+            color: #000;
+          }
+
+          button {
+            height: 3.5rem;
+            width: 100%;
+            background-color: #ed943b;
+            border: none;
+
+            &:hover {
+              background-color: #ff6900;
+            }
           }
         }
       }
-    }
 
-    article:nth-of-type(5) {
-      // border: 2px solid green;
-      flex-basis: 30%;
+      // container subscribe to newsletter form
+      article:nth-of-type(5) {
+        // border: 2px solid green;
+        flex-basis: 30%;
+        padding-bottom: 1rem;
+        p {
+        }
 
-      p {
-        font-size: large;
+        p {
+          font-size: large;
+          span {
+            font-weight: bold;
+          }
+        }
+      }
+
+      @media screen and (max-width: 1051px) {
+        gap: 1.5rem;
+      }
+
+      @media screen and (max-width: 768px) {
+        flex-direction: column-reverse;
+        padding: 0rem 0rem;
       }
     }
 
-    @media screen and (max-width: 1051px) {
-      gap: 1.5rem;
+    a {
+      text-decoration: none;
+      display: block;
     }
 
-    @media screen and (max-width: 768px) {
-      flex-direction: column-reverse;
-      padding: 3rem 0rem;
+    @media screen and (max-width: 1024px) {
+      padding: 0rem 2.5rem;
     }
-  }
-
-  a {
-    text-decoration: none;
-    display: block;
-  }
-
-  @media screen and (max-width: 1024px) {
-    padding: 2.5rem 2.5rem;
   }
 `;
 

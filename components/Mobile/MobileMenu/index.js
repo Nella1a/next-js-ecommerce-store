@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { useContext, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { CartContext } from '../../../util/context/cartContext';
 import NavMenu from '../../Navigation/NavMenu';
 
@@ -17,9 +17,9 @@ const mobileMenuStyle = (showBurger) => css`
     z-index: 40;
     margin: 0;
     display: ${showBurger ? 'block' : 'none'};
+    overflow: scroll;
 
     nav {
-      border: 2px solid red;
       background-color: #f9f8f7;
       position: absolute;
       bottom: 0;
@@ -56,7 +56,16 @@ const mobileMenuStyle = (showBurger) => css`
           justify-content: space-between;
           a {
             text-decoration: none;
-            display: inline-block;
+            display: block;
+            font-weight: bold;
+            color: black;
+          }
+
+          button {
+            all: unset;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
           }
         }
 
@@ -104,6 +113,7 @@ const mobileMenuStyle = (showBurger) => css`
         display: inline-block;
         font-size: 25px;
         font-weight: 100;
+        cursor: pointer;
       }
     }
   }
@@ -112,6 +122,14 @@ const mobileMenuStyle = (showBurger) => css`
 export default function MobileMenu() {
   const node = useRef();
   const { toggleMobileMenu, toggleMenu } = useContext(CartContext);
+
+  useEffect(() => {
+    if (toggleMenu) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'scroll';
+    }
+  }, [toggleMenu]);
 
   const toggleMobileMenuHandler = () => {
     toggleMobileMenu();
@@ -133,7 +151,6 @@ export default function MobileMenu() {
               </span>
             </div>
           </li>
-
           <NavMenu />
         </ul>
       </nav>

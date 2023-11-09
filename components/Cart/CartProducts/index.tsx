@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useContext } from 'react';
-import { PlantsAndQuantity } from '../../../pages/types';
 import { CartContext } from '../../../util/context/cartContext';
+import { PlantsAndQuantity } from '../../../util/types';
 import CartProductCard from '../CartProductCard';
 
 type Props = {
