@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { Cart } from '../../../pages/types';
 import { CartContext } from '../../../util/context/cartContext';
 import { CartCookieContext } from '../../../util/context/cookieContext';
+import { Cart } from '../../../util/types';
 import ChangeCartQuantity from '../../ChangeCartQuantity';
 import { plantName } from '../../elements';
 import CartItem from '../CartItem';

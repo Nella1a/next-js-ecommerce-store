@@ -6,7 +6,7 @@ import Layout from '../components/Layout';
 import Products from '../components/Products';
 import prisma from '../prisma';
 import { cleanedProducts } from '../util/database';
-import { PropsTypePlantsLayer } from './types';
+import { PropsTypePlantsLayer } from '../util/types';
 
 export default function Directory(props: PropsTypePlantsLayer) {
   // disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer);

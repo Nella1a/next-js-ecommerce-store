@@ -8,7 +8,7 @@ import Layout from '../components/Layout';
 import Products from '../components/Products';
 import prisma from '../prisma';
 import { cleanedProducts } from '../util/database';
-import { PropsTypePlantsCartCookieLayer } from './types';
+import { PropsTypePlantsCartCookieLayer } from '../util/types';
 
 const bgImageHero = css`
   background: no-repeat center url('indexHeroImg.jpeg');

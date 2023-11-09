@@ -10,7 +10,11 @@ import prisma from '../../prisma';
 import { CartContext } from '../../util/context/cartContext';
 import { CartCookieContext } from '../../util/context/cookieContext';
 import { cleanedProducts } from '../../util/database';
-import { Cookie, Plant, PropsTypePlantsCartCookieLayerPlantId } from '../types';
+import {
+  Cookie,
+  Plant,
+  PropsTypePlantsCartCookieLayerPlantId,
+} from '../../util/types';
 
 export default function SingleProduct(
   props: PropsTypePlantsCartCookieLayerPlantId,
@@ -50,18 +54,18 @@ export default function SingleProduct(
       <section css={singleProductPageStyle}>
         <div>
           <div>
-            <ProductImageSmall src={`/image0${props.plant.id}.jpeg`} />
+            <ProductImageSmall src={`/image${props.plant.id}.jpeg`} />
           </div>
           <div>
-            <ProductImageSmall src={`/image0${props.plant.id}.jpeg`} />
+            <ProductImageSmall src={`/image${props.plant.id}.jpeg`} />
           </div>
           <div>
-            <ProductImageSmall src={`/image0${props.plant.id}.jpeg`} />
+            <ProductImageSmall src={`/image${props.plant.id}.jpeg`} />
           </div>
         </div>
         <div>
           <div>
-            <ProductImage src={`/image0${props.plant.id}.jpeg`} />
+            <ProductImage src={`/image${props.plant.id}.jpeg`} />
           </div>
           <article>
             <div>

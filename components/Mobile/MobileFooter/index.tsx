@@ -46,23 +46,27 @@ export default function MobileFooter() {
                     setDisplayMenu(!displayMenu);
                     setToggle(index);
                   }}
+                  style={{ cursor: 'pointer' }}
                 >
-                  {info.header}
+                  <span>{info.header}</span>
+                  <span key={`info-toggle-${index}`}>
+                    {displayMenu && toggle === index ? '-' : '+'}
+                  </span>
                 </li>
-                <span key={`info-toggle-${index}`}>
-                  {displayMenu && toggle === index ? '-' : '+'}
-                </span>
-
-                {displayMenu && toggle === index && (
-                  <MobileFooterInfo index={index} info={info} />
-                )}
+                <li>
+                  {displayMenu && toggle === index && (
+                    <MobileFooterInfo index={index} info={info} />
+                  )}
+                </li>
               </ul>
             </article>
           );
         })}
         <article>
-          <p>Join Us</p>
-          <p>Subscribe to our newsletter</p>
+          <p>
+            <span>Join us!</span>
+          </p>
+          <p>Subscribe to our newsletter.</p>
           <form>
             <p>
               <input

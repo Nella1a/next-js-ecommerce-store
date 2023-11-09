@@ -1,3 +1,5 @@
+import { PrismaClient } from '@prisma/client';
+
 const products = [
   {
     title: 'Monstera Deliciosa',
@@ -29,11 +31,15 @@ const products = [
   },
 ];
 
-const { PrismaClient } = require('@prisma/client');
+//const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 async function main() {
   await prisma.product.createMany({ data: products });
+
+  await prisma.userRole.createMany({
+    data: [{ role_name: 'customer' }, { role_name: 'admin' }],
+  });
 }
 
 main()

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Cart } from '../../pages/types';
+import { Cart } from '../../util/types';
 import CartItem from '../Cart/CartItem';
 import { plantName } from '../elements';
 

@@ -1,12 +1,14 @@
 import Head from 'next/head';
-import { PropsTypeChildrenLayer } from '../../pages/types';
+import { PropsTypeChildrenLayer } from '../../util/types';
 import Delivery from '../Delivery';
 import Footer from '../Footer';
 import { Header } from '../Header';
+import MobileDelivery from '../Mobile/MobileDelivery';
 import MobileFooter from '../Mobile/MobileFooter';
-import Navigation from '../Navigation';
+import Navigation, { BREAKPOINTAT768, getScreenSize } from '../Navigation';
 
 export default function Layout(props: PropsTypeChildrenLayer) {
+  const screenwidth = getScreenSize();
   return (
     <>
       <Head>
@@ -23,7 +25,7 @@ export default function Layout(props: PropsTypeChildrenLayer) {
 
       <main>
         {props.children}
-        <Delivery />
+        {screenwidth > BREAKPOINTAT768 ? <Delivery /> : <MobileDelivery />}
       </main>
       <Footer />
       <MobileFooter />

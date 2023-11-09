@@ -1,84 +1,80 @@
 import { css } from '@emotion/react';
-import { useContext } from 'react';
+import { signIn } from 'next-auth/react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { OverlayContext } from '../../util/context/overlayContext';
 import { errorStyle } from '../CheckoutForm/Shipping';
 
-export const registerStyle = (toggle: boolean) => css`
-  background-color: rgba(0, 0, 0, 0.25);
+export const registerStyle = css`
+  /* background-color: rgba(0, 0, 0, 0.25);
   position: fixed;
   bottom: 0;
   right: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 40;
-  margin: 0;
-  display: ${toggle ? 'block' : 'none'};
+  top: 0; */
+  //width: 50%;
+  //height: 100%;
+  //z-index: 40;
+  // margin: 0;
 
-  > div {
-    background-color: #f9f8f7;
+  h1 {
+    padding-top: 2.25rem;
+    padding-bottom: 1rem;
+  }
+
+  > button {
     position: absolute;
-    bottom: 0;
-    right: 0;
     top: 0;
-    width: 518px;
-    padding: 0 40px;
-    height: 100vh;
-    z-index: 44;
-    margin: 0;
+    right: 0.5rem;
+    width: 55px;
+    height: auto;
+    background-color: transparent;
+    border: none;
+  }
 
-    h1 {
-      padding-top: 2.25rem;
-      padding-bottom: 1rem;
-    }
+  p {
+    margin-top: unset;
+    margin-bottom: 1rem;
+  }
 
+  form {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid green;
+    margin-bottom: 2rem;
+
+    input,
     > button {
-      position: absolute;
-      top: 0;
-      right: 0.5rem;
-      width: 55px;
-      height: auto;
-      background-color: transparent;
-      border: none;
-    }
-
-    p {
-      margin-top: unset;
+      width: 100%;
+      border-width: 1px;
+      width: 100%;
       margin-bottom: 1rem;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      border: 1px solid green;
-      margin-bottom: 2rem;
-
-      input,
-      > button {
-        width: 100%;
-        border-width: 1px;
-        width: 100%;
-        margin-bottom: 1rem;
-        padding: 1.2rem;
-        line-height: 1.25rem;
-        font-size: 100%;
-        margin-top: 0;
-        font-weight: unset;
-      }
+      padding: 1.2rem;
+      line-height: 1.25rem;
+      font-size: 100%;
+      margin-top: 0;
+      font-weight: unset;
     }
   }
 `;
 
+const apiErrorStyle = css`
+  padding: 10px 0;
+  color: red;
+`;
+
 export interface DefaultFormValues {
-  userEmail: string;
+  email: string;
   firstName?: string;
   lastName?: string;
-  userName: string;
+  username: string;
   password: string;
 }
 
-export default function RegisterForm() {
+type Props = {
+  token: string;
+};
+
+export default function RegisterForm(props: Props) {
   const defaultValues = {};
   const {
     register,
@@ -88,70 +84,89 @@ export default function RegisterForm() {
     trigger,
   } = useForm<DefaultFormValues>({ defaultValues });
 
-  const { toggle, toggleLayover, toggleLoginLayover } =
-    useContext(OverlayContext);
+  const { toggle, toggleLayover } = useContext(OverlayContext);
+  const [error, setError] = useState(undefined);
+  const [registerOkay, setRegisterOkay] = useState(false);
+  const [user, setUser] = useState({
+    username: undefined,
+    email: undefined,
+    id: undefined,
+  });
 
-  const onSubmit = (data: DefaultFormValues): void => {
+  const onSubmit = async (data: DefaultFormValues) => {
     console.log('----> RegisterForm Values: ', data);
-  };
 
-  const onClickHandler = () => {
-    toggleLayover();
-  };
+    const res = await fetch('/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ...data }),
+    });
 
-  const onClickLoginFormHandler = () => toggleLoginLayover();
+    const response = await res.json();
+
+    if ('error' in response) {
+      setError(response.error);
+      console.log('response: ', response);
+      return null;
+    }
+    setRegisterOkay(true);
+    setUser(response);
+    signIn('credentials', {
+      ...data,
+      callbackUrl: '/',
+    });
+  };
 
   return (
-    <section css={registerStyle(toggle)}>
-      <div>
-        <h1>Create Your Account </h1>
-        <button type="button" onClick={onClickHandler}>
-          <img src="/closeIcon.svg" alt="close overlay icon" />
-        </button>
-        <p>
-          lorem ipsum lorem ipsum lorem ipsum lorem ipsum ipsum lorem ipsum
-          lorem ipsum lorem.
-        </p>
-        <form action="/api" css={''} onSubmit={handleSubmit(onSubmit)}>
-          <input
-            {...register('userName', {
-              required: 'username is required.',
-            })}
-            aria-invalid={errors.userName ? 'true' : 'false'}
-            data-test-id="userName"
-            css={errorStyle(errors.userName?.type)}
-            placeholder="Username"
-          />
+    <article css={registerStyle}>
+      <h1>Create Your Account </h1>
 
-          <input
-            {...register('password', {
-              required: 'password is required.',
-            })}
-            aria-invalid={errors.password ? 'true' : 'false'}
-            data-test-id="password"
-            css={errorStyle(errors.password?.type)}
-            placeholder="Password"
-          />
+      <p>
+        lorem ipsum lorem ipsum lorem ipsum lorem ipsum ipsum lorem ipsum lorem
+        ipsum lorem.
+      </p>
+      <form action="/api" css={''} onSubmit={handleSubmit(onSubmit)}>
+        <input
+          {...register('username', {
+            required: 'username is required.',
+          })}
+          aria-invalid={errors.username ? 'true' : 'false'}
+          data-test-id="username"
+          css={errorStyle(errors.username?.type)}
+          placeholder="Username"
+        />
 
-          <input
-            {...register('userEmail', {
-              required: 'email is required.',
-            })}
-            aria-invalid={errors.userEmail ? 'true' : 'false'}
-            data-test-id="userEmail"
-            css={errorStyle(errors.userEmail?.type)}
-            placeholder="Email"
-          />
+        <input
+          {...register('password', {
+            required: 'password is required.',
+          })}
+          aria-invalid={errors.password ? 'true' : 'false'}
+          data-test-id="password"
+          css={errorStyle(errors.password?.type)}
+          placeholder="Password"
+        />
 
-          <button type="submit">Create Account</button>
-        </form>
-        <div>
-          Already have an account?{' '}
-          <button type="button" onClick={onClickLoginFormHandler}>
-            <span>Log in</span>{' '}
-          </button>
-        </div>
-      </div>
-    </section>
+        <input
+          {...register('email', {
+            required: 'email is required.',
+          })}
+          aria-invalid={errors.email ? 'true' : 'false'}
+          data-test-id="userEmail"
+          css={errorStyle(errors.email?.type)}
+          placeholder="Email"
+        />
+
+        <button type="submit">Create Account</button>
+      </form>
+      {error && <div css={apiErrorStyle}>{error}</div>}
+
+      {registerOkay && (
+        <>
+          Hello USER: {user.username}, {user.email}, {user.id}
+        </>
+      )}
+    </article>
   );
 }

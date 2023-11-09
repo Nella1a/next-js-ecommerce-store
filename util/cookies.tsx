@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import { Cookie } from '../pages/types';
+import { Cookie } from './types';
 
 // read cookie
 export function getParsedCookie(

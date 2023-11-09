@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 import { createContext, useEffect, useState } from 'react';
-import { Cookie } from '../../pages/types';
+import { Cookie } from '../types';
 
 /***+++++++++++++++++++++ */
 
