@@ -34,8 +34,8 @@ export default function Footer() {
         </article>
 
         <article>
-          <p>Join Us</p>
-          <p>Subscribe to our newsletter</p>
+          <p>Join us!</p>
+          <p>Subscribe to our newsletter.</p>
 
           <form
             action="#"
