@@ -9,7 +9,7 @@ import MobileMenu from '../Mobile/MobileMenu';
 import NavMenu from './NavMenu';
 
 // get window width
-const GetScreenSize = () => {
+export const getScreenSize = () => {
   const [screenSize, setScreenSize] = useState(0);
 
   useEffect(() => {
@@ -29,10 +29,10 @@ const GetScreenSize = () => {
   return screenSize;
 };
 
-const BREAKPOINT = 768;
+export const BREAKPOINTAT768 = 768;
 
 export default function Navigation() {
-  const screenwidth = GetScreenSize();
+  const screenwidth = getScreenSize();
   const { cartCount } = useContext(CartCookieContext);
 
   const { toggleMobileMenu } = useContext(CartContext);
@@ -64,7 +64,7 @@ export default function Navigation() {
           </Link>
         </div>
         <div>
-          {screenwidth > BREAKPOINT ? (
+          {screenwidth > BREAKPOINTAT768 ? (
             <ul>
               <NavMenu />
               <li>{shoppingBagIcon()}</li>
