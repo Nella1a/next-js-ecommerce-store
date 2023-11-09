@@ -28,15 +28,9 @@ export default function Footer() {
         </article>
         <article>
           <p>Terms</p>
-          <Link href="http://localhost:3000/">
-            Refund Policy
-          </Link>
-          <Link href="http://localhost:3000/">
-            Terms of Service
-          </Link>
-          <Link href="http://localhost:3000/">
-            Delivery and Schipping
-          </Link>
+          <Link href="http://localhost:3000/">Refund Policy</Link>
+          <Link href="http://localhost:3000/">Terms of Service</Link>
+          <Link href="http://localhost:3000/">Delivery and Schipping</Link>
         </article>
 
         <article>
