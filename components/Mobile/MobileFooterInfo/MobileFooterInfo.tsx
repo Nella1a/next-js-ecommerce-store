@@ -8,23 +8,16 @@ type Props = {
 export default function MobileFooterInfo(props: Props) {
   const { index, info } = props;
   return (
-    <p key={`infos-body-${index}`}>
-      <Link href="http://localhost:3000/">
-
-        <li key={`header-${index}-${info.infoOne}`}>{info.infoOne}</li>
-
-      </Link>
-      <Link href="http://localhost:3000/">
-
-        {' '}
-        <li key={`header-${index}-${info.infoTwo}`}>{info.infoTwo}</li>
-
-      </Link>
-      <Link href="http://localhost:3000/">
-
-        <li key={`header-${index}-${info.infoThree}`}>{info.infoThree}</li>
-
-      </Link>
-    </p>
+    <ul key={`infos-body-${index}`}>
+      <li key={`header-${index}-${info.infoOne}`}>
+        <Link href="http://localhost:3000/">{info.infoOne}</Link>
+      </li>
+      <li key={`header-${index}-${info.infoTwo}`}>
+        <Link href="http://localhost:3000/">{info.infoTwo}</Link>
+      </li>
+      <li key={`header-${index}-${info.infoThree}`}>
+        <Link href="http://localhost:3000/">{info.infoThree}</Link>
+      </li>
+    </ul>
   );
 }
