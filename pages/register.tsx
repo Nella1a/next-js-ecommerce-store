@@ -58,7 +58,7 @@ export default function register(props: Props) {
           </section>
           <section>
             <p>Already have an account?</p>
-            <Link href={'/signIn'}>Login here!</Link>
+            <Link href={'/login'}>Login here!</Link>
           </section>
         </LayoutNoHeader>
       </>
