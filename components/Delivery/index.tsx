@@ -6,7 +6,7 @@ export default function Delivery() {
       <div>
         <div>
           <article />
-          <p>Free Standard Shipping</p>
+          <p>Free Shipping</p>
         </div>
         <div>
           <article />
