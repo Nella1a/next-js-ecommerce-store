@@ -12,11 +12,14 @@ import prisma from '../prisma';
 import { createCsrfToken } from '../util/auth';
 import { authOptions } from './api/auth/[...nextauth]';
 
-const accountStyle = css`
+export const loginPageContainerStyle = css`
+  width: 31rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 1rem;
-  border: 1px solid red;
+  background-color: rgba(211, 211, 211, 0.5);
 `;
 
 type Props = {
@@ -45,12 +48,8 @@ export default function Login(props: Props) {
             <meta name="description" content="Plant Shop" />
             <link rel="icon" href="/favicon.ico" />
           </Head>
-          <section css={accountStyle}>
+          <section css={loginPageContainerStyle}>
             <LoginForm token={props.csrfToken} />
-          </section>
-          <section>
-            <p>Dont' have an account yet?</p>
-            <Link href={'/register'}>Create one here!</Link>
           </section>
         </LayoutNoHeader>
       </>

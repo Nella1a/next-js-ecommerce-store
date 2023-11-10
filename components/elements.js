@@ -1223,3 +1223,14 @@ export const deliveryInfos = () => css`
     }
   }
 `;
+/* *************************** */
+/*  login.tsx / register.tsx   */
+/* *************************** */
+
+export const registerLoginStyle = css``;
+
+/* *************************** */
+/*  login.tsx / register.tsx   */
+/* *************************** */
+
+export const registerLoginLayourStyle = css``;
