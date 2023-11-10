@@ -45,7 +45,7 @@ export default function LoginForm(props: Props) {
   };
 
   return (
-    <div css={loginRegisterFormStyle}>
+    <article css={loginRegisterFormStyle}>
       <h1>Welcome Back</h1>
 
       <p>Log in with your email and password</p>
@@ -82,6 +82,6 @@ export default function LoginForm(props: Props) {
           Hello USER: {user.username}, {user.email}, {user.id}
         </>
       )}
-    </div>
+    </article>
   );
 }
