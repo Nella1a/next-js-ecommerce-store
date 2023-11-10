@@ -4,7 +4,7 @@ import { useContext, useEffect } from 'react';
 import { OverlayContext } from '../../util/context/overlayContext';
 import LoginForm from '../LoginForm';
 
-export const registerStyle = (loginLayover: boolean) => css`
+export const loginLayoverStyle = (loginLayover: boolean) => css`
   background-color: rgba(0, 0, 0, 0.25);
   position: absolute;
   top: 0;
@@ -14,14 +14,29 @@ export const registerStyle = (loginLayover: boolean) => css`
   z-index: 40;
   display: ${loginLayover ? 'block' : 'none'};
 
-  article {
+  > div {
     background-color: #fff;
     position: fixed;
     right: 0;
     top: 0;
-    width: 50%;
+    width: 30rem;
     height: inherit;
-    padding: 0 1.5rem;
+    padding: 0 3rem;
+    border: 2px solid green;
+
+    > button {
+      display: inline-block;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    article {
+      margin-top: 2rem;
+    }
   }
 `;
 
@@ -46,18 +61,14 @@ export default function LoginInFormLayover(props: Props) {
   };
 
   return (
-    <section css={registerStyle(loginLayover)}>
-      <article>
+    <section css={loginLayoverStyle(loginLayover)}>
+      <div>
+        {' '}
         <button type="button" onClick={onClickHandler}>
           x
         </button>
         <LoginForm token="" />
-
-        <p>Dont' have an account yet?</p>
-        <Link href={'/register'} onClick={onClickHandler}>
-          Create one here!
-        </Link>
-      </article>
+      </div>
     </section>
   );
 }
