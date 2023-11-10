@@ -12,13 +12,7 @@ import prisma from '../prisma';
 import { createCsrfToken } from '../util/auth';
 import { OverlayContext } from '../util/context/overlayContext';
 import { authOptions } from './api/auth/[...nextauth]';
-
-const accountStyle = css`
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  border: 1px solid red;
-`;
+import { loginPageContainerStyle } from './login';
 
 type Props = {
   csrfToken: string;
@@ -53,12 +47,8 @@ export default function register(props: Props) {
             <meta name="description" content="Plant Shop" />
             <link rel="icon" href="/favicon.ico" />
           </Head>
-          <section css={accountStyle}>
+          <section css={loginPageContainerStyle}>
             <RegisterForm token={props.csrfToken} />
-          </section>
-          <section>
-            <p>Already have an account?</p>
-            <Link href={'/login'}>Login here!</Link>
           </section>
         </LayoutNoHeader>
       </>

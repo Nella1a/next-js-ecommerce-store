@@ -1,58 +1,57 @@
 import { css } from '@emotion/react';
 import { signIn } from 'next-auth/react';
+import Link from 'next/link';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { OverlayContext } from '../../util/context/overlayContext';
 import { errorStyle } from '../CheckoutForm/Shipping';
 
-export const registerStyle = css`
-  /* background-color: rgba(0, 0, 0, 0.25);
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  top: 0; */
-  //width: 50%;
-  //height: 100%;
-  //z-index: 40;
-  // margin: 0;
-
+export const loginRegisterFormStyle = css`
+  width: 100%;
   h1 {
     padding-top: 2.25rem;
     padding-bottom: 1rem;
-  }
-
-  > button {
-    position: absolute;
-    top: 0;
-    right: 0.5rem;
-    width: 55px;
-    height: auto;
-    background-color: transparent;
-    border: none;
+    text-align: center;
   }
 
   p {
     margin-top: unset;
     margin-bottom: 1rem;
+    text-align: center;
+
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
   }
 
   form {
     display: flex;
     flex-direction: column;
-    border: 1px solid green;
+    // border: 1px solid green;
     margin-bottom: 2rem;
 
     input,
     > button {
       width: 100%;
-      border-width: 1px;
-      width: 100%;
+      border-width: 2px;
       margin-bottom: 1rem;
       padding: 1.2rem;
       line-height: 1.25rem;
       font-size: 100%;
       margin-top: 0;
       font-weight: unset;
+    }
+
+    button {
+      background-color: #ed943b;
+      border: none;
     }
   }
 `;
@@ -120,13 +119,9 @@ export default function RegisterForm(props: Props) {
   };
 
   return (
-    <article css={registerStyle}>
+    <article css={loginRegisterFormStyle}>
       <h1>Create Your Account </h1>
 
-      <p>
-        lorem ipsum lorem ipsum lorem ipsum lorem ipsum ipsum lorem ipsum lorem
-        ipsum lorem.
-      </p>
       <form action="/api" css={''} onSubmit={handleSubmit(onSubmit)}>
         <input
           {...register('username', {
@@ -160,6 +155,10 @@ export default function RegisterForm(props: Props) {
 
         <button type="submit">Create Account</button>
       </form>
+      <p>
+        Already have an account? <Link href={'/login'}> Sign in here!</Link>
+      </p>
+
       {error && <div css={apiErrorStyle}>{error}</div>}
 
       {registerOkay && (

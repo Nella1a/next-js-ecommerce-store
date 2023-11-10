@@ -1,10 +1,11 @@
 import { signIn } from 'next-auth/react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { OverlayContext } from '../../util/context/overlayContext';
 import { errorStyle } from '../CheckoutForm/Shipping';
-import { registerStyle } from '../RegisterForm';
+import { loginRegisterFormStyle } from '../RegisterForm';
 
 export interface DefaultFormValues {
   email: string;
@@ -44,10 +45,10 @@ export default function LoginForm(props: Props) {
   };
 
   return (
-    <div css={registerStyle}>
+    <div css={loginRegisterFormStyle}>
       <h1>Welcome Back</h1>
 
-      <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum ipsum lorem ipsum.</p>
+      <p>Log in with your email and password</p>
       <form action="/api" css={''} onSubmit={handleSubmit(onSubmit)}>
         <input
           {...register('email', {
@@ -71,6 +72,10 @@ export default function LoginForm(props: Props) {
 
         <button type="submit">Login</button>
       </form>
+      <p>
+        Dont' have an account yet?{' '}
+        <Link href={'/register'}> Create one here!</Link>
+      </p>
 
       {registerOkay && (
         <>
