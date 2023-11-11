@@ -8,7 +8,6 @@ import Payment from '../components/CheckoutForm/Payment';
 import Shipping from '../components/CheckoutForm/Shipping';
 import CheckoutProductCard from '../components/CheckoutProductCard';
 import { checkoutPageStyle, formStyle } from '../components/elements';
-import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import LayoutNoHeaderAndFooter from '../components/Layout/LayoutNoHeaderFooter';
 import prisma from '../prisma';
 import { CartContext } from '../util/context/cartContext';
@@ -66,10 +65,11 @@ export default function CheckOut(props: Props) {
   };
 
   const submitShippingInfosHandler = async (event: any) => {
-    const noErrors = await trigger('shipping');
-    if (noErrors) {
-      setToNextStep(true);
-    }
+    // const noErrors = await trigger('shipping');
+    // if (noErrors) {
+    //   setToNextStep(true);
+    // }
+    setToNextStep(true);
   };
 
   useEffect(() => {
@@ -85,7 +85,7 @@ export default function CheckOut(props: Props) {
   const ButtonContinueToPayment = () => (
     <div>
       <button type="button" onClick={submitShippingInfosHandler}>
-        Continue to Shipping
+        Continue to Payment
       </button>
     </div>
   );
@@ -121,14 +121,14 @@ export default function CheckOut(props: Props) {
                   <ButtonContinueToPayment />
                 </>
               ) : (
-                <section>
+                <>
                   <Payment
                     register={register}
                     errors={errors}
                     getFieldState={getFieldState}
                   />
                   <ButtonSumitFormValues />
-                </section>
+                </>
               )}
             </form>
           </article>
@@ -138,6 +138,7 @@ export default function CheckOut(props: Props) {
                 <CheckoutProductCard plant={plant} />
               ))}
             </div>
+            <hr />
 
             <OrderSummary />
           </article>

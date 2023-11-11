@@ -7,19 +7,34 @@ const checkoutProductCardStyle = css`
   display: grid;
   grid-template-columns: 1fr 5fr;
   gap: 1rem;
+  // border: 1px solid red;
 
   > div:first-of-type {
     // Image
-    width: 100px;
+    width: 80px;
   }
 
   > div:nth-of-type(2) {
     // productInfoContainer
+    display: flex;
+    justify-content: space-between;
 
-    div:first-of-type {
-      // quantity
+    p:first-of-type {
+      // title and quantity
+      // border: 1px solid yellow;
+      height: 50%;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      span {
+        display: block;
+      }
+    }
+    p:nth-of-type(2) {
+      // price
+      height: 50%;
+      // border: 1px solid yellow;
+      display: flex;
+      justify-content: center;
       align-items: center;
     }
   }
@@ -45,16 +60,14 @@ export default function CheckoutProductCard(props: Props) {
       </div>
 
       <div className="ProductInfoContainer">
-        <div className="Quantity">
-          <p css={plantName}>{title}</p>
-          {quantity > 1 && <>Quantity: {quantity}</>}
-          <p className="Price">
-            €
-            {multiplePriceAndQuantity(Number(price), Number(quantity)).toFixed(
-              2,
-            )}
-          </p>
-        </div>
+        <p className="Quantity">
+          <span>{title}</span>
+          {quantity > 1 && <span>Quantity: {quantity}</span>}
+        </p>
+        <p className="Price">
+          €
+          {multiplePriceAndQuantity(Number(price), Number(quantity)).toFixed(2)}
+        </p>
       </div>
     </div>
   );

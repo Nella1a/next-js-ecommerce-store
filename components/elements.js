@@ -1039,12 +1039,12 @@ export const checkoutPageStyle = css`
   }
 
   article:nth-of-type(2) {
-    padding: 2rem;
+    // padding: 2rem;
     padding-top: unset;
     display: flex;
     flex-direction: column;
-
-    //gap: 1rem;
+    background-color: #f5f5f5;
+    border-left: 1.1px solid lightgray;
 
     > div:first-of-type {
       width: 100%;
@@ -1062,7 +1062,7 @@ export const checkoutPageStyle = css`
 
     > div:last-of-type {
       // orderSummary
-      background-color: #e0e0e0;
+      //background-color: #e0e0e0;
       height: auto;
       width: 100%;
       padding: 1.5rem;
@@ -1079,6 +1079,7 @@ export const checkoutPageStyle = css`
           padding-top: 1rem;
           font-weight: 600;
           font-size: 20px;
+          border-top: 1px solid lightgray;
         }
       }
     }
