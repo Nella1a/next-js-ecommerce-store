@@ -1027,13 +1027,14 @@ export const checkoutPageStyle = css`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
+  border-top: 1px solid #f5f5f5;
 
   @media screen and (max-width: 960px) {
     display: flex;
     flex-direction: column;
   }
   article:first-of-type {
-    border: 2px solid #e0e0e0;
+    // border: 2px solid #e0e0e0;
     padding: 0 1.5rem;
   }
 
@@ -1048,7 +1049,7 @@ export const checkoutPageStyle = css`
     > div:first-of-type {
       width: 100%;
       height: auto;
-      border: 2px solid #e0e0e0;
+      //  border: 2px solid #e0e0e0;
       padding-top: 1rem;
 
       > div {
@@ -1085,15 +1086,16 @@ export const checkoutPageStyle = css`
 `;
 
 export const formStyle = css`
-  p,
-  label,
   input {
-    margin-bottom: 6px;
+    padding-left: 1rem;
   }
+
   h2 {
     font-size: 18px;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
   }
-  margin-top: 3rem;
+
   input,
   select {
     width: 100%;
@@ -1107,8 +1109,9 @@ export const formStyle = css`
   div > p > input ~ span {
     color: red;
   }
+
   div {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 
   div:last-of-type {
