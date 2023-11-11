@@ -9,6 +9,7 @@ import Shipping from '../components/CheckoutForm/Shipping';
 import CheckoutProductCard from '../components/CheckoutProductCard';
 import { checkoutPageStyle, formStyle } from '../components/elements';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
+import LayoutNoHeaderAndFooter from '../components/Layout/LayoutNoHeaderFooter';
 import prisma from '../prisma';
 import { CartContext } from '../util/context/cartContext';
 import { CartCookieContext } from '../util/context/cookieContext';
@@ -96,7 +97,7 @@ export default function CheckOut(props: Props) {
   );
 
   return (
-    <LayoutNoHeader>
+    <LayoutNoHeaderAndFooter>
       <Head>
         <title>Checkout</title>
         <meta name="checkout" content="shipping and payment details" />
@@ -142,7 +143,7 @@ export default function CheckOut(props: Props) {
           </article>
         </div>
       </section>
-    </LayoutNoHeader>
+    </LayoutNoHeaderAndFooter>
   );
 }
 
