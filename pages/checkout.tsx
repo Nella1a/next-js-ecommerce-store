@@ -27,7 +27,7 @@ export interface DefaultFormValues {
     button: string;
   };
   payment: {
-    cartType: string;
+    cardType: string;
     cardNumber: number;
     nameOnCard: string;
     expiryDate: string;
@@ -103,46 +103,40 @@ export default function CheckOut(props: Props) {
         <meta name="checkout" content="shipping and payment details" />
       </Head>
 
-      <section>
-        <div css={checkoutPageStyle}>
-          <article>
-            <form
-              action="/api"
-              css={formStyle}
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              {!toNextStep ? (
-                <>
-                  <Shipping
-                    register={register}
-                    errors={errors}
-                    getFieldState={getFieldState}
-                  />
-                  <ButtonContinueToPayment />
-                </>
-              ) : (
-                <>
-                  <Payment
-                    register={register}
-                    errors={errors}
-                    getFieldState={getFieldState}
-                  />
-                  <ButtonSumitFormValues />
-                </>
-              )}
-            </form>
-          </article>
-          <article>
-            <div>
-              {props.plants.map((plant) => (
-                <CheckoutProductCard plant={plant} />
-              ))}
-            </div>
-            <hr />
+      <section css={checkoutPageStyle}>
+        <article>
+          <form action="/api" css={formStyle} onSubmit={handleSubmit(onSubmit)}>
+            {!toNextStep ? (
+              <>
+                <Shipping
+                  register={register}
+                  errors={errors}
+                  getFieldState={getFieldState}
+                />
+                <ButtonContinueToPayment />
+              </>
+            ) : (
+              <>
+                <Payment
+                  register={register}
+                  errors={errors}
+                  getFieldState={getFieldState}
+                />
+                <ButtonSumitFormValues />
+              </>
+            )}
+          </form>
+        </article>
+        <article>
+          <div>
+            {props.plants.map((plant) => (
+              <CheckoutProductCard plant={plant} />
+            ))}
+          </div>
+          <hr />
 
-            <OrderSummary />
-          </article>
-        </div>
+          <OrderSummary />
+        </article>
       </section>
     </LayoutNoHeaderAndFooter>
   );
