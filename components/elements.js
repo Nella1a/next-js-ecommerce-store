@@ -1028,6 +1028,7 @@ export const checkoutPageStyle = css`
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   border-top: 1px solid #f5f5f5;
+  height: 100vh;
 
   @media screen and (max-width: 960px) {
     display: flex;
@@ -1045,6 +1046,7 @@ export const checkoutPageStyle = css`
     flex-direction: column;
     background-color: #f5f5f5;
     border-left: 1.1px solid lightgray;
+    width: inherit;
 
     > div:first-of-type {
       width: 100%;
