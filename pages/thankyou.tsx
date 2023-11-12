@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
-import { disableGrayLayer } from '../hooks';
 
 export default function ThankYouPage() {
   // disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer);
