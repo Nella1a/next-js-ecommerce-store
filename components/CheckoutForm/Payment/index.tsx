@@ -14,10 +14,10 @@ export default function Payment({
       <div>
         <label htmlFor="cardType" />
         <select
-          {...register('payment.cartType', {
+          {...register('payment.cardType', {
             required: true,
           })}
-          css={errorStyle(errors.payment?.cartType?.type)}
+          css={errorStyle(errors.payment?.cardType?.type)}
           data-test-id="checkout-card-type"
         >
           {' '}
