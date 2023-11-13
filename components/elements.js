@@ -1195,23 +1195,24 @@ export const underConstruction = css`
 /* *************************** */
 
 export const deliveryInfos = () => css`
-  border: 1px solid red;
+  //border: 2px solid red;
   background-color: #709f7a;
   color: #000;
   height: 8rem;
-  //max-width: 1920px;
-  width: 100%;
+  max-width: unset;
+  width: 100vw;
   display: flex;
   justify-content: center;
 
   div {
-    height: inherit;
+    max-width: 1920px;
     width: 100%;
+    height: inherit;
+    margin: 0 auto;
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
-    align-items: center;
+    //background-color: blue;
 
     > div {
       gap: 1rem;
