@@ -8,6 +8,7 @@ export const checkOutHeaderStyle = css`
   background-color: transparent;
   width: 100vw;
   border-bottom: 1px solid lightgrey;
+  z-index: 1;
   // border: 2px solid red;
 
   // container
@@ -16,8 +17,6 @@ export const checkOutHeaderStyle = css`
     width: 100%;
     background-color: var(--backgroundColorWhite);
 
-    top: 0;
-    z-index: 1;
     margin: auto;
     display: flex;
     padding: 0 3rem;
@@ -27,14 +26,11 @@ export const checkOutHeaderStyle = css`
     // shelovesPlants logo
     > div:first-of-type {
       width: 100%;
-      margin: 0 auto;
-
-      top: 0px;
+      margin: auto;
       gap: 2rem;
       align-items: center;
       display: flex;
       justify-content: space-between;
-      z-index: 1;
       height: 4rem;
 
       img {
