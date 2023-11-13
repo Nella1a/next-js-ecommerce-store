@@ -1035,6 +1035,7 @@ export const checkoutPageStyle = css`
   gap: 2rem;
   border-top: 1px solid #f5f5f5;
   height: 100vh;
+  margin-top: unset;
 
   @media screen and (max-width: 960px) {
     display: flex;
