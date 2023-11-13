@@ -59,38 +59,40 @@ export default function Navigation() {
 
       <nav css={headerStyle}>
         <div>
-          <Link href="/" passHref>
-            <img src="/logo_shelovesplants.svg" alt="logo she loves plants" />
-          </Link>
-        </div>
-        <div>
-          {screenwidth > BREAKPOINTAT768 ? (
-            <ul>
-              <NavMenu />
-              <li>{shoppingBagIcon()}</li>
-            </ul>
-          ) : (
-            <ul>
-              <li>
-                <button>
-                  <span
-                    onClick={toggleMobileMenuHandler}
-                    onKeyDown={toggleMobileMenuHandler}
-                    role="menu"
-                    tabIndex={0}
-                  >
-                    <Image
-                      src="/menu.png"
-                      width="29"
-                      height="29"
-                      alt="menu icon"
-                    />
-                  </span>
-                </button>
-              </li>
-              <li>{shoppingBagIcon()}</li>
-            </ul>
-          )}
+          <div>
+            <Link href="/" passHref>
+              <img src="/logo_shelovesplants.svg" alt="logo she loves plants" />
+            </Link>
+          </div>
+          <div>
+            {screenwidth > BREAKPOINTAT768 ? (
+              <ul>
+                <NavMenu />
+                <li>{shoppingBagIcon()}</li>
+              </ul>
+            ) : (
+              <ul>
+                <li>
+                  <button>
+                    <span
+                      onClick={toggleMobileMenuHandler}
+                      onKeyDown={toggleMobileMenuHandler}
+                      role="menu"
+                      tabIndex={0}
+                    >
+                      <Image
+                        src="/menu.png"
+                        width="29"
+                        height="29"
+                        alt="menu icon"
+                      />
+                    </span>
+                  </button>
+                </li>
+                <li>{shoppingBagIcon()}</li>
+              </ul>
+            )}
+          </div>
         </div>
       </nav>
     </Fragment>

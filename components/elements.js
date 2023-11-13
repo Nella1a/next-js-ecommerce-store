@@ -126,107 +126,112 @@ const size = (width = '100%', height = '100%') => {
 /* *************************** */
 
 export const headerStyle = css`
-  max-width: 1920px;
-  width: 100%;
   position: fixed;
-  background-color: var(--backgroundColorWhite);
-  top: 0;
-  z-index: 1;
-  margin: auto;
-  display: flex;
-  padding: 0 3rem;
-  padding-top: 0.5rem;
-  border-bottom: 0px solid lightgrey;
-  box-shadow: rgba(0, 0, 0, 0.45) 0px 15px 10px -20px;
-
-  // shelovesPlants logo
-  > div:first-of-type {
+  background-color: transparent;
+  z-index: 2;
+  width: 100vw;
+  // container
+  > div {
+    max-width: 1920px;
     width: 100%;
-    ${marginCenter}
-    margin: auto;
-
-    position: relative;
-    top: 0px;
-    gap: 2rem;
-    align-items: center;
+    background-color: var(--backgroundColorWhite);
+    margin: 0 auto;
     display: flex;
-    justify-content: space-between;
-    z-index: 1;
-    height: 4rem;
+    padding: 0 3rem;
+    padding-top: 0.5rem;
+    border-bottom: 0px solid lightgrey;
+    // box-shadow: rgba(0, 0, 0, 0.45) 0px 15px 10px -20px;
+    border: 2px solid red;
 
-    img {
-      width: 80%;
-      height: auto;
-    }
-  }
-  // links
-  > div:nth-of-type(2) {
-    width: 100%;
-    ${marginCenter}
-    margin: auto;
+    // shelovesPlants logo
+    > div:first-of-type {
+      width: 100%;
+      ${marginCenter}
+      margin: auto;
 
-    position: relative;
-    top: 0px;
-    gap: 2rem;
-    align-items: center;
-    display: flex;
-    justify-content: end;
-    z-index: 1;
-    height: 4rem;
-    color: #43964f;
-
-    ul {
-      list-style-type: none;
-      list-style-position: inside;
+      position: relative;
+      top: 0px;
+      gap: 2rem;
+      align-items: center;
       display: flex;
-      gap: 3rem;
-      margin: 0;
+      justify-content: space-between;
+      z-index: 1;
+      height: 4rem;
 
-      li {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        //  border: 2px solid blue;
-      }
-
-      button {
-        all: unset;
-        color: black;
-        font-weight: bold;
-        cursor: pointer;
-      }
-
-      a {
-        text-decoration: none;
-        display: block;
-        font-weight: bold;
-        color: black;
+      img {
+        width: 80%;
+        height: auto;
       }
     }
+    // links
+    > div:nth-of-type(2) {
+      width: 100%;
+      ${marginCenter}
+      margin: auto;
 
-    @media (max-width: 1200px) {
-      gap: 1rem;
-    }
+      position: relative;
+      top: 0px;
+      gap: 2rem;
+      align-items: center;
+      display: flex;
+      justify-content: end;
+      z-index: 1;
+      height: 4rem;
+      color: #43964f;
 
-    @media (max-width: 768px) {
       ul {
-        gap: 2rem;
-      }
-      button {
-        all: unset;
-        display: block;
-        margin-left: auto;
-        position: relative;
-        top: 6px;
+        list-style-type: none;
+        list-style-position: inside;
+        display: flex;
+        gap: 3rem;
+        margin: 0;
 
-        > span {
+        li {
           display: flex;
           flex-direction: column;
+          justify-content: center;
+          //  border: 2px solid blue;
+        }
 
-          padding-top: 0.5rem;
+        button {
+          all: unset;
+          color: black;
+          font-weight: bold;
+          cursor: pointer;
+        }
+
+        a {
+          text-decoration: none;
+          display: block;
+          font-weight: bold;
+          color: black;
         }
       }
-      gap: 2rem;
+
+      @media (max-width: 1200px) {
+        gap: 1rem;
+      }
+
+      @media (max-width: 768px) {
+        ul {
+          gap: 2rem;
+        }
+        button {
+          all: unset;
+          display: block;
+          margin-left: auto;
+          position: relative;
+          top: 6px;
+
+          > span {
+            display: flex;
+            flex-direction: column;
+
+            padding-top: 0.5rem;
+          }
+        }
+        gap: 2rem;
+      }
     }
   }
 `;
@@ -507,7 +512,8 @@ export const MobileFooterStyle = css`
 export const bgImgContainer = css`
   height: 600px;
   position: relative;
-  border: 1px solid red;
+  top: 0;
+  border: 2px solid yellow;
   width: 100vw;
   display: flex;
   align-items: center;
