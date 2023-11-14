@@ -48,6 +48,13 @@ export default function register(props: Props) {
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <section css={loginPageContainerStyle}>
+            <article>
+              <p> Welcome! Create Your Account.</p>
+              <p>
+                Already have an account?{' '}
+                <Link href={'/login'}> Sign in here!</Link>
+              </p>
+            </article>
             <RegisterForm token={props.csrfToken} />
           </section>
         </LayoutNoHeader>
