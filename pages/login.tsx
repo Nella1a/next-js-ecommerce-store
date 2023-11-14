@@ -41,6 +41,7 @@ export const loginPageContainerStyle = css`
       input {
         background-color: rgb(249 248 247);
         border: 0.8 solid gray;
+        border-width: 1px;
       }
     }
   }
