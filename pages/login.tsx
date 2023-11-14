@@ -13,13 +13,37 @@ import { createCsrfToken } from '../util/auth';
 import { authOptions } from './api/auth/[...nextauth]';
 
 export const loginPageContainerStyle = css`
-  width: 31rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  background-color: rgba(211, 211, 211, 0.5);
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: start;
+  gap: 5rem;
+  //background-color: rgba(211, 211, 211, 0.5);
+  margin-top: 10rem;
+  article:first-of-type {
+    width: 44%;
+    height: 100%;
+
+    p {
+      font-size: 35px;
+      font-weight: 500;
+      line-height: 3rem;
+    }
+    p:last-of-type {
+      font-size: inherit;
+    }
+  }
+
+  article:nth-of-type(2) {
+    width: 44%;
+    height: 100%;
+    form {
+      input {
+        background-color: rgb(249 248 247);
+        border: 0.8 solid gray;
+      }
+    }
+  }
 `;
 
 type Props = {
@@ -49,6 +73,13 @@ export default function Login(props: Props) {
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <section css={loginPageContainerStyle}>
+            <article>
+              <p>Welcome back! Log in with your email and password</p>
+              <p>
+                Dont' have an account yet?{' '}
+                <Link href={'/register'}> Create one here!</Link>
+              </p>
+            </article>
             <LoginForm token={props.csrfToken} />
           </section>
         </LayoutNoHeader>
