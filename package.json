@@ -30,7 +30,7 @@
     "react-dom": "^18.2.0",
     "react-final-form": "^6.5.9",
     "react-hook-form": "^7.43.7",
-    "sharp": "^0.30.5"
+    "sharp": "^0.32.6"
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.22.5",
