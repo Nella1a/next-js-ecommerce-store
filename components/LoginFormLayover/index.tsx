@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import Router, { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
 import { OverlayContext } from '../../util/context/overlayContext';
 import LoginForm from '../LoginForm';
@@ -32,6 +34,11 @@ export const loginLayoverStyle = (loginLayover: boolean) => css`
 
     p:last-of-type {
       font-size: medium;
+
+      span {
+        font-weight: 600;
+        cursor: pointer;
+      }
     }
     > button {
       position: absolute;
@@ -46,13 +53,6 @@ export const loginLayoverStyle = (loginLayover: boolean) => css`
     article {
       margin-top: 2rem;
     }
-    a,
-    a:hover,
-    a:active,
-    a:visited {
-      font-weight: 600;
-      color: #000;
-    }
   }
 `;
 
@@ -63,6 +63,7 @@ type Props = {
 export default function LoginInFormLayover(props: Props) {
   const { toggle, toggleLayover, loginLayover, toggleLoginLayover } =
     useContext(OverlayContext);
+  const pathName = usePathname();
 
   useEffect(() => {
     if (loginLayover) {
@@ -74,6 +75,14 @@ export default function LoginInFormLayover(props: Props) {
 
   const onClickHandler = () => {
     toggleLoginLayover();
+  };
+
+  const onClickhandlerCreateAccount = () => {
+    if (pathName.includes('/register')) {
+      toggleLoginLayover();
+    } else {
+      Router.push('/register');
+    }
   };
 
   return (
@@ -88,7 +97,7 @@ export default function LoginInFormLayover(props: Props) {
         <LoginForm token="" />
         <p>
           Don't have an account yet?{' '}
-          <Link href={'/register'}> Create one here.</Link>
+          <span onClick={onClickhandlerCreateAccount}> Create one here.</span>
         </p>
       </div>
     </section>
