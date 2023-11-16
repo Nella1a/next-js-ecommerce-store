@@ -32,18 +32,20 @@ export const loginPageContainerStyle = css`
     p:last-of-type {
       font-size: inherit;
     }
+
+    a,
+    a:hover,
+    a:active,
+    a:visited {
+      font-weight: 600;
+      color: #000;
+      text-decoration: none;
+    }
   }
 
   article:nth-of-type(2) {
     width: 44%;
     height: 100%;
-    form {
-      input {
-        background-color: rgb(249 248 247);
-        border: 0.8 solid gray;
-        border-width: 1px;
-      }
-    }
   }
 `;
 
@@ -75,10 +77,10 @@ export default function Login(props: Props) {
           </Head>
           <section css={loginPageContainerStyle}>
             <article>
-              <p>Welcome back! Log in with your email and password</p>
+              <p>Welcome back! Log in to your account.</p>
               <p>
-                Dont' have an account yet?{' '}
-                <Link href={'/register'}> Create one here!</Link>
+                Don't have an account yet?{' '}
+                <Link href={'/register'}> Create one here.</Link>
               </p>
             </article>
             <LoginForm token={props.csrfToken} />

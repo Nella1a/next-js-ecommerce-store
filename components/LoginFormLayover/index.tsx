@@ -88,7 +88,7 @@ export default function LoginInFormLayover(props: Props) {
         <LoginForm token="" />
         <p>
           Don't have an account yet?{' '}
-          <Link href={'/register'}> Create one here!</Link>
+          <Link href={'/register'}> Create one here.</Link>
         </p>
       </div>
     </section>
