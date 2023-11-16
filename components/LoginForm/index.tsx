@@ -46,9 +46,6 @@ export default function LoginForm(props: Props) {
 
   return (
     <article css={loginRegisterFormStyle}>
-      <h1>Welcome Back</h1>
-
-      <p>Log in with your email and password</p>
       <form action="/api" css={''} onSubmit={handleSubmit(onSubmit)}>
         <input
           {...register('email', {
@@ -72,10 +69,6 @@ export default function LoginForm(props: Props) {
 
         <button type="submit">Login</button>
       </form>
-      <p>
-        Dont' have an account yet?{' '}
-        <Link href={'/register'}> Create one here!</Link>
-      </p>
 
       {registerOkay && (
         <>
