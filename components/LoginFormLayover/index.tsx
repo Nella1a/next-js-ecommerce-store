@@ -22,20 +22,36 @@ export const loginLayoverStyle = (loginLayover: boolean) => css`
     width: 30rem;
     height: inherit;
     padding: 0 3rem;
+    padding-top: 3rem;
     border: 2px solid green;
 
+    p:first-of-type {
+      font-size: x-large;
+      font-weight: 900;
+    }
+
+    p:last-of-type {
+      font-size: medium;
+    }
     > button {
+      position: absolute;
+      top: 0;
+      right: 0;
       display: inline-block;
       background-color: transparent;
       border: none;
       cursor: pointer;
       font-size: 20px;
-      position: absolute;
-      top: 0;
-      right: 0;
     }
     article {
       margin-top: 2rem;
+    }
+    a,
+    a:hover,
+    a:active,
+    a:visited {
+      font-weight: 600;
+      color: #000;
     }
   }
 `;
@@ -67,7 +83,13 @@ export default function LoginInFormLayover(props: Props) {
         <button type="button" onClick={onClickHandler}>
           x
         </button>
+        <p>Welcome back!</p>
+        <p>Log into your account to manage your orders.</p>
         <LoginForm token="" />
+        <p>
+          Don't have an account yet?{' '}
+          <Link href={'/register'}> Create one here!</Link>
+        </p>
       </div>
     </section>
   );
