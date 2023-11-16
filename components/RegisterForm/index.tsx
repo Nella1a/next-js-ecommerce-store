@@ -35,12 +35,12 @@ export const loginRegisterFormStyle = css`
     display: flex;
     flex-direction: column;
     // border: 1px solid green;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 
     input,
     > button {
       width: 100%;
-      border-width: 2px;
+      border-width: 1px;
       margin-bottom: 1rem;
       padding: 1.2rem;
       line-height: 1.25rem;
@@ -49,6 +49,9 @@ export const loginRegisterFormStyle = css`
       font-weight: unset;
     }
 
+    input {
+      color: rgb(249 248 247);
+    }
     button {
       background-color: #ed943b;
       border: none;
@@ -120,8 +123,6 @@ export default function RegisterForm(props: Props) {
 
   return (
     <article css={loginRegisterFormStyle}>
-      <h1>Create Your Account </h1>
-
       <form action="/api" css={''} onSubmit={handleSubmit(onSubmit)}>
         <input
           {...register('username', {
@@ -155,9 +156,6 @@ export default function RegisterForm(props: Props) {
 
         <button type="submit">Create Account</button>
       </form>
-      <p>
-        Already have an account? <Link href={'/login'}> Sign in here!</Link>
-      </p>
 
       {error && <div css={apiErrorStyle}>{error}</div>}
 
