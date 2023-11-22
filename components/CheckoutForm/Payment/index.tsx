@@ -15,7 +15,7 @@ export default function Payment({
         <label htmlFor="cardType" />
         <select
           {...register('payment.cardType', {
-            required: true,
+            required: 'Payment card is missing.',
           })}
           css={errorStyle(errors.payment?.cardType?.type)}
           data-test-id="checkout-card-type"
@@ -62,7 +62,7 @@ export default function Payment({
           <input
             style={{ width: '100%' }}
             {...register('payment.expiryDate', {
-              required: true,
+              required: 'Please enter a valid date in the MM/YY format.',
               pattern: {
                 value: dateMonthYearRegex,
                 message: 'Please enter a valid date in the MM/YY format',

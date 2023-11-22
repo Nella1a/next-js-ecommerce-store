@@ -96,11 +96,11 @@ export default async function handler(
       //   username: user.username,
       //   email: user.email,
       // });
-      return {
+      return res.status(200).json({
         id: user.id,
         username: user.username,
         email: user.email,
-      };
+      });
     } catch (e) {
       if (e instanceof Prisma.PrismaClientKnownRequestError) {
         if (e.code === 'P2002') {

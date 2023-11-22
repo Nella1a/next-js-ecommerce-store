@@ -30,8 +30,7 @@
     "**/*.js",
     "**/*.jsx",
     "**/*.cjs",
-    "**/*.mjs",
-    "./next-auth.d.ts"
+    "**/*.mjs"
   ],
   "exclude": ["node_modules", "build"]
 }

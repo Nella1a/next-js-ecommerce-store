@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -112,10 +111,6 @@ export default function RegisterForm(props: Props) {
     }
     setRegisterOkay(true);
     setUser(response);
-    signIn('credentials', {
-      ...data,
-      callbackUrl: '/account',
-    });
   };
 
   return (

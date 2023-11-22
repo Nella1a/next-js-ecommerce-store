@@ -1,8 +1,7 @@
-import { signIn } from 'next-auth/react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { Router, useRouter } from 'next/router';
 import { useContext, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useFormState } from 'react-hook-form';
 import { OverlayContext } from '../../util/context/overlayContext';
 import { errorStyle } from '../CheckoutForm/Shipping';
 import { loginRegisterFormStyle } from '../RegisterForm';
@@ -26,8 +25,8 @@ export default function LoginForm(props: Props) {
     trigger,
   } = useForm<DefaultFormValues>({ defaultValues });
 
-  const { toggleLayover } = useContext(OverlayContext);
-  const [error, setError] = useState(undefined);
+  const { toggleLayover, toggleLoginLayover } = useContext(OverlayContext);
+  const [error, setError] = useState('');
   const [registerOkay, setRegisterOkay] = useState(false);
   const [user, setUser] = useState({
     username: undefined,
@@ -37,11 +36,6 @@ export default function LoginForm(props: Props) {
 
   const onSubmit = async (formValues: DefaultFormValues) => {
     console.log('----> LoginForm Values: ', formValues);
-
-    signIn('credentials', {
-      ...formValues,
-      callbackUrl: '/account',
-    });
   };
 
   return (
@@ -65,11 +59,12 @@ export default function LoginForm(props: Props) {
           data-test-id="password"
           css={errorStyle(errors.password?.type)}
           placeholder="Password"
+          type="password"
         />
 
         <button type="submit">Login</button>
       </form>
-
+      {error && <p>{error}</p>}
       {registerOkay && (
         <>
           Hello USER: {user.username}, {user.email}, {user.id}

@@ -1,5 +1,4 @@
 import { Global, ThemeProvider } from '@emotion/react';
-import { SessionProvider } from 'next-auth/react';
 import { globalStyleBody } from '../components/elements';
 import LoginInFormLayover from '../components/LoginFormLayover';
 import theme from '../components/theme';
@@ -10,19 +9,17 @@ import { OverLayContextProvider } from '../util/context/overlayContext';
 function MyApp({ Component, pageProps: { session, ...pageProps } }: any) {
   return (
     <>
-      <SessionProvider session={session}>
-        <OverLayContextProvider>
-          <CartContextProvider>
-            <CartCookieProvider>
-              <ThemeProvider theme={theme}>
-                <Global styles={globalStyleBody(theme)} />
-                <Component {...pageProps} />
-                <LoginInFormLayover token={''} />
-              </ThemeProvider>
-            </CartCookieProvider>
-          </CartContextProvider>
-        </OverLayContextProvider>
-      </SessionProvider>
+      <OverLayContextProvider>
+        <CartContextProvider>
+          <CartCookieProvider>
+            <ThemeProvider theme={theme}>
+              <Global styles={globalStyleBody(theme)} />
+              <Component {...pageProps} />
+              <LoginInFormLayover token={''} />
+            </ThemeProvider>
+          </CartCookieProvider>
+        </CartContextProvider>
+      </OverLayContextProvider>
     </>
   );
 }
