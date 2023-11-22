@@ -1,8 +1,11 @@
 import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
+import { Session } from 'next-auth';
 import { getServerSession } from 'next-auth/next';
 import { getSession, useSession } from 'next-auth/react';
+import { redirect } from 'next/dist/server/api-utils';
 import Head from 'next/head';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
 import Router from 'next/router';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
@@ -50,23 +53,26 @@ export const loginPageContainerStyle = css`
 `;
 
 type Props = {
-  csrfToken: string;
-  session?: any;
-  test: string;
+  //csrfToken: string;
+  session?: Session | null;
+  //test: string;
 };
 
 export default function Login(props: Props) {
-  const { data, status } = useSession();
+  //const { data: session, status } = useSession();
+  //const { data: session, status } = props.session;
   console.log('props.session: ', props.session);
-  console.log('props.test: ', props);
+  //console.log('props.test: ', props);
+
+  //console.log('next header cookies: ', cookies.name);
 
   //const { user, status } = props.session;
 
   ///console.log('data: ', user);
-  console.log('token: ', props.csrfToken);
+  // console.log('token: ', props.csrfToken);
   // if (status !== 'authenticated')
-  if (status === 'authenticated') Router.push('/');
-  if (status !== 'authenticated') {
+  if (props.session) Router.push('/');
+  if (!props.session) {
     return (
       <>
         <LayoutNoHeader>
@@ -83,10 +89,33 @@ export default function Login(props: Props) {
                 <Link href={'/register'}> Create one here.</Link>
               </p>
             </article>
-            <LoginForm token={props.csrfToken} />
+            <LoginForm token={'string'} />
           </section>
         </LayoutNoHeader>
       </>
     );
   }
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  // 1. Check if there is a token
+  const token = context;
+  //console.log('---> context.req.cookies: ', context.req.cookies);
+
+  const session = await getServerSession(context.req, context.res, authOptions);
+  console.log('SESSION: ', session);
+
+  if (session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {
+      session: session,
+    },
+  };
 }
