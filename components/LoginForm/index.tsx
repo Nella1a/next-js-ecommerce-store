@@ -35,12 +35,12 @@ export default function LoginForm(props: Props) {
     id: undefined,
   });
 
-  const onSubmit = async (data: DefaultFormValues) => {
-    console.log('----> LoginForm Values: ', data);
+  const onSubmit = async (formValues: DefaultFormValues) => {
+    console.log('----> LoginForm Values: ', formValues);
 
     signIn('credentials', {
-      ...data,
-      callbackUrl: '/',
+      ...formValues,
+      callbackUrl: '/account',
     });
   };
 

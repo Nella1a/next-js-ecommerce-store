@@ -49,9 +49,6 @@ export const loginRegisterFormStyle = css`
       font-weight: unset;
     }
 
-    input {
-      color: rgb(249 248 247);
-    }
     button {
       background-color: #ed943b;
       border: none;
@@ -117,7 +114,7 @@ export default function RegisterForm(props: Props) {
     setUser(response);
     signIn('credentials', {
       ...data,
-      callbackUrl: '/',
+      callbackUrl: '/account',
     });
   };
 
