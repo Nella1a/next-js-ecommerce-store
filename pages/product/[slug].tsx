@@ -41,8 +41,27 @@ export default function SingleProduct(
 
   const updateCartAndCookieHandler = () => {
     updateCartQuantity(id, quantity);
-
     updateCart(id, price, quantity, title);
+
+    const addToCartFunction = async () => {
+      const res = await fetch('/api/addToCart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id, quantity }),
+      });
+
+      const response = await res.json();
+      console.log('response: ', response);
+
+      if ('error' in response) {
+        console.log('response: ', response);
+        return null;
+      }
+    };
+
+    addToCartFunction();
   };
 
   return (
