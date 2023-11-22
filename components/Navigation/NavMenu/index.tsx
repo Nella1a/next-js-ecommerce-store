@@ -1,4 +1,4 @@
-import { getSession, useSession } from 'next-auth/react';
+import { getSession, signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import Router from 'next/router';
 import { useContext } from 'react';
@@ -12,7 +12,7 @@ export default function NavMenu() {
   };
 
   const onClickLogoutHandler = () => {
-    Router.push('/');
+    signOut();
   };
 
   const loginButton = () => (
