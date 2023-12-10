@@ -70,3 +70,35 @@ export default function Login() {
     </>
   );
 }
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  // 1. Check if there is a token and valid
+
+  const token = context.req.cookies.sessionToken;
+  const currentDate = new Date();
+  if (token) {
+    // 2. check if token is valid and redirect to welcome page ->
+    // thus user can't login multiple times
+    const session = await prisma.userSession.findFirst({
+      where: {
+        token: token,
+        expire_at: { gte: currentDate.toISOString() },
+      },
+    });
+    console.log('SESSION: :', session);
+    if (session) {
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false,
+        },
+      };
+    }
+  }
+  // 3. Generate CSRF token and render the page
+  return {
+    props: {
+      csrfToken: createCsrfToken(),
+    },
+  };
+}

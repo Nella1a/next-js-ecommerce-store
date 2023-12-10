@@ -131,7 +131,7 @@ model User {
   user_details  UserDetail?
   user_roles    UserRole?     @relation(fields: [role_id], references: [id], onDelete: Cascade)
   users_payment UserPayment[]
-  user_sessions UserSession?
+  user_sessions UserSession[]
 
 
   @@unique([email, username])
@@ -152,10 +152,10 @@ model UserPayment {
 
 model UserSession {
   id           Int       @id @default(autoincrement())
-  token        Int?
-  expire_at    DateTime? @db.Date
-  user_id      Int?    @unique
-  users        User?   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  token        String
+  expire_at    DateTime   @default(dbgenerated("now() + interval '24 hours'"))
+  user_id      Int
+  users        User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("user_sessions")
 }

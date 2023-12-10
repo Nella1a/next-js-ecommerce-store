@@ -1,7 +1,9 @@
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import Link from 'next/link';
 import Router from 'next/router';
 import { useContext } from 'react';
 import { OverlayContext } from '../../../util/context/overlayContext';
+import { auth } from '../../../util/firebase-config';
 
 export default function NavMenu() {
   const { toggleLoginLayover } = useContext(OverlayContext);
@@ -10,7 +12,18 @@ export default function NavMenu() {
     toggleLoginLayover();
   };
 
-  const onClickLogoutHandler = () => {};
+  const onClickLogoutHandler = () => {
+    //Sign out with the Firebase client
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        console.log('Signed out');
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log('error during signed out');
+      });
+  };
 
   const loginButton = () => (
     <button data-test-id="login-link" onClick={onClickLoginHandler}>
@@ -32,7 +45,7 @@ export default function NavMenu() {
           Plants
         </Link>
       </li>
-      <li>{loginButton()}</li>
+      <li>{auth.currentUser ? logoutButton() : loginButton()}</li>
     </>
   );
 }

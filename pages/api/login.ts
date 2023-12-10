@@ -1,6 +1,23 @@
+import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
+import * as admin from 'firebase-admin';
+import { FirebaseError } from 'firebase/app';
 import type { NextApiRequest, NextApiResponse } from 'next';
+//import type { Database } from 'types_db';
 import prisma from '../../prisma';
+import { createSerializedRegisterSessionTokenCookie } from '../../util/cookies';
+
+// export default async (req: NextApiRequest, res: NextApiResponse) => {
+//   const supabaseServerClient = createPagesServerClient<Database>({
+//     req,
+//     res,
+//   });
+//   const {
+//     data: { user },
+//   } = await supabaseServerClient.auth.getUser();
+
+//   res.status(200).json({ name: user?.userName ?? '' });
+// };
 
 type ResponseData = {
   id: number;
@@ -42,7 +59,7 @@ export default async function handler(
       },
     });
 
-    console.log('found user: ', user);
+    console.log('\n--->found user: ', user);
     if (!user) {
       return res
         .status(401)
@@ -52,7 +69,7 @@ export default async function handler(
     // compare passwordHash
     const passwordMatches = await bcrypt.compare(password, user.password_hash);
 
-    console.log('passwordHast: ', passwordMatches);
+    console.log('\n-->passwordHast: ', passwordMatches);
     if (!passwordMatches) {
       console.log('PW is not right');
       return res
@@ -60,8 +77,31 @@ export default async function handler(
         .json({ errors: [{ message: 'Invalid credentials' }] });
     }
 
-    return res.status(201).json({
+    const token = crypto.randomBytes(100).toString('base64');
+
+    // add token to session_table
+    const userSession = await prisma.userSession.create({
+      data: {
+        user_id: user.id,
+        token,
+      },
+    });
+
+    console.log('---> session: ', userSession);
+    if (!userSession) {
+      return res
+        .status(500)
+        .json({ errors: [{ message: 'Error creaging session' }] });
+    }
+
+    const serializedCookie = createSerializedRegisterSessionTokenCookie(
+      userSession.token,
+    );
+
+    return res.setHeader('Set-Cookie', serializedCookie).status(200).json({
       id: user.id,
+      username: user.username,
+      email: user.email,
     });
   } else {
     return res.status(405).json({
@@ -69,25 +109,3 @@ export default async function handler(
     });
   }
 }
-
-//  // query user in db
-//  try {
-//   const user = await prisma.user.findUnique({
-//     where: {
-//       email: email,
-//     },
-//     select: {
-//       id: true,
-//       email: true,
-//       password_hash: true,
-//       username: true,
-//     },
-//   });
-// } catch (e) {
-//   if (e instanceof Prisma.PrismaClientKnownRequestError) {
-//     if (e.code === 'P2002') {
-//       return res.status(400).json({ errors: [{ message: e.message }] });
-//     }
-//     return res.status(400).json({ errors: [{ message: e.message }] });
-//   }
-// }

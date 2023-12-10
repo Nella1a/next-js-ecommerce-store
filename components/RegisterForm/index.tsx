@@ -1,8 +1,11 @@
 import { css } from '@emotion/react';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import Link from 'next/link';
-import { useContext, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { OverlayContext } from '../../util/context/overlayContext';
+import { auth } from '../../util/firebase-config';
 import { errorStyle } from '../CheckoutForm/Shipping';
 
 export const loginRegisterFormStyle = css`
@@ -82,6 +85,8 @@ export default function RegisterForm(props: Props) {
     trigger,
   } = useForm<DefaultFormValues>({ defaultValues });
 
+  //console.log('ENV: ', process.config());
+
   const { toggle, toggleLayover } = useContext(OverlayContext);
   const [error, setError] = useState(undefined);
   const [registerOkay, setRegisterOkay] = useState(false);
@@ -90,27 +95,53 @@ export default function RegisterForm(props: Props) {
     email: undefined,
     id: undefined,
   });
+  const router = useRouter();
 
   const onSubmit = async (data: DefaultFormValues) => {
     console.log('----> RegisterForm Values: ', data);
 
-    const res = await fetch('/api/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ ...data }),
-    });
+    createUserWithEmailAndPassword(auth, data.email, data.password)
+      // Signed up firebase
+      .then(async (userCredential) => {
+        // send token to backend
+        const user = userCredential.user;
+        console.log('user: ', user);
 
-    const response = await res.json();
+        fetch('/api/register', {
+          method: 'POST',
+          headers: {
+            Authorization: await user.getIdToken(),
+          },
+        }).then((response) => {
+          if (response.status === 200) {
+            setRegisterOkay(true);
+            router.push('/pages/account');
+          }
+        });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
 
-    if ('error' in response) {
-      setError(response.error);
-      console.log('response: ', response);
-      return null;
-    }
-    setRegisterOkay(true);
-    setUser(response);
+    // const res = await fetch('/api/register', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({ ...data }),
+    // });
+
+    // const response = await res.json();
+
+    // if ('error' in response) {
+    //   setError(response.error);
+    //   console.log('response: ', response);
+    //   return null;
+    // }
+    // setRegisterOkay(true);
+    // setUser(response);
   };
 
   return (

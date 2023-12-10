@@ -1,8 +1,10 @@
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import Link from 'next/link';
 import { Router, useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { useForm, useFormState } from 'react-hook-form';
 import { OverlayContext } from '../../util/context/overlayContext';
+import { auth } from '../../util/firebase-config';
 import { errorStyle } from '../CheckoutForm/Shipping';
 import { loginRegisterFormStyle } from '../RegisterForm';
 
@@ -34,8 +36,44 @@ export default function LoginForm(props: Props) {
     id: undefined,
   });
 
-  const onSubmit = async (formValues: DefaultFormValues) => {
+  const onSubmit = (formValues: DefaultFormValues) => {
     console.log('----> LoginForm Values: ', formValues);
+
+    signInWithEmailAndPassword(auth, formValues.email, formValues.password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log('logged in USER: ', user);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+
+    // async function loginUser() {
+    //   const response = await fetch('/api/login', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       ...formValues,
+    //     }),
+    //   });
+
+    //   const resp = await response.json();
+
+    //   if ('error' in resp) {
+    //     setError('Eerror');
+    //   } else {
+    //     setRegisterOkay(true);
+    //     console.log('-------> resp: ', resp);
+    //     router.push(`/myaccount/`);
+    //   }
+    // }
+
+    // loginUser();
   };
 
   return (
