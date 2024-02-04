@@ -1,117 +1,52 @@
-import crypto from 'node:crypto';
-import { Prisma } from '@prisma/client';
-import bcrypt from 'bcrypt';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../prisma';
-import { verifyCsrfToken } from '../../util/auth';
+import { firebaseAdmin } from '../../util/firebase-admin-config';
 
 type ResponseData = {
-  id: number;
-  username: string;
-  email: string;
+  registration: string;
 };
-
-export type Error = { errors: { message: string }[] };
+export type ErrorAPI = { error: { message: string } };
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ResponseData | Error>,
+  res: NextApiResponse<ResponseData | ErrorAPI>,
 ) {
   if (req.method === 'POST') {
-    console.log('request.body REGISTER', req.body);
-    const { username, email, password } = req.body;
+    const { username, idToken } = req.body;
 
-    // validation: fields are not empty
-    if (!username || !email || !password) {
-      res.status(400).json({
-        errors: [
-          {
-            message: 'Username, password, email are not provided',
-          },
-        ],
-      });
+    if (!idToken) {
+      res.status(401).json({ error: { message: 'unauthorized request!' } });
       return;
     }
 
-    // // Verify CSRF Token
-    // const csrfTokenMatches = verifyCsrfToken(csrfToken);
+    if (idToken) {
+      // verify token
+      const decodedToken = await firebaseAdmin.auth().verifyIdToken(idToken);
 
-    // if (!csrfTokenMatches) {
-    //   res.status(403).json({
-    //     errors: [
-    //       {
-    //         message: 'Invalid CSRF token',
-    //       },
-    //     ],
-    //   });
-    //   return;
-    // }
+      if (decodedToken && decodedToken.email) {
+        try {
+          // add user to db
+          await prisma.user.create({
+            data: {
+              user_id_external: decodedToken.uid,
+              username: username,
+              email: decodedToken.email,
+              role_id: 1,
+            },
+          });
 
-    // validation: check if username already exists in database
-    const alreadyExists = await prisma.user.findUnique({
-      where: {
-        email: email,
-      },
-      select: {
-        id: true,
-        email: true,
-        username: true,
-        password_hash: true,
-      },
-    });
-
-    if (alreadyExists) {
-      res.status(409).json({
-        errors: [{ message: 'Username is already taken' }],
-      });
-      return;
-    }
-
-    // create passwordHash
-    const passwordHash = await bcrypt.hash(password, 12);
-
-    // add new user to db
-    try {
-      const user = await prisma.user.create({
-        data: {
-          username: username,
-          email: email,
-          password_hash: passwordHash,
-        },
-      });
-
-      // // 1. Create a unique token (use node crypto)
-      // const token = crypto.randomBytes(64).toString('base64');
-      // const session = await prisma.userSession.create({
-      //   data: {
-      //     token: token,
-      //     user_id: user.id,
-      //   },
-      // });
-
-      // console.log('session.token: ', session.token);
-
-      // res.status(201).setHeader('Set-Cookie', session.token).json({
-      //   id: user.id,
-      //   username: user.username,
-      //   email: user.email,
-      // });
-      return res.status(200).json({
-        id: user.id,
-        username: user.username,
-        email: user.email,
-      });
-    } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError) {
-        if (e.code === 'P2002') {
-          return res.status(400).json({ errors: [{ message: e.message }] });
+          res.status(201).json({ registration: 'success' });
+          return;
+        } catch (error) {
+          // remove user from firebase
+          await firebaseAdmin.auth().deleteUser(decodedToken.uid);
+          res
+            .status(401)
+            .json({ error: { message: 'Error during registration!' } });
+          return;
         }
-        return res.status(400).json({ errors: [{ message: e.message }] });
       }
     }
-  } else {
-    res.status(405).json({
-      errors: [{ message: 'Method not supported, try POST instead' }],
-    });
   }
+  res.json({ error: { message: 'Method not allowed' } });
 }

@@ -1,7 +1,8 @@
 import { css } from '@emotion/react';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useAuth } from '../../AuthProvider';
 import { OverlayContext } from '../../util/context/overlayContext';
 import { errorStyle } from '../CheckoutForm/Shipping';
 
@@ -55,7 +56,7 @@ export const loginRegisterFormStyle = css`
   }
 `;
 
-const apiErrorStyle = css`
+export const apiErrorStyle = css`
   padding: 10px 0;
   color: red;
 `;
@@ -68,11 +69,11 @@ export interface DefaultFormValues {
   password: string;
 }
 
-type Props = {
-  token: string;
-};
+interface Error {
+  message: string | undefined;
+}
 
-export default function RegisterForm(props: Props) {
+export default function RegisterForm() {
   const defaultValues = {};
   const {
     register,
@@ -83,34 +84,44 @@ export default function RegisterForm(props: Props) {
   } = useForm<DefaultFormValues>({ defaultValues });
 
   const { toggle, toggleLayover } = useContext(OverlayContext);
-  const [error, setError] = useState(undefined);
+  const [error, setError] = useState<Error>({ message: undefined });
   const [registerOkay, setRegisterOkay] = useState(false);
-  const [user, setUser] = useState({
-    username: undefined,
-    email: undefined,
-    id: undefined,
-  });
+
+  const router = useRouter();
+  const { signUp, user, logOut } = useAuth();
 
   const onSubmit = async (data: DefaultFormValues) => {
-    console.log('----> RegisterForm Values: ', data);
+    setError({ message: undefined });
+    try {
+      const userCred = await signUp(data.email, data.password);
 
-    const res = await fetch('/api/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ ...data }),
-    });
+      const idToken = await userCred.user.getIdToken();
 
-    const response = await res.json();
+      if (idToken) {
+        const res = await fetch('/api/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
 
-    if ('error' in response) {
-      setError(response.error);
-      console.log('response: ', response);
-      return null;
+        const response = await res.json();
+
+        if ('error' in response) {
+          setError({ message: response.error.message });
+        } else if (res.status === 201) {
+          // registration okay
+          setRegisterOkay(true);
+          toggleLayover();
+          router.push('/login');
+        }
+        await logOut();
+      } else {
+        setError({ message: 'Error during registration.' });
+      }
+    } catch (error: any) {
+      setError({ message: 'Username and/or email already taken.' });
     }
-    setRegisterOkay(true);
-    setUser(response);
   };
 
   return (
@@ -149,7 +160,7 @@ export default function RegisterForm(props: Props) {
         <button type="submit">Create Account</button>
       </form>
 
-      {error && <div css={apiErrorStyle}>{error}</div>}
+      {error.message && <div css={apiErrorStyle}>{error.message}</div>}
 
       {registerOkay && (
         <>
