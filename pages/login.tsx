@@ -1,14 +1,12 @@
 import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
-import { cookies } from 'next/headers';
 import Link from 'next/link';
-import Router from 'next/router';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import LoginForm from '../components/LoginForm';
-import RegisterForm from '../components/RegisterForm';
-import prisma from '../prisma';
 import { createCsrfToken } from '../util/auth';
+import { firebaseAdmin } from '../util/firebase-admin-config';
+import { RegistrationProps } from './register';
 
 export const loginPageContainerStyle = css`
   display: flex;
@@ -47,26 +45,53 @@ export const loginPageContainerStyle = css`
   }
 `;
 
-export default function Login() {
+export default function Login({ csrfToken }: RegistrationProps) {
   return (
-    <>
-      <LayoutNoHeader>
-        <Head>
-          <title>Account</title>
-          <meta name="description" content="Plant Shop" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <section css={loginPageContainerStyle}>
-          <article>
-            <p>Welcome back! Log in to your account.</p>
-            <p>
-              Don't have an account yet?{' '}
-              <Link href={'/register'}> Create one here.</Link>
-            </p>
-          </article>
-          <LoginForm token={'string'} />
-        </section>
-      </LayoutNoHeader>
-    </>
+    <LayoutNoHeader>
+      <Head>
+        <title>Account</title>
+        <meta name="description" content="Plant Shop" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <section css={loginPageContainerStyle}>
+        <article>
+          <p>Welcome back! Log in to your account.</p>
+
+          <p>
+            Don't have an account yet?{' '}
+            <Link href={'/register'}> Create one here.</Link>
+          </p>
+        </article>
+        <LoginForm />
+      </section>
+    </LayoutNoHeader>
   );
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const token = context.req.cookies.accessToken;
+
+  if (token) {
+    try {
+      const decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
+
+      if (decodedToken) {
+        return {
+          redirect: {
+            destination: '/',
+            permanent: false,
+          },
+        };
+      }
+    } catch (error) {
+      return {
+        props: {},
+      };
+    }
+  }
+  return {
+    props: {
+      csrfToken: createCsrfToken(),
+    },
+  };
 }
