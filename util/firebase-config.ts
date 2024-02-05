@@ -1,24 +1,21 @@
-// config for the frontend
-
+/*
+firebase Client SDK Configurations
+*/
 import { getApp, getApps, initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider } from 'firebase/auth';
-import {
-  addDoc,
-  collection,
-  CollectionReference,
-  doc,
-  getDocs,
-  getFirestore,
-  query,
-  setDoc,
-  where,
-} from 'firebase/firestore';
-import { env } from 'process';
+import { getAuth } from 'firebase/auth';
 
-const firebaseConfig = {};
+const firebaseConfig = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+};
 
+// initialize Firebase
 export const app =
   getApps() && getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+
+// initialize Firebase auth
 export const auth = getAuth(app);
-//export const db = getFirestore(app);
-//export const provider = new GoogleAuthProvider();

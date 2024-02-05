@@ -1,32 +1,27 @@
-import { ParsedToken } from 'firebase/auth';
-import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
-import { useEffect, useState } from 'react';
+import { GetServerSidePropsContext } from 'next';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import prisma from '../prisma';
-import { createCsrfToken } from '../util/auth';
+import { firebaseAdmin } from '../util/firebase-admin-config';
 
 type Props = {
-  csrfToken: string;
-  //userSession?: Session | null;
-  user: { id: number; userName: string };
+  userId: number;
+  email: string;
+  userName: string;
 };
 
-export default function Account(props: Props) {
+export default function Account({ userId, email, userName }: Props) {
   return (
     <LayoutNoHeader>
       <section>
         <article>
-          <p>
-            Hello USER: {props?.user?.id} {props?.user?.userName}
-          </p>
-          <p>Orders placed: xxx</p>
+          <h1>Page Under Construction!</h1>
         </article>
+
         <article>
-          <h2>Order History</h2>
-          <button>Shop</button>
-        </article>
-        <article>
-          <h2>My Account</h2>
+          <p>Hello user {userName}! </p>
+          <p>Your userID is: {userId}</p>
+          <p>Your email is: {email}</p>
+          <p>You've logged into your account successfully.</p>
         </article>
       </section>
     </LayoutNoHeader>
@@ -34,54 +29,46 @@ export default function Account(props: Props) {
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  // 1. Check if there is a token and valid
-  const token = context.req.cookies.sessionToken;
-  const currentDate = new Date();
-  if (token) {
-    // 2. check if token is valid and redirect to welcome page ->
-    // thus user can't login multiple times
-    const session = await prisma.userSession.findFirst({
+  const token = context.req.cookies.accessToken;
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  // verify token
+  try {
+    const decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
+
+    // get user
+    const user = await prisma.user.findUnique({
       where: {
-        token: token,
-        expire_at: { gte: currentDate.toISOString() },
+        user_id_external: decodedToken.uid,
+      },
+      select: {
+        id: true,
+        email: true,
+        username: true,
       },
     });
 
-    if (session) {
-      // get user
-      const user = await prisma.user.findUnique({
-        where: {
-          id: session.user_id,
-        },
-        select: {
-          id: true,
-          username: true,
-        },
-      });
-
-      // if (Number(id) !== user?.id) {
-      //   return {
-      //     redirect: {
-      //       destination: '/',
-      //       permanent: false,
-      //     },
-      //   };
-      // }
-
-      // 3. Generate CSRF token and render the page
-      return {
-        props: {
-          csrfToken: createCsrfToken(),
-          user,
-        },
-      };
-    }
+    return {
+      props: {
+        userId: user?.id,
+        email: user?.email,
+        username: user?.username,
+      },
+    };
+  } catch (error) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
   }
-
-  return {
-    redirect: {
-      destination: '/',
-      permanent: false,
-    },
-  };
 }

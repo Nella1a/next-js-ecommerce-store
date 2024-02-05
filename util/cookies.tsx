@@ -28,11 +28,8 @@ export function createSerializedRegisterSessionTokenCookie(token: string) {
   // check if we are in production e.g. Heroku
   const isProduction = process.env.NODE_ENV === 'production';
 
-  const maxAge = 60 * 10; // 10 minutes
-
-  return cookie.serialize('sessionToken', token, {
-    maxAge: maxAge,
-    expires: new Date(Date.now() + maxAge * 1000),
+  return cookie.serialize('accessToken', token, {
+    maxAge: 60 * 60 * 24 * 1 * 1000, // Expires in 24 hours
     // only for use in development
     httpOnly: true,
     // set secure cookies on production (eg. Heroku)
@@ -43,11 +40,3 @@ export function createSerializedRegisterSessionTokenCookie(token: string) {
     sameSite: 'lax',
   });
 }
-
-// export const secureCookieOptions = {
-//   httpOnly: true,
-//   path: '/',
-//   secure: process.env.NODE_ENV === 'production',
-//   maxAge: 60 * 60 * 24,
-//   sameSite: 'lax',
-// } as const;

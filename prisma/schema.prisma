@@ -10,7 +10,7 @@ datasource db {
 model CartItem {
   id         Int      @id @default(autoincrement())
   product_id Int
-  cart_id    Int?     @unique
+  cart_id    Int?    @unique
   carts      Cart?   @relation(fields: [cart_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
   products   Product @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
@@ -54,7 +54,7 @@ model Order {
   user_id        Int
   total_price    Decimal          @db.Decimal(10, 2)
   status_id      Int?
-  modified_at    DateTime         @default(now()) @db.Timestamptz(6)
+  modified_at    DateTime        @default(now()) @db.Timestamptz(6)
   order_status   OrderStatus?    @relation(fields: [status_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   users          User            @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   product_orders ProductOrder[]
@@ -105,7 +105,7 @@ model UserDetail {
   city       String? @db.VarChar(100)
   zip_code   String? @db.VarChar(10)
   country    String? @db.VarChar(100)
-  user_id    Int?    @unique
+  user_id    Int? @unique
   users      User?  @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("user_details")
@@ -125,13 +125,13 @@ model User {
   username      String          @db.VarChar(30)
   role_id       Int?
   created_at    DateTime        @default(now()) @db.Timestamptz(6)
-  password_hash String          @db.VarChar(60)
   carts         Cart?
   orders        Order[]
   user_details  UserDetail?
-  user_roles    UserRole?     @relation(fields: [role_id], references: [id], onDelete: Cascade)
+  user_roles    UserRole?       @relation(fields: [role_id], references: [id], onDelete: Cascade)
   users_payment UserPayment[]
   user_sessions UserSession[]
+  user_id_external String       @unique
 
 
   @@unique([email, username])

@@ -1,22 +1,21 @@
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import Link from 'next/link';
-import { Router, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
-import { useForm, useFormState } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { useAuth } from '../../AuthProvider';
 import { OverlayContext } from '../../util/context/overlayContext';
 import { auth } from '../../util/firebase-config';
 import { errorStyle } from '../CheckoutForm/Shipping';
-import { loginRegisterFormStyle } from '../RegisterForm';
+import { apiErrorStyle, loginRegisterFormStyle } from '../RegisterForm';
 
 export interface DefaultFormValues {
   email: string;
   password: string;
 }
-type Props = {
-  token: string;
-};
 
-export default function LoginForm(props: Props) {
+interface Error {
+  message: string | undefined;
+}
+export default function LoginForm() {
   const defaultValues = {};
   const router = useRouter();
   const {
@@ -27,53 +26,41 @@ export default function LoginForm(props: Props) {
     trigger,
   } = useForm<DefaultFormValues>({ defaultValues });
 
-  const { toggleLayover, toggleLoginLayover } = useContext(OverlayContext);
-  const [error, setError] = useState('');
-  const [registerOkay, setRegisterOkay] = useState(false);
-  const [user, setUser] = useState({
-    username: undefined,
-    email: undefined,
-    id: undefined,
-  });
+  const { loginLayover, toggleLoginLayover } = useContext(OverlayContext);
+  const [error, setError] = useState<Error>({ message: undefined });
+  const { logIn, logOut } = useAuth();
 
   const onSubmit = (formValues: DefaultFormValues) => {
     console.log('----> LoginForm Values: ', formValues);
 
-    signInWithEmailAndPassword(auth, formValues.email, formValues.password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log('logged in USER: ', user);
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      });
+    setError({ message: undefined });
+    try {
+      const userCred = await logIn(formValues.email, formValues.password);
 
-    // async function loginUser() {
-    //   const response = await fetch('/api/login', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //       ...formValues,
-    //     }),
-    //   });
+      if (userCred) {
+        const response = await fetch('/api/login', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${await userCred.user.accessToken}`,
+          },
+        });
 
-    //   const resp = await response.json();
+        const result = await response.json();
 
-    //   if ('error' in resp) {
-    //     setError('Eerror');
-    //   } else {
-    //     setRegisterOkay(true);
-    //     console.log('-------> resp: ', resp);
-    //     router.push(`/myaccount/`);
-    //   }
-    // }
+        if ('error' in result) {
+          await logOut();
+          setError({ message: result.error.message });
+          if (result.error.message !== 'Invalid CSRF token') router.push('/');
+        }
 
-    // loginUser();
+        if (response.status === 200) {
+          loginLayover && toggleLoginLayover();
+          router.push('/myaccount');
+        }
+      }
+    } catch (error) {
+      setError({ message: 'Invalid email and/or password!' });
+    }
   };
 
   return (
@@ -102,12 +89,7 @@ export default function LoginForm(props: Props) {
 
         <button type="submit">Login</button>
       </form>
-      {error && <p>{error}</p>}
-      {registerOkay && (
-        <>
-          Hello USER: {user.username}, {user.email}, {user.id}
-        </>
-      )}
+      {error.message && <p css={apiErrorStyle}>{error.message}</p>}
     </article>
   );
 }

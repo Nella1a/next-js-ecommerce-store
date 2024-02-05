@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useAuth } from '../../AuthProvider';
 import { OverlayContext } from '../../util/context/overlayContext';
 import { auth } from '../../util/firebase-config';
 import { errorStyle } from '../CheckoutForm/Shipping';
@@ -58,7 +57,7 @@ export const loginRegisterFormStyle = css`
   }
 `;
 
-const apiErrorStyle = css`
+export const apiErrorStyle = css`
   padding: 10px 0;
   color: red;
 `;
@@ -71,11 +70,11 @@ export interface DefaultFormValues {
   password: string;
 }
 
-type Props = {
-  token: string;
-};
+interface Error {
+  message: string | undefined;
+}
 
-export default function RegisterForm(props: Props) {
+export default function RegisterForm() {
   const defaultValues = {};
   const {
     register,
@@ -88,60 +87,44 @@ export default function RegisterForm(props: Props) {
   //console.log('ENV: ', process.config());
 
   const { toggle, toggleLayover } = useContext(OverlayContext);
-  const [error, setError] = useState(undefined);
+  const [error, setError] = useState<Error>({ message: undefined });
   const [registerOkay, setRegisterOkay] = useState(false);
-  const [user, setUser] = useState({
-    username: undefined,
-    email: undefined,
-    id: undefined,
-  });
+
   const router = useRouter();
+  const { signUp, user, logOut } = useAuth();
 
   const onSubmit = async (data: DefaultFormValues) => {
-    console.log('----> RegisterForm Values: ', data);
+    setError({ message: undefined });
+    try {
+      const userCred = await signUp(data.email, data.password);
 
-    createUserWithEmailAndPassword(auth, data.email, data.password)
-      // Signed up firebase
-      .then(async (userCredential) => {
-        // send token to backend
-        const user = userCredential.user;
-        console.log('user: ', user);
+      const idToken = await userCred.user.getIdToken();
 
-        fetch('/api/register', {
+      if (idToken) {
+        const res = await fetch('/api/register', {
           method: 'POST',
           headers: {
-            Authorization: await user.getIdToken(),
+            'Content-Type': 'application/json',
           },
-        }).then((response) => {
-          if (response.status === 200) {
-            setRegisterOkay(true);
-            router.push('/pages/account');
-          }
         });
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
 
-    // const res = await fetch('/api/register', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ ...data }),
-    // });
+        const response = await res.json();
 
-    // const response = await res.json();
-
-    // if ('error' in response) {
-    //   setError(response.error);
-    //   console.log('response: ', response);
-    //   return null;
-    // }
-    // setRegisterOkay(true);
-    // setUser(response);
+        if ('error' in response) {
+          setError({ message: response.error.message });
+        } else if (res.status === 201) {
+          // registration okay
+          setRegisterOkay(true);
+          toggleLayover();
+          router.push('/login');
+        }
+        await logOut();
+      } else {
+        setError({ message: 'Error during registration.' });
+      }
+    } catch (error: any) {
+      setError({ message: 'Username and/or email already taken.' });
+    }
   };
 
   return (
@@ -180,7 +163,7 @@ export default function RegisterForm(props: Props) {
         <button type="submit">Create Account</button>
       </form>
 
-      {error && <div css={apiErrorStyle}>{error}</div>}
+      {error.message && <div css={apiErrorStyle}>{error.message}</div>}
 
       {registerOkay && (
         <>

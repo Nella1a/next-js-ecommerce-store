@@ -1,26 +1,39 @@
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import Link from 'next/link';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import { useContext } from 'react';
+import { useAuth } from '../../../AuthProvider';
 import { OverlayContext } from '../../../util/context/overlayContext';
 import { auth } from '../../../util/firebase-config';
 
 export default function NavMenu() {
   const { toggleLoginLayover } = useContext(OverlayContext);
+  const { logOut, user } = useAuth();
+  const router = useRouter();
 
   const onClickLoginHandler = () => {
     toggleLoginLayover();
   };
 
-  const onClickLogoutHandler = () => {
+  const onClickLogoutHandler = async () => {
     //Sign out with the Firebase client
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        console.log('Signed out');
+    logOut()
+      .then(async () => {
+        const res = await fetch('/api/logout', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ userId: user.uid }),
+        });
+
+        await res.json();
+        if (res.status === 200) {
+          console.log('sign out');
+          router.push('/');
+        }
       })
-      .catch((error) => {
-        // An error happened.
+      .catch((error: any) => {
         console.log('error during signed out');
       });
   };
@@ -45,7 +58,7 @@ export default function NavMenu() {
           Plants
         </Link>
       </li>
-      <li>{auth.currentUser ? logoutButton() : loginButton()}</li>
+      <li>{user.uid ? logoutButton() : loginButton()}</li>
     </>
   );
 }
