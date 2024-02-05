@@ -38,7 +38,11 @@ async function main() {
   await prisma.product.createMany({ data: products });
 
   await prisma.userRole.createMany({
-    data: [{ role_name: 'customer' }, { role_name: 'admin' }],
+    data: [
+      { role_name: 'customer' },
+      { role_name: 'admin' },
+      { role_name: 'guest' },
+    ],
   });
 }
 

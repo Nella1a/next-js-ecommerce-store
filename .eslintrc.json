@@ -1,7 +1,16 @@
-{
+/* {
   "extends": ["next/core-web-vitals, @upleveled/upleveled"],
   "rules": {
     "@next/next/link-passhref": "error",
     "react/no-unknown-property": ["error", { "ignore": "css" }]
+  }
+}
+ */
+{
+  "extends": ["next/core-web-vitals", "plugin:prettier/recommended"],
+  "rules": {
+    "@next/next/link-passhref": "error",
+    "react/no-unknown-property": ["error", { "ignore": "css" }],
+    "prettier/prettier": "error"
   }
 }
