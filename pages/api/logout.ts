@@ -13,7 +13,6 @@ export default async function handler(
   res: NextApiResponse<ResponseData | ErrorAPI>,
 ) {
   if (req.method === 'DELETE') {
-    console.log('REQUEST DELETE', req.cookies);
     const token = req.cookies.accessToken;
 
     if (!token) {
