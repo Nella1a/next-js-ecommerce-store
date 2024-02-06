@@ -30,7 +30,7 @@ export default function LoginForm() {
   const [error, setError] = useState<Error>({ message: undefined });
   const { logIn, logOut } = useAuth();
 
-  const onSubmit = (formValues: DefaultFormValues) => {
+  const onSubmit = async (formValues: DefaultFormValues) => {
     console.log('----> LoginForm Values: ', formValues);
 
     setError({ message: undefined });
