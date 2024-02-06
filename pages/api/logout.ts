@@ -1,4 +1,4 @@
-import cookie from 'cookie';
+import { serialize } from 'cookie';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../prisma';
 import { firebaseAdmin } from '../../util/firebase-admin-config';
@@ -47,7 +47,7 @@ export default async function handler(
           .status(200)
           .setHeader(
             'Set-Cookie',
-            cookie.serialize('accessToken', '', {
+            serialize('accessToken', '', {
               maxAge: -1,
               path: '/',
             }),
