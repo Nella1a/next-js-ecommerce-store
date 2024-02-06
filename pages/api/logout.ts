@@ -37,7 +37,6 @@ export default async function handler(
           },
         });
 
-        console.log('\n user: ', user);
         if (!user) {
           return res
             .status(401)

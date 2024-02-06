@@ -61,7 +61,6 @@ export default function CheckOut(props: Props) {
 
   const onSubmit = (data: DefaultFormValues): void => {
     deleteCookie('cart');
-    console.log('----> Form Values: ', data);
   };
 
   const submitShippingInfosHandler = async (event: any) => {

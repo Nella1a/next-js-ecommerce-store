@@ -16,8 +16,6 @@ const bgImageHero = css`
 `;
 
 export default function Home(props: PropsTypePlantsCartCookieLayer) {
-  console.log('Index_props.database typeopf:', typeof props.plants);
-
   const buttonInHeroImage = <ButtonCallToAction innerText="View All Plants" />;
 
   return (

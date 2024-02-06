@@ -31,8 +31,6 @@ export default function LoginForm() {
   const { logIn, logOut } = useAuth();
 
   const onSubmit = async (formValues: DefaultFormValues) => {
-    console.log('----> LoginForm Values: ', formValues);
-
     setError({ message: undefined });
     try {
       const userCred = await logIn(formValues.email, formValues.password);

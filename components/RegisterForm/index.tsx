@@ -84,8 +84,6 @@ export default function RegisterForm() {
     trigger,
   } = useForm<DefaultFormValues>({ defaultValues });
 
-  //console.log('ENV: ', process.config());
-
   const { toggle, toggleLayover } = useContext(OverlayContext);
   const [error, setError] = useState<Error>({ message: undefined });
   const [registerOkay, setRegisterOkay] = useState(false);

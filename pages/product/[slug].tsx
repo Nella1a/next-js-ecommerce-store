@@ -53,10 +53,8 @@ export default function SingleProduct(
       });
 
       const response = await res.json();
-      console.log('response: ', response);
 
       if ('error' in response) {
-        console.log('response: ', response);
         return null;
       }
     };

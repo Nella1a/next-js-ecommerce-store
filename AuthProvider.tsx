@@ -46,7 +46,6 @@ export const AuthContextProvider = ({
     return () => unsubscribe();
   }, []);
 
-  console.log('user in AuthContextprovider: ', user);
   // SingUp
   const signUp = async (email: string, password: string) => {
     return createUserWithEmailAndPassword(auth, email, password);
