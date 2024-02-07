@@ -45,7 +45,7 @@ export default function CheckOut(props: Props) {
   const [toNextStep, setToNextStep] = useState(false);
 
   const { cartItems } = useContext(CartContext);
-  const { deleteCookie } = useContext(CartCookieContext);
+  const { removeCookie } = useContext(CartCookieContext);
 
   useEffect(() => {
     cartItems(props.plants);
@@ -60,7 +60,7 @@ export default function CheckOut(props: Props) {
   } = useForm<DefaultFormValues>({ defaultValues });
 
   const onSubmit = (data: DefaultFormValues): void => {
-    deleteCookie('cart');
+    removeCookie('cart');
   };
 
   const submitShippingInfosHandler = async (event: any) => {

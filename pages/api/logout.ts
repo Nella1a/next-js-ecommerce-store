@@ -1,4 +1,4 @@
-import { serialize } from 'cookie';
+import { deleteCookie } from 'cookies-next';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../prisma';
 import { firebaseAdmin } from '../../util/firebase-admin-config';
@@ -43,18 +43,15 @@ export default async function handler(
             .json({ error: { message: 'Error during logout' } });
         }
 
-        return res
-          .status(200)
-          .setHeader(
-            'Set-Cookie',
-            serialize('accessToken', '', {
-              maxAge: -1,
-              path: '/',
-            }),
-          )
-          .json({
-            logout: 'success',
-          });
+        // remove cookie
+        deleteCookie('accessToken', {
+          res,
+          req,
+        });
+
+        return res.status(200).json({
+          logout: 'success',
+        });
       }
     }
   } else {

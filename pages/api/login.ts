@@ -1,7 +1,6 @@
+import { setCookie } from 'cookies-next';
 import type { NextApiRequest, NextApiResponse } from 'next';
-//import type { Database } from 'types_db';
 import prisma from '../../prisma';
-import { createSerializedRegisterSessionTokenCookie } from '../../util/cookies';
 import { firebaseAdmin } from '../../util/firebase-admin-config';
 import { ErrorAPI } from './register';
 
@@ -41,15 +40,20 @@ export default async function handler(
         return;
       }
 
-      res
-        .status(200)
-        .setHeader(
-          'Set-Cookie',
-          createSerializedRegisterSessionTokenCookie(tokenId),
-        )
-        .json({
-          user,
-        });
+      // set cookie
+      setCookie('accessToken', tokenId, {
+        res,
+        req,
+        maxAge: 60 * 60 * 24 * 1 * 1000,
+        httpOnly: true,
+        secure: true,
+        path: '/',
+        sameSite: 'lax',
+      });
+
+      res.status(200).json({
+        user,
+      });
       return;
     }
   } else {

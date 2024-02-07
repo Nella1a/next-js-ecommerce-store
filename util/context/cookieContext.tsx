@@ -1,4 +1,4 @@
-import Cookies from 'js-cookie';
+import { deleteCookie, getCookie, setCookie } from 'cookies-next';
 import { createContext, useEffect, useState } from 'react';
 import { Cookie } from '../types';
 
@@ -63,7 +63,7 @@ const clearProduct = (currentCookie: Cookie[], removeProductId: number) => {
 export const CartCookieContext = createContext({
   getParsedCookie: (key: string) => {},
   setParsedCookie: (element: any) => {},
-  deleteCookie: (key: string) => {},
+  removeCookie: (key: string) => {},
   currentCookie: [
     {
       id: 0,
@@ -85,7 +85,7 @@ export const CartCookieProvider = ({ children }: any) => {
 
   // get Cookie
   const getParsedCookie = (key: string): Cookie[] | [] => {
-    const currentC = Cookies.get(key);
+    const currentC = getCookie(key);
     if (currentC?.length) {
       setCurrentCookie(JSON.parse(currentC));
     }
@@ -99,15 +99,15 @@ export const CartCookieProvider = ({ children }: any) => {
   // set Cookie
   const setParsedCookie = (elements: Cookie[]) => {
     if (elements && elements.length) {
-      Cookies.set('cart', JSON.stringify(elements));
+      setCookie('cart', JSON.stringify(elements));
     } else {
-      Cookies.set('cart', JSON.stringify([]));
+      setCookie('cart', JSON.stringify([]));
     }
   };
 
   // delete cookie
-  const deleteCookie = (key: string) => {
-    Cookies.remove(key);
+  const removeCookie = (key: string) => {
+    deleteCookie(key);
   };
 
   // update quantity
@@ -160,7 +160,7 @@ export const CartCookieProvider = ({ children }: any) => {
     cartCount,
     getParsedCookie,
     setParsedCookie,
-    deleteCookie,
+    removeCookie,
     updateCartQuantity,
     deleteProductFromCookie,
   };
