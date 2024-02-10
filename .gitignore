@@ -42,3 +42,7 @@ yarn-error.log*
 
 # firebase
 /secret
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
