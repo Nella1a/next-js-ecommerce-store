@@ -128,7 +128,7 @@ export default function CheckOut(props: Props) {
         </article>
         <article>
           <div>
-            {props.plants.map((plant) => (
+            {props.plants?.map((plant) => (
               <CheckoutProductCard plant={plant} />
             ))}
           </div>
