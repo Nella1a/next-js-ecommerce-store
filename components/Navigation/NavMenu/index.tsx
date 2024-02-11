@@ -39,14 +39,14 @@ export default function NavMenu() {
   };
 
   const loginButton = () => (
-    <button data-testid="login-link" onClick={onClickLoginHandler}>
+    <button data-test-id="login-link" onClick={onClickLoginHandler}>
       {' '}
       Login
     </button>
   );
 
   const logoutButton = () => (
-    <button data-testid="logout-link" onClick={onClickLogoutHandler}>
+    <button data-test-id="logout-link" onClick={onClickLogoutHandler}>
       {' '}
       Logout
     </button>
@@ -54,7 +54,7 @@ export default function NavMenu() {
   return (
     <>
       <li>
-        <Link href="/products" data-testid="products-link">
+        <Link href="/products" data-test-id="products-link">
           Plants
         </Link>
       </li>

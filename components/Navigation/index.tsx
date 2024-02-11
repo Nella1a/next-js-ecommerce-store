@@ -47,7 +47,7 @@ export default function Navigation() {
         <div>
           <Image src={shoppingBag} alt="shopping cart icon" />
           <div>
-            <span data-testid="cart-count">{cartCount}</span>
+            <span data-test-id="cart-count">{cartCount}</span>
           </div>
         </div>
       </Link>
