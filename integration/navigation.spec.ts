@@ -46,3 +46,27 @@ test('test navigation links', async ({ page }) => {
     page.getByRole('heading').filter({ hasText: 'Summer Favorites' }),
   ).toBeVisible();
 });
+
+test('navigate to single product page', async ({ page }) => {
+  // start from the index page
+  await page.goto('/');
+
+  await expect(page.getByText('Best Sellers').first()).toBeVisible();
+  await expect(page.getByText('Pilea Peperomioides').first()).toBeVisible();
+  await expect(page.getByText('Pilea Peperomioides')).toHaveCount(4);
+
+  // navigate to single product page
+  await page
+    .getByRole('img', { name: 'plantName-Pilea Peperomioides' })
+    .first()
+    .click();
+
+  // the new url should be "/product/pilea-peperomioides"
+  await expect(page).toHaveURL('/product/pilea-peperomioides');
+  await expect(page.getByText('Pilea Peperomioides')).toBeVisible();
+  await expect(page.getByText('€12.95')).toBeVisible();
+  await expect(page.getByAltText('Pilea Peperomioides')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'ADD TO CART' })).toBeVisible();
+  await expect(page.getByRole('button', { name: '-' })).toBeVisible();
+  await expect(page.getByRole('button', { name: '+' })).toBeVisible();
+});
