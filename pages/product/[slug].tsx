@@ -82,7 +82,7 @@ export default function SingleProduct(
         </div>
         <div>
           <div>
-            <ProductImage src={`/image${props.plant.id}.jpeg`} />
+            <ProductImage src={`/image${props.plant.id}.jpeg`} title={title} />
           </div>
           <article>
             <div>
