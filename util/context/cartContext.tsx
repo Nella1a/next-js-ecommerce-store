@@ -85,7 +85,7 @@ export const CartContext = createContext({
     quantity: number,
     decrementFlag: boolean,
   ) => {},
-  deleteProductFromCart: (emoveProductId: number) => {},
+  deleteProductFromCart: (removeProductId: number) => {},
   toggleMenu: false,
   toggleMobileMenu: () => {},
 });
