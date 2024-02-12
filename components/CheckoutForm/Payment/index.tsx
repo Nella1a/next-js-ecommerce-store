@@ -6,7 +6,7 @@ export default function Payment({
   errors,
   getFieldState,
 }: CheckoutFormChildProps) {
-  const dateMonthYearRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|1[0-2])$/;
+  const dateMonthYearRegex = /^(0[1-9]|1[0-2])\/(2[4-9])$/;
 
   return (
     <>
