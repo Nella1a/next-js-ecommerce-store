@@ -10,7 +10,6 @@ import CheckoutProductCard from '../components/CheckoutProductCard';
 import { checkoutPageStyle, formStyle } from '../components/elements';
 import LayoutNoHeaderAndFooter from '../components/Layout/LayoutNoHeaderFooter';
 import prisma from '../prisma';
-import { CartContext } from '../util/context/cartContext';
 import { CartCookieContext } from '../util/context/cookieContext';
 import { cleanedProducts } from '../util/database';
 import { Cookie, PlantsAndQuantity } from '../util/types';
@@ -44,12 +43,7 @@ type Props = {
 export default function CheckOut(props: Props) {
   const [toNextStep, setToNextStep] = useState(false);
 
-  const { cartItems } = useContext(CartContext);
-  const { removeCookie } = useContext(CartCookieContext);
-
-  useEffect(() => {
-    cartItems(props.plants);
-  }, []);
+  const { removeCookie, clearCartCount } = useContext(CartCookieContext);
 
   const {
     register,
@@ -59,9 +53,7 @@ export default function CheckOut(props: Props) {
     trigger,
   } = useForm<DefaultFormValues>({ defaultValues });
 
-  const onSubmit = (data: DefaultFormValues): void => {
-    removeCookie('cart');
-  };
+  const onSubmit = (data: DefaultFormValues): void => {};
 
   const submitShippingInfosHandler = async (event: any) => {
     // const noErrors = await trigger('shipping');
@@ -76,6 +68,8 @@ export default function CheckOut(props: Props) {
       const { pathname } = Router;
 
       if (pathname == '/checkout') {
+        removeCookie('cart');
+        clearCartCount();
         Router.push('/thankyou');
       }
     }

@@ -77,6 +77,7 @@ export const CartCookieContext = createContext({
   ) => {},
   cartCount: 0,
   deleteProductFromCookie: (product: number) => {},
+  clearCartCount: () => {},
 });
 
 export const CartCookieProvider = ({ children }: any) => {
@@ -155,6 +156,10 @@ export const CartCookieProvider = ({ children }: any) => {
     setParsedCookie([...newCookie]);
   };
 
+  const clearCartCount = () => {
+    setCartcount(0);
+  };
+
   const value = {
     currentCookie,
     cartCount,
@@ -163,6 +168,7 @@ export const CartCookieProvider = ({ children }: any) => {
     removeCookie,
     updateCartQuantity,
     deleteProductFromCookie,
+    clearCartCount,
   };
 
   return (
