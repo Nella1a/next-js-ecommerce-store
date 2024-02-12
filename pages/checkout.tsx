@@ -56,11 +56,11 @@ export default function CheckOut(props: Props) {
   const onSubmit = (data: DefaultFormValues): void => {};
 
   const submitShippingInfosHandler = async (event: any) => {
-    // const noErrors = await trigger('shipping');
-    // if (noErrors) {
-    //   setToNextStep(true);
-    // }
-    setToNextStep(true);
+    const noErrors = await trigger('shipping');
+    if (noErrors) {
+      setToNextStep(true);
+    }
+    //  setToNextStep(true);
   };
 
   useEffect(() => {
