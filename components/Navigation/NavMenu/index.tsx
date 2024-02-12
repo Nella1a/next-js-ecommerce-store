@@ -1,10 +1,8 @@
-import { onAuthStateChanged, signOut } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { useAuth } from '../../../AuthProvider';
 import { OverlayContext } from '../../../util/context/overlayContext';
-import { auth } from '../../../util/firebase-config';
 
 export default function NavMenu() {
   const { toggleLoginLayover } = useContext(OverlayContext);

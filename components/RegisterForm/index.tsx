@@ -4,7 +4,6 @@ import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../AuthProvider';
 import { OverlayContext } from '../../util/context/overlayContext';
-import { auth } from '../../util/firebase-config';
 import { errorStyle } from '../CheckoutForm/Shipping';
 
 export const loginRegisterFormStyle = css`
