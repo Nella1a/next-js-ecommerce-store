@@ -41,7 +41,12 @@ export default function Cart(props: Props) {
         </Head>
         <section css={underConstruction}>
           <h1> Your cart is currently empty.</h1>
-          <Link href="/plants" passHref>
+          <Link
+            href={{
+              pathname: '/plants',
+            }}
+            passHref
+          >
             <button>Continue Shopping</button>
           </Link>
         </section>
@@ -71,7 +76,12 @@ export default function Cart(props: Props) {
           <h2>Total</h2>
           <OrderSummary />
           <div>
-            <Link href="/checkout" passHref>
+            <Link
+              href={{
+                pathname: '/checkout',
+              }}
+              passHref
+            >
               <button data-test-id="cart-checkout">Go to checkout</button>
             </Link>
           </div>

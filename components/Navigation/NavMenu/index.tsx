@@ -51,7 +51,12 @@ export default function NavMenu() {
   return (
     <>
       <li>
-        <Link href="/plants" data-test-id="products-link">
+        <Link
+          href={{
+            pathname: '/plants',
+          }}
+          data-test-id="products-link"
+        >
           Plants
         </Link>
       </li>
