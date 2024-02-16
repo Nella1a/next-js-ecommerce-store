@@ -47,7 +47,7 @@ export const loginPageContainerStyle = css`
 
 export default function Login({ csrfToken }: RegistrationProps) {
   return (
-   <LayoutNoHeader>
+    <LayoutNoHeader>
       <Head>
         <title>Account</title>
         <meta name="description" content="Plant Shop" />
@@ -58,8 +58,15 @@ export default function Login({ csrfToken }: RegistrationProps) {
           <p>Welcome back! Log in to your account.</p>
 
           <p>
-            Don't have an account yet?{' '}
-            <Link href={'/register'}> Create one here.</Link>
+            Don't have an account yet?
+            <Link
+              href={{
+                pathname: '/register',
+              }}
+              passHref
+            >
+              Create one here.
+            </Link>
           </p>
         </article>
         <LoginForm />

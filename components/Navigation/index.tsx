@@ -43,7 +43,12 @@ export default function Navigation() {
 
   const shoppingBagIcon = () => (
     <button css={shoppingBagStyle}>
-      <Link href="/cart" passHref>
+      <Link
+        href={{
+          pathname: '/cart',
+        }}
+        passHref
+      >
         <div>
           <Image src={shoppingBag} alt="shopping cart icon" />
           <div>

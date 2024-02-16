@@ -8,7 +8,7 @@ import prisma from '../prisma';
 import { cleanedProducts } from '../util/database';
 import { PropsTypePlantsLayer } from '../util/types';
 
-export default function Directory(props: PropsTypePlantsLayer) {
+export default function Plants(props: PropsTypePlantsLayer) {
   // disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer);
 
   const bgImageHero = css`
