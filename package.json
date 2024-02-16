@@ -10,7 +10,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "vercel-build": "prisma generate && prisma migrate deploy && next build",
-    "seed": "node -r dotenv/config ./scripts/seed.js"
+    "seed": "node -r dotenv/config ./prisma/seed.js"
   },
   "dependencies": {
     "@emotion/babel-plugin": "^11.7.2",
