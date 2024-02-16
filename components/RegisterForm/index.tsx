@@ -145,6 +145,7 @@ export default function RegisterForm() {
           data-test-id="password"
           css={errorStyle(errors.password?.type)}
           placeholder="Password"
+          type="password"
         />
 
         <input
