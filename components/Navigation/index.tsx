@@ -45,7 +45,7 @@ export default function Navigation() {
     <button css={shoppingBagStyle}>
       <Link
         href={{
-          pathname: '/cart',
+          pathname: '/Cart',
         }}
         passHref
       >
