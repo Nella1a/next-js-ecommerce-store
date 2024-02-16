@@ -25,7 +25,7 @@ export const loginLayoverStyle = (loginLayover: boolean) => css`
     height: inherit;
     padding: 0 3rem;
     padding-top: 3rem;
-    border: 2px solid green;
+    //  border: 2px solid green;
 
     p:first-of-type {
       font-size: x-large;
@@ -94,7 +94,7 @@ export default function LoginInFormLayover(props: Props) {
         </button>
         <p>Welcome back!</p>
         <p>Log into your account to manage your orders.</p>
-        <LoginForm token="" />
+        <LoginForm />
         <p>
           Don't have an account yet?{' '}
           <span onClick={onClickhandlerCreateAccount}> Create one here.</span>

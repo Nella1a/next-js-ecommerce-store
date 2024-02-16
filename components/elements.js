@@ -140,8 +140,8 @@ export const headerStyle = css`
     padding: 0 3rem;
     padding-top: 0.5rem;
     border-bottom: 0px solid lightgrey;
-    // box-shadow: rgba(0, 0, 0, 0.45) 0px 15px 10px -20px;
-    border: 2px solid red;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 15px 10px -20px;
+    //  border: 2px solid red;
 
     // shelovesPlants logo
     > div:first-of-type {
@@ -513,7 +513,7 @@ export const bgImgContainer = css`
   height: 600px;
   position: relative;
   top: 0;
-  border: 2px solid yellow;
+  // border: 2px solid yellow;
   width: 100vw;
   display: flex;
   align-items: center;
