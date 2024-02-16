@@ -27,7 +27,6 @@ export default function NavMenu() {
 
         await res.json();
         if (res.status === 200) {
-          console.log('sign out');
           router.push('/');
         }
       })
@@ -52,7 +51,7 @@ export default function NavMenu() {
   return (
     <>
       <li>
-        <Link href="/products" data-test-id="products-link">
+        <Link href="/plants" data-test-id="products-link">
           Plants
         </Link>
       </li>
