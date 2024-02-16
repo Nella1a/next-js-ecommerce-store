@@ -21,7 +21,7 @@ type Props = {
   plants: PlantsAndQuantity[];
 };
 
-export default function ShoppingCart(props: Props) {
+export default function Cart(props: Props) {
   const [cartProducts] = useState(props.plants);
   const { cartCount } = useContext(CartCookieContext);
 
@@ -41,7 +41,7 @@ export default function ShoppingCart(props: Props) {
         </Head>
         <section css={underConstruction}>
           <h1> Your cart is currently empty.</h1>
-          <Link href="/products" passHref legacyBehavior>
+          <Link href="/plants" passHref>
             <button>Continue Shopping</button>
           </Link>
         </section>
@@ -71,7 +71,7 @@ export default function ShoppingCart(props: Props) {
           <h2>Total</h2>
           <OrderSummary />
           <div>
-            <Link href="/checkout" passHref legacyBehavior>
+            <Link href="/checkout" passHref>
               <button data-test-id="cart-checkout">Go to checkout</button>
             </Link>
           </div>
