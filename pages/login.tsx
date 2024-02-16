@@ -4,7 +4,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import LoginForm from '../components/LoginForm';
-import { createCsrfToken } from '../util/auth';
 import { firebaseAdmin } from '../util/firebase-admin-config';
 import { RegistrationProps } from './register';
 
@@ -45,7 +44,7 @@ export const loginPageContainerStyle = css`
   }
 `;
 
-export default function Login({ csrfToken }: RegistrationProps) {
+export default function Login({}: RegistrationProps) {
   return (
     <LayoutNoHeader>
       <Head>
@@ -97,8 +96,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     }
   }
   return {
-    props: {
-      csrfToken: createCsrfToken(),
-    },
+    props: {},
   };
 }

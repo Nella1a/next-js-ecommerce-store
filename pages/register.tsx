@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { useContext, useEffect } from 'react';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import RegisterForm from '../components/RegisterForm';
-import { createCsrfToken } from '../util/auth';
 import { OverlayContext } from '../util/context/overlayContext';
 import { firebaseAdmin } from '../util/firebase-admin-config';
 import { loginPageContainerStyle } from './login';
@@ -13,7 +12,7 @@ export interface RegistrationProps {
   csrfToken: string;
 }
 
-export default function register({ csrfToken }: RegistrationProps) {
+export default function register() {
   const { loginLayover, toggleLoginLayover } = useContext(OverlayContext);
 
   useEffect(() => {
@@ -23,7 +22,7 @@ export default function register({ csrfToken }: RegistrationProps) {
   }, []);
 
   return (
-  <LayoutNoHeader>
+    <LayoutNoHeader>
       <Head>
         <title>Account</title>
         <meta name="description" content="Plant Shop" />
@@ -63,7 +62,5 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       };
     }
   }
-  return {
-    props: { csrfToken: createCsrfToken() },
-  };
+  return {};
 }
