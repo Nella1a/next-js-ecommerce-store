@@ -19,9 +19,10 @@ export default function ProductCard(props: Props) {
       <div>
         {id === 1 && <span>Easy Care</span>}
         {id === 4 && <span>Pet-Friendly</span>}{' '}
-        <Link href="/product/[slug]" as={`/product/${slugName}`}>
+        {/*    <Link href="/product/[slug]" as={`/product/${slugName}`}>
           <img src={`/image${id}.jpeg`} alt={`plantName-${title}`} />
-        </Link>
+        </Link> */}
+        <img src={`/image${id}.jpeg`} alt={`plantName-${title}`} />
       </div>
       <div>
         <h3>{title}</h3>

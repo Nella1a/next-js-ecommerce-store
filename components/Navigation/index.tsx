@@ -60,7 +60,7 @@ export default function Navigation() {
   );
   return (
     <Fragment>
-      <MobileMenu />
+      {/* <MobileMenu /> */}
 
       <nav css={headerStyle}>
         <div>
@@ -69,7 +69,7 @@ export default function Navigation() {
               <img src="/logo_shelovesplants.svg" alt="logo she loves plants" />
             </Link>
           </div>
-          <div>
+          {/*           <div>
             {screenwidth > BREAKPOINTAT768 ? (
               <ul>
                 <NavMenu />
@@ -97,7 +97,7 @@ export default function Navigation() {
                 <li>{shoppingBagIcon()}</li>
               </ul>
             )}
-          </div>
+          </div> */}
         </div>
       </nav>
     </Fragment>
