@@ -12,8 +12,8 @@ test('test navigation links', async ({ page }) => {
   // navigate to products overview page
   await page.getByRole('link', { name: 'Plants', exact: true }).click();
 
-  // the new url should be "/products"
-  await expect(page).toHaveURL('/products');
+  // the new url should be "/plants"
+  await expect(page).toHaveURL('/plants');
 
   // the new page should contain an h1 with "Products"
   await expect(
