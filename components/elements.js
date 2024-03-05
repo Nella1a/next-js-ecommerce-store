@@ -767,7 +767,7 @@ export const styleSectionProducts = css`
 
 export const singleProductPageStyle = css`
   margin-top: 8em;
-  border: 1px solid red;
+  // border: 1px solid red;
   display: grid;
   //grid-template-columns: minmax(0, 9.37rem) 1fr;
   grid-template-columns: 1fr 11fr;
