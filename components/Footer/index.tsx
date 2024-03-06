@@ -7,35 +7,51 @@ export default function Footer() {
 
   return (
     <footer css={footerStyle}>
-      <div>
+      <section>
         <article>
-          <p>About</p>
-          <p>Plant Care</p>
-          <p>FAQ</p>
-          <p>Contact</p>
+          <h4>About</h4>
+          <ul>
+            <li>Plant Care</li>
+            <li>FAQ</li>
+            <li>Contact</li>
+          </ul>
         </article>
         <article>
-          <p>Explore</p>
-          <p>Careers</p>
-          <p>Locations</p>
-          <p>Blog</p>
+          <h4>Explore</h4>
+          <ul>
+            <li>Careers</li>
+            <li>Locations</li>
+            <li>Blog</li>
+          </ul>
         </article>
         <article>
-          <p>Explore</p>
-          <p>Careers</p>
-          <p>Locations</p>
-          <p>Blog</p>
+          <h4>Social</h4>
+          <ul>
+            <li>Instagram</li>
+            <li>Pinterest</li>
+            <li>YouTube</li>
+          </ul>
         </article>
         <article>
-          <p>Terms</p>
-          <Link href="http://localhost:3000/">Refund Policy</Link>
-          <Link href="http://localhost:3000/">Terms of Service</Link>
-          <Link href="http://localhost:3000/">Delivery and Schipping</Link>
+          <h4>Terms</h4>
+          <ul>
+            <li>
+              <Link href="http://localhost:3000/">Refund Policy</Link>
+            </li>
+            <li>
+              <Link href="http://localhost:3000/">Terms of Service</Link>
+            </li>
+            <li>
+              <Link href="http://localhost:3000/">Delivery and Schipping</Link>
+            </li>
+          </ul>
         </article>
 
         <article>
-          <p>Join us!</p>
-          <p>Subscribe to our newsletter.</p>
+          <h4>
+            Join us!
+            <span> Subscribe to our newsletter.</span>
+          </h4>
 
           <form
             action="#"
@@ -56,10 +72,10 @@ export default function Footer() {
                 }}
               />
             </p>
-            <button>Sign Up</button>
+            <button type="submit">Sign Up</button>
           </form>
         </article>
-      </div>
+      </section>
     </footer>
   );
 }
