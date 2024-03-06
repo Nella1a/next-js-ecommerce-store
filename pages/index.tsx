@@ -2,7 +2,11 @@ import { css } from '@emotion/react';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import ButtonCallToAction from '../components/Buttons/ButtonCallToAction';
-import { bestSellerStyle, indexTextImageComp } from '../components/elements';
+import {
+  bestSellerStyle,
+  indexTextImageComp,
+  summerFavoritesStyle,
+} from '../components/elements';
 import IndexTextImage from '../components/Images/IndexTextImage';
 import Layout from '../components/Layout';
 import Products from '../components/Products';
@@ -40,7 +44,7 @@ export default function Home(props: PropsTypePlantsCartCookieLayer) {
         </div>
       </section>
 
-      <section>
+      <section css={summerFavoritesStyle}>
         <h2>Summer Favorites</h2>
         <div css={indexTextImageComp}>
           <IndexTextImage plants={props.plants} />

@@ -86,7 +86,7 @@ export const globalStyleBody = (theme) => css`
     width: 100%;
     padding: 0 3rem;
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
   }
 
   button {
@@ -274,14 +274,14 @@ export const shoppingBagStyle = (theme) => css`
 /* *************************** */
 
 export const footerStyle = css`
-  gap: 4rem;
+  //gap: 4rem;
   background-color: var(--footerBackGroundColor);
   width: 100%;
   margin: 8rem 0rem auto;
-
-  div {
+  border: 2px solid green;
+  section {
     max-width: 1920px;
-    // border: 1px red solid;
+    border: 1px red solid;
     padding: 3rem 3rem;
     margin: 0 auto;
     gap: 4.25rem;
@@ -289,11 +289,15 @@ export const footerStyle = css`
     justify-content: space-between;
 
     article {
-      //border: 1px dotted red;
-
+      border: 1px dotted red;
       display: flex;
       flex-direction: column;
       gap: 0.063rem;
+
+      ul {
+        list-style: none;
+        padding-left: 0;
+      }
 
       p:first-of-type {
         font-weight: bold;
@@ -583,9 +587,14 @@ export const bgImgInnerContainer = (theme) => css`
   }
 `;
 
+export const summerFavoritesStyle = (theme) => css`
+  flex-direction: column;
+`;
 export const bestSellerStyle = (theme) => css`
   //gap: 48px;
   //margin-top: 4rem;
+
+  flex-direction: column;
 
   h2 {
     //text-align: center;
