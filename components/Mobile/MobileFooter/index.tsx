@@ -2,43 +2,43 @@ import { useState } from 'react';
 import { MobileFooterStyle } from '../../elements';
 import MobileFooterInfo from '../MobileFooterInfo/MobileFooterInfo';
 
+export const footerInfos = [
+  {
+    header: 'About',
+    infoOne: 'Plant Care',
+    infoTwo: 'FAQ',
+    infoThree: 'Contact',
+  },
+  {
+    header: 'Explore',
+    infoOne: 'Career',
+    infoTwo: 'Locations',
+    infoThree: 'Blog',
+  },
+  {
+    header: 'Social',
+    infoOne: 'Instagram',
+    infoTwo: 'Pinterest',
+    infoThree: 'Youtube',
+  },
+  {
+    header: 'Terms',
+    infoOne: 'Refund Policy',
+    infoTwo: 'Terms of Service',
+    infoThree: 'Delivery and Schipping',
+  },
+];
+
 export default function MobileFooter() {
   const [displayMenu, setDisplayMenu] = useState(false);
   const [toggle, setToggle] = useState<number>();
-
-  const footerInfos = [
-    {
-      header: 'About',
-      infoOne: 'Plant Care',
-      infoTwo: 'FAQ',
-      infoThree: 'Contact',
-    },
-    {
-      header: 'Explor',
-      infoOne: 'Career',
-      infoTwo: 'Locations',
-      infoThree: 'Blog',
-    },
-    {
-      header: 'She Loves Plants',
-      infoOne: 'Your Account',
-      infoTwo: 'Rewards Programm',
-      infoThree: 'Track Your Order',
-    },
-    {
-      header: 'Terms',
-      infoOne: 'Refund Policy',
-      infoTwo: 'Terms of Service',
-      infoThree: 'Delivery and Schipping',
-    },
-  ];
 
   return (
     <footer css={MobileFooterStyle}>
       <div>
         {footerInfos.map((info, index) => {
           return (
-            <article key={index}>
+            <article key={`moble-footer-${index}`}>
               <ul>
                 <li
                   key={`header-${index}-${info.header}`}

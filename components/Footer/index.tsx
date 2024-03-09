@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { footerStyle } from '../elements';
+import { footerInfos } from '../Mobile/MobileFooter';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -8,45 +9,16 @@ export default function Footer() {
   return (
     <footer css={footerStyle}>
       <section>
-        <article>
-          <h4>About</h4>
-          <ul>
-            <li>Plant Care</li>
-            <li>FAQ</li>
-            <li>Contact</li>
-          </ul>
-        </article>
-        <article>
-          <h4>Explore</h4>
-          <ul>
-            <li>Careers</li>
-            <li>Locations</li>
-            <li>Blog</li>
-          </ul>
-        </article>
-        <article>
-          <h4>Social</h4>
-          <ul>
-            <li>Instagram</li>
-            <li>Pinterest</li>
-            <li>YouTube</li>
-          </ul>
-        </article>
-        <article>
-          <h4>Terms</h4>
-          <ul>
-            <li>
-              <Link href="http://localhost:3000/">Refund Policy</Link>
-            </li>
-            <li>
-              <Link href="http://localhost:3000/">Terms of Service</Link>
-            </li>
-            <li>
-              <Link href="http://localhost:3000/">Delivery and Schipping</Link>
-            </li>
-          </ul>
-        </article>
-
+        {footerInfos.map((info, index) => (
+          <article key={`desktop-footer-${index}`}>
+            <h4>{info.header}</h4>
+            <ul>
+              <li>{info.infoOne}</li>
+              <li>{info.infoTwo}</li>
+              <li>{info.infoThree}</li>
+            </ul>
+          </article>
+        ))}
         <article>
           <h4>
             Join us!
