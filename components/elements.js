@@ -226,7 +226,6 @@ export const headerStyle = css`
           > span {
             display: flex;
             flex-direction: column;
-
             padding-top: 0.5rem;
           }
         }
@@ -278,10 +277,10 @@ export const footerStyle = css`
   background-color: var(--footerBackGroundColor);
   width: 100%;
   margin: 8rem 0rem auto;
-  border: 2px solid green;
+  // border: 2px solid green;
   section {
     max-width: 1920px;
-    border: 1px red solid;
+    //  border: 1px red solid;
     padding: 3rem 3rem;
     margin: 0 auto;
     gap: 4.25rem;
@@ -289,7 +288,7 @@ export const footerStyle = css`
     justify-content: space-between;
 
     article {
-      border: 1px dotted red;
+      //  border: 1px dotted red;
       display: flex;
       flex-direction: column;
       gap: 0.063rem;
@@ -351,8 +350,6 @@ export const footerStyle = css`
 
     @media screen and (max-width: 768px) {
       display: none;
-      flex-direction: column-reverse;
-      padding: 3rem 0rem;
     }
   }
 
@@ -361,7 +358,7 @@ export const footerStyle = css`
     display: block;
   }
 
-  @media screen and (max-width: 1024px) {
+  @media screen and (min-width: 769px) {
     padding: 2.5rem 2.5rem;
   }
 `;
@@ -394,12 +391,13 @@ export const MobileFooterStyle = css`
 
   @media screen and (max-width: 768px) {
     flex-direction: column-reverse;
-    padding: 3rem 0rem;
+    padding: 3rem;
     display: block;
+    // border: 1px red solid;
 
     div {
       max-width: 1920px;
-      //border: 1px red solid;
+      // border: 1px red solid;
       padding: 3rem 3rem;
       margin: 0 auto;
       gap: 4.25rem;
@@ -446,7 +444,6 @@ export const MobileFooterStyle = css`
           max-width: 100%;
 
           input {
-            ${size('17.65rem', '1.47rem')}
             letter-spacing: 0.031rem;
             line-height: 1.125rem;
             // text-transform: uppercase;
@@ -474,11 +471,9 @@ export const MobileFooterStyle = css`
 
       // container subscribe to newsletter form
       article:nth-of-type(5) {
-        // border: 2px solid green;
+        //   border: 2px solid green;
         flex-basis: 30%;
         padding-bottom: 1rem;
-        p {
-        }
 
         p {
           font-size: large;
@@ -494,7 +489,7 @@ export const MobileFooterStyle = css`
 
       @media screen and (max-width: 768px) {
         flex-direction: column-reverse;
-        padding: 0rem 0rem;
+        padding: 0rem;
       }
     }
 
@@ -504,7 +499,7 @@ export const MobileFooterStyle = css`
     }
 
     @media screen and (max-width: 1024px) {
-      padding: 0rem 2.5rem;
+      //  padding: 0rem 2.5rem;
     }
   }
 `;

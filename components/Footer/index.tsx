@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { useState } from 'react';
 import { footerStyle } from '../elements';
+import FormNewsletter from '../FormNewsletter';
 import { footerInfos } from '../Mobile/MobileFooter';
 
 export default function Footer() {
@@ -19,34 +19,7 @@ export default function Footer() {
             </ul>
           </article>
         ))}
-        <article>
-          <h4>
-            Join us!
-            <span> Subscribe to our newsletter.</span>
-          </h4>
-
-          <form
-            action="#"
-            onSubmit={(e) => {
-              e.preventDefault();
-              setEmail('');
-            }}
-          >
-            <p>
-              <input
-                id="email"
-                type="email"
-                name="usermail"
-                placeholder="Your Email"
-                value={email}
-                onChange={(event) => {
-                  setEmail(event.target.value);
-                }}
-              />
-            </p>
-            <button type="submit">Sign Up</button>
-          </form>
-        </article>
+        <FormNewsletter email={email} setEmail={setEmail} />
       </section>
     </footer>
   );

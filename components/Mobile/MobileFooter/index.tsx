@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { MobileFooterStyle } from '../../elements';
+import FormNewsletter from '../../FormNewsletter';
 import MobileFooterInfo from '../MobileFooterInfo/MobileFooterInfo';
 
 export const footerInfos = [
@@ -32,6 +33,7 @@ export const footerInfos = [
 export default function MobileFooter() {
   const [displayMenu, setDisplayMenu] = useState(false);
   const [toggle, setToggle] = useState<number>();
+  const [email, setEmail] = useState('');
 
   return (
     <footer css={MobileFooterStyle}>
@@ -62,23 +64,7 @@ export default function MobileFooter() {
             </article>
           );
         })}
-        <article>
-          <p>
-            <span>Join us!</span>
-          </p>
-          <p>Subscribe to our newsletter.</p>
-          <form>
-            <p>
-              <input
-                id="email"
-                type="email"
-                name="usermail"
-                placeholder="Your Email"
-              />
-            </p>
-            <button>Sign Up</button>
-          </form>
-        </article>
+        <FormNewsletter email={email} setEmail={setEmail} />
       </div>
     </footer>
   );
