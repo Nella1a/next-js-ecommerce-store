@@ -20,8 +20,7 @@ export default function LayoutNoHeader(props: PropsLayoutCart) {
         {props.children}
         {screenwidth > BREAKPOINTAT768 ? <Delivery /> : <MobileDelivery />}
       </main>
-      <Footer />
-      <MobileFooter />
+      {screenwidth > BREAKPOINTAT768 ? <Footer /> : <MobileFooter />}
     </>
   );
 }

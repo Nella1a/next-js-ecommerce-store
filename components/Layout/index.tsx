@@ -12,10 +12,9 @@ export default function Layout(props: PropsTypeChildrenLayer) {
   return (
     <>
       <Head>
-        {' '}
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navigation />
+      {/* <Navigation /> */}
       <Header
         firstText="Delivering Plants,"
         secondText="Delivering Happiness!"
@@ -27,8 +26,7 @@ export default function Layout(props: PropsTypeChildrenLayer) {
         {props.children}
         {screenwidth > BREAKPOINTAT768 ? <Delivery /> : <MobileDelivery />}
       </main>
-      <Footer />
-      <MobileFooter />
+      {screenwidth > BREAKPOINTAT768 ? <Footer /> : <MobileFooter />}
     </>
   );
 }
