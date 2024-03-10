@@ -662,6 +662,19 @@ export const bestSellerStyle = (theme) => css`
       height: 8rem;
     }
   }
+
+  @media (max-width: 425px) {
+    > div {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    > div > article div:first-of-type {
+      height: 10rem;
+
+      span {
+        font-size: 14px;
+      }
+    }
+  }
 `;
 
 export const styleComp = css`
@@ -759,6 +772,14 @@ export const summerFavoritesStyle = (theme) => css`
     h3,
     p {
       font-size: 14px;
+    }
+  }
+
+  @media (max-width: 425px) {
+    > div {
+      > div:last-of-type {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
   }
 `;
