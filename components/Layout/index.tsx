@@ -5,7 +5,7 @@ import Footer from '../Footer';
 import { Header } from '../Header';
 import MobileDelivery from '../Mobile/MobileDelivery';
 import MobileFooter from '../Mobile/MobileFooter';
-import Navigation, { BREAKPOINTAT768, getScreenSize } from '../Navigation';
+import { BREAKPOINTAT768, getScreenSize } from '../Navigation';
 
 export default function Layout(props: PropsTypeChildrenLayer) {
   const screenwidth = getScreenSize();
@@ -14,7 +14,7 @@ export default function Layout(props: PropsTypeChildrenLayer) {
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <Navigation /> */}
+
       <Header
         firstText="Delivering Plants,"
         secondText="Delivering Happiness!"

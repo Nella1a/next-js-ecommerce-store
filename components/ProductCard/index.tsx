@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 type Plants = {
@@ -19,10 +20,13 @@ export default function ProductCard(props: Props) {
       <div>
         {id === 1 && <span>Easy Care</span>}
         {id === 4 && <span>Pet-Friendly</span>}{' '}
-        {/*    <Link href="/product/[slug]" as={`/product/${slugName}`}>
-          <img src={`/image${id}.jpeg`} alt={`plantName-${title}`} />
-        </Link> */}
-        <img src={`/image${id}.jpeg`} alt={`plantName-${title}`} />
+        <Image
+          src={`/image${id}.jpeg`}
+          alt={`plantName-${title}`}
+          fill
+          sizes="90vw"
+          style={{ objectFit: 'cover' }}
+        />
       </div>
       <div>
         <h3>{title}</h3>

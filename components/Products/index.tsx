@@ -1,5 +1,4 @@
 import { Fragment } from 'react';
-import { styleSectionProducts } from '../elements';
 import ProductCard from '../ProductCard';
 
 type Plants = {
@@ -20,12 +19,12 @@ export default function Products(props: Props) {
   });
 
   return (
-    <Fragment>
+    <>
       {props.plants.map((plant: Plants) => (
-        <article key={`guest-${plant.id}`} css={styleSectionProducts}>
+        <article key={`guest-${plant.id}`}>
           <ProductCard plant={plant} />
         </article>
       ))}
-    </Fragment>
+    </>
   );
 }

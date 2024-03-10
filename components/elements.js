@@ -126,12 +126,14 @@ const size = (width = '100%', height = '100%') => {
 /* *************************** */
 
 export const headerStyle = css`
-  position: fixed;
   background-color: transparent;
-  z-index: 2;
   width: 100vw;
+  height: 4.5rem;
+
   // container
   > div {
+    position: fixed;
+    z-index: 3;
     max-width: 1920px;
     width: 100%;
     background-color: var(--backgroundColorWhite);
@@ -277,6 +279,7 @@ export const footerStyle = css`
   background-color: var(--footerBackGroundColor);
   width: 100%;
   margin: 8rem 0rem auto;
+
   // border: 2px solid green;
   section {
     max-width: 1920px;
@@ -509,29 +512,24 @@ export const MobileFooterStyle = css`
 /* *************************** */
 
 export const bgImgContainer = css`
-  height: 600px;
+  z-index: 1;
+  height: 20rem;
   position: relative;
-  top: 0;
-  // border: 2px solid yellow;
-  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 1024px) {
-    height: 500px;
-  }
-
   @media (max-width: 769px) {
-    height: 400px;
+    height: 18rem;
   }
 
-  @media screen and (max-width: 480px) {
-    height: 300px;
+  @media (max-width: 640px) {
+    height: 16rem;
   }
 `;
 
-export const bgImgInnerContainer = (theme) => css`
+export const heroImageContentContainer = (theme) => css`
+  z-index: 1;
   height: 12.5rem;
   width: auto;
   color: #fff;
@@ -544,12 +542,7 @@ export const bgImgInnerContainer = (theme) => css`
 
   p {
     font-size: ${theme.typography.xLarge};
-
-    //margin: 0 0;
     font-weight: 500;
-
-    //text-shadow: 3px 4px 7px rgba(81,67,21,0.8);
-    //text-shadow: 6px 6px 0px rgba(0,0,0,0.2);
     text-shadow: 2px 8px 6px rgba(0, 0, 0, 0.2),
       0px -5px 35px rgba(255, 255, 255, 0.3), 0px 1px 4px rgb(0, 0, 0);
   }
@@ -559,65 +552,114 @@ export const bgImgInnerContainer = (theme) => css`
     background-color: #ed943b;
     border: none;
 
+    display: inline-block;
+
     &:hover {
       background-color: #ff6900;
     }
   }
 
   @media (max-width: 769px) {
-    height: 11.25rem;
-
-    //width: 60%;
-  }
-
-  @media (max-width: 425px) {
-    height: 10.25;
-
-    //width: 80%;
-
-    font-size: ${theme.typography.large};
+    height: 10.25rem;
     p {
-      font-size: 1.8rem;
+      font-size: ${theme.typography.large};
     }
   }
+  @media (max-width: 640px) {
+    display: none;
+  }
 `;
 
-export const summerFavoritesStyle = (theme) => css`
-  flex-direction: column;
-`;
 export const bestSellerStyle = (theme) => css`
-  //gap: 48px;
-  //margin-top: 4rem;
-
   flex-direction: column;
+  padding: 0 8rem;
 
   h2 {
-    //text-align: center;
     font-size: ${theme.typography.large};
-    //margin-top: 5.5rem;
-    // margin-bottom: 3.5rem;
   }
 
-  h3 {
-    margin-bottom: unset;
-  }
   > div {
     display: grid;
-    gap: 30px;
+    gap: 1rem;
     grid-template-columns: repeat(4, 1fr);
 
-    @media screen and (max-width: 1024px) {
-      gap: 24px;
+    > article {
+      //border: 2px solid green;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      // image container
+      div:first-of-type {
+        position: relative;
+        height: 20rem;
+        span {
+          z-index: 1;
+          position: absolute;
+          display: block;
+          //background-color: #37798D;
+          background-color: #009a7b;
+          color: #fff;
+          width: 70%;
+          height: 3rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 20px;
+          top: 30px;
+        }
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      div:last-of-type {
+        font-size: 18px;
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    gap: 0.8rem;
+    padding: 0 5rem;
+
+    h3,
+    p {
+      font-size: 18px;
     }
 
-    @media screen and (max-width: 800px) {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+    > div > article div:first-of-type {
+      height: 15rem;
+
+      span {
+        font-size: 16px;
+        height: 2rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 769px) {
+    padding: 0 2rem;
+
+    h3,
+    p {
+      font-size: 16px;
     }
 
-    @media screen and (max-width: 480px) {
-      gap: 4px;
-      grid-template-columns: 1fr;
+    > div > article div:first-of-type {
+      height: 10rem;
+    }
+  }
+
+  @media screen and (max-width: 620px) {
+    h3,
+    p {
+      font-size: 14px;
+    }
+
+    article div:first-of-type {
+      height: 8rem;
     }
   }
 `;
@@ -631,44 +673,92 @@ export const styleComp = css`
 /*     indexTextImage.js       */
 /* *************************** */
 
-export const indexTextImageComp = css`
-  // border: 2px solid green;
-  display: grid;
-  grid-template-columns: 3fr 2fr;
-  //margin-top: 64px;
-  //margin-bottom: 56px;
-  gap: 2rem;
-
-  h3 {
-    margin-bottom: unset;
-  }
-
-  > div:first-of-type {
-    height: 100%;
-  }
-
-  > div:nth-of-type(2) {
+export const summerFavoritesStyle = (theme) => css`
+  flex-direction: column;
+  padding: 0 8rem;
+  > div {
+    // border: 2px solid green;
     display: grid;
-    gap: 2rem;
-    grid-template-columns: 1fr 1fr;
-  }
+    grid-template-columns: 3fr 2fr;
+    gap: 1rem;
 
-  @media screen and (max-width: 1024px) {
-    grid-template-columns: 1fr;
+    // first image container
     > div:first-of-type {
-      height: 40rem;
+      height: 38rem;
+      position: relative;
+      border: 2px solid green;
     }
 
-    > div:nth-of-type(2) {
-      grid-template-columns: repeat(3, 1fr);
+    > div:last-of-type {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr 1fr;
+
+      article {
+        // second image container
+        > div:first-of-type {
+          position: relative;
+          height: 15rem;
+        }
+      }
     }
   }
 
-  @media screen and (max-width: 768px) {
-    grid-template-columns: 1fr;
+  @media (max-width: 1024px) {
+    padding: 0 5rem;
 
-    > div:nth-of-type(2) {
-      grid-template-columns: repeat(2, 1fr);
+    > div {
+      // first image container
+      > div:first-of-type {
+        height: 40rem;
+      }
+
+      > div:last-of-type {
+        grid-template-columns: repeat(2, 1fr);
+
+        article {
+          // second image container
+          > div:first-of-type {
+            height: 15rem;
+            margin-bottom: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 2rem;
+
+    h3,
+    p {
+      font-size: 16px;
+    }
+
+    > div {
+      grid-template-columns: 1fr;
+      // first image container
+      > div:first-of-type {
+        height: 20rem;
+      }
+
+      > div:last-of-type {
+        grid-template-columns: repeat(4, 1fr);
+
+        article {
+          // second image container
+          > div:first-of-type {
+            height: 10rem;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 620px) {
+    h3,
+    p {
+      font-size: 14px;
     }
   }
 `;
@@ -719,52 +809,6 @@ export const productsComponentStyle = (theme) => css`
   }
 `;
 
-export const styleSectionProducts = css`
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  //  border: 1px solid green;
-
-  div {
-    width: 100%;
-  }
-
-  div:first-of-type {
-    // height: auto;
-    position: relative;
-
-    span {
-      position: absolute;
-      display: block;
-      //background-color: #37798D;
-      background-color: #009a7b;
-      color: #fff;
-      width: 70%;
-      height: 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      top: 30px;
-
-      @media (max-width: 800px) {
-        font-size: 18px;
-      }
-    }
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  h3 {
-    font-size: 18px;
-    margin-top: 0.5rem;
-  }
-
-  @media (max-width: 1024px) {
-  }
-`;
 /* *************************** */
 /*  Single Product Page        */
 /* *************************** */
