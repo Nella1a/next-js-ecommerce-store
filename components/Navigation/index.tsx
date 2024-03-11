@@ -1,4 +1,4 @@
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, useContext, useEffect, useState } from 'react';
 import shoppingBag from '../../public/shoppingBag.png';
@@ -66,7 +66,12 @@ export default function Navigation() {
         <div>
           <div>
             <Link href="/" passHref>
-              <img src="/logo_shelovesplants.svg" alt="logo she loves plants" />
+              <Image
+                src={'/logo_shelovesplants.svg'}
+                alt={'logo she loves plants'}
+                width={'400'}
+                height={'52'}
+              />
             </Link>
           </div>
           {/*           <div>
