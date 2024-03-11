@@ -25,8 +25,8 @@ export const globalStyleBody = (theme) => css`
   }
 
   h2 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
+    font-size: ${theme.typography.large};
+    margin-bottom: 1.5rem;
   }
 
   /* set up the body */
@@ -73,7 +73,7 @@ export const globalStyleBody = (theme) => css`
     max-width: 1920px;
     width: 100%;
     padding: 0 3rem;
-    display: flex;
+    //display: flex;
   }
 
   button {
@@ -529,7 +529,6 @@ export const heroImageContentContainer = (theme) => css`
     ${size('10.65rem', '1.47rem')}
     background-color: ${theme.bgColor.orange5Main};
     border: none;
-
     display: inline-block;
 
     &:hover {
@@ -549,12 +548,9 @@ export const heroImageContentContainer = (theme) => css`
 `;
 
 export const bestSellerStyle = (theme) => css`
+  display: flex;
   flex-direction: column;
   padding: 0 8rem;
-
-  h2 {
-    font-size: ${theme.typography.large};
-  }
 
   > div {
     display: grid;
@@ -583,17 +579,18 @@ export const bestSellerStyle = (theme) => css`
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 20px;
+          font-size: ${theme.typography.main};
           top: 30px;
         }
       }
 
-      a {
+      a:link,
+      a:visited {
         text-decoration: none;
       }
 
       div:last-of-type {
-        font-size: 18px;
+        font-size: ${theme.typography.main};
       }
     }
   }
@@ -602,16 +599,10 @@ export const bestSellerStyle = (theme) => css`
     gap: 0.8rem;
     padding: 0 5rem;
 
-    h3,
-    p {
-      font-size: 18px;
-    }
-
     > div > article div:first-of-type {
       height: 15rem;
 
       span {
-        font-size: 16px;
         height: 2rem;
       }
     }
@@ -619,25 +610,30 @@ export const bestSellerStyle = (theme) => css`
 
   @media screen and (max-width: 769px) {
     padding: 0 2rem;
-
     h3,
     p {
-      font-size: 16px;
+      font-size: ${theme.typography.main};
     }
 
     > div > article div:first-of-type {
       height: 10rem;
+      span {
+        font-size: ${theme.typography.small};
+      }
     }
   }
 
   @media screen and (max-width: 620px) {
     h3,
     p {
-      font-size: 14px;
+      font-size: ${theme.typography.small};
     }
 
-    article div:first-of-type {
+    > div > article div:first-of-type {
       height: 8rem;
+      span {
+        font-size: ${theme.typography.xsmall};
+      }
     }
   }
 
@@ -647,10 +643,6 @@ export const bestSellerStyle = (theme) => css`
     }
     > div > article div:first-of-type {
       height: 10rem;
-
-      span {
-        font-size: 14px;
-      }
     }
   }
 `;
@@ -665,6 +657,7 @@ export const styleComp = css`
 /* *************************** */
 
 export const summerFavoritesStyle = (theme) => css`
+  display: flex;
   flex-direction: column;
   padding: 0 8rem;
   > div {

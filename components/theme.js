@@ -2,6 +2,7 @@ const theme = {
   font: `'Yeseva One', sans-serif;`,
 
   typography: {
+    xsmall: '.694rem', // 11.11px
     small: '.833rem', // 13.33 px
     main: '1rem', // 16px
     medium: '1.44rem', // 19.2px
@@ -15,6 +16,7 @@ const theme = {
     large: '.75rem', // 12px
     XLarge: '1.5rem', // 24px
     XXLarge: '2rem', // 32px
+    XXXLarge: '3rem', //48px
   },
 
   color: {
@@ -26,7 +28,7 @@ const theme = {
 
   bgColor: {
     white: '#fff',
-    greyMain: 'f8f9fa',
+    greyMain: '#f8f9fa',
     greyFooter: '#f5f5f5;',
 
     orange5Main: '#ff922b',
