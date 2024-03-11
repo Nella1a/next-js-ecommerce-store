@@ -11,12 +11,14 @@ const theme = {
   },
 
   spacing: {
+    xSmall: '.125rem', // 2px,
     small: '0.25rem', // 4px
-    medidum: '.5rem', // 8px
+    medium: '.5rem', // 8px
     large: '.75rem', // 12px
-    XLarge: '1.5rem', // 24px
-    XXLarge: '2rem', // 32px
-    XXXLarge: '3rem', //48px
+    XLarge: '1', // 16px
+    XXLarge: '1.5rem', // 24px
+    XXXLarge: '2rem', // 32px
+    XXXXLarge: '3rem', //48px
   },
 
   color: {
