@@ -1,12 +1,36 @@
 const theme = {
-  font: `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;`,
+  font: `'Yeseva One', sans-serif;`,
 
   typography: {
-    xSmall: '.8rem',
-    small: '',
-    medium: '1rem',
-    large: '2rem',
-    xLarge: '2.65rem',
+    small: '.833rem', // 13.33 px
+    main: '1rem', // 16px
+    medium: '1.44rem', // 19.2px
+    large: '2.074rem', // 33.18px
+    xLarge: '2.986rem', // 47.78 px
+  },
+
+  spacing: {
+    small: '0.25rem', // 4px
+    medidum: '.5rem', // 8px
+    large: '.75rem', // 12px
+    XLarge: '1.5rem', // 24px
+    XXLarge: '2rem', // 32px
+  },
+
+  color: {
+    white: '#fff',
+    grey5: '#adb5bd',
+    grey6: '#868e96',
+    grey8: '#343a40',
+  },
+
+  bgColor: {
+    white: '#fff',
+    greyMain: 'f8f9fa',
+    greyFooter: '#f5f5f5;',
+
+    orange5Main: '#ff922b',
+    orange6Hover: '#fd7e14',
   },
 };
 

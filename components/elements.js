@@ -5,12 +5,6 @@ import { css } from '@emotion/react';
 /* *************************** */
 
 export const globalStyleBody = (theme) => css`
-  :root {
-    --backgroundColor: #e4e8e7;
-    --backgroundColorWhite: #fff;
-    --footerBackGroundColor: #f5f5f5;
-  }
-
   /* Reset sizing   */
   *,
   *::before,
@@ -32,25 +26,20 @@ export const globalStyleBody = (theme) => css`
 
   h2 {
     font-size: 2rem;
-    //margin-top: 5.5rem;
     margin-bottom: 2rem;
   }
 
   /* set up the body */
   body {
     line-height: 1.5; /* default for browser: 1.4 tends to be very small*/
-    font-size: ${theme.typography.medium};
-    //min-height: 100vh;
-    //max-width: 1400px;
-    //font-family: ${theme.font};
-    font-family: 'Yeseva One';
-
-    background-color: var(--backgroundColorWhite);
+    font-size: ${theme.typography.main};
+    font-family: ${theme.font};
+    background-color: ${theme.bgColor.greyMain};
+    color: ${theme.color.grey8};
     position: relative;
   }
 
   main {
-    // margin-top: 4rem;
     height: auto;
     margin: auto auto;
     display: flex;
@@ -67,11 +56,10 @@ export const globalStyleBody = (theme) => css`
 
   /* form elements should have same font as body */
   input,
-  button,
   textarea,
   select {
     font: inherit;
-    color: grey;
+    color: ${theme.color.grey6};
   }
 
   section {
@@ -86,7 +74,6 @@ export const globalStyleBody = (theme) => css`
     width: 100%;
     padding: 0 3rem;
     display: flex;
-    // flex-direction: column;
   }
 
   button {
@@ -99,13 +86,9 @@ export const globalStyleBody = (theme) => css`
     min-height: 2.5rem;
     padding: 0.625rem 1rem;
     margin: 1rem 0;
-    color: #000;
+    color: ${theme.color.grey8};
   }
 `;
-
-/* *************************** */
-/*    Utility Styles?          */
-/* *************************** */
 
 const flexCenter = {
   display: 'flex',
@@ -125,7 +108,7 @@ const size = (width = '100%', height = '100%') => {
 /*   Header: Navigation Bar    */
 /* *************************** */
 
-export const headerStyle = css`
+export const headerStyle = (theme) => css`
   background-color: transparent;
   width: 100vw;
   height: 4.5rem;
@@ -136,14 +119,13 @@ export const headerStyle = css`
     z-index: 3;
     max-width: 1920px;
     width: 100%;
-    background-color: var(--backgroundColorWhite);
+    background-color: ${theme.bgColor.white};
     margin: 0 auto;
     display: flex;
     padding: 0 3rem;
     padding-top: 0.5rem;
-    border-bottom: 0px solid lightgrey;
+    border-bottom: 0px solid ${theme.color.grey6};
     box-shadow: rgba(0, 0, 0, 0.45) 0px 15px 10px -20px;
-    //  border: 2px solid red;
 
     // shelovesPlants logo
     > div:first-of-type {
@@ -197,7 +179,7 @@ export const headerStyle = css`
 
         button {
           all: unset;
-          color: black;
+          color: ${theme.color.grey8};
           font-weight: bold;
           cursor: pointer;
         }
@@ -206,7 +188,7 @@ export const headerStyle = css`
           text-decoration: none;
           display: block;
           font-weight: bold;
-          color: black;
+          color: ${theme.color.grey8};
         }
       }
 
@@ -241,7 +223,6 @@ export const shoppingBagStyle = (theme) => css`
   all: unset;
   ${size('3.76rem', '3.76rem')}
   position: relative;
-  // ${flexCenter}
 
   // container
   div:first-of-type {
@@ -253,7 +234,7 @@ export const shoppingBagStyle = (theme) => css`
       ${size('1.41rem', '1.41rem')}
       border-radius: 50%;
       background-color: #ff6900;
-      color: #fff;
+      color: ${theme.color.white};
       position: absolute;
       text-align: center;
       top: 5px;
@@ -264,7 +245,7 @@ export const shoppingBagStyle = (theme) => css`
         position: relative;
         top: 0px;
         right: 0px;
-        font-size: ${theme.typography.xSmall};
+        font-size: ${theme.typography.small};
       }
     }
   }
@@ -274,16 +255,14 @@ export const shoppingBagStyle = (theme) => css`
 /*         footer       */
 /* *************************** */
 
-export const footerStyle = css`
-  //gap: 4rem;
-  background-color: var(--footerBackGroundColor);
+export const footerStyle = (theme) => css`
+  background-color: ${theme.bgColor.greyMain};
   width: 100%;
   margin: 8rem 0rem auto;
 
   // border: 2px solid green;
   section {
     max-width: 1920px;
-    //  border: 1px red solid;
     padding: 3rem 3rem;
     margin: 0 auto;
     gap: 4.25rem;
@@ -322,17 +301,16 @@ export const footerStyle = css`
           height: 3.5rem;
           width: 100%;
           padding: 0.625rem 1rem;
-          color: #000;
         }
 
         button {
           height: 3.5rem;
           width: 100%;
-          background-color: #ed943b;
+          background-color: ${theme.bgColor.orange5Main};
           border: none;
 
           &:hover {
-            background-color: #ff6900;
+            background-color: ${theme.bgColor.orange6Hover};
           }
         }
       }
@@ -366,17 +344,17 @@ export const footerStyle = css`
   }
 `;
 
-export const styleLargeButton = css`
+export const styleLargeButton = (theme) => css`
   display: flex;
   justify-content: center;
 
   button {
     ${size('17.65rem', '1.47rem')}
-    background-color: #ed943b;
+    background-color: ${theme.bgColor.orange5Main};
     border: none;
 
     &:hover {
-      background-color: #ff6900;
+      background-color: ${theme.bgColor.orange6Hover};
     }
   }
 `;
@@ -385,9 +363,9 @@ export const styleLargeButton = css`
 /*         Mobile-Footer       */
 /* *************************** */
 
-export const MobileFooterStyle = css`
+export const MobileFooterStyle = (theme) => css`
   gap: 4rem;
-  background-color: var(--footerBackGroundColor);
+  background-color: ${theme.bgColor.greyMain};
   width: 100%;
   margin: 8rem 0rem auto;
   display: none;
@@ -532,7 +510,7 @@ export const heroImageContentContainer = (theme) => css`
   z-index: 1;
   height: 12.5rem;
   width: auto;
-  color: #fff;
+  color: ${theme.color.white};
   letter-spacing: 0.2rem;
   display: flex;
   flex-direction: column;
@@ -549,13 +527,13 @@ export const heroImageContentContainer = (theme) => css`
 
   button {
     ${size('10.65rem', '1.47rem')}
-    background-color: #ed943b;
+    background-color: ${theme.bgColor.orange5Main};
     border: none;
 
     display: inline-block;
 
     &:hover {
-      background-color: #ff6900;
+      background-color: ${theme.bgColor.orange6Hover};
     }
   }
 
@@ -599,7 +577,7 @@ export const bestSellerStyle = (theme) => css`
           display: block;
           //background-color: #37798D;
           background-color: #009a7b;
-          color: #fff;
+          color: ${theme.color.white};
           width: 70%;
           height: 3rem;
           display: flex;
