@@ -1314,18 +1314,6 @@ export const deliveryInfos = css`
       }
     }
 
-    @media screen and (max-width: 1024px) {
-      h4 {
-        font-size: 1.5rem;
-      }
-    }
-
-    @media screen and (max-width: 768px) {
-      h4 {
-        font-size: 1.3rem;
-      }
-    }
-
     @media screen and (max-width: 600px) {
       > article > div {
         display: none;
@@ -1334,6 +1322,7 @@ export const deliveryInfos = css`
 
     @media screen and (max-width: 480px) {
       grid-template-columns: 1fr;
+      gap: var(--space-xs);
     }
   }
 `;
