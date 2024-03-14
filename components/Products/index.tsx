@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import { productCardStyle } from '../elements';
 import ProductCard from '../ProductCard';
 
 type Plants = {
@@ -21,7 +22,7 @@ export default function Products(props: Props) {
   return (
     <>
       {props.plants.map((plant: Plants) => (
-        <article key={`guest-${plant.id}`}>
+        <article key={`guest-${plant.id}`} css={productCardStyle}>
           <ProductCard plant={plant} />
         </article>
       ))}

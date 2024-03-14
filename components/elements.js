@@ -3,8 +3,93 @@ import { css } from '@emotion/react';
 /* *************************** */
 /*    Global Styles            */
 /* *************************** */
-
 export const globalStyleBody = (theme) => css`
+  :root {
+    --font-primary: 'Yeseva One';
+    --font-fallback: sans-serif;
+
+    /* set base values */
+    --text-base-size: 1em;
+    --text-scale-ratio: 1.2; //120% of what they would normally be”.
+    --baseline: 24px;
+
+    /* base color */
+    --text-color: #343a40;
+    --main-bg-color: #f8f9fa;
+    --color-btn-primary-bg: #ff922b;
+    --color-btn-text: #343a40;
+    --color-btn-hover: #fd7e14;
+    --color-white: #ffff;
+    --color-grey-5: #adb5bd;
+    --color-grey-6: #868e96;
+
+    /* type scale */
+    --text-xs: calc(1em / (var(--text-scale-ratio) * var(--text-scale-ratio)));
+    --text-sm: calc(1em / var(--text-scale-ratio));
+    --text-md: calc(1em * var(--text-scale-ratio));
+    --text-lg: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio));
+    --text-xl: calc(
+      1em * var(--text-scale-ratio) * var(--text-scale-ratio) *
+        var(--text-scale-ratio)
+    );
+    --text-xxl: calc(
+      1em * var(--text-scale-ratio) * var(--text-scale-ratio) *
+        var(--text-scale-ratio) * var(--text-scale-ratio)
+    );
+    --text-xxxl: calc(
+      1em * var(--text-scale-ratio) * var(--text-scale-ratio) *
+        var(--text-scale-ratio) * var(--text-scale-ratio) *
+        var(--text-scale-ratio)
+    );
+
+    /* spacing values */
+    --space-xxxs: 0.25em;
+    --space-xxs: 0.375em;
+    --space-xs: 0.5em;
+    --space-sm: 0.75em;
+    --space-md: 1.25em;
+    --space-lg: 2em;
+    --space-xl: 3.25em;
+    --space-xxl: 5.25em;
+    --space-xxxl: 8.5em;
+  }
+
+  /* text size */
+  .text--xxxl {
+    font-size: var(--text-xxxl);
+  }
+
+  h1,
+  .text--xxl {
+    font-size: var(--text-xxxl);
+  }
+
+  h2,
+  .text--xl {
+    font-size: var(--text-xxl);
+    // margin-bottom: 1.5rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  h3,
+  .text--lg {
+    font-size: var(--text-md);
+    margin-bottom: var(--space-xs);
+  }
+
+  .text--sm,
+  small {
+    font-size: var(--text-sm);
+  }
+
+  .text--xs {
+    font-size: var(--text-xs);
+  }
+
+  p {
+    line-height: var(--body-line-height);
+  }
+
   /* Reset sizing   */
   *,
   *::before,
@@ -13,10 +98,9 @@ export const globalStyleBody = (theme) => css`
   }
 
   /* Reset margin */
-
   body,
   h1,
-  h2,
+ // h2,
   h3,
   h4,
   h5,
@@ -24,18 +108,13 @@ export const globalStyleBody = (theme) => css`
     margin: 0;
   }
 
-  h2 {
-    font-size: ${theme.typography.large};
-    margin-bottom: 1.5rem;
-  }
-
   /* set up the body */
   body {
     line-height: 1.5; /* default for browser: 1.4 tends to be very small*/
-    font-size: ${theme.typography.main};
-    font-family: ${theme.font};
-    background-color: ${theme.bgColor.greyMain};
-    color: ${theme.color.grey8};
+    font-size: var(--text-base-size);
+    font-family: var(--font-primary);
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
     position: relative;
   }
 
@@ -46,6 +125,7 @@ export const globalStyleBody = (theme) => css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: 1px solid red;
   }
 
   /* make img easier to work with*/
@@ -69,7 +149,7 @@ export const globalStyleBody = (theme) => css`
   - margin set to auto
   */
     margin: auto;
-    margin-top: 4.5rem;
+    margin-top: 3.5rem;
     max-width: 1920px;
     width: 100%;
     padding: 0 3rem;
@@ -87,6 +167,16 @@ export const globalStyleBody = (theme) => css`
     padding: 0.625rem 1rem;
     margin: 1rem 0;
     color: ${theme.color.grey8};
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: var(--text-xl);
+    }
+
+    h3 {
+      font-size: var(--text-base-size);
+    }
   }
 `;
 
@@ -258,8 +348,7 @@ export const shoppingBagStyle = (theme) => css`
 export const footerStyle = (theme) => css`
   background-color: ${theme.bgColor.greyMain};
   width: 100%;
-  margin: 8rem 0rem auto;
-
+  margin: 3rem 0rem auto;
   // border: 2px solid green;
   section {
     max-width: 1920px;
@@ -283,7 +372,7 @@ export const footerStyle = (theme) => css`
       p:first-of-type {
         font-weight: bold;
       }
-      line-height: 2.5rem;
+      line-height: 2rem;
 
       form {
         display: flex;
@@ -319,6 +408,9 @@ export const footerStyle = (theme) => css`
     article:nth-of-type(5) {
       // border: 2px solid green;
       flex-basis: 30%;
+      label {
+        font-weight: 600;
+      }
 
       p {
         font-size: large;
@@ -339,7 +431,7 @@ export const footerStyle = (theme) => css`
     display: block;
   }
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 768px) {
     padding: 2.5rem 2.5rem;
   }
 `;
@@ -510,7 +602,7 @@ export const heroImageContentContainer = (theme) => css`
   z-index: 1;
   height: 12.5rem;
   width: auto;
-  color: ${theme.color.white};
+  color: var(--main-bg-color);
   letter-spacing: 0.2rem;
   display: flex;
   flex-direction: column;
@@ -550,57 +642,60 @@ export const heroImageContentContainer = (theme) => css`
 export const bestSellerStyle = (theme) => css`
   display: flex;
   flex-direction: column;
-  padding: 0 8rem;
+  padding: 0 3rem;
+  border: 2px solid pink;
 
   > div {
     display: grid;
-    gap: 1rem;
+    gap: var(--space-sm);
     grid-template-columns: repeat(4, 1fr);
+    border: 1px solid green;
+  }
 
-    > article {
-      //border: 2px solid green;
+  @media (max-width: 480px) {
+    > div {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+`;
+
+export const productCardStyle = css`
+  //border: 2px solid green;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  border: 1px solid blue;
+
+  // image container
+  div:first-of-type {
+    position: relative;
+    height: 20rem;
+    span {
+      z-index: 1;
+      position: absolute;
+      display: block;
+      //background-color: #37798D;
+      background-color: #009a7b;
+      color: var(--color-white);
+      width: 70%;
+      height: 3rem;
       display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-
-      // image container
-      div:first-of-type {
-        position: relative;
-        height: 20rem;
-        span {
-          z-index: 1;
-          position: absolute;
-          display: block;
-          //background-color: #37798D;
-          background-color: #009a7b;
-          color: ${theme.color.white};
-          width: 70%;
-          height: 3rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: ${theme.typography.main};
-          top: 30px;
-        }
-      }
-
-      a:link,
-      a:visited {
-        text-decoration: none;
-      }
-
-      div:last-of-type {
-        font-size: ${theme.typography.main};
-      }
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-base-size);
+      top: 30px;
     }
   }
 
-  @media (max-width: 1024px) {
-    gap: 0.8rem;
-    padding: 0 5rem;
+  a:link,
+  a:visited {
+    text-decoration: none;
+  }
 
-    > div > article div:first-of-type {
+  @media (max-width: 1024px) {
+    div:first-of-type {
       height: 15rem;
+      width: auto;
 
       span {
         height: 2rem;
@@ -608,41 +703,22 @@ export const bestSellerStyle = (theme) => css`
     }
   }
 
-  @media screen and (max-width: 769px) {
-    padding: 0 2rem;
-    h3,
-    p {
-      font-size: ${theme.typography.main};
-    }
-
-    > div > article div:first-of-type {
+  @media screen and (max-width: 768px) {
+    div:first-of-type {
       height: 10rem;
+
       span {
-        font-size: ${theme.typography.small};
+        font-size: var(--text-sm);
       }
     }
   }
 
-  @media screen and (max-width: 620px) {
-    h3,
-    p {
-      font-size: ${theme.typography.small};
-    }
-
-    > div > article div:first-of-type {
+  @media (max-width: 480px) {
+    div:first-of-type {
       height: 8rem;
       span {
-        font-size: ${theme.typography.xsmall};
+        font-size: var(--text-xs);
       }
-    }
-  }
-
-  @media (max-width: 425px) {
-    > div {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    > div > article div:first-of-type {
-      height: 10rem;
     }
   }
 `;
@@ -659,12 +735,13 @@ export const styleComp = css`
 export const summerFavoritesStyle = (theme) => css`
   display: flex;
   flex-direction: column;
-  padding: 0 8rem;
+  padding: 0 3rem;
+  border: 1px solid yellow;
   > div {
     // border: 2px solid green;
     display: grid;
     grid-template-columns: 3fr 2fr;
-    gap: 1rem;
+    gap: var(--space-sm);
 
     // first image container
     > div:first-of-type {
@@ -673,9 +750,10 @@ export const summerFavoritesStyle = (theme) => css`
       border: 2px solid green;
     }
 
+    // images container
     > div:last-of-type {
       display: grid;
-      gap: 1rem;
+      gap: var(--space-sm);
       grid-template-columns: 1fr 1fr;
 
       article {
@@ -689,7 +767,7 @@ export const summerFavoritesStyle = (theme) => css`
   }
 
   @media (max-width: 1024px) {
-    padding: 0 5rem;
+    //padding: 0 5rem;
 
     > div {
       // first image container
@@ -700,7 +778,7 @@ export const summerFavoritesStyle = (theme) => css`
       > div:last-of-type {
         grid-template-columns: repeat(2, 1fr);
 
-        article {
+        /article {
           // second image container
           > div:first-of-type {
             height: 15rem;
@@ -714,13 +792,9 @@ export const summerFavoritesStyle = (theme) => css`
   @media (max-width: 768px) {
     padding: 0 2rem;
 
-    h3,
-    p {
-      font-size: 16px;
-    }
-
     > div {
       grid-template-columns: 1fr;
+
       // first image container
       > div:first-of-type {
         height: 20rem;
@@ -739,14 +813,7 @@ export const summerFavoritesStyle = (theme) => css`
     }
   }
 
-  @media (max-width: 620px) {
-    h3,
-    p {
-      font-size: 14px;
-    }
-  }
-
-  @media (max-width: 425px) {
+  @media (max-width: 480px) {
     > div {
       > div:last-of-type {
         grid-template-columns: repeat(2, 1fr);
