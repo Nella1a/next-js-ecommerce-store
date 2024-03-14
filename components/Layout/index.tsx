@@ -3,7 +3,6 @@ import { PropsTypeChildrenLayer } from '../../util/types';
 import Delivery from '../Delivery';
 import Footer from '../Footer';
 import { Header } from '../Header';
-import MobileDelivery from '../Mobile/MobileDelivery';
 import MobileFooter from '../Mobile/MobileFooter';
 import { BREAKPOINTAT768, getScreenSize } from '../Navigation';
 
@@ -24,7 +23,7 @@ export default function Layout(props: PropsTypeChildrenLayer) {
 
       <main>
         {props.children}
-        {screenwidth > BREAKPOINTAT768 ? <Delivery /> : <MobileDelivery />}
+        <Delivery />
       </main>
       {screenwidth > BREAKPOINTAT768 ? <Footer /> : <MobileFooter />}
     </>

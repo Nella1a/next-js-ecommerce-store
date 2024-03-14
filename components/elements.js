@@ -22,6 +22,7 @@ export const globalStyleBody = (theme) => css`
     --color-white: #ffff;
     --color-grey-5: #adb5bd;
     --color-grey-6: #868e96;
+    --color-green: #709f7a;
 
     /* type scale */
     --text-xs: calc(1em / (var(--text-scale-ratio) * var(--text-scale-ratio)));
@@ -1287,10 +1288,10 @@ export const underConstruction = css`
 /*    DeliveryInfos.js       */
 /* *************************** */
 
-export const deliveryInfos = () => css`
-  //border: 2px solid red;
-  background-color: #709f7a;
-  color: #000;
+export const deliveryInfos = css`
+  border: 2px solid red;
+  background-color: var(--color-green);
+  //color: #000;
   height: 8rem;
   max-width: unset;
   width: 100vw;
@@ -1302,18 +1303,28 @@ export const deliveryInfos = () => css`
     width: 100%;
     height: inherit;
     margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
     //background-color: blue;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    align-content: center;
 
-    > div {
+    > article {
       gap: 1rem;
-      article {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid black;
+      > div {
         width: 3rem;
         height: 3rem;
         background-color: lightgrey;
         border-radius: 50%;
+        margin: 0;
       }
     }
 
@@ -1327,6 +1338,16 @@ export const deliveryInfos = () => css`
       h4 {
         font-size: 1.3rem;
       }
+    }
+
+    @media screen and (max-width: 600px) {
+      > article > div {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      grid-template-columns: 1fr;
     }
   }
 `;

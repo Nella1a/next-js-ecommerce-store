@@ -4,18 +4,18 @@ export default function Delivery() {
   return (
     <section css={deliveryInfos}>
       <div>
-        <div>
-          <article />
+        <article>
+          <div></div>
           <p>Free Shipping</p>
-        </div>
-        <div>
-          <article />
+        </article>
+        <article>
+          <div></div>
           <p>30 Day Guarantee</p>
-        </div>
-        <div>
-          <article />
+        </article>
+        <article>
+          <div></div>
           <p>Best Quality</p>
-        </div>
+        </article>
       </div>
     </section>
   );
