@@ -16,9 +16,9 @@ export const globalStyleBody = css`
     /* base color */
     --text-color: #343a40;
     --main-bg-color: #f8f9fa;
-    --color-btn-primary-bg: #ff922b;
+    --color-btn-primary-bg: #f76707;
     --color-btn-text: #343a40;
-    --color-btn-hover: #fd7e14;
+    --color-btn-hover: #ff922b;
     --color-white: #ffff;
     --color-grey-5: #adb5bd;
     --color-grey-6: #868e96;
