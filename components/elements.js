@@ -166,7 +166,13 @@ export const globalStyleBody = (theme) => css`
     min-height: 2.5rem;
     padding: 0.625rem 1rem;
     margin: 1rem 0;
-    color: ${theme.color.grey8};
+    color: var(--text-color);
+    border: none;
+    background-color: var(--color-btn-primary-bg);
+
+    :hover {
+      background-color: var(--color-btn-hover);
+    }
   }
 
   @media (max-width: 768px) {
@@ -269,16 +275,15 @@ export const headerStyle = (theme) => css`
 
         button {
           all: unset;
-          color: ${theme.color.grey8};
-          font-weight: bold;
           cursor: pointer;
         }
 
-        a {
+        a:link,
+        a:visited {
           text-decoration: none;
           display: block;
           font-weight: bold;
-          color: ${theme.color.grey8};
+          color: var(--text-color);
         }
       }
 
@@ -395,12 +400,6 @@ export const footerStyle = (theme) => css`
         button {
           height: 3.5rem;
           width: 100%;
-          background-color: ${theme.bgColor.orange5Main};
-          border: none;
-
-          &:hover {
-            background-color: ${theme.bgColor.orange6Hover};
-          }
         }
       }
     }
@@ -442,12 +441,6 @@ export const styleLargeButton = (theme) => css`
 
   button {
     ${size('17.65rem', '1.47rem')}
-    background-color: ${theme.bgColor.orange5Main};
-    border: none;
-
-    &:hover {
-      background-color: ${theme.bgColor.orange6Hover};
-    }
   }
 `;
 
@@ -619,21 +612,14 @@ export const heroImageContentContainer = (theme) => css`
 
   button {
     ${size('10.65rem', '1.47rem')}
-    background-color: ${theme.bgColor.orange5Main};
-    border: none;
-    display: inline-block;
 
-    &:hover {
-      background-color: ${theme.bgColor.orange6Hover};
-    }
+    display: inline-block;
   }
 
   @media (max-width: 769px) {
     height: 10.25rem;
-    p {
-      font-size: ${theme.typography.large};
-    }
   }
+
   @media (max-width: 640px) {
     display: none;
   }
