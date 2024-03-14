@@ -829,32 +829,19 @@ export const separator = css`
 /*         Products.js         */
 /* *************************** */
 
-export const productsComponentStyle = (theme) => css`
-  h2 {
-    font-size: ${theme.typography.large};
-  }
-
-  h3 {
-    margin-bottom: unset;
-  }
-
-  > article:first-of-type {
+export const productsComponentStyle = css`
+  > div:first-of-type {
     display: grid;
-    gap: 30px;
+    gap: var(--space-sm);
     grid-template-columns: repeat(4, 1fr);
+    grid-row-gap: var(--space-xl);
 
     @media screen and (max-width: 1024px) {
-      gap: 24px;
+      grid-row-gap: var(--space-lg);
     }
 
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 600px) {
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-
-    @media screen and (max-width: 480px) {
-      gap: 4px;
-      grid-template-columns: 1fr;
     }
   }
 `;
