@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Fragment } from 'react';
 import { productCardStyle } from '../elements';
 import ProductCard from '../ProductCard';
@@ -22,9 +23,11 @@ export default function Products(props: Props) {
   return (
     <>
       {props.plants.map((plant: Plants) => (
-        <article key={`guest-${plant.id}`} css={productCardStyle}>
-          <ProductCard plant={plant} />
-        </article>
+        <Link href="/product/[slug]" as={`/product/${plant.slugName}`}>
+          <article key={`guest-${plant.id}`} css={productCardStyle}>
+            <ProductCard plant={plant} />
+          </article>
+        </Link>
       ))}
     </>
   );

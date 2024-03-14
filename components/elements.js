@@ -641,6 +641,17 @@ export const bestSellerStyle = (theme) => css`
     gap: var(--space-sm);
     grid-template-columns: repeat(4, 1fr);
     //  border: 1px solid green;
+
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: var(--text-color);
+    }
+
+    // a:hover,
+    a:active {
+      color: var(--text-color);
+    }
   }
 
   @media (max-width: 480px) {
@@ -741,11 +752,22 @@ export const summerFavoritesStyle = (theme) => css`
       // border: 2px solid green;
     }
 
-    // images container
+    // container for the productCards
     > div:last-of-type {
       display: grid;
       gap: var(--space-sm);
       grid-template-columns: 1fr 1fr;
+
+      a:link,
+      a:visited {
+        text-decoration: none;
+        color: var(--text-color);
+      }
+
+      // a:hover,
+      a:active {
+        color: var(--text-color);
+      }
 
       article {
         // second image container
@@ -835,6 +857,17 @@ export const productsComponentStyle = css`
     gap: var(--space-sm);
     grid-template-columns: repeat(4, 1fr);
     grid-row-gap: var(--space-xl);
+
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: var(--text-color);
+    }
+
+    // a:hover,
+    a:active {
+      color: var(--text-color);
+    }
 
     @media screen and (max-width: 1024px) {
       grid-row-gap: var(--space-lg);
