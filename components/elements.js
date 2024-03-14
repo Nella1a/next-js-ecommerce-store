@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 /* *************************** */
 /*    Global Styles            */
 /* *************************** */
-export const globalStyleBody = (theme) => css`
+export const globalStyleBody = css`
   :root {
     --font-primary: 'Yeseva One';
     --font-fallback: sans-serif;
@@ -126,7 +126,7 @@ export const globalStyleBody = (theme) => css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid red;
+    // border: 1px solid red;
   }
 
   /* make img easier to work with*/
@@ -140,7 +140,7 @@ export const globalStyleBody = (theme) => css`
   textarea,
   select {
     font: inherit;
-    color: ${theme.color.grey6};
+    color: var(--color-grey-6);
   }
 
   section {
@@ -510,6 +510,10 @@ export const MobileFooterStyle = (theme) => css`
           flex-direction: column;
           max-width: 100%;
 
+          label {
+            font-weight: 600;
+          }
+
           input {
             letter-spacing: 0.031rem;
             line-height: 1.125rem;
@@ -630,13 +634,13 @@ export const bestSellerStyle = (theme) => css`
   display: flex;
   flex-direction: column;
   padding: 0 3rem;
-  border: 2px solid pink;
+  // border: 2px solid pink;
 
   > div {
     display: grid;
     gap: var(--space-sm);
     grid-template-columns: repeat(4, 1fr);
-    border: 1px solid green;
+    //  border: 1px solid green;
   }
 
   @media (max-width: 480px) {
@@ -651,7 +655,7 @@ export const productCardStyle = css`
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  border: 1px solid blue;
+  // border: 1px solid blue;
 
   // image container
   div:first-of-type {
@@ -723,7 +727,7 @@ export const summerFavoritesStyle = (theme) => css`
   display: flex;
   flex-direction: column;
   padding: 0 3rem;
-  border: 1px solid yellow;
+  // border: 1px solid yellow;
   > div {
     // border: 2px solid green;
     display: grid;
@@ -734,7 +738,7 @@ export const summerFavoritesStyle = (theme) => css`
     > div:first-of-type {
       height: 38rem;
       position: relative;
-      border: 2px solid green;
+      // border: 2px solid green;
     }
 
     // images container
@@ -1289,7 +1293,7 @@ export const underConstruction = css`
 /* *************************** */
 
 export const deliveryInfos = css`
-  border: 2px solid red;
+  //  border: 2px solid red;
   background-color: var(--color-green);
   //color: #000;
   height: 8rem;
@@ -1303,10 +1307,6 @@ export const deliveryInfos = css`
     width: 100%;
     height: inherit;
     margin: 0 auto;
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-    //background-color: blue;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-content: center;
@@ -1317,8 +1317,7 @@ export const deliveryInfos = css`
       display: flex;
       align-items: center;
       justify-content: center;
-
-      border: 1px solid black;
+      //border: 1px solid black;
       > div {
         width: 3rem;
         height: 3rem;

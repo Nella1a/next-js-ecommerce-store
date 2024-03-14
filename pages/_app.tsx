@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: any) {
           <CartContextProvider>
             <CartCookieProvider>
               <ThemeProvider theme={theme}>
-                <Global styles={globalStyleBody(theme)} />
+                <Global styles={globalStyleBody} />
                 <Component {...pageProps} />
                 <LoginInFormLayover token={''} />
               </ThemeProvider>
