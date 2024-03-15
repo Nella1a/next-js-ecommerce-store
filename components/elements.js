@@ -969,7 +969,8 @@ export const singleProductPageStyle = css`
             button {
               background-color: var(--color-grey-2);
               border-radius: 100rem;
-              width: 3.8em;
+              width: 3.5em;
+              min-height: 2rem;
               border: unset;
 
               :hover {
