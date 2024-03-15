@@ -907,6 +907,7 @@ export const singleProductPageStyle = css`
           }
           p {
             font-size: var(--text-md);
+            font-weight: bold;
           }
         }
       }
@@ -917,6 +918,7 @@ export const singleProductPageStyle = css`
         > div:first-of-type {
           p {
             font-size: var(--base-text);
+            font-weight: 400;
           }
         }
       }
