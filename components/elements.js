@@ -228,9 +228,11 @@ export const headerStyle = (theme) => css`
     padding-top: 0.5rem;
     border-bottom: 0px solid var(--color-grey-6);
     box-shadow: rgba(0, 0, 0, 0.45) 0px 15px 10px -20px;
+    border: 2px solid red;
 
-    // shelovesPlants logo
+    // contanier shelovesPlants logo
     > div:first-of-type {
+      border: 1px solid blue;
       width: 100%;
       ${marginCenter}
       margin: auto;
@@ -249,11 +251,13 @@ export const headerStyle = (theme) => css`
         height: auto;
       }
     }
-    // links
+
+    // container links
     > div:nth-of-type(2) {
-      width: 100%;
+      //  width: 100%;
       ${marginCenter}
       margin: auto;
+      border: 2px solid pink;
 
       position: relative;
       top: 0px;
@@ -269,19 +273,15 @@ export const headerStyle = (theme) => css`
         list-style-type: none;
         list-style-position: inside;
         display: flex;
-        gap: 3rem;
+        gap: var(--space-md);
         margin: 0;
 
         li {
           display: flex;
-          flex-direction: column;
+          //flex-direction: column;
+          align-items: flex-end;
           justify-content: center;
           //  border: 2px solid blue;
-        }
-
-        button {
-          all: unset;
-          cursor: pointer;
         }
 
         a:link,
@@ -296,58 +296,32 @@ export const headerStyle = (theme) => css`
       @media (max-width: 1200px) {
         gap: 1rem;
       }
-
-      @media (max-width: 768px) {
-        ul {
-          gap: 2rem;
-        }
-        button {
-          all: unset;
-          display: block;
-          margin-left: auto;
-          position: relative;
-          top: 6px;
-
-          > span {
-            display: flex;
-            flex-direction: column;
-            padding-top: 0.5rem;
-          }
-        }
-        gap: 2rem;
-      }
     }
   }
 `;
 
-export const shoppingBagStyle = (theme) => css`
+export const shoppingBagStyle = css`
   all: unset;
-  ${size('3.76rem', '3.76rem')}
   position: relative;
+  ${size('1.55rem', '1.55rem')}
+  border: 1px solid red;
+  background-color: lightpink;
 
-  // container
-  div:first-of-type {
-    ${size('1.88rem', '1.88rem')}
-    //  border: 1px solid red;
+  // container circle and quantity
+  > span:nth-of-type(2) {
+    ${size('1.41rem', '1.41rem')}
+    display: flex;
+    border-radius: 50%;
+    background-color: var(--color-btn-primary-bg);
+    color: var(--color-white);
+    position: absolute;
+    text-align: center;
+    top: -18px;
+    right: -5px;
 
-    // circle
-    div {
-      ${size('1.41rem', '1.41rem')}
-      border-radius: 50%;
-      background-color: #ff6900;
-      color: var(--color-white);
-      position: absolute;
-      text-align: center;
-      top: 5px;
-      right: -11px;
-
-      // quantity inside of the circle
-      span {
-        position: relative;
-        top: 0px;
-        right: 0px;
-        font-size: ${theme.typography.small};
-      }
+    > span {
+      margin: auto auto;
+      font-size: var(--text-sm);
     }
   }
 `;

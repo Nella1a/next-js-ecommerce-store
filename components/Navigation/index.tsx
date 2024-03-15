@@ -29,7 +29,7 @@ export const getScreenSize = () => {
   return screenSize;
 };
 
-export const BREAKPOINTAT768 = 768;
+export const BREAKPOINT_AT_768 = 768;
 
 export default function Navigation() {
   const screenwidth = getScreenSize();
@@ -42,21 +42,31 @@ export default function Navigation() {
   };
 
   const shoppingBagIcon = () => (
-    <button css={shoppingBagStyle}>
-      <Link
-        href={{
-          pathname: '/Cart',
-        }}
-        passHref
-      >
-        <div>
-          <Image src={shoppingBag} alt="shopping cart icon" />
-          <div>
-            <span data-test-id="cart-count">{cartCount}</span>
-          </div>
-        </div>
-      </Link>
-    </button>
+    <Link
+      href={{
+        pathname: '/Cart',
+      }}
+      passHref
+    >
+      <button css={shoppingBagStyle}>
+        <span>
+          <Image
+            src={shoppingBag}
+            alt="shopping cart icon"
+            quality={90}
+            fill
+            sizes="100vw"
+            style={{
+              objectFit: 'cover',
+            }}
+          />
+        </span>
+
+        <span>
+          <span data-test-id="cart-count">{cartCount}</span>
+        </span>
+      </button>
+    </Link>
   );
   return (
     <Fragment>
@@ -74,35 +84,12 @@ export default function Navigation() {
               />
             </Link>
           </div>
-          {/*           <div>
-            {screenwidth > BREAKPOINTAT768 ? (
-              <ul>
-                <NavMenu />
-                <li>{shoppingBagIcon()}</li>
-              </ul>
-            ) : (
-              <ul>
-                <li>
-                  <button>
-                    <span
-                      onClick={toggleMobileMenuHandler}
-                      onKeyDown={toggleMobileMenuHandler}
-                      role="menu"
-                      tabIndex={0}
-                    >
-                      <Image
-                        src="/menu.png"
-                        width="29"
-                        height="29"
-                        alt="menu icon"
-                      />
-                    </span>
-                  </button>
-                </li>
-                <li>{shoppingBagIcon()}</li>
-              </ul>
-            )}
-          </div> */}
+          <div>
+            <ul>
+              <NavMenu />
+              <li>{shoppingBagIcon()}</li>
+            </ul>
+          </div>
         </div>
       </nav>
     </Fragment>

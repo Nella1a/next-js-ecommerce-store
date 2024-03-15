@@ -3,7 +3,7 @@ import { PropsLayoutCart } from '../../../util/types';
 import Delivery from '../../Delivery';
 import Footer from '../../Footer';
 import MobileFooter from '../../Mobile/MobileFooter';
-import Navigation, { BREAKPOINTAT768, getScreenSize } from '../../Navigation';
+import Navigation, { BREAKPOINT_AT_768, getScreenSize } from '../../Navigation';
 
 export default function LayoutNoHeader(props: PropsLayoutCart) {
   const screenwidth = getScreenSize();
@@ -19,7 +19,7 @@ export default function LayoutNoHeader(props: PropsLayoutCart) {
         {props.children}
         <Delivery />
       </main>
-      {screenwidth > BREAKPOINTAT768 ? <Footer /> : <MobileFooter />}
+      {screenwidth > BREAKPOINT_AT_768 ? <Footer /> : <MobileFooter />}
     </>
   );
 }

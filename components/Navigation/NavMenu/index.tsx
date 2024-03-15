@@ -60,7 +60,7 @@ export default function NavMenu() {
           Plants
         </Link>
       </li>
-      <li>{user.uid ? logoutButton() : loginButton()}</li>
+      {/* <li>{user.uid ? logoutButton() : loginButton()}</li> */}
     </>
   );
 }
