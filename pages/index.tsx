@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import ButtonCallToAction from '../components/Buttons/ButtonCallToAction';
