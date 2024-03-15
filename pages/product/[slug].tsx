@@ -62,6 +62,13 @@ export default function SingleProduct(
     addToCartFunction();
   };
 
+  const titleAndPrice = () => (
+    <div>
+      <h1>{props.plant.title}</h1>
+      <p data-test-id="product-price"> €{props.plant.price}</p>
+    </div>
+  );
+
   return (
     <LayoutNoHeader>
       <Head>
@@ -69,7 +76,7 @@ export default function SingleProduct(
         <meta name="Plant with a smile" content="View all Plants" />
       </Head>
       <section css={singleProductPageStyle}>
-        <div>
+        <article>
           <div>
             <ProductImageSmall src={`/image${props.plant.id}.jpeg`} />
           </div>
@@ -79,32 +86,35 @@ export default function SingleProduct(
           <div>
             <ProductImageSmall src={`/image${props.plant.id}.jpeg`} />
           </div>
-        </div>
-        <div>
           <div>
+            <ProductImageSmall src={`/image${props.plant.id}.jpeg`} />
+          </div>
+        </article>
+        <article>
+          <div>
+            {titleAndPrice()}
             <ProductImage src={`/image${props.plant.id}.jpeg`} title={title} />
           </div>
-          <article>
+          <section>
             <div>
-              <h1>{props.plant.title}</h1>
-              <p data-test-id="product-price"> €{props.plant.price}</p>
+              {titleAndPrice()}
               <p>{props.plant.descr}</p>
               <div>
-                <ChangeCartQuantity
-                  quantity={quantity}
-                  increment={incrementHandler}
-                  decrement={decrementHandler}
-                />
                 <button
                   data-test-id="product-add-to-cart"
                   onClick={updateCartAndCookieHandler}
                 >
                   Add to cart
                 </button>
+                <ChangeCartQuantity
+                  quantity={quantity}
+                  increment={incrementHandler}
+                  decrement={decrementHandler}
+                />
               </div>
             </div>
-          </article>
-        </div>
+          </section>
+        </article>
       </section>
     </LayoutNoHeader>
   );

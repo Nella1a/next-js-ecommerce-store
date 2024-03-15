@@ -20,8 +20,12 @@ export const globalStyleBody = css`
     --color-btn-text: #343a40;
     --color-btn-hover: #ff922b;
     --color-white: #ffff;
-    --color-grey-5: #adb5bd;
     --color-grey-6: #868e96;
+    --color-grey-5: #adb5bd;
+    --color-grey-4: #ced4da;
+    --color-grey-3: #dee2e6;
+    --color-grey-2: #e9ecef;
+
     --color-green: #709f7a;
 
     /* type scale */
@@ -141,6 +145,7 @@ export const globalStyleBody = css`
   select {
     font: inherit;
     color: var(--color-grey-6);
+    min-height: 2.9rem;
   }
 
   section {
@@ -164,7 +169,7 @@ export const globalStyleBody = css`
     font-weight: bold;
     font-size: 0.75rem;
     display: block;
-    min-height: 2.5rem;
+    min-height: 2.9rem;
     padding: 0.625rem 1rem;
     margin: 1rem 0;
     color: var(--text-color);
@@ -216,12 +221,12 @@ export const headerStyle = (theme) => css`
     z-index: 3;
     max-width: 1920px;
     width: 100%;
-    background-color: ${theme.bgColor.white};
+    background-color: var(--main-bg-color);
     margin: 0 auto;
     display: flex;
     padding: 0 3rem;
     padding-top: 0.5rem;
-    border-bottom: 0px solid ${theme.color.grey6};
+    border-bottom: 0px solid var(--color-grey-6);
     box-shadow: rgba(0, 0, 0, 0.45) 0px 15px 10px -20px;
 
     // shelovesPlants logo
@@ -330,7 +335,7 @@ export const shoppingBagStyle = (theme) => css`
       ${size('1.41rem', '1.41rem')}
       border-radius: 50%;
       background-color: #ff6900;
-      color: ${theme.color.white};
+      color: var(--color-white);
       position: absolute;
       text-align: center;
       top: 5px;
@@ -393,14 +398,8 @@ export const footerStyle = (theme) => css`
           font-weight: bold;
           font-size: 0.75rem;
           display: block;
-          height: 3.5rem;
           width: 100%;
           padding: 0.625rem 1rem;
-        }
-
-        button {
-          height: 3.5rem;
-          width: 100%;
         }
       }
     }
@@ -521,21 +520,9 @@ export const MobileFooterStyle = (theme) => css`
             font-weight: bold;
             font-size: 0.75rem;
             display: block;
-            height: 3.5rem;
             width: 100%;
             padding: 0.625rem 1rem;
             color: #000;
-          }
-
-          button {
-            height: 3.5rem;
-            width: 100%;
-            background-color: #ed943b;
-            border: none;
-
-            &:hover {
-              background-color: #ff6900;
-            }
           }
         }
       }
@@ -616,8 +603,7 @@ export const heroImageContentContainer = (theme) => css`
   }
 
   button {
-    ${size('10.65rem', '1.47rem')}
-
+    width: 12.65rem;
     display: inline-block;
   }
 
@@ -791,7 +777,7 @@ export const summerFavoritesStyle = (theme) => css`
       > div:last-of-type {
         grid-template-columns: repeat(2, 1fr);
 
-        /article {
+        article {
           // second image container
           > div:first-of-type {
             height: 15rem;
@@ -884,30 +870,28 @@ export const productsComponentStyle = css`
 /* *************************** */
 
 export const singleProductPageStyle = css`
-  margin-top: 8em;
-  // border: 1px solid red;
+  border: 2px solid red;
   display: grid;
-  //grid-template-columns: minmax(0, 9.37rem) 1fr;
   grid-template-columns: 1fr 11fr;
   gap: 1.5rem;
 
   @media screen and (max-width: 1025px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 11fr;
     max-width: 100%;
   }
 
   @media screen and (max-width: 768px) {
     max-width: 100%;
     display: unset;
-    padding: 0 1.5rem;
   }
 
-  > div:first-of-type {
+  // first container - small images
+  > article:first-of-type {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    //justify-content: space-between;
-    // display: block;
+    gap: var(--space-sm);
+
+    border: 1px solid green;
 
     @media screen and (max-width: 1025px) {
       display: none;
@@ -917,104 +901,153 @@ export const singleProductPageStyle = css`
     }
   }
 
-  div:nth-of-type(2) {
+  // second container - large image and text
+  > article:nth-of-type(2) {
     display: flex;
+    gap: var(--space-lg);
+    border: 1px solid blue;
 
-    gap: 1.5rem;
-
-    @media screen and (max-width: 768px) {
-      flex-direction: column;
-    }
-
+    // container large image
     > div {
       display: block;
       height: auto;
       width: 40%;
 
+      // container for title, price, description and button
+      > div:first-of-type {
+        display: none;
+      }
       @media screen and (max-width: 1025px) {
         width: 50%;
       }
 
       @media screen and (max-width: 768px) {
         width: 100%;
+
+        // container title and price
+        > div:first-of-type {
+          display: block;
+          margin-bottom: var(--space-lg);
+          h1 {
+            font-size: var(--text-xl);
+          }
+          p {
+            font-size: var(--text-md);
+          }
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        width: 100%;
+        // container title and price
+        > div:first-of-type {
+          p {
+            font-size: var(--base-text);
+          }
+        }
       }
     }
 
     // info outerContainer
-    article {
+    section {
+      padding: unset;
+      margin: unset;
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 50%;
+      width: 60%;
+      border: 2px solid orange;
 
       // info innerContainer
-      > div:first-child {
+      > div {
         display: flex;
         flex-direction: column;
-        gap: 2rem;
+        gap: var(--space-md);
+        border: 2px solid pink;
 
-        h1 {
-          font-size: 24px;
+        // container title and price
+        > div:first-of-type {
+          h1 {
+            font-size: var(--text-xxl);
+          }
+
+          p:first-of-type {
+            font-size: var(--text-md);
+            font-weight: bold;
+          }
+          @media screen and (max-width: 768px) {
+            display: none;
+          }
+        }
+        // container quantity and buttons
+        > div:nth-of-type(2) {
+          display: flex;
+          gap: 1.2rem;
+          border: 2px solid lightskyblue;
+
+          // container quantity buttons
+          div {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 0.8rem;
+
+            button {
+              background-color: var(--color-grey-2);
+              border-radius: 100rem;
+              width: 3.8em;
+              border: unset;
+
+              :hover {
+                background-color: var(--color-btn-hover);
+              }
+            }
+            // quantity
+            span {
+              font-size: var(--text-md);
+            }
+          }
+
+          > button {
+            ${size('15.65rem', '1.47rem')}
+            border: none;
+          }
+
+          @media screen and (max-width: 768px) {
+            flex-direction: column-reverse;
+            // margin-top: var(--space-sm);
+
+            // container quantity buttons
+            div {
+              button {
+                margin: 0;
+              }
+            }
+
+            // add-to-cart button
+            > button {
+              width: 100%;
+              margin: 0;
+            }
+          }
+        }
+
+        @media screen and (max-width: 480px) {
+          width: 100%;
         }
       }
 
       @media screen and (max-width: 768px) {
         width: 100%;
-        padding: 0 1rem;
       }
 
-      > div {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: flex-end;
-        gap: 1.2rem;
-
-        // quantity container
-        div {
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          gap: 0.8rem;
-
-          button {
-            background-color: rgba(243, 244, 243);
-            border: unset;
-            :hover {
-              background-color: rgba(237, 148, 59, 0.6);
-            }
-          }
-        }
-
-        > button {
-          ${size('15.65rem', '1.47rem')}
-          background-color: #ed943b;
-          border: none;
-
-          &:hover {
-            background-color: #ff6900;
-          }
-        }
+      @media screen and (max-width: 480px) {
+        padding: 0;
       }
     }
-  }
-`;
 
-export const singleProductPageStyleSecondArticle = css`
-  margin-top: 3rem;
-  height: 0px;
-
-  a {
-    text-decoration: none;
-  }
-
-  button {
-    ${size('17.65rem', '1.47rem')}
-
-    border: 1px solid #ed943b;
-    background-color: transparent;
-
-    &:hover {
-      background-color: #ff6900;
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
     }
   }
 `;
