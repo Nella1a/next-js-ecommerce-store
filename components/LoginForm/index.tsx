@@ -4,7 +4,8 @@ import { useForm } from 'react-hook-form';
 import { useAuth } from '../../AuthProvider';
 import { OverlayContext } from '../../util/context/overlayContext';
 import { errorStyle } from '../CheckoutForm/Shipping';
-import { apiErrorStyle, loginRegisterFormStyle } from '../RegisterForm';
+import { loginRegisterFormStyle } from '../elements';
+import { apiErrorStyle } from '../RegisterForm';
 
 export interface DefaultFormValues {
   email: string;
@@ -80,7 +81,7 @@ export default function LoginForm() {
           aria-invalid={errors.password ? 'true' : 'false'}
           data-test-id="password"
           css={errorStyle(errors.password?.type)}
-          placeholder="Password"
+          placeholder="password"
           type="password"
         />
 

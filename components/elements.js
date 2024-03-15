@@ -1373,7 +1373,128 @@ export const deliveryInfos = css`
 /*  login.tsx / register.tsx   */
 /* *************************** */
 
-export const registerLoginStyle = css``;
+export const loginPageContainerStyle = css`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: start;
+  gap: var(--space-lg);
+  //margin-top: 10rem;
+  border: 1px solid blue;
+  height: 50vh;
+
+  article:first-of-type {
+    width: 44%;
+    // height: 100%;
+
+    border: 2px solid green;
+    h1 {
+      font-weight: 500;
+    }
+    p:last-of-type {
+      font-size: inherit;
+    }
+
+    a:link,
+    a:visited,
+    a:hover,
+    a:active {
+      font-weight: 600;
+      color: var(--text-color);
+      text-decoration: none;
+    }
+  }
+
+  article:nth-of-type(2) {
+    width: 44%;
+    // height: 100%;
+  }
+
+  @media (max-width: 768px) {
+    gap: var(--space-md);
+    h1 {
+      font-size: var(--text-xxl);
+    }
+
+    height: unset;
+    //flex-direction: column;
+    //justify-content: center;
+    //align-items: center;
+
+    article:first-of-type,
+    article:nth-of-type(2) {
+      width: 80%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    gap: var(--space-sm);
+    h1 {
+      font-size: var(--text-xl);
+    }
+
+    article:first-of-type,
+    article:nth-of-type(2) {
+      width: 100%;
+    }
+  }
+`;
+
+export const loginRegisterFormStyle = css`
+  width: 100%;
+  h1 {
+    padding-top: 2.25rem;
+    //padding-bottom: 1rem;
+    text-align: center;
+  }
+
+  p {
+    margin-top: unset;
+    margin-bottom: 1rem;
+    text-align: center;
+
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    // border: 1px solid green;
+    margin-bottom: 1rem;
+
+    input,
+    > button {
+      width: 100%;
+      border-width: 0.5px;
+      margin-bottom: 1rem;
+      padding: 1.2rem;
+      // line-height: 1.25rem;
+      font-size: 100%;
+      margin-top: 0;
+      font-weight: unset;
+    }
+
+    button {
+      background-color: var(--color-btn-primary-bg);
+      border: none;
+      text-transform: unset;
+    }
+  }
+`;
+
+export const apiErrorStyle = css`
+  padding: 10px 0;
+  color: red;
+`;
 
 /* *************************** */
 /*  login.tsx / register.tsx   */

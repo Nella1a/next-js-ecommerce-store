@@ -9,7 +9,7 @@ export default function NavMenu() {
   const { logOut, user } = useAuth();
   const router = useRouter();
 
-  const onClickLoginHandler = () => {
+  /*   const onClickLoginHandler = () => {
     toggleLoginLayover();
   };
 
@@ -44,10 +44,9 @@ export default function NavMenu() {
 
   const logoutButton = () => (
     <button data-test-id="logout-link" onClick={onClickLogoutHandler}>
-      {' '}
       Logout
     </button>
-  );
+  ); */
   return (
     <>
       <li>
@@ -61,6 +60,27 @@ export default function NavMenu() {
         </Link>
       </li>
       {/* <li>{user.uid ? logoutButton() : loginButton()}</li> */}
+      <li>
+        {user.uid ? (
+          <Link
+            href={{
+              pathname: '/',
+            }}
+            data-test-id="logout-button"
+          >
+            Logout
+          </Link>
+        ) : (
+          <Link
+            href={{
+              pathname: '/login',
+            }}
+            data-test-id="login-button"
+          >
+            Login
+          </Link>
+        )}
+      </li>
     </>
   );
 }
