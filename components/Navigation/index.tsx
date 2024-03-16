@@ -44,7 +44,7 @@ export default function Navigation() {
   const shoppingBagIcon = () => (
     <Link
       href={{
-        pathname: '/Cart',
+        pathname: '/cart',
       }}
       passHref
     >

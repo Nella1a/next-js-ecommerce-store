@@ -117,7 +117,7 @@ export const globalStyleBody = css`
   body {
     line-height: 1.5; /* default for browser: 1.4 tends to be very small*/
     font-size: var(--text-base-size);
-    font-family: var(--font-primary);
+    font-family: var(--font-primary) var(--font-fallback);
     background-color: var(--main-bg-color);
     color: var(--text-color);
     position: relative;
@@ -181,6 +181,19 @@ export const globalStyleBody = css`
     }
   }
 
+  a:link,
+  a:visited {
+    text-decoration: none;
+    color: var(--text-color);
+  }
+
+  a:hover,
+  a:active {
+    text-decoration: none;
+    color: var(--text-color);
+  }
+
+  //todo
   @media (max-width: 768px) {
     h2 {
       font-size: var(--text-xl);
@@ -955,6 +968,8 @@ export const singleProductPageStyle = css`
             display: none;
           }
         }
+
+        // todo: dry! see shoppingCartStyle
         // container quantity and buttons
         > div:nth-of-type(2) {
           display: flex;
@@ -971,12 +986,15 @@ export const singleProductPageStyle = css`
             button {
               background-color: var(--color-grey-2);
               border-radius: 100rem;
-              width: 3.5em;
-              min-height: 2rem;
+              //width: 1.5rem;
+              min-height: 0.5rem;
               border: unset;
+              font-size: var(--text-sm);
+              font-weight: 400;
+              margin: 0;
 
               :hover {
-                background-color: var(--color-btn-hover);
+                background-color: var(--color-grey-4);
               }
             }
             // quantity
@@ -992,7 +1010,6 @@ export const singleProductPageStyle = css`
 
           @media screen and (max-width: 768px) {
             flex-direction: column-reverse;
-            // margin-top: var(--space-sm);
 
             // container quantity buttons
             div {
@@ -1033,94 +1050,171 @@ export const singleProductPageStyle = css`
 /*      Shoppingcart.js          */
 /* *************************** */
 
-export const shoppingCartSectionHeader = css`
-  margin-top: 8rem;
-  text-align: left;
-`;
-
 export const shoppingCartStyle = css`
-  margin-top: 4rem;
-  display: grid;
-  gap: 100px;
-  grid-template-columns: 2fr 1fr;
-  position: relative;
+  //margin-top: 4rem;
 
-  @media screen and (max-width: 960px) {
-    display: flex;
-    flex-direction: column;
+  h1 {
+    margin-bottom: var(--space-xs);
   }
 
-  // cartproducts
-  article:first-of-type {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    background-color: #fff;
+  @media (max-width: 480px) {
+    h1 {
+      font-size: var(--text-xl);
+      margin-bottom: var(--space-md);
+    }
+  }
 
-    > div {
+  > div {
+    margin-top: var(--space-sm);
+    display: grid;
+    gap: var(--text-xxxl);
+    grid-template-columns: 2fr 1fr;
+    position: relative;
+    border: 1px solid green;
+
+    @media screen and (max-width: 900px) {
+      display: flex;
+      flex-direction: column;
+    }
+
+    // cartproducts
+    article:first-of-type {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
       background-color: #fff;
-      border-bottom: 0.5px solid lightgray;
-      display: grid;
-      grid-template-columns: 1fr 7fr;
-      gap: 1rem;
 
-      // Image
-      > div:first-of-type {
-        width: 120px;
-      }
+      > div {
+        background-color: #fff;
+        border-bottom: 0.5px solid lightgray;
+        display: grid;
+        grid-template-columns: 1fr 7fr;
+        gap: 1rem;
 
-      // productInfoContainer
-      > div:nth-of-type(2) {
-        // quantity
-        div:first-of-type {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
+        // Image
+        > div:first-of-type {
+          width: 100px;
 
-          p {
-            margin: 0px;
-            width: 2rem;
+          @media (max-width: 768px) {
+            width: 120px;
           }
         }
 
-        // removeButton
-        > div:last-of-type {
-          button {
-            all: unset;
-            color: grey;
+        // productInfoContainer
+        > div:nth-of-type(2) {
+          // quantity
+          border: 2px solid red;
+
+          // container quantity and buttons
+          > div:first-of-type {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid greenyellow;
+            gap: var(--space-sm);
+            font-weight: bold;
+
+            h2 {
+              font-size: var(--text-base-size);
+              margin: 0px;
+              width: 2rem;
+            }
+
+            // todo: dry! see singleProductStyle
+            // container quantity and buttons
+            > div > div {
+              border: 2px solid blue;
+              background-color: lavender;
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              gap: 0.8rem;
+
+              button {
+                background-color: var(--color-grey-2);
+                border-radius: 100rem;
+                //width: 1.5rem;
+                min-height: 0.5rem;
+                border: unset;
+                font-size: var(--text-sm);
+                font-weight: 400;
+                margin: 0;
+
+                :hover {
+                  background-color: var(--color-grey-4);
+                }
+              }
+              // quantity
+              span {
+                // font-size: var(--text-md);
+              }
+            }
+
+            @media (max-width: 768px) {
+              h2 {
+                width: 100%;
+              }
+              flex-direction: column;
+              justify-content: flex-start;
+              align-items: unset;
+              gap: unset;
+
+              > div > div {
+                margin: var(--space-sm) 0;
+              }
+            }
+
+            @media (max-width: 480px) {
+              p {
+                font-weight: 500;
+              }
+            }
+          }
+
+          // removeButton
+          > div:last-of-type {
+            button {
+              all: unset;
+              color: grey;
+            }
           }
         }
       }
     }
-  }
 
-  // OrderSummary
-  article:nth-of-type(2) {
-    width: 100%;
-    height: 322px;
-    background-color: #e0e0e0;
-    position: sticky;
-    top: 69px;
-    padding: 1.5rem;
+    // OrderSummary
+    article:nth-of-type(2) {
+      width: 100%;
+      background-color: var(--color-grey-3);
+      position: sticky;
+      top: 69px;
+      padding: 1rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
 
-    h2 {
-      margin-bottom: 2rem;
-      width: inherit;
-    }
-
-    > div {
-      div:first-of-type {
+      h2 {
+        margin: 0;
         width: inherit;
+      }
+
+      // container price, delivery, total
+      > div:first-of-type {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+        width: inherit;
+        border: 1px solid red;
 
         @media screen and (max-width: 960px) {
-          padding: 0rem 2rem;
+          //padding: 0rem 2rem;
         }
 
         p {
           width: inherit;
           display: flex;
           justify-content: space-between;
-          margin-bottom: 1rem;
+          //margin-bottom: 1rem;
 
           span {
             display: block;
@@ -1133,16 +1227,11 @@ export const shoppingCartStyle = css`
           border-top: 1px solid lightgray;
         }
       }
-    }
 
-    > div:last-of-type {
+      // checkout button
       button {
         width: 100%;
-        background-color: #ed943b;
-        border: none;
-        &:hover {
-          background-color: #ff6900;
-        }
+        margin: 0;
       }
     }
   }
@@ -1301,19 +1390,41 @@ export const flexStyle = css`
 /* *************************** */
 export const underConstruction = css`
   // margin-top: 5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 50vh;
 
-  button {
-    ${size('15rem', '1.47rem')}
-    background-color: #ed943b;
-    border: none;
+  border: 1px solid red;
+  article {
+    h1 {
+      border: 1px solid red;
+      text-align: center;
+    }
 
-    &:hover {
-      background-color: #ff6900;
+    margin: 5rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    //  height: 50vh;
+    padding: 0 0.5rem;
+
+    border: 2px solid red;
+    a {
+      display: block;
+    }
+
+    button {
+      width: 15rem;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: var(--text-xxl);
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: var(--text-xl);
+      }
     }
   }
 `;
