@@ -71,7 +71,7 @@ export default function LoginForm() {
           aria-invalid={errors.email ? 'true' : 'false'}
           data-test-id="email"
           css={errorStyle(errors.email?.type)}
-          placeholder="email"
+          placeholder="Email"
         />
 
         <input
@@ -81,7 +81,7 @@ export default function LoginForm() {
           aria-invalid={errors.password ? 'true' : 'false'}
           data-test-id="password"
           css={errorStyle(errors.password?.type)}
-          placeholder="password"
+          placeholder="Password"
           type="password"
         />
 
