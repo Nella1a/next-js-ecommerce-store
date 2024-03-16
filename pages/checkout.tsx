@@ -7,7 +7,7 @@ import OrderSummary from '../components/Cart/OrderSummary';
 import Payment from '../components/CheckoutForm/Payment';
 import Shipping from '../components/CheckoutForm/Shipping';
 import CheckoutProductCard from '../components/CheckoutProductCard';
-import { checkoutPageStyle, formStyle } from '../components/elements';
+import { checkoutFormStyle, checkoutPageStyle } from '../components/elements';
 import LayoutNoHeaderAndFooter from '../components/Layout/LayoutNoHeaderFooter';
 import prisma from '../prisma';
 import { CartCookieContext } from '../util/context/cookieContext';
@@ -98,8 +98,13 @@ export default function CheckOut(props: Props) {
 
       <section css={checkoutPageStyle}>
         <article>
-          <form action="/api" css={formStyle} onSubmit={handleSubmit(onSubmit)}>
-            {!toNextStep ? (
+          <form
+            action="/api"
+            css={checkoutFormStyle}
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            {/* {!toNextStep ? ( */}
+            {!true ? (
               <>
                 <Shipping
                   register={register}
@@ -126,7 +131,6 @@ export default function CheckOut(props: Props) {
               <CheckoutProductCard plant={plant} />
             ))}
           </div>
-          <hr />
 
           <OrderSummary />
         </article>

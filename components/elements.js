@@ -25,6 +25,12 @@ export const globalStyleBody = css`
     --color-grey-4: #ced4da;
     --color-grey-3: #dee2e6;
     --color-grey-2: #e9ecef;
+    --color-grey-1: #f5f5f5;
+    --color-grey-0: #f8f9fa;
+
+    --color-red-7: #f03e3e;
+    --color-red-8: #e03131;
+    --color-red-9: #c92a2a;
 
     --color-green: #709f7a;
 
@@ -1182,7 +1188,8 @@ export const shoppingCartStyle = css`
       }
     }
 
-    // OrderSummary
+    // todo: dry! see checkoutPageStyle  - orderSummary
+    // orderSummary
     article:nth-of-type(2) {
       width: 100%;
       background-color: var(--color-grey-3);
@@ -1246,79 +1253,134 @@ export const plantName = css`
 /* *************************** */
 
 export const checkoutPageStyle = css`
-  // form and orderSummary
+  // contact infos and orderSummary
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  border-top: 1px solid #f5f5f5;
-  height: 100vh;
+  gap: var(--space-lg);
   margin-top: unset;
 
   @media screen and (max-width: 960px) {
     display: flex;
     flex-direction: column;
   }
-  article:first-of-type {
-    // border: 2px solid #e0e0e0;
-    padding: 0 1.5rem;
+
+  @media screen and (max-width: 768px) {
+    gap: var(--space-md);
   }
 
+  // contact infos
+  article:first-of-type {
+    padding: 0 1.5rem;
+    border: 1px solid red;
+  }
+
+  // order summary
   article:nth-of-type(2) {
     // padding: 2rem;
+    border: 2px solid black;
     padding-top: unset;
     display: flex;
     flex-direction: column;
-    background-color: #f5f5f5;
-    border-left: 1.1px solid lightgray;
+    background-color: var(--color-grey-1);
+    border-left: 1px solid var(--color-grey-3);
     width: inherit;
+    // height: 50%;
+
+    > form span {
+      color: var(--red-color-7);
+    }
 
     > div:first-of-type {
       width: 100%;
-      height: auto;
-      //  border: 2px solid #e0e0e0;
       padding-top: 1rem;
+      border: 2px solid grey;
 
       > div {
-        // checkoutProductCart
+        // checkoutProductCard
         width: inherit;
         padding: 0 1.5rem;
-        margin-bottom: 0.5rem;
+        //  margin-bottom: 0.5rem;
+        border: 2px solid yellowgreen;
       }
     }
 
-    > div:last-of-type {
-      // orderSummary
-      //background-color: #e0e0e0;
-      height: auto;
-      width: 100%;
+    // todo: dry! see shoppingCartStyle - orderSummary-container price, delivery, total
+    // orderSummary
+    > div:nth-of-type(2) {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      width: inherit;
       padding: 1.5rem;
+      border: 1px solid red;
 
-      > div {
-        p {
-          width: inherit;
-          display: flex;
-          justify-content: space-between;
-          margin-bottom: 1rem;
-        }
+      p {
+        width: inherit;
+        display: flex;
+        justify-content: space-between;
 
-        p:last-of-type {
-          padding-top: 1rem;
-          font-weight: 600;
-          font-size: 20px;
-          border-top: 1px solid lightgray;
+        span {
+          display: block;
         }
+      }
+
+      p:last-of-type {
+        padding-top: var(--space-xs);
+        font-weight: 600;
+        border-top: 1px solid lightgray;
       }
     }
   }
 `;
 
-export const formStyle = css`
-  input {
-    padding-left: 1rem;
+export const checkoutProductCardStyle = css`
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  gap: 1rem;
+  border: 1px solid pink;
+
+  > div:first-of-type {
+    // Image
+    width: 80px;
   }
 
+  > div:nth-of-type(2) {
+    // productInfoContainer
+    display: flex;
+    justify-content: space-between;
+
+    p:first-of-type {
+      // title and quantity
+
+      height: 50%;
+      display: flex;
+      flex-direction: column;
+      span {
+        display: block;
+      }
+    }
+    p:nth-of-type(2) {
+      // price
+      height: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+      justify-content: flex-end;
+
+      p:nth-of-type(2) {
+        justify-content: flex-start;
+      }
+    }
+  }
+`;
+
+export const checkoutFormStyle = css`
   h2 {
-    font-size: 18px;
+    font-size: var(--text-lg);
     margin-top: 3rem;
     margin-bottom: 1rem;
   }
@@ -1328,13 +1390,13 @@ export const formStyle = css`
     width: 100%;
     height: 48px;
     border-radius: 5px;
-  }
-  div > input ~ p {
-    color: red;
+    padding-left: var(--text-base-size);
   }
 
+  // error message
+  div > input ~ span,
   div > p > input ~ span {
-    color: red;
+    color: var(--color-red-7);
   }
 
   div {
@@ -1355,17 +1417,24 @@ export const formStyle = css`
   }
   button {
     ${size('17.65rem', '1.47rem')}
-    background-color: #ed943b;
-    border: none;
-    &:hover {
-      background-color: #ff6900;
-    }
-
     @media screen and (max-width: 960px) {
       width: 100%;
     }
   }
 `;
+
+// export const flexStyleShippigAddress = css`
+//   display: flex;
+//   gap: 16px;
+
+//   p {
+//     width: 50%;
+//   }
+
+//   button {
+//     ${size('17.65rem', '1.47rem')}
+//   }
+// `;
 
 export const flexStyle = css`
   display: flex;
@@ -1374,13 +1443,19 @@ export const flexStyle = css`
   p {
     width: 50%;
   }
+
+  span {
+    color: var(--color-red-7);
+  }
+
   button {
     ${size('17.65rem', '1.47rem')}
-    background-color: #ed943b;
-    border: none;
+  }
 
-    &:hover {
-      background-color: #ff6900;
+  @media (max-width: 480px) {
+    flex-direction: column;
+    p {
+      width: 100%;
     }
   }
 `;
@@ -1607,8 +1682,49 @@ export const apiErrorStyle = css`
   color: red;
 `;
 
-/* *************************** */
-/*  login.tsx / register.tsx   */
-/* *************************** */
+/* *********************** */
+/*  nav with logo only     */
+/* *********************** */
 
-export const registerLoginLayourStyle = css``;
+export const navWithLogoOnlyStyle = css`
+  // position: sticky;
+  // top: 0;
+  background-color: transparent;
+  width: 100vw;
+  border-bottom: 1px solid var(--color-grey-3);
+  // z-index: 1;
+  // border: 2px solid red;
+
+  // container
+  > div {
+    max-width: 1920px;
+    width: 100%;
+    // background-color: var(--backgroundColorWhite);
+    background-color: var(--main-bg-color);
+
+    margin: auto;
+    display: flex;
+    padding: 0 3rem;
+    padding-top: 0.5rem;
+    height: 6rem;
+
+    // shelovesPlants logo
+    > div:first-of-type {
+      width: 100%;
+      margin: auto;
+      gap: 2rem;
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      height: 4rem;
+
+      img {
+        width: 80%;
+        height: auto;
+      }
+    }
+    // links
+    > div:nth-of-type(2) {
+    }
+  }
+`;
