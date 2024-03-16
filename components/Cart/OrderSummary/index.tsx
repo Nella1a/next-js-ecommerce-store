@@ -8,15 +8,15 @@ export default function OrderSummary() {
     <div>
       <p>
         <span>Subtotal</span>
-        <span>{totalPrice}</span>
+        <span>&euro; {totalPrice}</span>
       </p>
       <p>
         <span>Delivery</span>
-        <span>€ 0.00</span>
+        <span>&euro; 0.00</span>
       </p>
       <p>
         <span>Total (VAT included)</span>
-        <span>€ {totalPrice}</span>
+        <span>&euro; {totalPrice}</span>
       </p>
     </div>
   );

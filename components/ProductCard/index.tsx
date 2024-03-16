@@ -29,7 +29,7 @@ export default function ProductCard(props: Props) {
       </div>
       <div>
         <h3>{title}</h3>
-        <p>€{price}</p>
+        <p>&euro; {price}</p>
       </div>
     </>
   );

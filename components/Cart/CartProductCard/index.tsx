@@ -48,7 +48,7 @@ export default function CartProductCard(props: Props) {
         <div className="Quantity">
           <h2 css={plantName}>{title}</h2>
           <p className="Price">
-            €
+            &euro;{' '}
             {multiplePriceAndQuantity(Number(price), Number(quantity)).toFixed(
               2,
             )}

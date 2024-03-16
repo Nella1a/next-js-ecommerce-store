@@ -65,7 +65,7 @@ export default function SingleProduct(
   const titleAndPrice = () => (
     <div>
       <h1>{props.plant.title}</h1>
-      <p data-test-id="product-price"> €{props.plant.price}</p>
+      <p data-test-id="product-price"> &euro; {props.plant.price}</p>
     </div>
   );
 
