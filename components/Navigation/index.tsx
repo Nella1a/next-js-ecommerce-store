@@ -68,9 +68,23 @@ export default function Navigation() {
       </button>
     </Link>
   );
+
+  const hamburgerIcon = () => (
+    <button>
+      <span
+        onClick={toggleMobileMenuHandler}
+        onKeyDown={toggleMobileMenuHandler}
+        role="menu"
+        tabIndex={0}
+      >
+        <Image src="/menu.png" width="29" height="29" alt="menu icon" />
+      </span>
+    </button>
+  );
+
   return (
     <Fragment>
-      {/* <MobileMenu /> */}
+      {screenwidth < BREAKPOINT_AT_768 && <MobileMenu />}
 
       <nav css={headerStyle}>
         <div>
@@ -86,7 +100,11 @@ export default function Navigation() {
           </div>
           <div>
             <ul>
-              <NavMenu />
+              {screenwidth > BREAKPOINT_AT_768 ? (
+                <NavMenu />
+              ) : (
+                <li>{hamburgerIcon()}</li>
+              )}
               <li>{shoppingBagIcon()}</li>
             </ul>
           </div>

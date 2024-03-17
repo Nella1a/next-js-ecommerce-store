@@ -232,61 +232,49 @@ const size = (width = '100%', height = '100%') => {
 export const headerStyle = (theme) => css`
   background-color: transparent;
   width: 100vw;
-  height: 4.5rem;
+  // height: 4.5rem;
+  border: 1px solid olive;
+  position: sticky;
+  top: 0;
+  z-index: 30;
 
   // container
   > div {
-    position: fixed;
-    z-index: 3;
+    // position: sticky;
+    // z-index: 3;
     max-width: 1920px;
     width: 100%;
     background-color: var(--main-bg-color);
-    margin: 0 auto;
-    display: flex;
-    padding: 0 3rem;
-    padding-top: 0.5rem;
+    margin: auto;
+    // display: flex;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    padding: 1rem 3rem 0;
+    // padding-top: 0.5rem 0;
     border-bottom: 0px solid var(--color-grey-6);
     box-shadow: rgba(0, 0, 0, 0.45) 0px 15px 10px -20px;
     border: 2px solid red;
+    justify-items: end;
+    align-content: center;
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr 1fr;
+    }
 
     // contanier shelovesPlants logo
     > div:first-of-type {
+      align-self: center;
+      justify-self: start;
       border: 1px solid blue;
-      width: 100%;
-      ${marginCenter}
-      margin: auto;
-
-      position: relative;
-      top: 0px;
-      gap: 2rem;
-      align-items: center;
-      display: flex;
-      justify-content: space-between;
-      z-index: 1;
-      height: 4rem;
-
-      img {
-        width: 80%;
-        height: auto;
-      }
     }
 
     // container links
     > div:nth-of-type(2) {
-      //  width: 100%;
-      ${marginCenter}
-      margin: auto;
       border: 2px solid pink;
-
-      position: relative;
-      top: 0px;
-      gap: 2rem;
-      align-items: center;
       display: flex;
-      justify-content: end;
-      z-index: 1;
-      height: 4rem;
-      color: #43964f;
+      align-items: center;
+      // z-index: 1;
+      // height: 4rem;
 
       ul {
         list-style-type: none;
@@ -294,26 +282,25 @@ export const headerStyle = (theme) => css`
         display: flex;
         gap: var(--space-md);
         margin: 0;
+        padding-left: 0;
+
+        a:link,
+        a:visited,
+        a:hover,
+        a:active {
+          font-weight: bold;
+        }
 
         li {
           display: flex;
-          //flex-direction: column;
           align-items: flex-end;
           justify-content: center;
-          //  border: 2px solid blue;
         }
 
-        a:link,
-        a:visited {
-          text-decoration: none;
-          display: block;
-          font-weight: bold;
-          color: var(--text-color);
+        > li:first-of-type button {
+          all: unset;
+          cursor: pointer;
         }
-      }
-
-      @media (max-width: 1200px) {
-        gap: 1rem;
       }
     }
   }
