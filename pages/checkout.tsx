@@ -103,8 +103,7 @@ export default function CheckOut(props: Props) {
             css={checkoutFormStyle}
             onSubmit={handleSubmit(onSubmit)}
           >
-            {/* {!toNextStep ? ( */}
-            {!true ? (
+            {!toNextStep ? (
               <>
                 <Shipping
                   register={register}

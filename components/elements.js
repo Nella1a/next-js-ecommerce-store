@@ -1259,6 +1259,10 @@ export const checkoutPageStyle = css`
   article:first-of-type {
     padding: 0 1.5rem;
     border: 1px solid red;
+
+    > form input ~ p {
+      color: var(--color-red-7);
+    }
   }
 
   // order summary
@@ -1274,7 +1278,7 @@ export const checkoutPageStyle = css`
     // height: 50%;
 
     > form span {
-      color: var(--red-color-7);
+      color: var(--color-red-7);
     }
 
     > div:first-of-type {

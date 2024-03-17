@@ -96,7 +96,7 @@ export default function Shipping({
           <label htmlFor="street"></label>
           <input
             {...register('shipping.street', {
-              required: 'Street is required.',
+              required: 'Address is required.',
               min: 1,
             })}
             aria-invalid={errors.shipping?.street ? 'true' : 'false'}
