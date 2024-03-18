@@ -22,7 +22,7 @@ export default function Home(props: PropsTypePlantsCartCookieLayer) {
       </Head>
 
       <section css={bestSellerStyle}>
-        <h2>Best Sellers</h2>
+        <h2>Bestsellers</h2>
         <div>
           <Products plants={props.plants} />
         </div>
