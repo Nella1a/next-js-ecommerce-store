@@ -70,15 +70,13 @@ export default function Navigation() {
   );
 
   const hamburgerIcon = () => (
-    <button>
-      <span
-        onClick={toggleMobileMenuHandler}
-        onKeyDown={toggleMobileMenuHandler}
-        role="menu"
-        tabIndex={0}
-      >
-        <Image src="/menu.png" width="29" height="29" alt="menu icon" />
-      </span>
+    <button
+      onClick={toggleMobileMenuHandler}
+      onKeyDown={toggleMobileMenuHandler}
+      role="menu"
+      tabIndex={0}
+    >
+      <Image src="/menu.png" width="29" height="29" alt="menu icon" />
     </button>
   );
 
@@ -88,26 +86,24 @@ export default function Navigation() {
 
       <nav css={headerStyle}>
         <div>
-          <div>
-            <Link href="/" passHref>
-              <Image
-                src={'/logo_shelovesplants.svg'}
-                alt={'logo she loves plants'}
-                width={'400'}
-                height={'52'}
-              />
-            </Link>
-          </div>
-          <div>
-            <ul>
-              {screenwidth > BREAKPOINT_AT_768 ? (
-                <NavMenu />
-              ) : (
-                <li>{hamburgerIcon()}</li>
-              )}
-              <li>{shoppingBagIcon()}</li>
-            </ul>
-          </div>
+          <ul>
+            <li>
+              <Link href="/" passHref>
+                <Image
+                  src={'/logo_shelovesplants.svg'}
+                  alt={'logo she loves plants'}
+                  width={'250'}
+                  height={'52'}
+                />
+              </Link>
+            </li>
+            {screenwidth > BREAKPOINT_AT_768 ? (
+              <NavMenu />
+            ) : (
+              <li>{hamburgerIcon()}</li>
+            )}
+            <li>{shoppingBagIcon()}</li>
+          </ul>
         </div>
       </nav>
     </Fragment>

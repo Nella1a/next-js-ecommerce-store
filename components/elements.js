@@ -247,15 +247,14 @@ export const headerStyle = (theme) => css`
     background-color: var(--main-bg-color);
     margin: auto;
     // display: flex;
-    display: grid;
-    grid-template-columns: 3fr 1fr;
+    //display: grid;
+    //grid-template-columns: 3fr 1fr;
     padding: 1rem 3rem 0;
     // padding-top: 0.5rem 0;
     border-bottom: 0px solid var(--color-grey-6);
     box-shadow: rgba(0, 0, 0, 0.45) 0px 15px 10px -20px;
     border: 2px solid red;
-    justify-items: end;
-    align-content: center;
+    //justify-items: end;
 
     @media (max-width: 480px) {
       grid-template-columns: 1fr 1fr;
@@ -263,46 +262,71 @@ export const headerStyle = (theme) => css`
 
     // contanier shelovesPlants logo
     > div:first-of-type {
-      align-self: center;
+      /* align-self: center;
       justify-self: start;
-      border: 1px solid blue;
+      border: 1px solid blue; */
     }
 
     // container links
-    > div:nth-of-type(2) {
+    /* > div:nth-of-type(2) {
       border: 2px solid pink;
       display: flex;
       align-items: center;
       // z-index: 1;
-      // height: 4rem;
+      // height: 4rem; */
 
-      ul {
-        list-style-type: none;
-        list-style-position: inside;
+    ul {
+      list-style-type: none;
+      list-style-position: inside;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-md);
+      margin: 0;
+      padding-left: 0;
+
+      > li:first-of-type a {
+        display: inline-block;
+      }
+
+      a:link,
+      a:visited,
+      a:hover,
+      a:active {
+        font-weight: bold;
+      }
+
+      /* li {
         display: flex;
-        gap: var(--space-md);
-        margin: 0;
-        padding-left: 0;
+        align-items: flex-end;
+        justify-content: center;
+      } */
 
-        a:link,
-        a:visited,
-        a:hover,
-        a:active {
-          font-weight: bold;
-        }
-
-        li {
-          display: flex;
-          align-items: flex-end;
-          justify-content: center;
-        }
-
-        > li:first-of-type button {
+      /* > li:first-of-type button {
           all: unset;
           cursor: pointer;
-        }
+        } */
+      > li:nth-of-type(2) button {
+        all: unset;
+        cursor: pointer;
+      }
+
+      > li:nth-of-type(2) {
+        margin-left: auto;
+      }
+
+      // hamburger menu
+
+      li button img {
+        display: inline-block;
+      }
+
+      li button {
+        display: inline-flex;
+        align-items: flex-end;
       }
     }
+    // }
   }
 `;
 
@@ -455,13 +479,24 @@ export const MobileFooterStyle = (theme) => css`
         flex-direction: column;
         gap: 0.063rem;
         // border: 2px solid yellow;
+
+        > p {
+          display: flex;
+          justify-content: space-between;
+
+          span {
+            display: inline-block;
+            font-weight: bold;
+          }
+        }
+
         > ul {
           list-style-type: none;
           list-style-position: inside;
           margin: 0;
           padding: 0;
 
-          > li:first-of-type {
+          /* > li:first-of-type {
             display: flex;
             justify-content: space-between;
 
@@ -469,9 +504,9 @@ export const MobileFooterStyle = (theme) => css`
               display: inline-block;
               font-weight: bold;
             }
-          }
+          } */
 
-          > li:nth-of-type(2) {
+          > li {
             border-bottom: 1px solid lightgrey;
 
             > ul {
@@ -632,7 +667,6 @@ export const productCardStyle = css`
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  // border: 1px solid blue;
 
   // image container
   div:first-of-type {
