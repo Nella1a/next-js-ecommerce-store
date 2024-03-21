@@ -742,14 +742,14 @@ export const summerFavoritesStyle = (theme) => css`
   > div {
     // border: 2px solid green;
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 2fr 2fr;
     gap: var(--space-sm);
 
     // first image container
     > div:first-of-type {
-      height: 38rem;
+      // height: 38rem;
       position: relative;
-      // border: 2px solid green;
+      //border: 2px solid green;
     }
 
     // container for the productCards
