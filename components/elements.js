@@ -162,7 +162,7 @@ export const globalStyleBody = css`
   */
     margin: auto;
     margin-top: 3.5rem;
-    max-width: 1920px;
+    max-width: 1200px;
     width: 100%;
     padding: 0 3rem;
     //display: flex;
@@ -309,6 +309,7 @@ export const headerStyle = (theme) => css`
       > li:nth-of-type(2) button {
         all: unset;
         cursor: pointer;
+        display: flex;
       }
 
       > li:nth-of-type(2) {
@@ -316,7 +317,6 @@ export const headerStyle = (theme) => css`
       }
 
       // hamburger menu
-
       li button img {
         display: inline-block;
       }
@@ -366,7 +366,7 @@ export const footerStyle = (theme) => css`
   margin: 3rem 0rem auto;
   // border: 2px solid green;
   section {
-    max-width: 1920px;
+    max-width: 1200px;
     padding: 3rem 3rem;
     margin: 0 auto;
     gap: 4.25rem;
