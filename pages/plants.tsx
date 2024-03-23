@@ -4,7 +4,7 @@ import { productsComponentStyle } from '../components/elements';
 import Layout from '../components/Layout';
 import Products from '../components/Products';
 import prisma from '../prisma';
-import ProductsHeroImage from '../public/productsHeroImage.jpeg';
+import ProductsHeroImage from '../public/productsHeroImage.jpg';
 import { cleanedProducts } from '../util/database';
 import { PropsTypePlantsLayer } from '../util/types';
 

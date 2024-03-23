@@ -4,6 +4,7 @@ import { bgImgContainer, heroImageContentContainer } from '../elements';
 export default function BackGImage(props: any) {
   return (
     <div css={bgImgContainer}>
+      {/* using fill, the parent element must have position: relative */}
       <Image
         src={props.bgImageHero}
         alt="desk full of plants"
@@ -16,7 +17,6 @@ export default function BackGImage(props: any) {
         }}
         priority
       />
-
       <article css={heroImageContentContainer}>
         <p>{props.firstText}</p>
         <p>{props.secondText}</p>
