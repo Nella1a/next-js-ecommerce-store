@@ -6,7 +6,7 @@ import IndexTextImage from '../components/Images/IndexTextImage';
 import Layout from '../components/Layout';
 import Products from '../components/Products';
 import prisma from '../prisma';
-import IndexHeroImage from '../public/indexHeroImg.jpeg';
+import IndexHeroImage from '../public/indexHeroImg.webp';
 import { cleanedProducts } from '../util/database';
 import { PropsTypePlantsCartCookieLayer } from '../util/types';
 

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import { Fragment } from 'react';
-import indexSectionImage from '../../public/indexSectionImage.jpeg';
+import indexSectionImage from '../../public/indexSectionImage.jpg';
 import Products from '../Products';
 
 type Props = {
