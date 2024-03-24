@@ -35,7 +35,7 @@ export default function Navigation() {
   const screenwidth = getScreenSize();
   const { cartCount } = useContext(CartCookieContext);
 
-  const { toggleMobileMenu } = useContext(CartContext);
+  const { toggleMenu, toggleMobileMenu } = useContext(CartContext);
 
   const toggleMobileMenuHandler = () => {
     toggleMobileMenu();
@@ -61,7 +61,6 @@ export default function Navigation() {
             }}
           />
         </span>
-
         <span>
           <span data-test-id="cart-count">{cartCount}</span>
         </span>
@@ -69,16 +68,24 @@ export default function Navigation() {
     </Link>
   );
 
-  const hamburgerIcon = () => (
-    <button
-      onClick={toggleMobileMenuHandler}
-      onKeyDown={toggleMobileMenuHandler}
-      role="menu"
-      tabIndex={0}
-    >
-      <Image src="/menu.png" width="29" height="29" alt="menu icon" />
-    </button>
-  );
+  // const hamburgerIcon = () => (
+  //   <button
+  //     onClick={toggleMobileMenuHandler}
+  //     onKeyDown={toggleMobileMenuHandler}
+  //     role="menu"
+  //     tabIndex={0}
+  //     aria-label={'Open the menu'}
+  //     aria-expanded={`${toggleMenu}`}
+  //   >
+  //     <Image
+  //       src="/menu.png"
+  //       width="29"
+  //       height="29"
+  //       alt="menu icon"
+  //       aria-hidden={true}
+  //     />
+  //   </button>
+  // );
 
   return (
     <Fragment>
@@ -100,7 +107,22 @@ export default function Navigation() {
             {screenwidth > BREAKPOINT_AT_768 ? (
               <NavMenu />
             ) : (
-              <li>{hamburgerIcon()}</li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  className="hamburgerIcon"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                  />
+                </svg>
+              </li>
             )}
             <li>{shoppingBagIcon()}</li>
           </ul>
