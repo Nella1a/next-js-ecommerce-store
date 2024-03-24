@@ -181,6 +181,8 @@ export const globalStyleBody = css`
     color: var(--text-color);
     border: none;
     background-color: var(--color-btn-primary-bg);
+    cursor: pointer;
+    transition: all 0.3s;
 
     :hover {
       background-color: var(--color-btn-hover);
@@ -208,6 +210,25 @@ export const globalStyleBody = css`
     h3 {
       font-size: var(--text-base-size);
     }
+  }
+`;
+export const btnLinkStyle = css`
+  letter-spacing: 0.031rem;
+  line-height: 1.125rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75rem;
+  display: block;
+  min-height: 2.9rem;
+  padding: 0.625rem 1rem;
+  margin: 1rem 0;
+  color: var(--text-color);
+  border: none;
+  background-color: var(--color-btn-primary-bg);
+  transition: all 0.3s;
+
+  :hover {
+    background-color: var(--color-btn-hover);
   }
 `;
 
@@ -314,31 +335,73 @@ export const headerStyle = (theme) => css`
 
       > li:nth-of-type(2) {
         margin-left: auto;
+        display: flex;
+        .hamburgerIcon {
+          height: 30px;
+          width: 30px;
+          display: inline-block;
+        }
       }
 
-      // hamburger menu
+      > li:last-of-type {
+        height: 30px;
+      }
+
+      /* // hamburger menu
       li button img {
         display: inline-block;
-      }
-
+      } */
+      /*
       li button {
         display: inline-flex;
         align-items: flex-end;
-      }
+      } */
     }
     // }
   }
 `;
 
+// export const shoppingBagStyle = css`
+//   all: unset;
+//   position: relative;
+//   ${size('1.55rem', '1.55rem')}
+//   border: 1px solid red;
+//   background-color: lightpink;
+
+//   // container circle and quantity
+//   > span:nth-of-type(2) {
+//     ${size('1.41rem', '1.41rem')}
+//     display: flex;
+//     border-radius: 50%;
+//     background-color: var(--color-btn-primary-bg);
+//     color: var(--color-white);
+//     position: absolute;
+//     text-align: center;
+//     top: -18px;
+//     right: -5px;
+
+//     > span {
+//       margin: auto auto;
+//       font-size: var(--text-sm);
+//     }
+//   }
+// `;
+
 export const shoppingBagStyle = css`
-  all: unset;
   position: relative;
-  ${size('1.55rem', '1.55rem')}
   border: 1px solid red;
   background-color: lightpink;
+  display: inline-flex;
+  text-decoration: none;
+
+  .shoppingBagStyle {
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+  }
 
   // container circle and quantity
-  > span:nth-of-type(2) {
+  > span:first-of-type {
     ${size('1.41rem', '1.41rem')}
     display: flex;
     border-radius: 50%;

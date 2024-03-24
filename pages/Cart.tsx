@@ -4,7 +4,11 @@ import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
 import CartProducts from '../components/Cart/CartProducts';
 import OrderSummary from '../components/Cart/OrderSummary';
-import { shoppingCartStyle, underConstruction } from '../components/elements';
+import {
+  btnLinkStyle,
+  shoppingCartStyle,
+  underConstruction,
+} from '../components/elements';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import prisma from '../prisma';
 //import { disableGrayLayer } from '../hooks';
@@ -43,8 +47,9 @@ export default function Cart(props: Props) {
                 pathname: '/plants',
               }}
               passHref
+              css={btnLinkStyle}
             >
-              <button>Continue Shopping</button>
+              Continue Shopping
             </Link>
           </article>
         </section>
@@ -79,8 +84,10 @@ export default function Cart(props: Props) {
                 pathname: '/checkout',
               }}
               passHref
+              data-test-id="cart-checkout"
+              css={btnLinkStyle}
             >
-              <button data-test-id="cart-checkout">Go to checkout</button>
+              Go to checkout
             </Link>
           </article>
         </div>

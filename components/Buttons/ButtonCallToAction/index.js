@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { btnLinkStyle } from '../../elements';
 
 export default function ButtonCallToAction(props) {
   return (
@@ -7,10 +8,10 @@ export default function ButtonCallToAction(props) {
         pathname: '/plants',
       }}
       passHref
+      data-test-id="button-view-all-plants"
+      css={btnLinkStyle}
     >
-      <button data-test-id="button-view-all-plants" css={props.styleb}>
-        {props.innerText}
-      </button>
+      {props.innerText}
     </Link>
   );
 }
