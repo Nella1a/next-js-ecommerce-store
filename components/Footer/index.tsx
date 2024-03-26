@@ -10,14 +10,14 @@ export default function Footer() {
     <footer css={footerStyle}>
       <section>
         {footerInfos.map((info, index) => (
-          <article key={`desktop-footer-${index}`}>
-            <h4>{info.header}</h4>
+          <div key={`desktop-footer-${index}`}>
+            <p>{info.header}</p>
             <ul>
               <li>{info.infoOne}</li>
               <li>{info.infoTwo}</li>
               <li>{info.infoThree}</li>
             </ul>
-          </article>
+          </div>
         ))}
         <FormNewsletter email={email} setEmail={setEmail} />
       </section>
