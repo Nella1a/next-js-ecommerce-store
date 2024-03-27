@@ -1,7 +1,43 @@
 import { useState } from 'react';
 import { footerStyle } from '../elements';
 import FormNewsletter from '../FormNewsletter';
-import { footerInfos } from '../Mobile/MobileFooter';
+import FooterListElements from './FooterListElements';
+
+export type FooterData = {
+  footerInfos: {
+    header: string;
+    infoOne: string;
+    infoTwo: string;
+    infoThree: string;
+  }[];
+};
+
+export const footerInfos = [
+  {
+    header: 'About',
+    infoOne: 'Plant Care',
+    infoTwo: 'FAQ',
+    infoThree: 'Contact',
+  },
+  {
+    header: 'Explore',
+    infoOne: 'Career',
+    infoTwo: 'Locations',
+    infoThree: 'Blog',
+  },
+  {
+    header: 'Social',
+    infoOne: 'Instagram',
+    infoTwo: 'Pinterest',
+    infoThree: 'Youtube',
+  },
+  {
+    header: 'Terms',
+    infoOne: 'Refund Policy',
+    infoTwo: 'Terms of Service',
+    infoThree: 'Delivery and Schipping',
+  },
+];
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -9,15 +45,13 @@ export default function Footer() {
   return (
     <footer css={footerStyle}>
       <section>
-        {footerInfos.map((info, index) => (
-          <div key={`desktop-footer-${index}`}>
-            <p>{info.header}</p>
-            <ul>
-              <li>{info.infoOne}</li>
-              <li>{info.infoTwo}</li>
-              <li>{info.infoThree}</li>
-            </ul>
-          </div>
+        {footerInfos.map((info, index: number) => (
+          <>
+            <div key={`desktop-footer-${index}`}>
+              <p>{info.header}</p>
+              <FooterListElements info={info} />
+            </div>
+          </>
         ))}
         <FormNewsletter email={email} setEmail={setEmail} />
       </section>

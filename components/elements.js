@@ -436,44 +436,31 @@ export const footerStyle = (theme) => css`
     display: flex;
     justify-content: space-between;
 
-    article {
-      //  border: 1px dotted red;
+    div {
+      border: 1px dotted red;
       display: flex;
       flex-direction: column;
       gap: 0.063rem;
+      line-height: 2rem;
+
+      p {
+        font-weight: bold;
+      }
 
       ul {
         list-style: none;
         padding-left: 0;
       }
-
-      p:first-of-type {
-        font-weight: bold;
-      }
-      line-height: 2rem;
-
-      form {
-        display: flex;
-        flex-direction: column;
-        max-width: 100%;
-
-        input {
-          ${size('17.65rem', '1.47rem')}
-          letter-spacing: 0.031rem;
-          line-height: 1.125rem;
-          // text-transform: uppercase;
-          font-weight: bold;
-          font-size: 0.75rem;
-          display: block;
-          width: 100%;
-          padding: 0.625rem 1rem;
-        }
+      @media (max-width: 768px) {
+        display: none;
       }
     }
 
-    article:nth-of-type(5) {
-      // border: 2px solid green;
-      flex-basis: 30%;
+    form {
+      display: flex;
+      flex-direction: column;
+      max-width: 100%;
+
       label {
         font-weight: 600;
       }
@@ -481,24 +468,23 @@ export const footerStyle = (theme) => css`
       p {
         font-size: large;
       }
-    }
 
-    @media screen and (max-width: 1051px) {
-      gap: 1.5rem;
-    }
-
-    @media screen and (max-width: 768px) {
-      display: none;
+      input {
+        ${size('17.65rem', '1.47rem')}
+        letter-spacing: 0.031rem;
+        line-height: 1.125rem;
+        // text-transform: uppercase;
+        font-weight: bold;
+        font-size: 0.75rem;
+        display: block;
+        width: 100%;
+        padding: 0.625rem 1rem;
+      }
     }
   }
 
-  a {
-    text-decoration: none;
-    display: block;
-  }
-
-  @media screen and (min-width: 768px) {
-    padding: 2.5rem 2.5rem;
+  @media screen and (max-width: 768px) {
+    display: none;
   }
 `;
 
@@ -528,7 +514,7 @@ export const MobileFooterStyle = (theme) => css`
     display: block;
     // border: 1px red solid;
 
-    div {
+    > div {
       max-width: 1920px;
       // border: 1px red solid;
       padding: 3rem 3rem;
@@ -537,15 +523,16 @@ export const MobileFooterStyle = (theme) => css`
       display: flex;
       justify-content: space-between;
 
-      article {
+      > div {
         display: flex;
         flex-direction: column;
         gap: 0.063rem;
-        // border: 2px solid yellow;
+        border: 2px solid yellow;
 
         > p {
           display: flex;
           justify-content: space-between;
+          border-bottom: 0.1rem solid lightgray;
 
           span {
             display: inline-block;
@@ -556,66 +543,38 @@ export const MobileFooterStyle = (theme) => css`
         > ul {
           list-style-type: none;
           list-style-position: inside;
+          display: flex;
+          flex-direction: column;
           margin: 0;
           padding: 0;
-
-          /* > li:first-of-type {
-            display: flex;
-            justify-content: space-between;
-
-            span {
-              display: inline-block;
-              font-weight: bold;
-            }
-          } */
-
-          > li {
-            border-bottom: 1px solid lightgrey;
-
-            > ul {
-              width: 100%;
-              padding-left: 1rem;
-              list-style-type: none;
-            }
+          li {
+            padding-left: 0.8rem;
           }
         }
 
         line-height: 2.5rem;
-
-        form {
-          display: flex;
-          flex-direction: column;
-          max-width: 100%;
-
-          label {
-            font-weight: 600;
-          }
-
-          input {
-            letter-spacing: 0.031rem;
-            line-height: 1.125rem;
-            // text-transform: uppercase;
-            font-weight: bold;
-            font-size: 0.75rem;
-            display: block;
-            width: 100%;
-            padding: 0.625rem 1rem;
-            color: #000;
-          }
-        }
       }
 
-      // container subscribe to newsletter form
-      article:nth-of-type(5) {
-        //   border: 2px solid green;
-        flex-basis: 30%;
-        padding-bottom: 1rem;
+      // subscribe to newsletter form
+      form {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
 
-        p {
-          font-size: large;
-          span {
-            font-weight: bold;
-          }
+        label {
+          font-weight: 600;
+        }
+
+        input {
+          letter-spacing: 0.031rem;
+          line-height: 1.125rem;
+          // text-transform: uppercase;
+          font-weight: bold;
+          font-size: 0.75rem;
+          display: block;
+          width: 100%;
+          padding: 0.625rem 1rem;
+          color: #000;
         }
       }
 
@@ -627,15 +586,6 @@ export const MobileFooterStyle = (theme) => css`
         flex-direction: column-reverse;
         padding: 0rem;
       }
-    }
-
-    a {
-      text-decoration: none;
-      display: block;
-    }
-
-    @media screen and (max-width: 1024px) {
-      //  padding: 0rem 2.5rem;
     }
   }
 `;

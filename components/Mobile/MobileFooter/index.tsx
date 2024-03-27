@@ -1,67 +1,46 @@
 import { useState } from 'react';
 import { MobileFooterStyle } from '../../elements';
+import { FooterData, footerInfos } from '../../Footer';
+import FooterListElements from '../../Footer/FooterListElements';
 import FormNewsletter from '../../FormNewsletter';
-import MobileFooterInfo from '../MobileFooterInfo/MobileFooterInfo';
-
-export const footerInfos = [
-  {
-    header: 'About',
-    infoOne: 'Plant Care',
-    infoTwo: 'FAQ',
-    infoThree: 'Contact',
-  },
-  {
-    header: 'Explore',
-    infoOne: 'Career',
-    infoTwo: 'Locations',
-    infoThree: 'Blog',
-  },
-  {
-    header: 'Social',
-    infoOne: 'Instagram',
-    infoTwo: 'Pinterest',
-    infoThree: 'Youtube',
-  },
-  {
-    header: 'Terms',
-    infoOne: 'Refund Policy',
-    infoTwo: 'Terms of Service',
-    infoThree: 'Delivery and Schipping',
-  },
-];
 
 export default function MobileFooter() {
-  const [displayMenu, setDisplayMenu] = useState(false);
-  const [toggle, setToggle] = useState<number>();
   const [email, setEmail] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(-1);
+  const [isActive, setIsActive] = useState(false);
+
+  const handleAccordionClick = (index: number) => {
+    console.log('clicked index: ', index);
+    console.log('last index: ', currentIndex);
+    if (currentIndex !== index) {
+      setIsActive(true);
+      setCurrentIndex(index);
+    } else {
+      setIsActive(!isActive);
+    }
+  };
 
   return (
     <footer css={MobileFooterStyle}>
       <div>
         {footerInfos.map((info, index) => {
           return (
-            <article key={`moble-footer-${index}`}>
-              <ul>
-                <li
-                  key={`header-${index}-${info.header}`}
-                  onClick={() => {
-                    setDisplayMenu(!displayMenu);
-                    setToggle(index);
-                  }}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <span>{info.header}</span>
-                  <span key={`info-toggle-${index}`}>
-                    {displayMenu && toggle === index ? '-' : '+'}
-                  </span>
-                </li>
-                <li>
-                  {displayMenu && toggle === index && (
-                    <MobileFooterInfo index={index} info={info} />
-                  )}
-                </li>
-              </ul>
-            </article>
+            <div key={`moble-footer-${index}`}>
+              <p
+                key={`header-${index}-${info.header}`}
+                onClick={() => handleAccordionClick(index)}
+                style={{ cursor: 'pointer' }}
+              >
+                <span>{info.header}</span>
+                <span key={`info-toggle-${index}`}>
+                  {isActive && currentIndex === index ? '-' : '+'}
+                </span>
+              </p>
+
+              {isActive && currentIndex === index && (
+                <FooterListElements info={info} />
+              )}
+            </div>
           );
         })}
         <FormNewsletter email={email} setEmail={setEmail} />
