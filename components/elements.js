@@ -1,5 +1,19 @@
 import { css } from '@emotion/react';
 
+/* - font sizes (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+.6 /.8 /.9 /1 / 1.1 /1.3 / 1.5/ 1.875 /2.25/2.75/3.25
+
+
+
+*/
+
+/* - spacing (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+0.125/.25/.75/ 1 /1.5 / 2 /3 / 4 / 5 / 6 / 8
+*/
+
 /* *************************** */
 /*    Global Styles            */
 /* *************************** */
@@ -11,7 +25,7 @@ export const globalStyleBody = css`
     /* set base values */
     --text-base-size: 1em;
     --text-scale-ratio: 1.2; //120% of what they would normally be”.
-    --baseline: 24px;
+    // --baseline: 24px;
 
     /* base color */
     --text-color: #343a40;
@@ -35,7 +49,7 @@ export const globalStyleBody = css`
     --color-green: #709f7a;
 
     /* type scale */
-    --text-xs: calc(1em / (var(--text-scale-ratio) * var(--text-scale-ratio)));
+    /* --text-xs: calc(1em / (var(--text-scale-ratio) * var(--text-scale-ratio)));
     --text-sm: calc(1em / var(--text-scale-ratio));
     --text-md: calc(1em * var(--text-scale-ratio));
     --text-lg: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio));
@@ -51,22 +65,47 @@ export const globalStyleBody = css`
       1em * var(--text-scale-ratio) * var(--text-scale-ratio) *
         var(--text-scale-ratio) * var(--text-scale-ratio) *
         var(--text-scale-ratio)
-    );
+    ); */
+
+    --text-xxs: 0.5em; // 8
+    --text-xs: 0.625em; // 10
+    --text-sm: 0.75em; // 12
+    --text-md: 0.875em; // 14
+    --text-base-size: 1em; // 16
+    --text-lg: 1.125em; // 18
+    --text-xl: 1.25em; // 20
+    --text-xxl: 1.5em; // 24
+    --text-xxxl: 1.875em; // 30
+    --text-4xl: 2.25em; // 36
+    --text-5xl: 2.75em; // 44
+    --text-6xl: 3.25em; // 52
+    --text-7xl: 3.875em; // 62
+    --text-7xl: 4.625em; // 74
+    --text-8xl: 5.375em; // 86
+    --text-9xl: 6.125em; // 98
 
     /* spacing values */
-    --space-xxxs: 0.25em;
-    --space-xxs: 0.375em;
-    --space-xs: 0.5em;
-    --space-sm: 0.75em;
-    --space-md: 1.25em;
-    --space-lg: 2em;
-    --space-xl: 3.25em;
-    --space-xxl: 5.25em;
-    --space-xxxl: 8.5em;
+
+    --space-xxs: 0.125rem; // 4px
+    --space-xs: 0.25rem; // 8px
+    --space-sm: 0.75rem; // 12px
+    --space-md: 1rem; // 16px
+
+    --space-lg: 1.5rem; // 24px
+    --space-xl: 2rem; // 32px
+    --space-xxl: 3rem; // 48px
+    --space-xxxl: 4rem; //64px
+    --space-4xl: 5rem; //80px
+    --space-5xl: 6rem; //96px
+    --space-6xl: 8rem; //128px
+  }
+
+  h2 {
+    font-size: var(--text-4xl);
   }
 
   /* text size */
-  .text--xxxl {
+  /* .text--xxxl {
     font-size: var(--text-xxxl);
   }
 
@@ -99,37 +138,28 @@ export const globalStyleBody = css`
 
   p {
     line-height: var(--body-line-height);
-  }
+  } */
 
   /* Reset sizing   */
   *,
   *::before,
   *::after {
     box-sizing: border-box;
-  }
-
-  /* Reset margin */
-  body,
-  h1,
- // h2,
-  h3,
-  h4,
-  h5,
-  p {
+    padding: 0;
     margin: 0;
   }
 
   /* set up the body */
-  body {
+  html {
     line-height: 1.5; /* default for browser: 1.4 tends to be very small*/
-    font-size: var(--text-base-size);
-    font-family: var(--font-primary) var(--font-fallback);
+    font-size: 1rem;
+    font-family: var(--font-primary), var(--font-fallback);
     background-color: var(--main-bg-color);
     color: var(--text-color);
     position: relative;
   }
 
-  main {
+  /* main {
     height: auto;
     margin: auto auto;
     display: flex;
@@ -137,7 +167,7 @@ export const globalStyleBody = css`
     justify-content: center;
     align-items: center;
     // border: 1px solid red;
-  }
+  } */
 
   /* make img easier to work with*/
   img {
@@ -149,9 +179,10 @@ export const globalStyleBody = css`
   input,
   textarea,
   select {
-    font: inherit;
+    font-family: inherit;
     color: var(--color-grey-6);
     min-height: 2.9rem;
+    min-height: var(--text-lg);
   }
 
   section {
@@ -160,11 +191,11 @@ export const globalStyleBody = css`
   - "width: 100%":allows it to take up the entire available space
   - margin set to auto
   */
-    margin: auto;
-    margin-top: 3.5rem;
-    max-width: 1200px;
-    width: 100%;
-    padding: 0 3rem;
+    //margin: auto;
+    // margin-top: 3.5rem;
+    // max-width: 1200px;
+    //width: 100%;
+    //padding: 0 3rem;
     //display: flex;
   }
 
@@ -232,6 +263,22 @@ export const btnLinkStyle = css`
   }
 `;
 
+/* *************************** */
+/*   UTILITY   */
+/* *************************** */
+
+export const container = {
+  maxWidth: '1200px',
+  padding: '0 3rem',
+  margin: '0 auto',
+};
+
+export const flexRowXYCenter = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+};
+
 const flexCenter = {
   display: 'flex',
   justifyContent: 'center',
@@ -250,116 +297,116 @@ const size = (width = '100%', height = '100%') => {
 /*   Header: Navigation Bar    */
 /* *************************** */
 
-export const headerStyle = (theme) => css`
-  background-color: transparent;
-  width: 100vw;
-  // height: 4.5rem;
-  border: 1px solid olive;
-  position: sticky;
-  top: 0;
-  z-index: 30;
+// export const headerStyle = (theme) => css`
+//   background-color: transparent;
+//   width: 100vw;
+//   // height: 4.5rem;
+//   border: 2px solid olive;
+//   position: sticky;
+//   top: 0;
+//   z-index: 30;
 
-  // container
-  > div {
-    // position: sticky;
-    // z-index: 3;
-    max-width: 1920px;
-    width: 100%;
-    background-color: var(--main-bg-color);
-    margin: auto;
-    // display: flex;
-    //display: grid;
-    //grid-template-columns: 3fr 1fr;
-    padding: 1rem 3rem 0;
-    // padding-top: 0.5rem 0;
-    border-bottom: 0px solid var(--color-grey-6);
-    box-shadow: rgba(0, 0, 0, 0.45) 0px 15px 10px -20px;
-    border: 2px solid red;
-    //justify-items: end;
+//   // container
+//   > div {
+//     // position: sticky;
+//     // z-index: 3;
+//     max-width: 1920px;
+//     width: 100%;
+//     background-color: var(--main-bg-color);
+//     margin: auto;
+//     // display: flex;
+//     //display: grid;
+//     //grid-template-columns: 3fr 1fr;
+//     padding: 1rem 3rem 0;
+//     // padding-top: 0.5rem 0;
+//     border-bottom: 0px solid var(--color-grey-6);
+//     box-shadow: rgba(0, 0, 0, 0.45) 0px 15px 10px -20px;
+//     border: 2px solid red;
+//     //justify-items: end;
 
-    @media (max-width: 480px) {
-      grid-template-columns: 1fr 1fr;
-    }
+//     @media (max-width: 480px) {
+//       grid-template-columns: 1fr 1fr;
+//     }
 
-    // contanier shelovesPlants logo
-    > div:first-of-type {
-      /* align-self: center;
-      justify-self: start;
-      border: 1px solid blue; */
-    }
+//     // contanier shelovesPlants logo
+//     > div:first-of-type {
+//       /* align-self: center;
+//       justify-self: start;
+//       border: 1px solid blue; */
+//     }
 
-    // container links
-    /* > div:nth-of-type(2) {
-      border: 2px solid pink;
-      display: flex;
-      align-items: center;
-      // z-index: 1;
-      // height: 4rem; */
+//     // container links
+//     /* > div:nth-of-type(2) {
+//       border: 2px solid pink;
+//       display: flex;
+//       align-items: center;
+//       // z-index: 1;
+//       // height: 4rem; */
 
-    ul {
-      list-style-type: none;
-      list-style-position: inside;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--space-md);
-      margin: 0;
-      padding-left: 0;
+//     ul {
+//       list-style-type: none;
+//       list-style-position: inside;
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+//       gap: var(--space-md);
+//       margin: 0;
+//       padding-left: 0;
 
-      > li:first-of-type a {
-        display: inline-block;
-      }
+//       > li:first-of-type a {
+//         display: inline-block;
+//       }
 
-      a:link,
-      a:visited,
-      a:hover,
-      a:active {
-        font-weight: bold;
-      }
+//       a:link,
+//       a:visited,
+//       a:hover,
+//       a:active {
+//         font-weight: bold;
+//       }
 
-      /* li {
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-      } */
+//       /* li {
+//         display: flex;
+//         align-items: flex-end;
+//         justify-content: center;
+//       } */
 
-      /* > li:first-of-type button {
-          all: unset;
-          cursor: pointer;
-        } */
-      > li:nth-of-type(2) button {
-        all: unset;
-        cursor: pointer;
-        display: flex;
-      }
+//       /* > li:first-of-type button {
+//           all: unset;
+//           cursor: pointer;
+//         } */
+//       > li:nth-of-type(2) button {
+//         all: unset;
+//         cursor: pointer;
+//         display: flex;
+//       }
 
-      > li:nth-of-type(2) {
-        margin-left: auto;
-        display: flex;
-        .hamburgerIcon {
-          height: 30px;
-          width: 30px;
-          display: inline-block;
-        }
-      }
+//       > li:nth-of-type(2) {
+//         margin-left: auto;
+//         display: flex;
+//         .hamburgerIcon {
+//           height: 30px;
+//           width: 30px;
+//           display: inline-block;
+//         }
+//       }
 
-      > li:last-of-type {
-        height: 30px;
-      }
+//       > li:last-of-type {
+//         height: 30px;
+//       }
 
-      /* // hamburger menu
-      li button img {
-        display: inline-block;
-      } */
-      /*
-      li button {
-        display: inline-flex;
-        align-items: flex-end;
-      } */
-    }
-    // }
-  }
-`;
+//       /* // hamburger menu
+//       li button img {
+//         display: inline-block;
+//       } */
+//       /*
+//       li button {
+//         display: inline-flex;
+//         align-items: flex-end;
+//       } */
+//     }
+//     // }
+//   }
+// `;
 
 // export const shoppingBagStyle = css`
 //   all: unset;
@@ -387,37 +434,37 @@ export const headerStyle = (theme) => css`
 //   }
 // `;
 
-export const shoppingBagStyle = css`
-  position: relative;
-  border: 1px solid red;
-  background-color: lightpink;
-  display: inline-flex;
-  text-decoration: none;
+// export const shoppingBagStyle = css`
+//   position: relative;
+//   border: 1px solid red;
+//   background-color: lightpink;
+//   display: inline-flex;
+//   text-decoration: none;
 
-  .shoppingBagStyle {
-    width: 24px;
-    height: 24px;
-    display: inline-flex;
-  }
+//   .shoppingBagStyle {
+//     width: 24px;
+//     height: 24px;
+//     display: inline-flex;
+//   }
 
-  // container circle and quantity
-  > span:first-of-type {
-    ${size('1.41rem', '1.41rem')}
-    display: flex;
-    border-radius: 50%;
-    background-color: var(--color-btn-primary-bg);
-    color: var(--color-white);
-    position: absolute;
-    text-align: center;
-    top: -18px;
-    right: -5px;
+//   // container circle and quantity
+//   > span:first-of-type {
+//     ${size('1.41rem', '1.41rem')}
+//     display: flex;
+//     border-radius: 50%;
+//     background-color: var(--color-btn-primary-bg);
+//     color: var(--color-white);
+//     position: absolute;
+//     text-align: center;
+//     top: -18px;
+//     right: -5px;
 
-    > span {
-      margin: auto auto;
-      font-size: var(--text-sm);
-    }
-  }
-`;
+//     > span {
+//       margin: auto auto;
+//       font-size: var(--text-sm);
+//     }
+//   }
+// `;
 
 /* *************************** */
 /*         footer       */
@@ -529,7 +576,7 @@ export const MobileFooterStyle = (theme) => css`
         gap: 0.063rem;
         border: 2px solid yellow;
 
-        > p {
+        > {
           display: flex;
           justify-content: space-between;
           border-bottom: 0.1rem solid lightgray;
@@ -594,55 +641,55 @@ export const MobileFooterStyle = (theme) => css`
 /*         Index.js            */
 /* *************************** */
 
-export const bgImgContainer = css`
-  z-index: 1;
-  height: 20rem;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+// export const bgImgContainer = css`
+//   z-index: 1;
+//   height: 20rem;
+//   position: relative;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
 
-  @media (max-width: 769px) {
-    height: 18rem;
-  }
+//   @media (max-width: 769px) {
+//     height: 18rem;
+//   }
 
-  @media (max-width: 640px) {
-    height: 16rem;
-  }
-`;
+//   @media (max-width: 640px) {
+//     height: 16rem;
+//   }
+// `;
 
-export const heroImageContentContainer = (theme) => css`
-  z-index: 1;
-  height: 12.5rem;
-  width: auto;
-  color: var(--main-bg-color);
-  letter-spacing: 0.2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  //border: 2px solid blue;
+// export const heroImageContentContainer = (theme) => css`
+//   z-index: 1;
+//   height: 12.5rem;
+//   width: auto;
+//   color: var(--main-bg-color);
+//   letter-spacing: 0.2rem;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   //border: 2px solid blue;
 
-  p {
-    font-size: ${theme.typography.xLarge};
-    font-weight: 500;
-    text-shadow: 2px 8px 6px rgba(0, 0, 0, 0.2),
-      0px -5px 35px rgba(255, 255, 255, 0.3), 0px 1px 4px rgb(0, 0, 0);
-  }
+//   p {
+//     font-size: ${theme.typography.xLarge};
+//     font-weight: 500;
+//     text-shadow: 2px 8px 6px rgba(0, 0, 0, 0.2),
+//       0px -5px 35px rgba(255, 255, 255, 0.3), 0px 1px 4px rgb(0, 0, 0);
+//   }
 
-  button {
-    width: 12.65rem;
-    display: inline-block;
-  }
+//   button {
+//     width: 12.65rem;
+//     display: inline-block;
+//   }
 
-  @media (max-width: 769px) {
-    height: 10.25rem;
-  }
+//   @media (max-width: 769px) {
+//     height: 10.25rem;
+//   }
 
-  @media (max-width: 640px) {
-    display: none;
-  }
-`;
+//   @media (max-width: 640px) {
+//     display: none;
+//   }
+// `;
 
 export const bestSellerStyle = (theme) => css`
   display: flex;

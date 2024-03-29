@@ -1,12 +1,106 @@
+import { css } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, useContext, useEffect, useState } from 'react';
-import shoppingBag from '../../public/shoppingBag.png';
 import { CartContext } from '../../util/context/cartContext';
 import { CartCookieContext } from '../../util/context/cookieContext';
-import { headerStyle, shoppingBagStyle } from '../elements';
 import MobileMenu from '../Mobile/MobileMenu';
 import NavMenu from './NavMenu';
+
+export const navigation = () => css`
+  background-color: var(--main-bg-color);
+  width: 100vw;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  padding-top: 1rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-grey-6);
+
+  // container
+  > section {
+    max-width: 81rem; //1330px;
+    margin: 0 1.5rem;
+    width: 100%;
+
+    ul {
+      list-style-type: none;
+      list-style-position: inside;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-md);
+      margin: 0;
+      padding-left: 0;
+
+      a:link,
+      a:visited,
+      a:hover,
+      a:active {
+        font-weight: bold;
+      }
+
+      > li:nth-of-type(2) button {
+        all: unset;
+        cursor: pointer;
+        display: flex;
+      }
+
+      > li:nth-of-type(2) {
+        margin-left: auto;
+        display: flex;
+
+        .hamburgerIcon {
+          height: 30px;
+          width: 30px;
+          display: inline-block;
+        }
+      }
+
+      > li:last-of-type {
+        height: 30px;
+      }
+    }
+
+    @media (max-width: 30rem) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+`;
+
+const shoppingBagStyle = (itemsInCart: boolean) => css`
+  position: relative;
+  display: inline-flex;
+  text-decoration: none;
+
+  .shoppingBagSVG {
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+  }
+
+  // container circle and quantity
+  > span:first-of-type {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: ${itemsInCart ? 'flex' : 'none'};
+    border-radius: 50%;
+    background-color: var(--color-btn-primary-bg);
+    color: var(--color-white);
+    position: absolute;
+    text-align: center;
+    top: -18px;
+    right: -5px;
+
+    > span {
+      margin: auto auto;
+      font-size: 0.8rem;
+    }
+  }
+`;
 
 // get window width
 export const getScreenSize = () => {
@@ -34,39 +128,11 @@ export const BREAKPOINT_AT_768 = 768;
 export default function Navigation() {
   const screenwidth = getScreenSize();
   const { cartCount } = useContext(CartCookieContext);
-
   const { toggleMenu, toggleMobileMenu } = useContext(CartContext);
 
   const toggleMobileMenuHandler = () => {
     toggleMobileMenu();
   };
-
-  // const shoppingBagIcon = () => (
-  //   <Link
-  //     href={{
-  //       pathname: '/cart',
-  //     }}
-  //     passHref
-  //   >
-  //     <button css={shoppingBagStyle}>
-  //       <span>
-  //         <Image
-  //           src={shoppingBag}
-  //           alt="shopping cart icon"
-  //           quality={90}
-  //           fill
-  //           sizes="100vw"
-  //           style={{
-  //             objectFit: 'cover',
-  //           }}
-  //         />
-  //       </span>
-  //       <span>
-  //         <span data-test-id="cart-count">{cartCount}</span>
-  //       </span>
-  //     </button>
-  //   </Link>
-  // );
 
   const shoppingBagIcon = () => (
     <Link
@@ -74,7 +140,7 @@ export default function Navigation() {
         pathname: '/cart',
       }}
       passHref
-      css={shoppingBagStyle}
+      css={shoppingBagStyle(Boolean(cartCount))}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +148,7 @@ export default function Navigation() {
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
-        className="shoppingBagStyle"
+        className="shoppingBagSVG"
       >
         <path
           stroke-linecap="round"
@@ -97,31 +163,11 @@ export default function Navigation() {
     </Link>
   );
 
-  // const hamburgerIcon = () => (
-  //   <button
-  //     onClick={toggleMobileMenuHandler}
-  //     onKeyDown={toggleMobileMenuHandler}
-  //     role="menu"
-  //     tabIndex={0}
-  //     aria-label={'Open the menu'}
-  //     aria-expanded={`${toggleMenu}`}
-  //   >
-  //     <Image
-  //       src="/menu.png"
-  //       width="29"
-  //       height="29"
-  //       alt="menu icon"
-  //       aria-hidden={true}
-  //     />
-  //   </button>
-  // );
-
   return (
     <Fragment>
       {screenwidth < BREAKPOINT_AT_768 && <MobileMenu />}
-
-      <nav css={headerStyle}>
-        <div>
+      <nav css={navigation}>
+        <section>
           <ul>
             <li>
               <Link href="/" passHref>
@@ -129,7 +175,7 @@ export default function Navigation() {
                   src={'/logo_shelovesplants.svg'}
                   alt={'logo she loves plants'}
                   width={'250'}
-                  height={'52'}
+                  height={'36'}
                 />
               </Link>
             </li>
@@ -164,7 +210,7 @@ export default function Navigation() {
             )}
             <li>{shoppingBagIcon()}</li>
           </ul>
-        </div>
+        </section>
       </nav>
     </Fragment>
   );
