@@ -2,6 +2,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
+import ButtonCallToAction from '../components/Buttons/ButtonCallToAction';
 import CartProducts from '../components/Cart/CartProducts';
 import OrderSummary from '../components/Cart/OrderSummary';
 import {
@@ -42,15 +43,7 @@ export default function Cart(props: Props) {
         <section css={underConstruction}>
           <article>
             <h1> Your cart is currently empty.</h1>
-            <Link
-              href={{
-                pathname: '/plants',
-              }}
-              passHref
-              css={btnLinkStyle}
-            >
-              Continue Shopping
-            </Link>
+            <ButtonCallToAction innerText="Continue Shopping" />
           </article>
         </section>
       </LayoutNoHeader>
