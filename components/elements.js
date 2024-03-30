@@ -155,16 +155,6 @@ export const globalStyleBody = css`
     position: relative;
   }
 
-  /* main {
-    height: auto;
-    margin: auto auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    // border: 1px solid red;
-  } */
-
   /* make img easier to work with*/
   img {
     max-width: 100%; /* ensure that the img gets narrow when viewoprt shrinks*/
@@ -175,45 +165,10 @@ export const globalStyleBody = css`
   input,
   textarea,
   select {
-    font-family: inherit;
+    font-family: var(--font-primary), var(--font-fallback);
     color: var(--color-grey-6);
-    min-height: 2.9rem;
-    min-height: var(--text-lg);
-  }
-
-  section {
-    /*
-  - max-width instead of width: ensure that the img gets narrow when viewoprt shrinks
-  - "width: 100%":allows it to take up the entire available space
-  - margin set to auto
-  */
-    //margin: auto;
-    // margin-top: 3.5rem;
-    // max-width: 1200px;
-    //width: 100%;
-    //padding: 0 3rem;
-    //display: flex;
-  }
-
-  button {
-    letter-spacing: 0.031rem;
-    line-height: 1.125rem;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 0.75rem;
-    display: block;
-    min-height: 2.9rem;
-    padding: 0.625rem 1rem;
-    margin: 1rem 0;
-    color: var(--text-color);
-    border: none;
-    background-color: var(--color-btn-primary-bg);
-    cursor: pointer;
-    transition: all 0.3s;
-
-    :hover {
-      background-color: var(--color-btn-hover);
-    }
+    // min-height: 2.9rem;
+    // min-height: var(--text-lg);
   }
 
   a:link,
@@ -268,6 +223,17 @@ export const flexRowXYCenter = {
   alignItems: 'center',
 };
 
+export const btn = {
+  letterSpacing: '0.031rem',
+  lineHeight: '1.125rem',
+  fontWeight: 'bold',
+  fontSize: '0.9rem',
+  minHeight: '2.9rem',
+  padding: '1rem',
+  border: 'none',
+  cursor: 'pointer',
+};
+
 const flexCenter = {
   display: 'flex',
   justifyContent: 'center',
@@ -282,251 +248,6 @@ const size = (width = '100%', height = '100%') => {
   return { width, height };
 };
 
-/* *************************** */
-/*   Header: Navigation Bar    */
-/* *************************** */
-
-// export const headerStyle = (theme) => css`
-//   background-color: transparent;
-//   width: 100vw;
-//   // height: 4.5rem;
-//   border: 2px solid olive;
-//   position: sticky;
-//   top: 0;
-//   z-index: 30;
-
-//   // container
-//   > div {
-//     // position: sticky;
-//     // z-index: 3;
-//     max-width: 1920px;
-//     width: 100%;
-//     background-color: var(--main-bg-color);
-//     margin: auto;
-//     // display: flex;
-//     //display: grid;
-//     //grid-template-columns: 3fr 1fr;
-//     padding: 1rem 3rem 0;
-//     // padding-top: 0.5rem 0;
-//     border-bottom: 0px solid var(--color-grey-6);
-//     box-shadow: rgba(0, 0, 0, 0.45) 0px 15px 10px -20px;
-//     border: 2px solid red;
-//     //justify-items: end;
-
-//     @media (max-width: 480px) {
-//       grid-template-columns: 1fr 1fr;
-//     }
-
-//     // contanier shelovesPlants logo
-//     > div:first-of-type {
-//       /* align-self: center;
-//       justify-self: start;
-//       border: 1px solid blue; */
-//     }
-
-//     // container links
-//     /* > div:nth-of-type(2) {
-//       border: 2px solid pink;
-//       display: flex;
-//       align-items: center;
-//       // z-index: 1;
-//       // height: 4rem; */
-
-//     ul {
-//       list-style-type: none;
-//       list-style-position: inside;
-//       display: flex;
-//       align-items: center;
-//       justify-content: center;
-//       gap: var(--space-md);
-//       margin: 0;
-//       padding-left: 0;
-
-//       > li:first-of-type a {
-//         display: inline-block;
-//       }
-
-//       a:link,
-//       a:visited,
-//       a:hover,
-//       a:active {
-//         font-weight: bold;
-//       }
-
-//       /* li {
-//         display: flex;
-//         align-items: flex-end;
-//         justify-content: center;
-//       } */
-
-//       /* > li:first-of-type button {
-//           all: unset;
-//           cursor: pointer;
-//         } */
-//       > li:nth-of-type(2) button {
-//         all: unset;
-//         cursor: pointer;
-//         display: flex;
-//       }
-
-//       > li:nth-of-type(2) {
-//         margin-left: auto;
-//         display: flex;
-//         .hamburgerIcon {
-//           height: 30px;
-//           width: 30px;
-//           display: inline-block;
-//         }
-//       }
-
-//       > li:last-of-type {
-//         height: 30px;
-//       }
-
-//       /* // hamburger menu
-//       li button img {
-//         display: inline-block;
-//       } */
-//       /*
-//       li button {
-//         display: inline-flex;
-//         align-items: flex-end;
-//       } */
-//     }
-//     // }
-//   }
-// `;
-
-// export const shoppingBagStyle = css`
-//   all: unset;
-//   position: relative;
-//   ${size('1.55rem', '1.55rem')}
-//   border: 1px solid red;
-//   background-color: lightpink;
-
-//   // container circle and quantity
-//   > span:nth-of-type(2) {
-//     ${size('1.41rem', '1.41rem')}
-//     display: flex;
-//     border-radius: 50%;
-//     background-color: var(--color-btn-primary-bg);
-//     color: var(--color-white);
-//     position: absolute;
-//     text-align: center;
-//     top: -18px;
-//     right: -5px;
-
-//     > span {
-//       margin: auto auto;
-//       font-size: var(--text-sm);
-//     }
-//   }
-// `;
-
-// export const shoppingBagStyle = css`
-//   position: relative;
-//   border: 1px solid red;
-//   background-color: lightpink;
-//   display: inline-flex;
-//   text-decoration: none;
-
-//   .shoppingBagStyle {
-//     width: 24px;
-//     height: 24px;
-//     display: inline-flex;
-//   }
-
-//   // container circle and quantity
-//   > span:first-of-type {
-//     ${size('1.41rem', '1.41rem')}
-//     display: flex;
-//     border-radius: 50%;
-//     background-color: var(--color-btn-primary-bg);
-//     color: var(--color-white);
-//     position: absolute;
-//     text-align: center;
-//     top: -18px;
-//     right: -5px;
-
-//     > span {
-//       margin: auto auto;
-//       font-size: var(--text-sm);
-//     }
-//   }
-// `;
-
-/* *************************** */
-/*         footer       */
-/* *************************** */
-
-export const footerStyle = (theme) => css`
-  background-color: ${theme.bgColor.greyMain};
-  width: 100%;
-  margin: 3rem 0rem auto;
-  // border: 2px solid green;
-  section {
-    ${container};
-    ${marginTop};
-
-    //max-width: 1200px;
-    // padding: 3rem 3rem;
-    //margin: 0 auto;
-    gap: 4.25rem;
-    display: flex;
-    justify-content: space-between;
-
-    div {
-      border: 1px dotted red;
-      display: flex;
-      flex-direction: column;
-      gap: 0.063rem;
-      line-height: 2rem;
-
-      p {
-        font-weight: bold;
-      }
-
-      ul {
-        list-style: none;
-        padding-left: 0;
-      }
-      @media (max-width: 768px) {
-        display: none;
-      }
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      max-width: 100%;
-
-      label {
-        font-weight: 600;
-      }
-
-      p {
-        font-size: large;
-      }
-
-      input {
-        ${size('17.65rem', '1.47rem')}
-        letter-spacing: 0.031rem;
-        line-height: 1.125rem;
-        // text-transform: uppercase;
-        font-weight: bold;
-        font-size: 0.75rem;
-        display: block;
-        width: 100%;
-        padding: 0.625rem 1rem;
-      }
-    }
-  }
-
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
-`;
-
 export const styleLargeButton = (theme) => css`
   display: flex;
   justify-content: center;
@@ -535,153 +256,6 @@ export const styleLargeButton = (theme) => css`
     ${size('17.65rem', '1.47rem')}
   }
 `;
-
-/* *************************** */
-/*         Mobile-Footer       */
-/* *************************** */
-
-export const MobileFooterStyle = (theme) => css`
-  gap: 4rem;
-  background-color: ${theme.bgColor.greyMain};
-  width: 100%;
-  margin: 8rem 0rem auto;
-  display: none;
-
-  @media screen and (max-width: 768px) {
-    flex-direction: column-reverse;
-    padding: 3rem;
-    display: block;
-    // border: 1px red solid;
-
-    > div {
-      max-width: 1920px;
-      // border: 1px red solid;
-      padding: 3rem 3rem;
-      margin: 0 auto;
-      gap: 4.25rem;
-      display: flex;
-      justify-content: space-between;
-
-      > div {
-        display: flex;
-        flex-direction: column;
-        gap: 0.063rem;
-        border: 2px solid yellow;
-
-        > {
-          display: flex;
-          justify-content: space-between;
-          border-bottom: 0.1rem solid lightgray;
-
-          span {
-            display: inline-block;
-            font-weight: bold;
-          }
-        }
-
-        > ul {
-          list-style-type: none;
-          list-style-position: inside;
-          display: flex;
-          flex-direction: column;
-          margin: 0;
-          padding: 0;
-          li {
-            padding-left: 0.8rem;
-          }
-        }
-
-        line-height: 2.5rem;
-      }
-
-      // subscribe to newsletter form
-      form {
-        display: flex;
-        flex-direction: column;
-        max-width: 100%;
-
-        label {
-          font-weight: 600;
-        }
-
-        input {
-          letter-spacing: 0.031rem;
-          line-height: 1.125rem;
-          // text-transform: uppercase;
-          font-weight: bold;
-          font-size: 0.75rem;
-          display: block;
-          width: 100%;
-          padding: 0.625rem 1rem;
-          color: #000;
-        }
-      }
-
-      @media screen and (max-width: 1051px) {
-        gap: 1.5rem;
-      }
-
-      @media screen and (max-width: 768px) {
-        flex-direction: column-reverse;
-        padding: 0rem;
-      }
-    }
-  }
-`;
-
-/* *************************** */
-/*         Index.js            */
-/* *************************** */
-
-// export const bgImgContainer = css`
-//   z-index: 1;
-//   height: 20rem;
-//   position: relative;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-
-//   @media (max-width: 769px) {
-//     height: 18rem;
-//   }
-
-//   @media (max-width: 640px) {
-//     height: 16rem;
-//   }
-// `;
-
-// export const heroImageContentContainer = (theme) => css`
-//   z-index: 1;
-//   height: 12.5rem;
-//   width: auto;
-//   color: var(--main-bg-color);
-//   letter-spacing: 0.2rem;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-//   //border: 2px solid blue;
-
-//   p {
-//     font-size: ${theme.typography.xLarge};
-//     font-weight: 500;
-//     text-shadow: 2px 8px 6px rgba(0, 0, 0, 0.2),
-//       0px -5px 35px rgba(255, 255, 255, 0.3), 0px 1px 4px rgb(0, 0, 0);
-//   }
-
-//   button {
-//     width: 12.65rem;
-//     display: inline-block;
-//   }
-
-//   @media (max-width: 769px) {
-//     height: 10.25rem;
-//   }
-
-//   @media (max-width: 640px) {
-//     display: none;
-//   }
-// `;
 
 export const bestSellerStyle = (theme) => css`
   ${container};
@@ -1601,57 +1175,6 @@ export const underConstruction = css`
   }
 `;
 
-/* *************************** */
-/*    DeliveryInfos.js       */
-/* *************************** */
-
-// export const deliveryInfos = css`
-//   //  border: 2px solid red;
-//   background-color: var(--color-green);
-//   //color: #000;
-//   height: 8rem;
-//   max-width: unset;
-//   width: 100vw;
-//   display: flex;
-//   justify-content: center;
-
-//   div {
-//     max-width: 1920px;
-//     width: 100%;
-//     height: inherit;
-//     margin: 0 auto;
-//     display: grid;
-//     grid-template-columns: repeat(3, 1fr);
-//     justify-content: center;
-//     align-content: center;
-
-//     > article {
-//       gap: 1rem;
-//       display: flex;
-//       align-items: center;
-//       justify-content: center;
-//       //border: 1px solid black;
-//       > div {
-//         width: 3rem;
-//         height: 3rem;
-//         background-color: lightgrey;
-//         border-radius: 50%;
-//         margin: 0;
-//       }
-//     }
-
-//     @media screen and (max-width: 600px) {
-//       > article > div {
-//         display: none;
-//       }
-//     }
-
-//     @media screen and (max-width: 480px) {
-//       grid-template-columns: 1fr;
-//       gap: var(--space-xs);
-//     }
-//   }
-// `;
 /* *************************** */
 /*  login.tsx / register.tsx   */
 /* *************************** */

@@ -1,8 +1,66 @@
+import { css } from '@emotion/react';
 import { useState } from 'react';
-import { MobileFooterStyle } from '../../elements';
-import { FooterData, footerInfos } from '../../Footer';
+import { btn } from '../../elements';
+import { footerInfos } from '../../Footer';
 import FooterListElements from '../../Footer/FooterListElements';
 import FormNewsletter from '../../FormNewsletter';
+
+export const MobileFooterStyle = css`
+  display: none;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+    padding: 4rem 1.5rem;
+
+    > nav {
+      margin: 0 auto;
+      gap: 4.25rem;
+      display: flex;
+      justify-content: space-between;
+
+      > div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.063rem;
+
+        > button {
+          ${btn};
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          span {
+            font-family: var(--font-primary);
+            font-size: 0.9rem;
+            display: inline-block;
+            font-weight: bold;
+          }
+
+          span:last-of-type {
+            font-size: 1.1rem;
+          }
+        }
+
+        > ul {
+          li {
+            padding-left: 0.8rem;
+          }
+        }
+
+        line-height: 2.5rem;
+      }
+
+      @media screen and (max-width: 1051px) {
+        gap: 1.5rem;
+      }
+
+      @media (max-width: 768px) {
+        flex-direction: column-reverse;
+        padding: 0rem;
+      }
+    }
+  }
+`;
 
 export default function MobileFooter() {
   const [email, setEmail] = useState('');
@@ -10,8 +68,6 @@ export default function MobileFooter() {
   const [isActive, setIsActive] = useState(false);
 
   const handleAccordionClick = (index: number) => {
-    console.log('clicked index: ', index);
-    console.log('last index: ', currentIndex);
     if (currentIndex !== index) {
       setIsActive(true);
       setCurrentIndex(index);
@@ -22,11 +78,11 @@ export default function MobileFooter() {
 
   return (
     <footer css={MobileFooterStyle}>
-      <div>
+      <nav>
         {footerInfos.map((info, index) => {
           return (
             <div key={`moble-footer-${index}`}>
-              <p
+              <button
                 key={`header-${index}-${info.header}`}
                 onClick={() => handleAccordionClick(index)}
                 style={{ cursor: 'pointer' }}
@@ -35,7 +91,7 @@ export default function MobileFooter() {
                 <span key={`info-toggle-${index}`}>
                   {isActive && currentIndex === index ? '-' : '+'}
                 </span>
-              </p>
+              </button>
 
               {isActive && currentIndex === index && (
                 <FooterListElements info={info} />
@@ -44,7 +100,7 @@ export default function MobileFooter() {
           );
         })}
         <FormNewsletter email={email} setEmail={setEmail} />
-      </div>
+      </nav>
     </footer>
   );
 }
