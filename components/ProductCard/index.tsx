@@ -17,19 +17,26 @@ export default function ProductCard(props: Props) {
   return (
     <>
       <div>
-        {id === 1 && <span>Easy Care</span>}
-        {id === 4 && <span>Pet-Friendly</span>}{' '}
+        {/* {id === 1 && <span>Easy Care</span>}
+        {id === 4 && <span>Pet-Friendly</span>}{' '} */}
         <Image
           src={`/image${id}.jpeg`}
           alt={`plantName-${title}`}
-          fill
-          sizes="90vw"
-          style={{ objectFit: 'cover' }}
+          //fill
+          //sizes="90vw"
+          // style={{ objectFit: 'cover' }}
+
+          style={{
+            width: '100%',
+            height: 'auto',
+          }}
+          width={440}
+          height={550}
         />
       </div>
       <div>
-        <h3>{title}</h3>
-        <p>&euro; {price}</p>
+        <span>{title}</span>
+        <span>&euro; {price}</span>
       </div>
     </>
   );

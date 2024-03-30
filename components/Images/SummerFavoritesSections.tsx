@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import Image from 'next/image';
 import { Fragment } from 'react';
 import indexSectionImage from '../../public/indexSectionImage.jpg';
@@ -14,12 +13,12 @@ type Plants = {
   price: number;
 };
 
-const bgImageSale = css`
-  background: url('indexSectionImage.jpeg') no-repeat left -200px bottom;
-  background-size: 1600px;
-`;
+// const bgImageSale = css`
+//   background: url('indexSectionImage.jpeg') no-repeat left -200px bottom;
+//   background-size: 1600px;
+// `;
 
-export default function IndexTextImage(props: Props) {
+export default function SummerFavoritesSection(props: Props) {
   return (
     <Fragment>
       <div>

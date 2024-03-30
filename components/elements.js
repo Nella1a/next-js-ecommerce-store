@@ -100,10 +100,6 @@ export const globalStyleBody = css`
     --space-6xl: 8rem; //128px
   }
 
-  h2 {
-    font-size: var(--text-4xl);
-  }
-
   /* text size */
   /* .text--xxxl {
     font-size: var(--text-xxxl);
@@ -231,17 +227,6 @@ export const globalStyleBody = css`
     text-decoration: none;
     color: var(--text-color);
   }
-
-  //todo
-  @media (max-width: 768px) {
-    h2 {
-      font-size: var(--text-xl);
-    }
-
-    h3 {
-      font-size: var(--text-base-size);
-    }
-  }
 `;
 export const btnLinkStyle = css`
   letter-spacing: 0.031rem;
@@ -268,9 +253,13 @@ export const btnLinkStyle = css`
 /* *************************** */
 
 export const container = {
-  maxWidth: '1200px',
+  maxWidth: '1350px',
   padding: '0 3rem',
   margin: '0 auto',
+};
+
+export const marginTop = {
+  marginTop: '4rem',
 };
 
 export const flexRowXYCenter = {
@@ -476,9 +465,12 @@ export const footerStyle = (theme) => css`
   margin: 3rem 0rem auto;
   // border: 2px solid green;
   section {
-    max-width: 1200px;
-    padding: 3rem 3rem;
-    margin: 0 auto;
+    ${container};
+    ${marginTop};
+
+    //max-width: 1200px;
+    // padding: 3rem 3rem;
+    //margin: 0 auto;
     gap: 4.25rem;
     display: flex;
     justify-content: space-between;
@@ -692,6 +684,13 @@ export const MobileFooterStyle = (theme) => css`
 // `;
 
 export const bestSellerStyle = (theme) => css`
+  ${container};
+  ${marginTop};
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+
   display: flex;
   flex-direction: column;
   padding: 0 3rem;
@@ -699,9 +698,8 @@ export const bestSellerStyle = (theme) => css`
 
   > div {
     display: grid;
-    gap: var(--space-sm);
-    grid-template-columns: repeat(4, 1fr);
-    //  border: 1px solid green;
+    gap: var(--space-lg);
+    grid-template-columns: repeat(4, minmax(1rem, 1fr));
 
     a:link,
     a:visited {
@@ -715,9 +713,22 @@ export const bestSellerStyle = (theme) => css`
     }
   }
 
+  @media (max-width: 1200px) {
+    padding: 0 1.5rem;
+    h2 {
+      font-size: 1.875rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    > div {
+      grid-template-columns: repeat(3, minmax(1rem, 1fr));
+    }
+  }
+
   @media (max-width: 480px) {
     > div {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(1rem, 1fr));
     }
   }
 `;
@@ -749,6 +760,20 @@ export const productCardStyle = css`
     }
   }
 
+  div:last-of-type {
+    span {
+      display: block;
+    }
+
+    // title
+    span:first-of-type {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    // price
+    span:last-of-type {
+    }
+  }
   a:link,
   a:visited {
     text-decoration: none;
@@ -791,105 +816,92 @@ export const styleComp = css`
 `;
 
 /* *************************** */
-/*     indexTextImage.js       */
+/*     index.js       */
 /* *************************** */
 
 export const summerFavoritesStyle = (theme) => css`
+  ${container};
+  ${marginTop}
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+
   display: flex;
   flex-direction: column;
   padding: 0 3rem;
-  // border: 1px solid yellow;
-  > div {
-    // border: 2px solid green;
-    display: grid;
-    grid-template-columns: 2fr 2fr;
-    gap: var(--space-sm);
 
-    // first image container
+  > div {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    gap: var(--space-lg);
+
+    // container for img and product cards
     > div:first-of-type {
-      // height: 38rem;
       position: relative;
-      //border: 2px solid green;
     }
 
-    // container for the productCards
     > div:last-of-type {
+      //product cards grid container
       display: grid;
-      gap: var(--space-sm);
-      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+      grid-template-columns: repeat(2, minmax(1rem, 1fr));
 
       a:link,
       a:visited {
-        text-decoration: none;
         color: var(--text-color);
       }
 
-      // a:hover,
+      a:hover,
       a:active {
         color: var(--text-color);
-      }
-
-      article {
-        // second image container
-        > div:first-of-type {
-          position: relative;
-          height: 15rem;
-        }
       }
     }
   }
 
-  @media (max-width: 1024px) {
-    //padding: 0 5rem;
+  @media (max-width: 75rem) {
+    padding: 0 1.5rem;
+    h2 {
+      font-size: 1.875rem;
+    }
 
     > div {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+
       // first image container
       > div:first-of-type {
         height: 40rem;
       }
 
       > div:last-of-type {
-        grid-template-columns: repeat(2, 1fr);
-
-        article {
-          // second image container
-          > div:first-of-type {
-            height: 15rem;
-            margin-bottom: 0.5rem;
-          }
-        }
+        // product cards grid container
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: var(--space-md);
       }
     }
   }
 
-  @media (max-width: 768px) {
-    padding: 0 2rem;
-
+  @media (max-width: 48rem) {
     > div {
       grid-template-columns: 1fr;
+    }
+  }
 
-      // first image container
-      > div:first-of-type {
-        height: 20rem;
-      }
-
+  @media (max-width: 600px) {
+    > div {
+      // product cards grid container
       > div:last-of-type {
-        grid-template-columns: repeat(4, 1fr);
-
-        article {
-          // second image container
-          > div:first-of-type {
-            height: 10rem;
-          }
-        }
+        grid-template-columns: repeat(3, minmax(1rem, 1fr));
       }
     }
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 30rem) {
     > div {
+      //product cards grid container
       > div:last-of-type {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(1rem, 1fr));
       }
     }
   }
@@ -1593,53 +1605,53 @@ export const underConstruction = css`
 /*    DeliveryInfos.js       */
 /* *************************** */
 
-export const deliveryInfos = css`
-  //  border: 2px solid red;
-  background-color: var(--color-green);
-  //color: #000;
-  height: 8rem;
-  max-width: unset;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
+// export const deliveryInfos = css`
+//   //  border: 2px solid red;
+//   background-color: var(--color-green);
+//   //color: #000;
+//   height: 8rem;
+//   max-width: unset;
+//   width: 100vw;
+//   display: flex;
+//   justify-content: center;
 
-  div {
-    max-width: 1920px;
-    width: 100%;
-    height: inherit;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-content: center;
-    align-content: center;
+//   div {
+//     max-width: 1920px;
+//     width: 100%;
+//     height: inherit;
+//     margin: 0 auto;
+//     display: grid;
+//     grid-template-columns: repeat(3, 1fr);
+//     justify-content: center;
+//     align-content: center;
 
-    > article {
-      gap: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      //border: 1px solid black;
-      > div {
-        width: 3rem;
-        height: 3rem;
-        background-color: lightgrey;
-        border-radius: 50%;
-        margin: 0;
-      }
-    }
+//     > article {
+//       gap: 1rem;
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+//       //border: 1px solid black;
+//       > div {
+//         width: 3rem;
+//         height: 3rem;
+//         background-color: lightgrey;
+//         border-radius: 50%;
+//         margin: 0;
+//       }
+//     }
 
-    @media screen and (max-width: 600px) {
-      > article > div {
-        display: none;
-      }
-    }
+//     @media screen and (max-width: 600px) {
+//       > article > div {
+//         display: none;
+//       }
+//     }
 
-    @media screen and (max-width: 480px) {
-      grid-template-columns: 1fr;
-      gap: var(--space-xs);
-    }
-  }
-`;
+//     @media screen and (max-width: 480px) {
+//       grid-template-columns: 1fr;
+//       gap: var(--space-xs);
+//     }
+//   }
+// `;
 /* *************************** */
 /*  login.tsx / register.tsx   */
 /* *************************** */
