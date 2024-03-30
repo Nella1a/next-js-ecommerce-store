@@ -92,8 +92,8 @@ const shoppingBagStyle = (itemsInCart: boolean) => css`
     color: var(--color-white);
     position: absolute;
     text-align: center;
-    top: -18px;
-    right: -5px;
+    top: -9px;
+    right: -9px;
 
     > span {
       margin: auto auto;

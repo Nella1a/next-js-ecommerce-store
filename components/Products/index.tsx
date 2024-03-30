@@ -30,7 +30,8 @@ export const productCardStyle = css`
     }
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 56.25rem) {
+    // 900px
     div:last-of-type {
       span:first-of-type {
         font-size: 0.9rem;
@@ -42,7 +43,8 @@ export const productCardStyle = css`
     }
   }
 
-  @media (max-width: 750px) {
+  @media (max-width: 46.875rem) {
+    // 750px
     div:last-of-type {
       // title and price
       span {
@@ -51,13 +53,19 @@ export const productCardStyle = css`
     }
   }
 
-  @media (max-width: 480px) {
-    div:first-of-type {
-      //  height: 10rem;
-    }
+  @media (max-width: 30rem) {
     div:last-of-type {
       span:first-of-type {
         width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 22.5rem) {
+    // 360px
+    div:last-of-type {
+      span:first-of-type {
+        width: 50%;
       }
     }
   }

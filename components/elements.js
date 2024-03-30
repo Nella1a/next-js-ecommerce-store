@@ -217,6 +217,14 @@ export const marginTop = {
   marginTop: '4rem',
 };
 
+export const h2Section = {
+  marginBottom: '1rem',
+  fontSize: '2rem',
+};
+export const h2SectionMediaQuery75 = {
+  fontSize: '1.875rem',
+};
+
 export const flexRowXYCenter = {
   display: 'flex',
   justifyContent: 'center',
@@ -262,7 +270,7 @@ export const bestSellerStyle = (theme) => css`
   ${marginTop};
 
   h2 {
-    margin-bottom: 1rem;
+    ${h2Section}
   }
 
   display: flex;
@@ -287,20 +295,21 @@ export const bestSellerStyle = (theme) => css`
     }
   }
 
-  @media (max-width: 1200px) {
+  @media (max-width: 75rem) {
     padding: 0 1.5rem;
     h2 {
-      font-size: 1.875rem;
+      ${h2SectionMediaQuery75}
     }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 37.5rem) {
+    // 600px
     > div {
       grid-template-columns: repeat(3, minmax(1rem, 1fr));
     }
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 30rem) {
     > div {
       grid-template-columns: repeat(2, minmax(1rem, 1fr));
     }
@@ -398,7 +407,7 @@ export const summerFavoritesStyle = (theme) => css`
   ${marginTop}
 
   h2 {
-    margin-bottom: 1rem;
+    ${h2Section}
   }
 
   display: flex;
@@ -436,7 +445,7 @@ export const summerFavoritesStyle = (theme) => css`
   @media (max-width: 75rem) {
     padding: 0 1.5rem;
     h2 {
-      font-size: 1.875rem;
+      ${h2SectionMediaQuery75}
     }
 
     > div {
@@ -491,38 +500,6 @@ export const separator = css`
 
   margin: 0 64px;
   width: calc(100% - 280px);
-`;
-
-/* *************************** */
-/*         Products.js         */
-/* *************************** */
-
-export const productsComponentStyle = css`
-  > div:first-of-type {
-    display: grid;
-    gap: var(--space-sm);
-    grid-template-columns: repeat(4, 1fr);
-    grid-row-gap: var(--space-xl);
-
-    a:link,
-    a:visited {
-      text-decoration: none;
-      color: var(--text-color);
-    }
-
-    // a:hover,
-    a:active {
-      color: var(--text-color);
-    }
-
-    @media screen and (max-width: 1024px) {
-      grid-row-gap: var(--space-lg);
-    }
-
-    @media screen and (max-width: 600px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
 `;
 
 /* *************************** */
