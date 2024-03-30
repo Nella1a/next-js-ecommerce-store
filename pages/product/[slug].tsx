@@ -1,8 +1,15 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Head from 'next/head';
 import { useContext, useEffect, useState } from 'react';
+import ButtonCallToAction from '../../components/Buttons/ButtonCallToAction';
 import ChangeCartQuantity from '../../components/ChangeCartQuantity';
-import { singleProductPageStyle } from '../../components/elements';
+import {
+  imageGallery,
+  productDetailsContainer,
+  productImageContainer,
+  productTitleAndPriceContainer,
+  singleProductPageStyle,
+} from '../../components/elements';
 import ProductImage from '../../components/Images/ProductImage';
 import ProductImageSmall from '../../components/Images/ProductImageSmall';
 import LayoutNoHeader from '../../components/Layout/LayoutNoHeader';
@@ -63,7 +70,7 @@ export default function SingleProduct(
   };
 
   const titleAndPrice = () => (
-    <div>
+    <div css={productTitleAndPriceContainer}>
       <h1>{props.plant.title}</h1>
       <p data-test-id="product-price"> &euro; {props.plant.price}</p>
     </div>
@@ -76,7 +83,7 @@ export default function SingleProduct(
         <meta name="Plant with a smile" content="View all Plants" />
       </Head>
       <section css={singleProductPageStyle}>
-        <article>
+        <article css={imageGallery}>
           <div>
             <ProductImageSmall src={`/image${props.plant.id}.jpeg`} />
           </div>
@@ -90,12 +97,14 @@ export default function SingleProduct(
             <ProductImageSmall src={`/image${props.plant.id}.jpeg`} />
           </div>
         </article>
+
         <article>
-          <div>
+          <div css={productImageContainer}>
             {titleAndPrice()}
             <ProductImage src={`/image${props.plant.id}.jpeg`} title={title} />
           </div>
-          <section>
+
+          <div css={productDetailsContainer}>
             <div>
               {titleAndPrice()}
               <p>{props.plant.descr}</p>
@@ -106,6 +115,7 @@ export default function SingleProduct(
                 >
                   Add to cart
                 </button>
+
                 <ChangeCartQuantity
                   quantity={quantity}
                   increment={incrementHandler}
@@ -113,7 +123,7 @@ export default function SingleProduct(
                 />
               </div>
             </div>
-          </section>
+          </div>
         </article>
       </section>
     </LayoutNoHeader>

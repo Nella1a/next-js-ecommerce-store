@@ -1,3 +1,33 @@
+import { css } from '@emotion/react';
+
+const changeCartQuantityButtons = css`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.8rem;
+
+  > button {
+    background-color: var(--color-grey-2);
+    border-radius: 100rem;
+    font-weight: 400;
+    cursor: pointer;
+    font-weight: bold;
+    min-height: 2.5rem;
+    padding: 0.625rem 1rem;
+    border: none;
+    color: var(--text-color);
+
+    :hover {
+      background-color: var(--color-grey-4);
+    }
+  }
+
+  // quantity
+  span {
+    font-size: var(--text-md);
+  }
+`;
+
 type Props = {
   quantity: number;
   increment: () => void;
@@ -7,7 +37,7 @@ type Props = {
 export default function ChangeCartQuantity(props: Props) {
   return (
     <div>
-      <div>
+      <div css={changeCartQuantityButtons}>
         <button onClick={props.decrement} type="button">
           {' '}
           -{' '}

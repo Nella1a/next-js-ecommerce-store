@@ -507,194 +507,190 @@ export const separator = css`
 /* *************************** */
 
 export const singleProductPageStyle = css`
-  border: 2px solid red;
+  ${container};
+  margin-top: 8rem;
   display: grid;
   grid-template-columns: 1fr 11fr;
   gap: 1.5rem;
+  //border: 2px solid red;
 
-  @media screen and (max-width: 1025px) {
+  @media (max-width: 75rem) {
+    padding: 0 1.5rem;
     grid-template-columns: 11fr;
     max-width: 100%;
   }
 
-  @media screen and (max-width: 768px) {
+  @media (max-width: 48rem) {
     max-width: 100%;
     display: unset;
   }
 
-  // first container - small images
-  > article:first-of-type {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-
-    border: 1px solid green;
-
-    @media screen and (max-width: 1025px) {
-      display: none;
-    }
-    > div {
-      display: block;
-    }
-  }
-
-  // second container - large image and text
+  // product details container
   > article:nth-of-type(2) {
     display: flex;
-    gap: var(--space-lg);
-    border: 1px solid blue;
+    gap: var(--space-xl);
+    //border: 1px solid blue;
 
-    // container large image
-    > div {
-      display: block;
-      height: auto;
-      width: 40%;
-
-      // container for title, price, description and button
-      > div:first-of-type {
-        display: none;
-      }
-      @media screen and (max-width: 1025px) {
-        width: 50%;
-      }
-
-      @media screen and (max-width: 768px) {
-        width: 100%;
-
-        // container title and price
-        > div:first-of-type {
-          display: block;
-          margin-bottom: var(--space-lg);
-          h1 {
-            font-size: var(--text-xl);
-          }
-          p {
-            font-size: var(--text-md);
-            font-weight: bold;
-          }
-        }
-      }
-
-      @media screen and (max-width: 480px) {
-        width: 100%;
-        // container title and price
-        > div:first-of-type {
-          p {
-            font-size: var(--base-text);
-            font-weight: 400;
-          }
-        }
-      }
-    }
-
-    // info outerContainer
-    section {
-      padding: unset;
-      margin: unset;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 60%;
-      border: 2px solid orange;
-
-      // info innerContainer
-      > div {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-md);
-        border: 2px solid pink;
-
-        // container title and price
-        > div:first-of-type {
-          h1 {
-            font-size: var(--text-xxl);
-          }
-
-          p:first-of-type {
-            font-size: var(--text-md);
-            font-weight: bold;
-          }
-          @media screen and (max-width: 768px) {
-            display: none;
-          }
-        }
-
-        // todo: dry! see shoppingCartStyle
-        // container quantity and buttons
-        > div:nth-of-type(2) {
-          display: flex;
-          gap: 1.2rem;
-          border: 2px solid lightskyblue;
-
-          // container quantity buttons
-          div {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 0.8rem;
-
-            button {
-              background-color: var(--color-grey-2);
-              border-radius: 100rem;
-              //width: 1.5rem;
-              min-height: 0.5rem;
-              border: unset;
-              font-size: var(--text-sm);
-              font-weight: 400;
-              margin: 0;
-
-              :hover {
-                background-color: var(--color-grey-4);
-              }
-            }
-            // quantity
-            span {
-              font-size: var(--text-md);
-            }
-          }
-
-          > button {
-            ${size('15.65rem', '1.47rem')}
-            border: none;
-          }
-
-          @media screen and (max-width: 768px) {
-            flex-direction: column-reverse;
-
-            // container quantity buttons
-            div {
-              button {
-                margin: 0;
-              }
-            }
-
-            // add-to-cart button
-            > button {
-              width: 100%;
-              margin: 0;
-            }
-          }
-        }
-
-        @media screen and (max-width: 480px) {
-          width: 100%;
-        }
-      }
-
-      @media screen and (max-width: 768px) {
-        width: 100%;
-      }
-
-      @media screen and (max-width: 480px) {
-        padding: 0;
-      }
-    }
-
-    @media screen and (max-width: 768px) {
+    @media (max-width: 48rem) {
       flex-direction: column;
+      padding: 0 3rem;
+    }
+
+    @media (max-width: 30rem) {
+      padding: 0 1.5rem;
     }
   }
 `;
+
+export const imageGallery = css`
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  //border: 1px solid green;
+
+  @media screen and (max-width: 75rem) {
+    display: none;
+  }
+  > div {
+    display: block;
+  }
+`;
+
+export const productImageContainer = css`
+  display: block;
+  height: auto;
+  width: 40%;
+
+  > div {
+    display: none;
+  }
+
+  @media (max-width: 75rem) {
+    > div {
+      width: 50%;
+    }
+  }
+
+  @media (max-width: 48rem) {
+    width: 100%;
+
+    // container title and price
+    > div {
+      margin-top: 6rem;
+      display: block;
+      margin-bottom: var(--space-lg);
+    }
+  }
+
+  @media screen and (max-width: 30rem) {
+    > div {
+      p {
+        font-size: var(--base-text);
+        font-weight: 400;
+      }
+    }
+  }
+`;
+
+export const productTitleAndPriceContainer = css`
+  h1 {
+    font-size: var(--text-xl);
+  }
+  p {
+    font-size: var(--text-md);
+    font-weight: bold;
+  }
+`;
+
+export const productDetailsContainer = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  // border: 3px solid orange;
+
+  // info innerContainer
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    //  border: 2px solid pink;
+
+    // container title and price
+    > div:first-of-type {
+      @media (max-width: 48rem) {
+        display: none;
+      }
+    }
+
+    // todo: dry! see shoppingCartStyle
+    // container quantity and buttons
+    > div:nth-of-type(2) {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      // border: 2px solid lightskyblue;
+
+      > button:first-of-type {
+        ${btn};
+        display: inline-block;
+        background-color: var(--color-btn-primary-bg);
+        color: var(--text-color);
+        ${size('17.65rem', '1.47rem')}
+
+        :hover {
+          background-color: var(--color-btn-hover);
+        }
+      }
+
+      @media (max-width: 30rem) {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 1rem;
+
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 48rem) {
+    //padding: 0 3rem;
+    width: 100%;
+    > div {
+      gap: var(--space-lg);
+    }
+  }
+`;
+
+// export const changeCartQuantityButtons = css`
+//   display: flex;
+//   justify-content: flex-start;
+//   align-items: center;
+//   gap: 0.8rem;
+
+//   > button {
+//     background-color: var(--color-grey-2);
+//     border-radius: 100rem;
+//     font-weight: 400;
+//     cursor: pointer;
+//     font-weight: bold;
+//     min-height: 2.5rem;
+//     padding: 0.625rem 1rem;
+//     border: none;
+//     color: var(--text-color);
+
+//     :hover {
+//       background-color: var(--color-grey-4);
+//     }
+//   }
+
+//   // quantity
+//   span {
+//     font-size: var(--text-md);
+//   }
+// `;
 
 /* *************************** */
 /*      Shoppingcart.js          */
@@ -768,36 +764,6 @@ export const shoppingCartStyle = css`
               font-size: var(--text-base-size);
               margin: 0px;
               width: 2rem;
-            }
-
-            // todo: dry! see singleProductStyle
-            // container quantity and buttons
-            > div > div {
-              border: 2px solid blue;
-              background-color: lavender;
-              display: flex;
-              justify-content: flex-start;
-              align-items: center;
-              gap: 0.8rem;
-
-              button {
-                background-color: var(--color-grey-2);
-                border-radius: 100rem;
-                //width: 1.5rem;
-                min-height: 0.5rem;
-                border: unset;
-                font-size: var(--text-sm);
-                font-weight: 400;
-                margin: 0;
-
-                :hover {
-                  background-color: var(--color-grey-4);
-                }
-              }
-              // quantity
-              span {
-                // font-size: var(--text-md);
-              }
             }
 
             @media (max-width: 768px) {
