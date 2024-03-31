@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
 import CartProducts from '../components/Cart/CartProducts';
 import OrderSummary from '../components/Cart/OrderSummary';
-import { btnLinkStyle, shoppingCartStyle } from '../components/elements';
+import { shoppingCartStyle } from '../components/elements';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import Placeholder from '../components/Placeholder';
 import prisma from '../prisma';
@@ -61,7 +61,6 @@ export default function Cart(props: Props) {
               }}
               passHref
               data-test-id="cart-checkout"
-              css={btnLinkStyle}
             >
               Go to checkout
             </Link>

@@ -167,8 +167,6 @@ export const globalStyleBody = css`
   select {
     font-family: var(--font-primary), var(--font-fallback);
     color: var(--color-grey-6);
-    // min-height: 2.9rem;
-    // min-height: var(--text-lg);
   }
 
   a:link,
@@ -181,25 +179,6 @@ export const globalStyleBody = css`
   a:active {
     text-decoration: none;
     color: var(--text-color);
-  }
-`;
-export const btnLinkStyle = css`
-  letter-spacing: 0.031rem;
-  line-height: 1.125rem;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 0.75rem;
-  display: block;
-  min-height: 2.9rem;
-  padding: 0.625rem 1rem;
-  margin: 1rem 0;
-  color: var(--text-color);
-  border: none;
-  background-color: var(--color-btn-primary-bg);
-  transition: all 0.3s;
-
-  :hover {
-    background-color: var(--color-btn-hover);
   }
 `;
 
@@ -664,143 +643,31 @@ export const productDetailsContainer = css`
   }
 `;
 
-// export const changeCartQuantityButtons = css`
-//   display: flex;
-//   justify-content: flex-start;
-//   align-items: center;
-//   gap: 0.8rem;
-
-//   > button {
-//     background-color: var(--color-grey-2);
-//     border-radius: 100rem;
-//     font-weight: 400;
-//     cursor: pointer;
-//     font-weight: bold;
-//     min-height: 2.5rem;
-//     padding: 0.625rem 1rem;
-//     border: none;
-//     color: var(--text-color);
-
-//     :hover {
-//       background-color: var(--color-grey-4);
-//     }
-//   }
-
-//   // quantity
-//   span {
-//     font-size: var(--text-md);
-//   }
-// `;
-
 /* *************************** */
 /*      Shoppingcart.js          */
 /* *************************** */
 
 export const shoppingCartStyle = css`
-  //margin-top: 4rem;
+  ${container}
+  margin-top: 8rem;
 
   h1 {
     margin-bottom: var(--space-xs);
-  }
-
-  @media (max-width: 480px) {
-    h1 {
-      font-size: var(--text-xl);
-      margin-bottom: var(--space-md);
-    }
+    margin-bottom: 1rem;
   }
 
   > div {
+    // grid container for product cards and total
     margin-top: var(--space-sm);
     display: grid;
     gap: var(--text-xxxl);
     grid-template-columns: 2fr 1fr;
     position: relative;
-    border: 1px solid green;
-
-    @media screen and (max-width: 900px) {
-      display: flex;
-      flex-direction: column;
-    }
-
-    // cartproducts
-    article:first-of-type {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      background-color: #fff;
-
-      > div {
-        background-color: #fff;
-        border-bottom: 0.5px solid lightgray;
-        display: grid;
-        grid-template-columns: 1fr 7fr;
-        gap: 1rem;
-
-        // Image
-        > div:first-of-type {
-          width: 100px;
-
-          @media (max-width: 768px) {
-            width: 120px;
-          }
-        }
-
-        // productInfoContainer
-        > div:nth-of-type(2) {
-          // quantity
-          border: 2px solid red;
-
-          // container quantity and buttons
-          > div:first-of-type {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 2px solid greenyellow;
-            gap: var(--space-sm);
-            font-weight: bold;
-
-            h2 {
-              font-size: var(--text-base-size);
-              margin: 0px;
-              width: 2rem;
-            }
-
-            @media (max-width: 768px) {
-              h2 {
-                width: 100%;
-              }
-              flex-direction: column;
-              justify-content: flex-start;
-              align-items: unset;
-              gap: unset;
-
-              > div > div {
-                margin: var(--space-sm) 0;
-              }
-            }
-
-            @media (max-width: 480px) {
-              p {
-                font-weight: 500;
-              }
-            }
-          }
-
-          // removeButton
-          > div:last-of-type {
-            button {
-              all: unset;
-              color: grey;
-            }
-          }
-        }
-      }
-    }
+    // border: 2px solid green;
 
     // todo: dry! see checkoutPageStyle  - orderSummary
-    // orderSummary
     article:nth-of-type(2) {
+      // container orderSummary
       width: 100%;
       background-color: var(--color-grey-3);
       position: sticky;
@@ -810,52 +677,60 @@ export const shoppingCartStyle = css`
       flex-direction: column;
       gap: var(--space-md);
 
-      h2 {
-        margin: 0;
-        width: inherit;
-      }
-
-      // container price, delivery, total
-      > div:first-of-type {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-sm);
-        width: inherit;
-        border: 1px solid red;
-
-        @media screen and (max-width: 960px) {
-          //padding: 0rem 2rem;
-        }
-
-        p {
-          width: inherit;
-          display: flex;
-          justify-content: space-between;
-          //margin-bottom: 1rem;
-
-          span {
-            display: block;
-          }
-        }
-
-        p:last-of-type {
-          padding-top: 1rem;
-          font-weight: 600;
-          border-top: 1px solid lightgray;
-        }
-      }
-
       // checkout button
-      button {
+      a:link,
+      a:visited {
+        ${btn};
+        display: block;
         width: 100%;
-        margin: 0;
+        text-align: center;
+        background-color: var(--color-btn-primary-bg);
+        transition: all 0.3s;
+
+        :hover {
+          background-color: var(--color-btn-hover);
+        }
       }
     }
   }
-`;
 
-export const plantName = css`
-  margin-top: 0.5rem;
+  @media (max-width: 75rem) {
+    padding: 0 1.5rem;
+  }
+
+  @media screen and (max-width: 56.25rem) {
+    // 900px
+    > div {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 48rem) {
+    > div {
+      // border: 1px solid red;
+
+      article > div > div:nth-of-type(2) > div:first-of-type {
+        button {
+          min-height: unset;
+          padding: 0.4rem 0.7rem;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 30rem) {
+    h1 {
+      font-size: var(--text-xl);
+      margin-bottom: var(--space-md);
+    }
+
+    article > div > div:nth-of-type(2) > div:first-of-type {
+      p:nth-of-type(2) {
+        font-weight: 500;
+      }
+    }
+  }
 `;
 
 /* *************************** */

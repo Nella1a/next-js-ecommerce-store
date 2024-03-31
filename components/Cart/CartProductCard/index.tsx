@@ -3,7 +3,6 @@ import { CartContext } from '../../../util/context/cartContext';
 import { CartCookieContext } from '../../../util/context/cookieContext';
 import { Cart } from '../../../util/types';
 import ChangeCartQuantity from '../../ChangeCartQuantity';
-import { plantName } from '../../elements';
 import CartItem from '../CartItem';
 
 type Props = {
@@ -40,14 +39,14 @@ export default function CartProductCard(props: Props) {
 
   return (
     <>
-      <div className="Image">
+      <div>
         <CartItem plant={plant} />
       </div>
 
-      <div className="ProductInfoContainer">
-        <div className="Quantity">
-          <h2 css={plantName}>{title}</h2>
-          <p className="Price">
+      <div>
+        <div>
+          <p>{title}</p>
+          <p>
             &euro;{' '}
             {multiplePriceAndQuantity(Number(price), Number(quantity)).toFixed(
               2,
