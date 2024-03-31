@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
-import Link from 'next/link';
 import { useContext } from 'react';
 import { CartContext } from '../../../util/context/cartContext';
 
-const orderSummary = css`
+const orderTotal = css`
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
@@ -28,10 +27,11 @@ const orderSummary = css`
   }
 `;
 
-export default function OrderSummary() {
+export default function OrderTotal() {
   const { totalPrice } = useContext(CartContext);
+
   return (
-    <div css={orderSummary}>
+    <div css={orderTotal}>
       <p>
         <span>Subtotal</span>
         <span>&euro; {totalPrice}</span>

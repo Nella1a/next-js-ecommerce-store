@@ -657,7 +657,7 @@ export const shoppingCartStyle = css`
   }
 
   > div {
-    // grid container for product cards and total
+    // grid container for product cards and order total
     margin-top: var(--space-sm);
     display: grid;
     gap: var(--text-xxxl);
@@ -665,9 +665,8 @@ export const shoppingCartStyle = css`
     position: relative;
     // border: 2px solid green;
 
-    // todo: dry! see checkoutPageStyle  - orderSummary
     article:nth-of-type(2) {
-      // container orderSummary
+      // container order total
       width: 100%;
       background-color: var(--color-grey-3);
       position: sticky;
@@ -676,6 +675,7 @@ export const shoppingCartStyle = css`
       display: flex;
       flex-direction: column;
       gap: var(--space-md);
+      // border: 1px solid red;
 
       // checkout button
       a:link,
@@ -738,132 +738,62 @@ export const shoppingCartStyle = css`
 /* *************************** */
 
 export const checkoutPageStyle = css`
-  // contact infos and orderSummary
+  ${container};
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-lg);
-  margin-top: unset;
 
-  @media screen and (max-width: 960px) {
-    display: flex;
-    flex-direction: column;
-  }
-
-  @media screen and (max-width: 768px) {
-    gap: var(--space-md);
-  }
-
-  // contact infos
+  // container - contact and shipping details
   article:first-of-type {
     padding: 0 1.5rem;
-    border: 1px solid red;
-
-    > form input ~ p {
-      color: var(--color-red-7);
-    }
   }
 
-  // order summary
+  // container - order summary
   article:nth-of-type(2) {
-    // padding: 2rem;
-    border: 2px solid black;
-    padding-top: unset;
+    //padding-top: unset;
     display: flex;
     flex-direction: column;
     background-color: var(--color-grey-1);
     border-left: 1px solid var(--color-grey-3);
     width: inherit;
-    // height: 50%;
-
-    > form span {
-      color: var(--color-red-7);
-    }
+    //border: 2px solid black;
 
     > div:first-of-type {
+      // container product cards
       width: 100%;
       padding-top: 1rem;
-      border: 2px solid grey;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      // border: 2px solid blue;
 
       > div {
-        // checkoutProductCard
+        // container product card
         width: inherit;
         padding: 0 1.5rem;
-        //  margin-bottom: 0.5rem;
-        border: 2px solid yellowgreen;
+        // border: 2px solid yellowgreen;
       }
     }
 
-    // todo: dry! see shoppingCartStyle - orderSummary-container price, delivery, total
-    // orderSummary
+    // container order total
     > div:nth-of-type(2) {
-      display: flex;
-      flex-direction: column;
       gap: var(--space-xs);
-      width: inherit;
       padding: 1.5rem;
-      border: 1px solid red;
-
-      p {
-        width: inherit;
-        display: flex;
-        justify-content: space-between;
-
-        span {
-          display: block;
-        }
-      }
-
-      p:last-of-type {
-        padding-top: var(--space-xs);
-        font-weight: 600;
-        border-top: 1px solid lightgray;
-      }
+      margin-top: 1rem;
     }
   }
-`;
 
-export const checkoutProductCardStyle = css`
-  display: grid;
-  grid-template-columns: 1fr 5fr;
-  gap: 1rem;
-  border: 1px solid pink;
-
-  > div:first-of-type {
-    // Image
-    width: 80px;
+  @media (max-width: 75rem) {
+    padding: 0 1.5rem;
   }
 
-  > div:nth-of-type(2) {
-    // productInfoContainer
+  @media (max-width: 960px) {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+  }
 
-    p:first-of-type {
-      // title and quantity
-
-      height: 50%;
-      display: flex;
-      flex-direction: column;
-      span {
-        display: block;
-      }
-    }
-    p:nth-of-type(2) {
-      // price
-      height: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    @media (max-width: 480px) {
-      flex-direction: column;
-      justify-content: flex-end;
-
-      p:nth-of-type(2) {
-        justify-content: flex-start;
-      }
-    }
+  @media (max-width: 768px) {
+    gap: var(--space-md);
   }
 `;
 
@@ -883,13 +813,15 @@ export const checkoutFormStyle = css`
   }
 
   // error message
+  > div:first-of-type > p > span,
   div > input ~ span,
   div > p > input ~ span {
     color: var(--color-red-7);
+    font-size: var(--text-md);
   }
 
   div {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   div:last-of-type {
@@ -905,25 +837,20 @@ export const checkoutFormStyle = css`
     }
   }
   button {
+    ${btn}
     ${size('17.65rem', '1.47rem')}
+    margin-top: 1rem;
+
     @media screen and (max-width: 960px) {
       width: 100%;
     }
+    background-color: var(--color-btn-primary-bg);
+
+    :hover {
+      background-color: var(--color-btn-hover);
+    }
   }
 `;
-
-// export const flexStyleShippigAddress = css`
-//   display: flex;
-//   gap: 16px;
-
-//   p {
-//     width: 50%;
-//   }
-
-//   button {
-//     ${size('17.65rem', '1.47rem')}
-//   }
-// `;
 
 export const flexStyle = css`
   display: flex;

@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
 import CartProducts from '../components/Cart/CartProducts';
-import OrderSummary from '../components/Cart/OrderSummary';
+import OrderTotal from '../components/Cart/OrderTotal';
 import { shoppingCartStyle } from '../components/elements';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import Placeholder from '../components/Placeholder';
@@ -53,7 +53,7 @@ export default function Cart(props: Props) {
           <CartProducts />
           <article>
             <h2>Total</h2>
-            <OrderSummary />
+            <OrderTotal />
 
             <Link
               href={{

@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Router from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import OrderSummary from '../components/Cart/OrderSummary';
+import OrderTotal from '../components/Cart/OrderTotal';
 import Payment from '../components/CheckoutForm/Payment';
 import Shipping from '../components/CheckoutForm/Shipping';
 import CheckoutProductCard from '../components/CheckoutProductCard';
@@ -85,7 +85,7 @@ export default function CheckOut(props: Props) {
 
   const ButtonSumitFormValues = () => (
     <div>
-      <button type="submit">Submit</button>
+      <button type="submit">Place order</button>
     </div>
   );
 
@@ -131,7 +131,7 @@ export default function CheckOut(props: Props) {
             ))}
           </div>
 
-          <OrderSummary />
+          <OrderTotal />
         </article>
       </section>
     </LayoutNoHeaderAndFooter>
