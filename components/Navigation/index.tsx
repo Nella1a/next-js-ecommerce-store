@@ -137,7 +137,7 @@ export default function Navigation() {
   const shoppingBagIcon = () => (
     <Link
       href={{
-        pathname: '/cart',
+        pathname: '/Cart',
       }}
       passHref
       css={shoppingBagStyle(Boolean(cartCount))}
