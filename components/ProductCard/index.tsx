@@ -20,7 +20,7 @@ export default function ProductCard(props: Props) {
         {/* {id === 1 && <span>Easy Care</span>}
         {id === 4 && <span>Pet-Friendly</span>}{' '} */}
         <Image
-          src={`/image${id}.jpeg`}
+          src={`/image${id}.jpg`}
           alt={`plantName-${title}`}
           //fill
           //sizes="90vw"

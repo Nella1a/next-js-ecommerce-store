@@ -85,23 +85,23 @@ export default function SingleProduct(
       <section css={singleProductPageStyle}>
         <article css={imageGallery}>
           <div>
-            <ProductImageSmall src={`/image${props.plant.id}.jpeg`} />
+            <ProductImageSmall src={`/image${props.plant.id}.jpg`} />
           </div>
           <div>
-            <ProductImageSmall src={`/image${props.plant.id}.jpeg`} />
+            <ProductImageSmall src={`/image${props.plant.id}.jpg`} />
           </div>
           <div>
-            <ProductImageSmall src={`/image${props.plant.id}.jpeg`} />
+            <ProductImageSmall src={`/image${props.plant.id}.jpg`} />
           </div>
           <div>
-            <ProductImageSmall src={`/image${props.plant.id}.jpeg`} />
+            <ProductImageSmall src={`/image${props.plant.id}.jpg`} />
           </div>
         </article>
 
         <article>
           <div css={productImageContainer}>
             {titleAndPrice()}
-            <ProductImage src={`/image${props.plant.id}.jpeg`} title={title} />
+            <ProductImage src={`/image${props.plant.id}.jpg`} title={title} />
           </div>
 
           <div css={productDetailsContainer}>

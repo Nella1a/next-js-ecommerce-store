@@ -9,7 +9,7 @@ type Props = {
 export default function CartItem({ plant }: Props) {
   return (
     <Link href={`/product/${plant.slug}`} passHref>
-      <ProductImageSmall src={`/image${plant.id}.jpeg`} />
+      <ProductImageSmall src={`/image${plant.id}.jpg`} />
     </Link>
   );
 }
