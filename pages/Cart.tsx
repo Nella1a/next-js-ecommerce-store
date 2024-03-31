@@ -2,15 +2,11 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
-import ButtonCallToAction from '../components/Buttons/ButtonCallToAction';
 import CartProducts from '../components/Cart/CartProducts';
 import OrderSummary from '../components/Cart/OrderSummary';
-import {
-  btnLinkStyle,
-  shoppingCartStyle,
-  underConstruction,
-} from '../components/elements';
+import { btnLinkStyle, shoppingCartStyle } from '../components/elements';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
+import Placeholder from '../components/Placeholder';
 import prisma from '../prisma';
 //import { disableGrayLayer } from '../hooks';
 import { CartContext } from '../util/context/cartContext';
@@ -34,20 +30,7 @@ export default function Cart(props: Props) {
 
   // case: no cookie set
   if (!cartProducts.length || !cartCount) {
-    return (
-      <LayoutNoHeader>
-        <Head>
-          <title>Shopping Cart Items</title>
-          <meta name="description" content="Your Shopping Cart" />
-        </Head>
-        <section css={underConstruction}>
-          <article>
-            <h1> Your cart is currently empty.</h1>
-            <ButtonCallToAction innerText="Continue Shopping" />
-          </article>
-        </section>
-      </LayoutNoHeader>
-    );
+    return <Placeholder />;
   }
 
   const cartHeader = (

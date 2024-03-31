@@ -1075,50 +1075,6 @@ export const flexStyle = css`
 `;
 
 /* *************************** */
-/*    Underconstruction        */
-/* *************************** */
-export const underConstruction = css`
-  // margin-top: 5rem;
-
-  border: 1px solid red;
-  article {
-    h1 {
-      border: 1px solid red;
-      text-align: center;
-    }
-
-    margin: 5rem auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    //  height: 50vh;
-    padding: 0 0.5rem;
-
-    border: 2px solid red;
-    a {
-      display: block;
-    }
-
-    button {
-      width: 15rem;
-    }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: var(--text-xxl);
-      }
-    }
-
-    @media (max-width: 480px) {
-      h1 {
-        font-size: var(--text-xl);
-      }
-    }
-  }
-`;
-
-/* *************************** */
 /*  login.tsx / register.tsx   */
 /* *************************** */
 

@@ -26,6 +26,7 @@ const newsLetterForm = css`
     ${btn}
     background-color: var(--color-btn-primary-bg);
     color: var(--text-color);
+
     &:hover {
       background-color: var(--color-btn-hover);
     }
