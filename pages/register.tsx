@@ -2,11 +2,11 @@ import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useContext, useEffect } from 'react';
+import { loginPageContainerStyle } from '../components/elements';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import RegisterForm from '../components/RegisterForm';
 import { OverlayContext } from '../util/context/overlayContext';
 import { firebaseAdmin } from '../util/firebase-admin-config';
-import { loginPageContainerStyle } from './login';
 
 export interface RegistrationProps {
   csrfToken: string;
@@ -30,9 +30,9 @@ export default function register() {
       </Head>
       <section css={loginPageContainerStyle}>
         <article>
-          <p> Welcome! Create Your Account.</p>
+          <h1>Create Your Account</h1>
           <p>
-            Already have an account? <Link href={'/login'}> Sign in here!</Link>
+            Already have an account? <Link href={'/login'}> Login here!</Link>
           </p>
         </article>
         <RegisterForm />

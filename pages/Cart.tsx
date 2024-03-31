@@ -3,13 +3,10 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
 import CartProducts from '../components/Cart/CartProducts';
-import OrderSummary from '../components/Cart/OrderSummary';
-import {
-  shoppingCartSectionHeader,
-  shoppingCartStyle,
-  underConstruction,
-} from '../components/elements';
+import OrderTotal from '../components/Cart/OrderTotal';
+import { shoppingCartStyle } from '../components/elements';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
+import Placeholder from '../components/Placeholder';
 import prisma from '../prisma';
 //import { disableGrayLayer } from '../hooks';
 import { CartContext } from '../util/context/cartContext';
@@ -33,33 +30,13 @@ export default function Cart(props: Props) {
 
   // case: no cookie set
   if (!cartProducts.length || !cartCount) {
-    return (
-      <LayoutNoHeader>
-        <Head>
-          <title>Shopping Cart Items</title>
-          <meta name="description" content="Your Shopping Cart" />
-        </Head>
-        <section css={underConstruction}>
-          <h1> Your cart is currently empty.</h1>
-          <Link
-            href={{
-              pathname: '/plants',
-            }}
-            passHref
-          >
-            <button>Continue Shopping</button>
-          </Link>
-        </section>
-      </LayoutNoHeader>
-    );
+    return <Placeholder />;
   }
 
   const cartHeader = (
-    <section css={shoppingCartSectionHeader}>
-      <h1>
-        Your Cart ({cartCount} {cartCount === 1 ? 'Product' : 'Products'})
-      </h1>
-    </section>
+    <h1>
+      Your Cart ({cartCount} {cartCount === 1 ? 'Product' : 'Products'})
+    </h1>
   );
 
   // case: cookie set
@@ -69,23 +46,26 @@ export default function Cart(props: Props) {
         <title>Shopping Cart Items</title>
         <meta name="description" content="Your Shopping Cart" />
       </Head>
-      {cartHeader}
+
       <section css={shoppingCartStyle}>
-        <CartProducts />
-        <article>
-          <h2>Total</h2>
-          <OrderSummary />
-          <div>
+        {cartHeader}
+        <div>
+          <CartProducts />
+          <article>
+            <h2>Total</h2>
+            <OrderTotal />
+
             <Link
               href={{
                 pathname: '/checkout',
               }}
               passHref
+              data-test-id="cart-checkout"
             >
-              <button data-test-id="cart-checkout">Go to checkout</button>
+              Go to checkout
             </Link>
-          </div>
-        </article>
+          </article>
+        </div>
       </section>
     </LayoutNoHeader>
   );

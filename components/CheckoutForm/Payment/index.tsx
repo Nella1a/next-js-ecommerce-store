@@ -57,10 +57,10 @@ export default function Payment({
       </div>
 
       <div css={flexStyle}>
-        <p style={{ display: 'flex', flexDirection: 'column' }}>
+        <p>
           <label htmlFor="expiration" />
           <input
-            style={{ width: '100%' }}
+            // style={{ width: '100%' }}
             {...register('payment.expiryDate', {
               required: 'Please enter a valid date in the MM/YY format.',
               pattern: {
@@ -76,7 +76,7 @@ export default function Payment({
           />
           <span>{errors.payment?.expiryDate?.message}</span>
         </p>
-        <p style={{ display: 'flex', flexDirection: 'column' }}>
+        <p>
           <label htmlFor="securityCode" />
           <input
             style={{ width: '100%' }}

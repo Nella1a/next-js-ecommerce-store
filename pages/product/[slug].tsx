@@ -1,8 +1,15 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Head from 'next/head';
 import { useContext, useEffect, useState } from 'react';
+import ButtonCallToAction from '../../components/Buttons/ButtonCallToAction';
 import ChangeCartQuantity from '../../components/ChangeCartQuantity';
-import { singleProductPageStyle } from '../../components/elements';
+import {
+  imageGallery,
+  productDetailsContainer,
+  productImageContainer,
+  productTitleAndPriceContainer,
+  singleProductPageStyle,
+} from '../../components/elements';
 import ProductImage from '../../components/Images/ProductImage';
 import ProductImageSmall from '../../components/Images/ProductImageSmall';
 import LayoutNoHeader from '../../components/Layout/LayoutNoHeader';
@@ -62,6 +69,13 @@ export default function SingleProduct(
     addToCartFunction();
   };
 
+  const titleAndPrice = () => (
+    <div css={productTitleAndPriceContainer}>
+      <h1>{props.plant.title}</h1>
+      <p data-test-id="product-price"> &euro; {props.plant.price}</p>
+    </div>
+  );
+
   return (
     <LayoutNoHeader>
       <Head>
@@ -69,42 +83,48 @@ export default function SingleProduct(
         <meta name="Plant with a smile" content="View all Plants" />
       </Head>
       <section css={singleProductPageStyle}>
-        <div>
+        <article css={imageGallery}>
           <div>
-            <ProductImageSmall src={`/image${props.plant.id}.jpeg`} />
+            <ProductImageSmall src={`/image${props.plant.id}.jpg`} />
           </div>
           <div>
-            <ProductImageSmall src={`/image${props.plant.id}.jpeg`} />
+            <ProductImageSmall src={`/image${props.plant.id}.jpg`} />
           </div>
           <div>
-            <ProductImageSmall src={`/image${props.plant.id}.jpeg`} />
+            <ProductImageSmall src={`/image${props.plant.id}.jpg`} />
           </div>
-        </div>
-        <div>
           <div>
-            <ProductImage src={`/image${props.plant.id}.jpeg`} title={title} />
+            <ProductImageSmall src={`/image${props.plant.id}.jpg`} />
           </div>
-          <article>
+        </article>
+
+        <article>
+          <div css={productImageContainer}>
+            {titleAndPrice()}
+            <ProductImage src={`/image${props.plant.id}.jpg`} title={title} />
+          </div>
+
+          <div css={productDetailsContainer}>
             <div>
-              <h1>{props.plant.title}</h1>
-              <p data-test-id="product-price"> €{props.plant.price}</p>
+              {titleAndPrice()}
               <p>{props.plant.descr}</p>
               <div>
-                <ChangeCartQuantity
-                  quantity={quantity}
-                  increment={incrementHandler}
-                  decrement={decrementHandler}
-                />
                 <button
                   data-test-id="product-add-to-cart"
                   onClick={updateCartAndCookieHandler}
                 >
                   Add to cart
                 </button>
+
+                <ChangeCartQuantity
+                  quantity={quantity}
+                  increment={incrementHandler}
+                  decrement={decrementHandler}
+                />
               </div>
             </div>
-          </article>
-        </div>
+          </div>
+        </article>
       </section>
     </LayoutNoHeader>
   );

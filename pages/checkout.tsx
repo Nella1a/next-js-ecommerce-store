@@ -3,11 +3,11 @@ import Head from 'next/head';
 import Router from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import OrderSummary from '../components/Cart/OrderSummary';
+import OrderTotal from '../components/Cart/OrderTotal';
 import Payment from '../components/CheckoutForm/Payment';
 import Shipping from '../components/CheckoutForm/Shipping';
 import CheckoutProductCard from '../components/CheckoutProductCard';
-import { checkoutPageStyle, formStyle } from '../components/elements';
+import { checkoutFormStyle, checkoutPageStyle } from '../components/elements';
 import LayoutNoHeaderAndFooter from '../components/Layout/LayoutNoHeaderFooter';
 import prisma from '../prisma';
 import { CartCookieContext } from '../util/context/cookieContext';
@@ -85,7 +85,7 @@ export default function CheckOut(props: Props) {
 
   const ButtonSumitFormValues = () => (
     <div>
-      <button type="submit">Submit</button>
+      <button type="submit">Place order</button>
     </div>
   );
 
@@ -98,7 +98,11 @@ export default function CheckOut(props: Props) {
 
       <section css={checkoutPageStyle}>
         <article>
-          <form action="/api" css={formStyle} onSubmit={handleSubmit(onSubmit)}>
+          <form
+            action="/api"
+            css={checkoutFormStyle}
+            onSubmit={handleSubmit(onSubmit)}
+          >
             {!toNextStep ? (
               <>
                 <Shipping
@@ -126,9 +130,8 @@ export default function CheckOut(props: Props) {
               <CheckoutProductCard plant={plant} />
             ))}
           </div>
-          <hr />
 
-          <OrderSummary />
+          <OrderTotal />
         </article>
       </section>
     </LayoutNoHeaderAndFooter>

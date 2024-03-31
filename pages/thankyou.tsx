@@ -1,19 +1,23 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
+import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
+import { underConstruction } from '../components/Placeholder';
 
 export default function ThankYouPage() {
   // disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer);
   return (
-    <Layout>
+    <LayoutNoHeader>
       <Head>
-        <title>Thank you for your order</title>
+        <title>Thank you!</title>
         <meta name="description" content="checkout thank you page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <section css>
-        <h1>Thank you for your order.</h1>
+      <section css={underConstruction}>
+        <article>
+          <h1>Thank you for your order.</h1>
+        </article>
       </section>
-    </Layout>
+    </LayoutNoHeader>
   );
 }

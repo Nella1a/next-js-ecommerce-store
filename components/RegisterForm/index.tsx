@@ -5,56 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useAuth } from '../../AuthProvider';
 import { OverlayContext } from '../../util/context/overlayContext';
 import { errorStyle } from '../CheckoutForm/Shipping';
-
-export const loginRegisterFormStyle = css`
-  width: 100%;
-  h1 {
-    padding-top: 2.25rem;
-    padding-bottom: 1rem;
-    text-align: center;
-  }
-
-  p {
-    margin-top: unset;
-    margin-bottom: 1rem;
-    text-align: center;
-
-    a:link,
-    a:visited {
-      text-decoration: none;
-      color: black;
-      font-weight: bold;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    // border: 1px solid green;
-    margin-bottom: 1rem;
-
-    input,
-    > button {
-      width: 100%;
-      border-width: 1px;
-      margin-bottom: 1rem;
-      padding: 1.2rem;
-      line-height: 1.25rem;
-      font-size: 100%;
-      margin-top: 0;
-      font-weight: unset;
-    }
-
-    button {
-      background-color: #ed943b;
-      border: none;
-    }
-  }
-`;
+import { loginAndRegisterForm } from '../elements';
 
 export const apiErrorStyle = css`
   padding: 10px 0;
@@ -125,8 +76,12 @@ export default function RegisterForm() {
   };
 
   return (
-    <article css={loginRegisterFormStyle}>
-      <form action="/api" css={''} onSubmit={handleSubmit(onSubmit)}>
+    <article>
+      <form
+        action="/api"
+        css={loginAndRegisterForm}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <input
           {...register('username', {
             required: 'username is required.',
