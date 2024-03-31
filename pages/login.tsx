@@ -17,12 +17,10 @@ export default function Login({}: RegistrationProps) {
       </Head>
       <section css={loginPageContainerStyle}>
         <article>
-          <h1>
-            Welcome back! <span>Log in to your account.</span>
-          </h1>
+          <h1>Login to your account</h1>
 
           <p>
-            Don't have an account yet?
+            No account yet?
             <Link
               href={{
                 pathname: '/register',

@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useAuth } from '../../AuthProvider';
 import { OverlayContext } from '../../util/context/overlayContext';
 import { errorStyle } from '../CheckoutForm/Shipping';
-import { loginRegisterFormStyle } from '../elements';
+import { loginAndRegisterForm } from '../elements';
 
 export const apiErrorStyle = css`
   padding: 10px 0;
@@ -76,8 +76,12 @@ export default function RegisterForm() {
   };
 
   return (
-    <article css={loginRegisterFormStyle}>
-      <form action="/api" css={''} onSubmit={handleSubmit(onSubmit)}>
+    <article>
+      <form
+        action="/api"
+        css={loginAndRegisterForm}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <input
           {...register('username', {
             required: 'username is required.',

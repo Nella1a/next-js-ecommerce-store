@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import { underConstruction } from '../components/elements';
 import Layout from '../components/Layout';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
+import { underConstruction } from '../components/Placeholder';
 
 export default function ThankYouPage() {
   // disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer);

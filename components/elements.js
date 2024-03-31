@@ -48,25 +48,6 @@ export const globalStyleBody = css`
 
     --color-green: #709f7a;
 
-    /* type scale */
-    /* --text-xs: calc(1em / (var(--text-scale-ratio) * var(--text-scale-ratio)));
-    --text-sm: calc(1em / var(--text-scale-ratio));
-    --text-md: calc(1em * var(--text-scale-ratio));
-    --text-lg: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio));
-    --text-xl: calc(
-      1em * var(--text-scale-ratio) * var(--text-scale-ratio) *
-        var(--text-scale-ratio)
-    );
-    --text-xxl: calc(
-      1em * var(--text-scale-ratio) * var(--text-scale-ratio) *
-        var(--text-scale-ratio) * var(--text-scale-ratio)
-    );
-    --text-xxxl: calc(
-      1em * var(--text-scale-ratio) * var(--text-scale-ratio) *
-        var(--text-scale-ratio) * var(--text-scale-ratio) *
-        var(--text-scale-ratio)
-    ); */
-
     --text-xxs: 0.5em; // 8
     --text-xs: 0.625em; // 10
     --text-sm: 0.75em; // 12
@@ -85,7 +66,6 @@ export const globalStyleBody = css`
     --text-9xl: 6.125em; // 98
 
     /* spacing values */
-
     --space-xxs: 0.125rem; // 4px
     --space-xs: 0.25rem; // 8px
     --space-sm: 0.75rem; // 12px
@@ -99,42 +79,6 @@ export const globalStyleBody = css`
     --space-5xl: 6rem; //96px
     --space-6xl: 8rem; //128px
   }
-
-  /* text size */
-  /* .text--xxxl {
-    font-size: var(--text-xxxl);
-  }
-
-  h1,
-  .text--xxl {
-    font-size: var(--text-xxxl);
-  }
-
-  h2,
-  .text--xl {
-    font-size: var(--text-xxl);
-    // margin-bottom: 1.5rem;
-    margin-bottom: var(--space-xs);
-  }
-
-  h3,
-  .text--lg {
-    font-size: var(--text-md);
-    margin-bottom: var(--space-xs);
-  }
-
-  .text--sm,
-  small {
-    font-size: var(--text-sm);
-  }
-
-  .text--xs {
-    font-size: var(--text-xs);
-  }
-
-  p {
-    line-height: var(--body-line-height);
-  } */
 
   /* Reset sizing   */
   *,
@@ -881,61 +825,70 @@ export const flexStyle = css`
 /* *************************** */
 
 export const loginPageContainerStyle = css`
+  margin-top: 8rem;
+  margin-bottom: 4rem;
+  padding: 4rem 4rem;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: start;
-  gap: var(--space-lg);
-  //margin-top: 10rem;
-  border: 1px solid blue;
-  height: 50vh;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--space-xxl);
 
   article:first-of-type {
-    width: 44%;
-    // height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+    gap: 0.25rem;
 
-    border: 2px solid green;
     h1 {
-      font-weight: 500;
-    }
-    p:last-of-type {
-      font-size: inherit;
+      font-size: 1.875rem;
+      font-weight: 600;
     }
 
     a:link,
-    a:visited,
-    a:hover,
-    a:active {
+    a:visited {
       font-weight: 600;
       color: var(--text-color);
-      text-decoration: none;
+    }
+
+    a:hover,
+    a:active {
+      color: var(--color-green);
     }
   }
 
   article:nth-of-type(2) {
-    width: 44%;
-    // height: 100%;
+    width: 50%;
+  }
+
+  ~ section {
+    margin-top: 0;
+  }
+
+  @media (max-width: 1200px) {
+    padding: 0 1.5rem;
   }
 
   @media (max-width: 768px) {
-    gap: var(--space-md);
-    h1 {
-      font-size: var(--text-xxl);
-    }
+    margin-top: 7rem;
 
-    height: unset;
-    //flex-direction: column;
-    //justify-content: center;
-    //align-items: center;
+    flex-direction: column;
+    gap: var(--space-xl);
+
+    article:first-of-type {
+      height: unset;
+
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
 
     article:first-of-type,
     article:nth-of-type(2) {
-      width: 80%;
+      width: 100%;
     }
   }
 
   @media (max-width: 480px) {
-    gap: var(--space-sm);
     h1 {
       font-size: var(--text-xl);
     }
@@ -947,53 +900,27 @@ export const loginPageContainerStyle = css`
   }
 `;
 
-export const loginRegisterFormStyle = css`
-  width: 100%;
-  h1 {
-    padding-top: 2.25rem;
-    //padding-bottom: 1rem;
-    text-align: center;
+export const loginAndRegisterForm = css`
+  display: flex;
+  flex-direction: column;
+
+  input,
+  > button {
+    width: 100%;
+    border-width: 0.05rem;
+    margin-bottom: 0.75rem;
+    padding: 1.2rem;
+    font-size: 0.9rem;
   }
 
-  p {
-    margin-top: unset;
-    margin-bottom: 1rem;
-    text-align: center;
+  button {
+    ${btn};
+    background-color: var(--color-btn-primary-bg);
+    transition: all 0.3s;
+    margin-bottom: 0;
 
-    a:link,
-    a:visited {
-      text-decoration: none;
-      color: black;
-      font-weight: bold;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    // border: 1px solid green;
-    margin-bottom: 1rem;
-
-    input,
-    > button {
-      width: 100%;
-      border-width: 0.5px;
-      margin-bottom: 1rem;
-      padding: 1.2rem;
-      // line-height: 1.25rem;
-      font-size: 100%;
-      margin-top: 0;
-      font-weight: unset;
-    }
-
-    button {
-      background-color: var(--color-btn-primary-bg);
-      border: none;
-      text-transform: unset;
+    :hover {
+      background-color: var(--color-btn-hover);
     }
   }
 `;

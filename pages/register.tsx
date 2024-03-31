@@ -30,12 +30,9 @@ export default function register() {
       </Head>
       <section css={loginPageContainerStyle}>
         <article>
-          <h1>
-            {' '}
-            Welcome! <span>Create Your Account.</span>
-          </h1>
+          <h1>Create Your Account</h1>
           <p>
-            Already have an account? <Link href={'/login'}> Sign in here!</Link>
+            Already have an account? <Link href={'/login'}> Login here!</Link>
           </p>
         </article>
         <RegisterForm />

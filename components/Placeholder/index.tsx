@@ -9,10 +9,13 @@ export const underConstruction = css`
   margin-top: 8rem;
   //border: 1px solid red;
 
+  h1 {
+    font-size: var(--text-xxl);
+  }
+
   article {
     height: 30vh;
     h1 {
-      // border: 1px solid red;
       text-align: center;
     }
 
@@ -22,7 +25,6 @@ export const underConstruction = css`
     align-items: center;
     justify-content: center;
     padding: 0 0.5rem;
-
     //border: 2px solid red;
 
     a {
@@ -31,12 +33,6 @@ export const underConstruction = css`
       height: 1.47rem;
       text-align: center;
       font-size: 1rem;
-    }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: var(--text-xxl);
-      }
     }
 
     @media (max-width: 480px) {
