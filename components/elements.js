@@ -179,7 +179,7 @@ const size = (width = '100%', height = '100%') => {
   return { width, height };
 };
 
-export const styleLargeButton = (theme) => css`
+export const styleLargeButton = css`
   display: flex;
   justify-content: center;
 
@@ -188,7 +188,7 @@ export const styleLargeButton = (theme) => css`
   }
 `;
 
-export const bestSellerStyle = (theme) => css`
+export const bestSellerStyle = css`
   ${container};
   ${marginTop};
 
@@ -325,7 +325,7 @@ export const styleComp = css`
 /*     index.js       */
 /* *************************** */
 
-export const summerFavoritesStyle = (theme) => css`
+export const summerFavoritesStyle = css`
   ${container};
   ${marginTop}
 

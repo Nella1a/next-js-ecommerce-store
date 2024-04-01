@@ -1,9 +1,7 @@
-import { Global, ThemeProvider } from '@emotion/react';
-import { useCallback, useEffect, useState } from 'react';
+import { Global } from '@emotion/react';
 import { AuthContextProvider } from '../AuthProvider';
 import { globalStyleBody } from '../components/elements';
 import LoginInFormLayover from '../components/LoginFormLayover';
-import theme from '../components/theme';
 import { CartContextProvider } from '../util/context/cartContext';
 import { CartCookieProvider } from '../util/context/cookieContext';
 import { OverLayContextProvider } from '../util/context/overlayContext';
@@ -16,11 +14,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: any) {
         <OverLayContextProvider>
           <CartContextProvider>
             <CartCookieProvider>
-              <ThemeProvider theme={theme}>
-                <Global styles={globalStyleBody} />
-                <Component {...pageProps} />
-                <LoginInFormLayover token={''} />
-              </ThemeProvider>
+              <Global styles={globalStyleBody} />
+              <Component {...pageProps} />
+              <LoginInFormLayover token={''} />
             </CartCookieProvider>
           </CartContextProvider>
         </OverLayContextProvider>
