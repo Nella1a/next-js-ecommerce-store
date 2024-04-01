@@ -18,7 +18,7 @@ export const productsComponentStyle = css`
   ${container}
   ${marginTop}
 
-  h2 {
+  h1 {
     ${h2Section}
   }
 
@@ -44,7 +44,7 @@ export const productsComponentStyle = css`
 
   @media (max-width: 75rem) {
     padding: 0 1.5rem;
-    h2 {
+    h1 {
       ${h2SectionMediaQuery75}
     }
   }
@@ -63,7 +63,7 @@ export default function Plants(props: PropsTypePlantsLayer) {
         <meta name="description" content="View all Plants" />
       </Head>
       <section css={productsComponentStyle}>
-        <h2>Products</h2>
+        <h1>All Plants</h1>
         <div>
           <Products plants={props.plants} />
           <Products plants={props.plants} />
