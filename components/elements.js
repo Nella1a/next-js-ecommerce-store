@@ -479,12 +479,22 @@ export const imageGallery = css`
   }
 `;
 
+export const productTitleAndPriceContainer = css`
+  h1 {
+    font-size: var(--text-xl);
+  }
+  p {
+    font-size: var(--text-md);
+    font-weight: bold;
+  }
+`;
+
 export const productImageContainer = css`
   display: block;
   height: auto;
   width: 40%;
 
-  > div {
+  > div:first-of-type {
     display: none;
   }
 
@@ -512,16 +522,6 @@ export const productImageContainer = css`
         font-weight: 400;
       }
     }
-  }
-`;
-
-export const productTitleAndPriceContainer = css`
-  h1 {
-    font-size: var(--text-xl);
-  }
-  p {
-    font-size: var(--text-md);
-    font-weight: bold;
   }
 `;
 

@@ -141,6 +141,7 @@ export default function Navigation() {
       }}
       passHref
       css={shoppingBagStyle(Boolean(cartCount))}
+      data-test-id="cart-link"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -170,7 +171,7 @@ export default function Navigation() {
         <section>
           <ul>
             <li>
-              <Link href="/" passHref>
+              <Link href="/" passHref data-test-id="nav-home-button">
                 <Image
                   src={'/logo_shelovesplants.svg'}
                   alt={'logo she loves plants'}
