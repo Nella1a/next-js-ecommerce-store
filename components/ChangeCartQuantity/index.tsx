@@ -42,7 +42,7 @@ export default function ChangeCartQuantity(props: Props) {
           {' '}
           -{' '}
         </button>
-        <span>{props.quantity}</span>
+        <span data-test-id="add-quantity">{props.quantity}</span>
         <button onClick={props.increment} type="button">
           {' '}
           +{' '}
