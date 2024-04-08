@@ -4,50 +4,14 @@ import { useContext } from 'react';
 import { useAuth } from '../../../AuthProvider';
 import { OverlayContext } from '../../../util/context/overlayContext';
 
-const AllProductsLink = () => (
-  <Link
-    href={{
-      pathname: '/plants',
-    }}
-    data-test-id="products-link"
-  >
-    Plants
-  </Link>
-);
-
-const LoginButton = () => (
-  <Link
-    href={{
-      pathname: '/login',
-    }}
-    data-test-id="login-link"
-    //   onClick={onClickLoginHandler}
-  >
-    {' '}
-    Login
-  </Link>
-);
-
-const LogoutButton = () => (
-  <Link
-    href={{
-      pathname: '/',
-    }}
-    data-test-id="logout-link"
-    // onClick={onClickLogoutHandler}
-  >
-    Logout
-  </Link>
-);
-
 export default function NavMenu() {
   const { toggleLoginLayover } = useContext(OverlayContext);
   const { logOut, user } = useAuth();
   const router = useRouter();
 
-  const onClickLoginHandler = () => {
-    toggleLoginLayover();
-  };
+  // const onClickLoginHandler = () => {
+  //   toggleLoginLayover();
+  // };
 
   const onClickLogoutHandler = async () => {
     //Sign out with the Firebase client
@@ -70,6 +34,41 @@ export default function NavMenu() {
         console.log('error during signed out');
       });
   };
+
+  const AllProductsLink = () => (
+    <Link
+      href={{
+        pathname: '/plants',
+      }}
+      data-test-id="products-link"
+    >
+      Plants
+    </Link>
+  );
+
+  const LoginButton = () => (
+    <Link
+      href={{
+        pathname: '/login',
+      }}
+      data-test-id="login-link"
+      //   onClick={onClickLoginHandler}
+    >
+      {' '}
+      Login
+    </Link>
+  );
+  const LogoutButton = () => (
+    <Link
+      href={{
+        pathname: '/',
+      }}
+      data-test-id="logout-link"
+      onClick={onClickLogoutHandler}
+    >
+      Logout
+    </Link>
+  );
 
   return (
     <>
