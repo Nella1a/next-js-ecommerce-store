@@ -12,7 +12,16 @@ export default async function handler(
   res: NextApiResponse<ResponseData | ErrorAPI>,
 ) {
   if (req.method === 'POST') {
-    const { username, idToken } = req.body;
+    const { username } = req.body;
+    const authorization = req.headers.authorization;
+
+    if (!authorization?.startsWith('Bearer ')) {
+      res.status(401).json({ error: { message: 'unauthorized request!' } });
+      return;
+    }
+
+    const idToken = authorization.split('Bearer ')[1];
+    const decodedToken = await firebaseAdmin.auth().verifyIdToken(idToken);
 
     if (!idToken) {
       res.status(401).json({ error: { message: 'unauthorized request!' } });

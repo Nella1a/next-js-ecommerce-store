@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -38,14 +39,13 @@ export default function RegisterForm() {
   const [error, setError] = useState<Error>({ message: undefined });
   const [registerOkay, setRegisterOkay] = useState(false);
 
-  const router = useRouter();
+  // const router = useRouter();
   const { signUp, user, logOut } = useAuth();
 
   const onSubmit = async (data: DefaultFormValues) => {
     setError({ message: undefined });
     try {
       const userCred = await signUp(data.email, data.password);
-
       const idToken = await userCred.user.getIdToken();
 
       if (idToken) {
@@ -53,7 +53,11 @@ export default function RegisterForm() {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${idToken}`,
           },
+          body: JSON.stringify({
+            username: data.username,
+          }),
         });
 
         const response = await res.json();
@@ -64,7 +68,7 @@ export default function RegisterForm() {
           // registration okay
           setRegisterOkay(true);
           toggleLayover();
-          router.push('/login');
+          // router.push('/login');
         }
         await logOut();
       } else {
@@ -77,6 +81,14 @@ export default function RegisterForm() {
 
   return (
     <article>
+      {registerOkay && (
+        <div>
+          <p>Your registration was successful.</p>
+          <p>
+            You can login <Link href={'/login'}> here!</Link>
+          </p>
+        </div>
+      )}
       <form
         action="/api"
         css={loginAndRegisterForm}
@@ -117,12 +129,6 @@ export default function RegisterForm() {
       </form>
 
       {error.message && <div css={apiErrorStyle}>{error.message}</div>}
-
-      {registerOkay && (
-        <>
-          Hello USER: {user.username}, {user.email}, {user.id}
-        </>
-      )}
     </article>
   );
 }
