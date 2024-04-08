@@ -39,7 +39,7 @@ export default function RegisterForm() {
   const [error, setError] = useState<Error>({ message: undefined });
   const [registerOkay, setRegisterOkay] = useState(false);
 
-  // const router = useRouter();
+  const router = useRouter();
   const { signUp, user, logOut } = useAuth();
 
   const onSubmit = async (data: DefaultFormValues) => {
@@ -68,7 +68,10 @@ export default function RegisterForm() {
           // registration okay
           setRegisterOkay(true);
           toggleLayover();
-          // router.push('/login');
+          setTimeout(() => {
+            // console.log('Delayed for 3 second.');
+            router.push('/login');
+          }, 3000);
         }
         await logOut();
       } else {
@@ -84,9 +87,7 @@ export default function RegisterForm() {
       {registerOkay && (
         <div>
           <p>Your registration was successful.</p>
-          <p>
-            You can login <Link href={'/login'}> here!</Link>
-          </p>
+          <p>You will be forward to the login page.</p>
         </div>
       )}
       <form
@@ -124,7 +125,6 @@ export default function RegisterForm() {
           css={errorStyle(errors.email?.type)}
           placeholder="Email"
         />
-
         <button type="submit">Create Account</button>
       </form>
 
