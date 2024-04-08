@@ -4,12 +4,48 @@ import { useContext } from 'react';
 import { useAuth } from '../../../AuthProvider';
 import { OverlayContext } from '../../../util/context/overlayContext';
 
+const AllProductsLink = () => (
+  <Link
+    href={{
+      pathname: '/plants',
+    }}
+    data-test-id="products-link"
+  >
+    Plants
+  </Link>
+);
+
+const LoginButton = () => (
+  <Link
+    href={{
+      pathname: '/login',
+    }}
+    data-test-id="login-link"
+    //   onClick={onClickLoginHandler}
+  >
+    {' '}
+    Login
+  </Link>
+);
+
+const LogoutButton = () => (
+  <Link
+    href={{
+      pathname: '/',
+    }}
+    data-test-id="logout-link"
+    // onClick={onClickLogoutHandler}
+  >
+    Logout
+  </Link>
+);
+
 export default function NavMenu() {
   const { toggleLoginLayover } = useContext(OverlayContext);
   const { logOut, user } = useAuth();
   const router = useRouter();
 
-  /*   const onClickLoginHandler = () => {
+  const onClickLoginHandler = () => {
     toggleLoginLayover();
   };
 
@@ -35,52 +71,12 @@ export default function NavMenu() {
       });
   };
 
-  const loginButton = () => (
-    <button data-test-id="login-link" onClick={onClickLoginHandler}>
-      {' '}
-      Login
-    </button>
-  );
-
-  const logoutButton = () => (
-    <button data-test-id="logout-link" onClick={onClickLogoutHandler}>
-      Logout
-    </button>
-  ); */
   return (
     <>
       <li>
-        <Link
-          href={{
-            pathname: '/plants',
-          }}
-          data-test-id="products-link"
-        >
-          Plants
-        </Link>
+        <AllProductsLink />
       </li>
-      {/* <li>{user.uid ? logoutButton() : loginButton()}</li> */}
-      <li>
-        {user.uid ? (
-          <Link
-            href={{
-              pathname: '/',
-            }}
-            data-test-id="logout-button"
-          >
-            Logout
-          </Link>
-        ) : (
-          <Link
-            href={{
-              pathname: '/login',
-            }}
-            data-test-id="login-button"
-          >
-            Login
-          </Link>
-        )}
-      </li>
+      <li>{user.uid ? <LogoutButton /> : <LoginButton />}</li>
     </>
   );
 }
