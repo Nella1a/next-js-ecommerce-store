@@ -1,5 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
+import { underConstruction } from '../components/Placeholder';
 import prisma from '../prisma';
 import { firebaseAdmin } from '../util/firebase-admin-config';
 
@@ -12,14 +13,9 @@ type Props = {
 export default function Account({ userId, email, userName }: Props) {
   return (
     <LayoutNoHeader>
-      <section>
+      <section css={underConstruction}>
         <article>
           <h1>Page Under Construction!</h1>
-        </article>
-
-        <article>
-          <p>Hello user {userName}! </p>
-          <p>Your userID is: {userId}</p>
           <p>Your email is: {email}</p>
           <p>You've logged into your account successfully.</p>
         </article>
