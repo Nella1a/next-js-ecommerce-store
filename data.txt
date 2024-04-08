@@ -1,9 +1,0 @@
-
-next_js_ecommerce_plant_store=> SELECT * FROM plants;
- id |        name         | price |                                   description
-----+---------------------+-------+----------------------------------------------------------------------------------
-  1 | Monstera Deliciosa  |  1795 | Lorem ipsum dolor sit amet
-  2 | Ficus Lyrata        |   995 | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at elit libero.
-  3 | Pilea Peperomioides |  1295 | Vivamus at elit libero.
-  4 | Calathea Orbifolia  |  2695 | Lorem ipsum dolor sit amet, consectetur adipiscing elit
-(4 rows)
