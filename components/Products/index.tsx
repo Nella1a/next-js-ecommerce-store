@@ -91,8 +91,12 @@ export default function Products(props: Props) {
   return (
     <>
       {props.plants.map((plant: Plants) => (
-        <Link href="/product/[slug]" as={`/product/${plant.slugName}`}>
-          <article key={`guest-${plant.id}`} css={productCardStyle}>
+        <Link
+          href="/product/[slug]"
+          as={`/product/${plant.slugName}`}
+          key={`guest-${plant.id}`}
+        >
+          <article css={productCardStyle}>
             <ProductCard plant={plant} />
           </article>
         </Link>

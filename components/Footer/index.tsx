@@ -83,12 +83,10 @@ export default function Footer() {
       <nav>
         <div>
           {footerInfos.map((info, index: number) => (
-            <>
-              <div key={`desktop-footer-${index}`}>
-                <p>{info.header}</p>
-                <FooterListElements info={info} />
-              </div>
-            </>
+            <div key={`desktop-footer-${index}`}>
+              <p>{info.header}</p>
+              <FooterListElements info={info} />
+            </div>
           ))}
         </div>
         <FormNewsletter email={email} setEmail={setEmail} />
