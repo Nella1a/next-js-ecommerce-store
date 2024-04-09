@@ -508,7 +508,7 @@ export const productImageContainer = css`
     width: 100%;
 
     // container title and price
-    > div {
+    > div:first-of-type {
       margin-top: 6rem;
       display: block;
       margin-bottom: var(--space-lg);
