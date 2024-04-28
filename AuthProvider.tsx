@@ -59,7 +59,7 @@ export const AuthContextProvider = ({
   // Logout
   const logOut = async () => {
     setUser({ email: null, uid: null });
-    return await auth.signOut();
+    return auth.signOut();
   };
 
   return (
