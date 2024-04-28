@@ -113,6 +113,10 @@ export const globalStyleBody = css`
     color: var(--color-grey-6);
   }
 
+  input::placeholder {
+    color: var(--color-grey-4);
+  }
+
   a:link,
   a:visited {
     text-decoration: none;
@@ -908,7 +912,7 @@ export const loginAndRegisterForm = css`
   > button {
     width: 100%;
     border-width: 0.05rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
     padding: 1.2rem;
     font-size: 0.9rem;
   }
