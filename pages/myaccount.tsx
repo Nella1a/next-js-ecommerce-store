@@ -16,6 +16,7 @@ export default function Account({ userId, email, userName }: Props) {
       <section css={underConstruction}>
         <article>
           <h1>Page Under Construction!</h1>
+          <p>Your username is: {userName}</p>
           <p>Your email is: {email}</p>
           <p>You've logged into your account successfully.</p>
         </article>
