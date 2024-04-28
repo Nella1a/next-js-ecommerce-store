@@ -57,13 +57,6 @@ export const globalStyleBody = css`
     --text-xl: 1.25em; // 20
     --text-xxl: 1.5em; // 24
     --text-xxxl: 1.875em; // 30
-    --text-4xl: 2.25em; // 36
-    --text-5xl: 2.75em; // 44
-    --text-6xl: 3.25em; // 52
-    --text-7xl: 3.875em; // 62
-    --text-7xl: 4.625em; // 74
-    --text-8xl: 5.375em; // 86
-    --text-9xl: 6.125em; // 98
 
     /* spacing values */
     --space-xxs: 0.125rem; // 4px
@@ -101,7 +94,7 @@ export const globalStyleBody = css`
 
   /* make img easier to work with*/
   img {
-    max-width: 100%; /* ensure that the img gets narrow when viewoprt shrinks*/
+    max-width: 100%; /* ensure that the img gets narrow when viewport shrinks*/
     display: block;
   }
 
