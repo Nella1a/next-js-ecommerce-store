@@ -95,6 +95,7 @@ export default function RegisterForm() {
         css={loginAndRegisterForm}
         onSubmit={handleSubmit(onSubmit)}
       >
+        <label htmlFor="username">Username</label>
         <input
           {...register('username', {
             required: 'username is required.',
@@ -103,8 +104,21 @@ export default function RegisterForm() {
           data-test-id="username"
           css={errorStyle(errors.username?.type)}
           placeholder="Username"
+          id="username"
         />
 
+        <label htmlFor="email">Email</label>
+        <input
+          {...register('email', {
+            required: 'email is required.',
+          })}
+          aria-invalid={errors.email ? 'true' : 'false'}
+          data-test-id="userEmail"
+          css={errorStyle(errors.email?.type)}
+          placeholder="Email"
+          id="email"
+        />
+        <label htmlFor="password">Password</label>
         <input
           {...register('password', {
             required: 'password is required.',
@@ -114,16 +128,7 @@ export default function RegisterForm() {
           css={errorStyle(errors.password?.type)}
           placeholder="Password"
           type="password"
-        />
-
-        <input
-          {...register('email', {
-            required: 'email is required.',
-          })}
-          aria-invalid={errors.email ? 'true' : 'false'}
-          data-test-id="userEmail"
-          css={errorStyle(errors.email?.type)}
-          placeholder="Email"
+          id="password"
         />
         <button type="submit">Create Account</button>
       </form>

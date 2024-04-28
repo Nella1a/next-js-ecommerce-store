@@ -68,6 +68,7 @@ export default function LoginForm() {
         css={loginAndRegisterForm}
         onSubmit={handleSubmit(onSubmit)}
       >
+        <label htmlFor="email">Email</label>
         <input
           {...register('email', {
             required: 'Email is required.',
@@ -76,8 +77,9 @@ export default function LoginForm() {
           data-test-id="email"
           css={errorStyle(errors.email?.type)}
           placeholder="Email"
+          id="email"
         />
-
+        <label htmlFor="password">Password</label>
         <input
           {...register('password', {
             required: 'password is required.',
@@ -87,6 +89,7 @@ export default function LoginForm() {
           css={errorStyle(errors.password?.type)}
           placeholder="Password"
           type="password"
+          id="password"
         />
 
         <button type="submit">Login</button>

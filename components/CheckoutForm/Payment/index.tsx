@@ -12,13 +12,14 @@ export default function Payment({
     <>
       <h2>Payment information</h2>
       <div>
-        <label htmlFor="cardType" />
+        <label htmlFor="cardType">Card type</label>
         <select
           {...register('payment.cardType', {
             required: 'Payment card is missing.',
           })}
           css={errorStyle(errors.payment?.cardType?.type)}
           data-test-id="checkout-card-type"
+          id="cartType"
         >
           {' '}
           <option value="">Select card type</option>
@@ -28,22 +29,23 @@ export default function Payment({
         </select>
       </div>
       <div>
-        <label htmlFor="cardNumber" />
+        <label htmlFor="cardNumber">Credit card number</label>
         <input
           {...register('payment.cardNumber', {
             required: 'Please enter a valid card number',
             setValueAs: (cnumber) => parseInt(cnumber),
           })}
           aria-invalid={errors.payment?.cardNumber ? 'true' : 'false'}
-          placeholder="Card number"
+          placeholder="1234 1234 1234 1234"
           data-test-id="checkout-credit-card"
+          id="cardNumber"
           css={errorStyle(errors.payment?.cardNumber?.type)}
         />
         <span>{errors.payment?.cardNumber?.message}</span>
       </div>
 
       <div>
-        <label htmlFor="nameOncard" />
+        <label htmlFor="nameOncard">Name on card</label>
         <input
           {...register('payment.nameOnCard', {
             required: 'Name on card is required',
@@ -51,6 +53,7 @@ export default function Payment({
           aria-invalid={errors.payment?.nameOnCard ? 'true' : 'false'}
           data-test-id="name-on-card"
           placeholder="Name on card"
+          id="nameOnCard"
           css={errorStyle(errors.payment?.nameOnCard?.type)}
         />
         <span>{errors.payment?.nameOnCard?.message}</span>
@@ -58,7 +61,7 @@ export default function Payment({
 
       <div css={flexStyle}>
         <p>
-          <label htmlFor="expiration" />
+          <label htmlFor="expiration">Expiration</label>
           <input
             // style={{ width: '100%' }}
             {...register('payment.expiryDate', {
@@ -73,11 +76,12 @@ export default function Payment({
             css={errorStyle(errors.payment?.expiryDate?.type)}
             placeholder="Expiry Date (MM/YY)"
             data-test-id="checkout-expiration-date"
+            id="expiration"
           />
           <span>{errors.payment?.expiryDate?.message}</span>
         </p>
         <p>
-          <label htmlFor="securityCode" />
+          <label htmlFor="securityCode">CVC</label>
           <input
             style={{ width: '100%' }}
             {...register('payment.securityCode', {
@@ -97,6 +101,7 @@ export default function Payment({
             css={errorStyle(errors.payment?.securityCode?.type)}
             placeholder="Security Code (CVC)"
             data-test-id="checkout-security-code"
+            id="securityCode"
           />
           <span>{errors.payment?.securityCode?.message}</span>
         </p>

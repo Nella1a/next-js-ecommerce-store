@@ -28,7 +28,7 @@ export default function Shipping({
     <>
       <h2>Contact information </h2>
       <div>
-        <label htmlFor="email" />
+        <label htmlFor="email">Email</label>
         <input
           {...register('shipping.userEmail', {
             required: 'Email is required.',
@@ -39,6 +39,7 @@ export default function Shipping({
           data-test-id="checkout-email"
           css={errorStyle(errors.shipping?.userEmail?.type)}
           placeholder="Email"
+          id="email"
         />
         <p>
           <span>{errors.shipping?.userEmail?.message}</span>
@@ -53,7 +54,7 @@ export default function Shipping({
 
       <div css={flexStyle}>
         <p>
-          <label htmlFor="firstName" />
+          <label htmlFor="firstName">First name</label>
           <input
             {...register('shipping.firstName', {
               required: 'First name is required.',
@@ -67,13 +68,14 @@ export default function Shipping({
             aria-invalid={errors.shipping?.firstName ? 'true' : 'false'}
             data-test-id="checkout-first-name"
             placeholder="First name"
+            id="firstName"
             css={errorStyle(errors.shipping?.firstName?.type)}
           />
           <span>{errors.shipping?.firstName?.message}</span>
         </p>
 
         <p>
-          <label htmlFor="lastName" />
+          <label htmlFor="lastName">Last name</label>
           <input
             {...register('shipping.lastName', {
               required: 'Last name is required.',
@@ -86,6 +88,7 @@ export default function Shipping({
             aria-invalid={errors.shipping?.lastName ? 'true' : 'false'}
             placeholder="Last name"
             data-test-id="checkout-last-name"
+            id="lastName"
             css={errorStyle(errors.shipping?.lastName?.type)}
           />
           <span>{errors.shipping?.lastName?.message}</span>
@@ -93,7 +96,7 @@ export default function Shipping({
       </div>
       <div>
         <p>
-          <label htmlFor="street"></label>
+          <label htmlFor="street">Address</label>
           <input
             {...register('shipping.street', {
               required: 'Address is required.',
@@ -102,6 +105,7 @@ export default function Shipping({
             aria-invalid={errors.shipping?.street ? 'true' : 'false'}
             data-test-id="checkout-street"
             placeholder="Address"
+            id="street"
             css={errorStyle(errors.shipping?.street?.type)}
           />
           <span>{errors.shipping?.street?.message}</span>
@@ -109,7 +113,7 @@ export default function Shipping({
       </div>
       <div css={flexStyle}>
         <p>
-          <label htmlFor="city" />
+          <label htmlFor="city">City</label>
           <input
             {...register('shipping.city', {
               required: 'City is required.',
@@ -119,13 +123,14 @@ export default function Shipping({
             aria-invalid={errors.shipping?.city ? 'true' : 'false'}
             data-test-id="checkout-city"
             placeholder="City"
+            id="city"
             css={errorStyle(errors.shipping?.city?.type)}
           />
           <span>{errors.shipping?.city?.message}</span>
         </p>
 
         <p>
-          <label htmlFor="postalCode" />
+          <label htmlFor="postalCode">Postal code</label>
           <input
             {...register('shipping.postalCode', {
               required: 'Postal/ZIP code is required.',
@@ -137,14 +142,15 @@ export default function Shipping({
             })}
             aria-invalid={errors.shipping?.postalCode ? 'true' : 'false'}
             data-test-id="checkout-postal-code"
-            placeholder="Zip Code"
+            placeholder="Postal code"
+            id="postalCode"
             css={errorStyle(errors.shipping?.postalCode?.type)}
           />
           <span>{errors.shipping?.postalCode?.message}</span>
         </p>
 
         <p>
-          <label htmlFor="country" />
+          <label htmlFor="country">Country</label>
 
           <input
             {...register('shipping.country', {
@@ -154,6 +160,7 @@ export default function Shipping({
             aria-invalid={errors.shipping?.country ? 'true' : 'false'}
             data-test-id="checkout-country"
             placeholder="Country"
+            id="country"
             css={errorStyle(errors.shipping?.country?.type)}
           />
           <span>{errors.shipping?.country?.message}</span>
