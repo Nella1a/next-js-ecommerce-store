@@ -21,40 +21,47 @@ export default async function handler(
     }
 
     const idToken = authorization.split('Bearer ')[1];
-    const decodedToken = await firebaseAdmin.auth().verifyIdToken(idToken);
-
     if (!idToken) {
       res.status(401).json({ error: { message: 'unauthorized request!' } });
       return;
     }
 
-    if (idToken) {
-      // verify token
-      const decodedToken = await firebaseAdmin.auth().verifyIdToken(idToken);
+    // verify token
+    const decodedToken = await firebaseAdmin.auth().verifyIdToken(idToken);
+    if (!decodedToken) {
+      res.status(401).json({ error: { message: 'unauthorized request!' } });
+      return;
+    }
 
-      if (decodedToken && decodedToken.email) {
-        try {
-          // add user to db
-          await prisma.user.create({
-            data: {
-              user_id_external: decodedToken.uid,
-              username: username,
-              email: decodedToken.email,
-              role_id: 1,
-            },
-          });
+    if (decodedToken && decodedToken.email) {
+      try {
+        // add user to db
+        await prisma.user.create({
+          data: {
+            user_id_external: decodedToken.uid,
+            username: username,
+            email: decodedToken.email,
+            role_id: 1,
+          },
+        });
 
-          res.status(201).json({ registration: 'success' });
-          return;
-        } catch (error) {
-          // remove user from firebase
-          await firebaseAdmin.auth().deleteUser(decodedToken.uid);
-          res
-            .status(401)
-            .json({ error: { message: 'Error during registration!' } });
-          return;
-        }
+        res.status(201).json({ registration: 'success' });
+        return;
+      } catch (error) {
+        // remove user from firebase
+        await firebaseAdmin.auth().deleteUser(decodedToken.uid);
+        res
+          .status(401)
+          .json({ error: { message: 'Error during registration!' } });
+        return;
       }
+    } else {
+      // remove user from firebase
+      await firebaseAdmin.auth().deleteUser(decodedToken.uid);
+      res
+        .status(401)
+        .json({ error: { message: 'Error during registration!' } });
+      return;
     }
   }
   res.json({ error: { message: 'Method not allowed' } });
