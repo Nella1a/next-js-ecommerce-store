@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -41,7 +40,7 @@ export default function RegisterForm() {
   const [registerOkay, setRegisterOkay] = useState(false);
 
   const router = useRouter();
-  const { signUp, user, logOut } = useAuth();
+  const { signUp, logOut } = useAuth();
 
   const onSubmit = async (data: DefaultFormValues) => {
     setError({ message: undefined });
@@ -71,7 +70,6 @@ export default function RegisterForm() {
           toggleLayover();
           reset();
           setTimeout(() => {
-            // console.log('Delayed for 3 second.');
             router.push('/login');
           }, 3000);
         }

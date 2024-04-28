@@ -45,16 +45,17 @@ export default function NavMenu() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ userId: user.uid }),
         });
 
-        await res.json();
+        const result = await res.json();
         if (res.status === 200) {
           router.push('/');
+        } else {
+          console.log(result.error.message);
         }
       })
       .catch((error: any) => {
-        console.log('error during signed out');
+        console.log('Error during signed out');
       });
   };
 
