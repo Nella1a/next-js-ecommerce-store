@@ -24,6 +24,7 @@ export default function LoginForm() {
     formState: { isSubmitSuccessful, errors },
     getFieldState,
     trigger,
+    reset,
   } = useForm<DefaultFormValues>({ defaultValues });
 
   const { loginLayover, toggleLoginLayover } = useContext(OverlayContext);
@@ -52,6 +53,7 @@ export default function LoginForm() {
         }
 
         if (response.status === 200) {
+          reset();
           loginLayover && toggleLoginLayover();
           router.push('/myaccount');
         }

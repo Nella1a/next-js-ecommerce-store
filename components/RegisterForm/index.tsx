@@ -33,6 +33,7 @@ export default function RegisterForm() {
     formState: { isSubmitSuccessful, errors },
     getFieldState,
     trigger,
+    reset,
   } = useForm<DefaultFormValues>({ defaultValues });
 
   const { toggle, toggleLayover } = useContext(OverlayContext);
@@ -68,6 +69,7 @@ export default function RegisterForm() {
           // registration okay
           setRegisterOkay(true);
           toggleLayover();
+          reset();
           setTimeout(() => {
             // console.log('Delayed for 3 second.');
             router.push('/login');
