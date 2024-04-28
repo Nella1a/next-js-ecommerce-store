@@ -78,7 +78,7 @@ export default function CheckOut(props: Props) {
   const ButtonContinueToPayment = () => (
     <div>
       <button type="button" onClick={submitShippingInfosHandler}>
-        Continue to Payment
+        Continue to payment
       </button>
     </div>
   );
