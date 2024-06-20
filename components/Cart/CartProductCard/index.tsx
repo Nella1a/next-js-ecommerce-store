@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useAuth } from '../../../AuthProvider';
 import { CartContext } from '../../../util/context/cartContext';
 import { CartCookieContext } from '../../../util/context/cookieContext';
 import { Cart } from '../../../util/types';
@@ -15,6 +16,7 @@ export function multiplePriceAndQuantity(price: number, quantity: number) {
 }
 
 export default function CartProductCard(props: Props) {
+  const { user } = useAuth();
   const { id, title, price, quantity } = props.plant;
   const { plant } = props;
   const { updateCartQuantity, deleteProductFromCookie } =
@@ -32,9 +34,24 @@ export default function CartProductCard(props: Props) {
     updateCartProduct(id, 1, true);
   };
 
-  const onClickHandler = (removeProductId: number) => {
+  const onClickHandler = async (removeProductId: number) => {
     deleteProductFromCookie(removeProductId);
     deleteProductFromCart(removeProductId);
+
+    /// active user session
+    if (user) {
+      const response = await fetch('/api/cart/delete', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          product: removeProductId,
+        }),
+      });
+      const result = await response.json();
+      console.log('RESULT: ', result);
+    }
   };
 
   return (
