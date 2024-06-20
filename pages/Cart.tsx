@@ -20,8 +20,7 @@ type Props = {
 
 export default function Cart(props: Props) {
   const [cartProducts] = useState(props.plants);
-  const { cartCount } = useContext(CartCookieContext);
-
+  const { cartCount, currentCookie } = useContext(CartCookieContext);
   const { cartItems } = useContext(CartContext);
 
   useEffect(() => {
@@ -38,6 +37,22 @@ export default function Cart(props: Props) {
       Your Cart ({cartCount} {cartCount === 1 ? 'Product' : 'Products'})
     </h1>
   );
+
+  const onClickHandler = async () => {
+    //ToDo: check if user is logged in
+    const response = await fetch('api/cart/update', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        cart: currentCookie,
+      }),
+    });
+
+    const result = response.json();
+    console.log('RESULT CHECKOUT:   ', result);
+  };
 
   // case: cookie set
   return (
@@ -61,6 +76,7 @@ export default function Cart(props: Props) {
               }}
               passHref
               data-test-id="cart-checkout"
+              onClick={onClickHandler}
             >
               Go to checkout
             </Link>
