@@ -6,85 +6,89 @@ datasource db {
   provider = "postgresql"
   // Uses connection pooling
   url = env("POSTGRES_PRISMA_URL")
-  directUrl = env("POSTGRES_URL_NON_POOLING")
+ // directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model CartItem {
-  id         Int      @id @default(autoincrement())
-  product_id Int
-  cart_id    Int?    @unique
-  carts      Cart?   @relation(fields: [cart_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  products   Product @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id          Int         @id @default(autoincrement())
+  created_at  DateTime    @default(now()) @db.Timestamptz(6)
+  updated_at  DateTime    @updatedAt @db.Timestamptz(6)
+  quantity    Int
+  product     Product     @relation(fields: [product_id], references: [id])
+  product_id  Int
+  user        User        @relation(fields: [user_id], references: [id])
+  user_id     Int
 
   @@map("cart_items")
 }
 
-model Cart {
-  id          Int         @id @default(autoincrement())
-  created_at  DateTime    @default(now()) @db.Timestamptz(6)
-  modified_at DateTime    @default(now()) @db.Timestamptz(6)
-  user_id     Int?        @unique
-  total_price Decimal?    @db.Decimal(10, 2)
-  is_order    String?     @db.Bit(1)
-  quantity    Int?
-  cart_items  CartItem?
-  users       User?      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+model OrderItem {
+  id           Int       @id @default(autoincrement())
+  quantity Int
+  product_id  Int
+  order_id  Int
+  product   Product     @relation(fields: [product_id], references: [id])
+  order   Order         @relation(fields: [order_id], references: [id])
 
-  @@map("carts")
+ @@map("order_items")
 }
 
-model Category {
-  id                 Int                  @id @default(autoincrement())
-  name               String               @db.VarChar(60)
-  product_categories ProductCategory[]
 
-  @@map("categories")
-}
 
 model OrderStatus {
   id     Int      @id @default(autoincrement())
   name   String   @db.VarChar(60)
-  orders Order[]
+  order  Order[]
 
   @@map("order_status")
 }
 
+model PaymentStatus {
+  id     Int      @id @default(autoincrement())
+  name   String   @db.VarChar(60)
+  status OrderPayments[]
+  @@map("payment_status")
+}
+
+
 model Order {
   id             Int              @id @default(autoincrement())
   created_at     DateTime         @default(now()) @db.Timestamptz(6)
-  quantity       Int
-  user_id        Int
+  updated_at    DateTime          @updatedAt @db.Timestamptz(6)
   total_price    Decimal          @db.Decimal(10, 2)
-  status_id      Int?
-  modified_at    DateTime        @default(now()) @db.Timestamptz(6)
-  order_status   OrderStatus?    @relation(fields: [status_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  payment_id     Int
+  user_id        Int
+  status_id      Int
+  payment        OrderPayments    @relation(fields: [payment_id], references: [id])
+  order_status   OrderStatus    @relation(fields: [status_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   users          User            @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  product_orders ProductOrder[]
+  order OrderItem[]
+
 
   @@map("orders")
 }
 
+model OrderPayments {
+  id   Int   @id @default(autoincrement())
+  created_at     DateTime         @default(now()) @db.Timestamptz(6)
+  updated_at     DateTime         @updatedAt @db.Timestamptz(6)
+  payment   Order[]
+  status_id      Int
+  status PaymentStatus @relation(fields: [status_id], references: [id])
+
+ @@map("order_payments")
+}
+
+
+
+
 model ProductCategory {
-  product_id  Int
-  category_id Int
-  categories  Category @relation(fields: [category_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  products    Product   @relation(fields: [product_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-
-  @@id([product_id, category_id], map: "product_categories_pk")
-
-  @@map("product_categories")
+  id   Int   @id @default(autoincrement())
+  name String @db.VarChar(100)
+  product Product[]
+   @@map("product_categories")
 }
 
-model ProductOrder {
-  product_id Int
-  order_id   Int
-  orders     Order   @relation(fields: [order_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  products   Product @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-
-  @@id([product_id, order_id], map: "product_orders_pk")
-
-  @@map("product_orders")
-}
 
 model Product {
   id                 Int                  @id @default(autoincrement())
@@ -92,9 +96,10 @@ model Product {
   price              Decimal              @db.Decimal(10, 2)
   descr              String
   slug               String               @db.VarChar(50)
-  cart_items         CartItem[]
   product_categories ProductCategory[]
-  product_orders     ProductOrder[]
+  cart CartItem[]
+  img_url ProductImgURL[]
+  product OrderItem[]
 
   @@map("products")
 }
@@ -126,8 +131,8 @@ model User {
   email         String          @unique @db.VarChar(30)
   username      String          @db.VarChar(30)
   role_id       Int?
-  created_at    DateTime        @default(now()) @db.Timestamptz(6)
-  carts         Cart?
+  created_at     DateTime        @default(now()) @db.Timestamptz(6)
+  cart_items    CartItem[]
   orders        Order[]
   user_details  UserDetail?
   user_roles    UserRole?       @relation(fields: [role_id], references: [id], onDelete: Cascade)
@@ -151,6 +156,16 @@ model UserPayment {
 
   @@map("users_payment")
 }
+
+
+model ProductImgURL {
+   id  Int       @id @default(autoincrement())
+   url String?
+   product_id Int
+   product Product @relation(fields: [product_id], references: [id])
+ @@map("product_img_urls")
+}
+
 
 model UserSession {
   id           Int       @id @default(autoincrement())
