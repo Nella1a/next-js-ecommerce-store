@@ -2,6 +2,7 @@ import { setCookie } from 'cookies-next';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../prisma';
 import { firebaseAdmin } from '../../util/firebase-admin-config';
+import { Cookie } from '../../util/types';
 import { ErrorAPI } from './register';
 
 type ResponseData = {
@@ -38,6 +39,27 @@ export default async function handler(
       if (!user) {
         res.status(401).json({ error: { message: 'Invalid credentials' } });
         return;
+      }
+
+      // update cart items
+      const requestBody = JSON.parse(req.body);
+      if (requestBody?.cart.length > 0) {
+        // remove current cart items
+        await prisma.cartItem.deleteMany({
+          where: {
+            user_id: user.id,
+          },
+        });
+        // update cart items
+        requestBody.cart.map(async (item: Cookie) => {
+          await prisma.cartItem.create({
+            data: {
+              product_id: item.id,
+              quantity: item.quantity,
+              user_id: user.id,
+            },
+          });
+        });
       }
 
       // set cookie
