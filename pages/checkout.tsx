@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Router from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { AuthContextProvider, useAuth } from '../AuthProvider';
 import OrderTotal from '../components/Cart/OrderTotal';
 import Payment from '../components/CheckoutForm/Payment';
 import Shipping from '../components/CheckoutForm/Shipping';
@@ -42,20 +43,54 @@ type Props = {
 
 export default function CheckOut(props: Props) {
   const [toNextStep, setToNextStep] = useState(false);
-
+  const { user } = useAuth();
   const { removeCookie, clearCartCount } = useContext(CartCookieContext);
-
+  const { pathname } = Router;
   const {
     register,
     handleSubmit,
     formState: { isSubmitSuccessful, errors },
     getFieldState,
     trigger,
+    getValues,
   } = useForm<DefaultFormValues>({ defaultValues });
+  console.log('USER: ', user);
+  const onSubmit = async (data: DefaultFormValues): Promise<void> => {
+    console.log('FormDATA: ', data);
 
-  const onSubmit = (data: DefaultFormValues): void => {};
+    // check if user is logged in
+    if (user) {
+      console.log('errors: ', errors);
+      try {
+        console.log('HELLO2');
+        const response = await fetch('api/checkout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            form: data,
+          }),
+        });
+
+        const result = await response.json();
+        console.log('result: ', result);
+
+        if (pathname == '/checkout') {
+          removeCookie('cart');
+          clearCartCount();
+          Router.push('/thankyou');
+        }
+      } catch (error) {
+        console.log(console.error);
+        alert('ups something went wrong');
+      }
+    }
+  };
 
   const submitShippingInfosHandler = async (event: any) => {
+    const shippingValues = getValues('shipping');
+    console.log('shipping Values: ', shippingValues);
     const noErrors = await trigger('shipping');
     if (noErrors) {
       setToNextStep(true);
@@ -83,7 +118,7 @@ export default function CheckOut(props: Props) {
     </div>
   );
 
-  const ButtonSumitFormValues = () => (
+  const ButtonSubmitFormValues = () => (
     <div>
       <button type="submit">Place order</button>
     </div>
@@ -98,11 +133,7 @@ export default function CheckOut(props: Props) {
 
       <section css={checkoutPageStyle}>
         <article>
-          <form
-            action="/api"
-            css={checkoutFormStyle}
-            onSubmit={handleSubmit(onSubmit)}
-          >
+          <form css={checkoutFormStyle} onSubmit={handleSubmit(onSubmit)}>
             {!toNextStep ? (
               <>
                 <Shipping
@@ -119,7 +150,7 @@ export default function CheckOut(props: Props) {
                   errors={errors}
                   getFieldState={getFieldState}
                 />
-                <ButtonSumitFormValues />
+                <ButtonSubmitFormValues />
               </>
             )}
           </form>
@@ -127,7 +158,10 @@ export default function CheckOut(props: Props) {
         <article>
           <div>
             {props.plants?.map((plant) => (
-              <CheckoutProductCard plant={plant} />
+              <CheckoutProductCard
+                key={`${plant.id}-${plant.price}`}
+                plant={plant}
+              />
             ))}
           </div>
 
