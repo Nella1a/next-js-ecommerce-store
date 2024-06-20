@@ -177,7 +177,6 @@ export default function Navigation() {
                   alt={'logo she loves plants'}
                   width={'250'}
                   height={'36'}
-                  priority
                 />
               </Link>
             </li>
