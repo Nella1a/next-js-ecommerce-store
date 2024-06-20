@@ -80,7 +80,6 @@ export default function BackGImage(props: any) {
         style={{
           objectFit: 'cover',
         }}
-        priority
       />
       <article css={bgImgContainerContent}>
         <p>{props.firstText}</p>

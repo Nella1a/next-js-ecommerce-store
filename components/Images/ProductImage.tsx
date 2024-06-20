@@ -16,7 +16,7 @@ export default function ProductImage(props: Props) {
       width="393"
       height="491.5"
       data-test-id="product-image"
-      layout="responsive"
+      //layout="responsive"
       alt={`plant-name-is-${props.title}`}
     />
   );

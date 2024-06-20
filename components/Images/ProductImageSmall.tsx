@@ -12,7 +12,7 @@ export default function ProductImageSmall(props: Props) {
       width={19.65}
       height={24.575}
       data-test-id="product-image"
-      layout="responsive"
+      // layout="responsive"
       alt="image of a plant"
     />
   );
