@@ -6,7 +6,7 @@ import SummerFavoritesSection from '../components/Images/SummerFavoritesSections
 import Layout from '../components/Layout';
 import Products from '../components/Products';
 import prisma from '../prisma';
-import IndexHeroImage from '../public/indexHeroImg.webp';
+import IndexHeroImage from '../public/indexHeroImg.jpg';
 import { cleanedProducts } from '../util/database';
 import { PropsTypePlantsCartCookieLayer } from '../util/types';
 
