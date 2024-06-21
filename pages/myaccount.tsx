@@ -4,35 +4,42 @@ import { underConstruction } from '../components/Placeholder';
 import prisma from '../prisma';
 import { firebaseAdmin } from '../util/firebase-admin-config';
 
-type OrderHistory = {
-  id: number;
+type SerializedOrders = {
   quantity: number;
   product_id: number;
   order_id: number;
-  product: { title: string };
-  order: {
-    created_at: string;
-    // total_price: number;
-    order_status: { name: string };
-    payment: { status: { name: string } };
-  };
+  product: { [key: string]: string | number };
+  order: Orders;
 };
 
-type Props = {
+type Orders = {
+  order_id: number;
+  created_at: string;
+  total_price: string;
+  order_status: { name: string };
+  payment: { status: { name: string } };
+  products: { [key: string]: string | number }[];
+};
+
+type UserAccount = {
   userId: number;
   email: string;
   username: string;
-  orders: OrderHistory[];
-  orderCount: number;
+  orderCount?: number;
+  orders?: Orders[];
+};
+
+const formateDate = (dateString: string) => {
+  return new Date(dateString).toLocaleDateString('de-DE');
 };
 
 export default function Account({
   userId,
   email,
   username,
-  orders,
   orderCount,
-}: Props) {
+  orders,
+}: UserAccount) {
   return (
     <LayoutNoHeader>
       <section css={underConstruction}>
@@ -40,20 +47,30 @@ export default function Account({
           <h1>Page Under Construction!</h1>
           <p>Your email is: {email}</p>
           <p>Your username: {username}</p>
-          <p>You've logged into your account successfully.</p>
-
           <p>Order History</p>
           <p> You have {orderCount} Order(s)</p>
-          {orders.length > 0 ? (
-            orders.map((item) => {
+          {orders && orders.length > 0 ? (
+            orders.map((order) => {
               return (
-                <div style={{ display: 'flex', gap: '.5rem' }} key={item.id}>
-                  <p> Product: {item.product.title}</p>
-                  <p> Quantity: {item.quantity}</p>
-                  <p> OrderId: {item.order_id}</p>
-                  <p>Created: {item.order.created_at}</p>
-                  <p> OrderStatus: {item.order.order_status.name}</p>
-                  <p> PaymentStatus: {item.order.payment.status.name}</p>
+                <div
+                  style={{ display: 'flex', gap: '.5rem' }}
+                  key={order.order_id}
+                >
+                  <p>Order number: {order.order_id}</p>
+                  <p>Order date: {formateDate(order.created_at)}</p>
+                  <p>Total: {order.total_price}</p>
+                  <p> Order status: {order.order_status.name}</p>
+                  <p> Payment status: {order.payment.status.name}</p>
+                  <hr></hr>
+                  <div>
+                    <h4>Products</h4>
+                    {order.products.map((product) => (
+                      <>
+                        <p>{product.title}</p>
+                        <p>{product.id}</p>
+                      </>
+                    ))}
+                  </div>
                 </div>
               );
             })
@@ -110,8 +127,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
           order: {
             select: {
+              id: true,
               created_at: true,
-              // total_price: true,
+              total_price: true,
               order_status: {
                 select: {
                   name: true,
@@ -131,37 +149,67 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
           },
         },
       });
-      console.log('orderHistory: ', orders);
 
-      // Fetch the count of products
+      // count orders
       const orderCount = await prisma.order.count({
         where: {
           user_id: user.id,
         },
       });
 
-      console.log('------> user: ', user);
-      //   console.log('----->PAYMENT: ', orders[0].order.payment);
-
+      // serialize date and price
       const ordersSerialized = orders.map((order) => ({
         ...order,
         ...(order.order.created_at = JSON.parse(
           JSON.stringify(order.order.created_at),
+          ...(order.order.total_price = JSON.parse(
+            JSON.stringify(order.order.total_price),
+          )),
         )),
       }));
+
+      const orderHistory = [] as Orders[];
+
+      ordersSerialized.forEach((orderOrder: SerializedOrders) => {
+        // group ordered items by order id
+        const orderIndex = orderHistory.findIndex(
+          (order) => order.order_id === orderOrder.order_id,
+        );
+
+        if (orderIndex === -1) {
+          // create new order
+          const orderDetails = {
+            order_id: orderOrder.order_id,
+            created_at: orderOrder.order.created_at,
+            total_price: orderOrder.order.total_price,
+            order_status: orderOrder.order.order_status,
+            payment: orderOrder.order.payment,
+            products: [orderOrder.product],
+          };
+          orderHistory.push(orderDetails);
+        } else {
+          // update existing order
+          const product = {
+            title: orderOrder.product.title,
+            product_id: orderOrder.product_id,
+            quantity: orderOrder.quantity,
+          };
+          orderHistory[orderIndex].products.push(product);
+        }
+      });
 
       return {
         props: {
           userId: user?.id,
           email: user?.email,
           username: user?.username,
-          orders: ordersSerialized?.length > 0 ? ordersSerialized : [],
           orderCount: orderCount,
+          orders: orderHistory,
         },
       };
     }
   } catch (error) {
-    console.log('----> error: ', error);
+    // user not logged in
     return {
       redirect: {
         destination: '/',
