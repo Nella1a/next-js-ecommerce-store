@@ -2,8 +2,8 @@ import { Prisma, PrismaClient } from '@prisma/client';
 import { getCookie } from 'cookies-next';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../prisma';
+import { getUsersOrderHistory } from '../../util/database';
 import { firebaseAdmin } from '../../util/firebase-admin-config';
-import { Cookie } from '../../util/types';
 import { ErrorAPI } from './register';
 
 type ResponseData =
@@ -36,7 +36,6 @@ export default async function handler(
           username: true,
         },
       });
-
       if (!user) {
         res.status(401).json({ error: { message: 'Unauthorized' } });
         return;
@@ -109,40 +108,14 @@ export default async function handler(
         },
       });
 
-      // get order history
-      const orderHistory = await prisma.orderItem.findMany({
-        where: {
-          order: {
-            user_id: user.id,
-          },
-        },
-        include: {
-          product: {
-            select: {
-              title: true,
-            },
-          },
-          order: {
-            select: {
-              created_at: true,
-              total_price: true,
-              order_status: {
-                select: {
-                  name: true,
-                },
-              },
-              payment: {
-                include: {
-                  status: true,
-                },
-              },
-            },
-          },
-        },
-      });
-
-      res.status(200).json(orderHistory);
-      return;
+      getUsersOrderHistory(user.id)
+        .then((orders) => {
+          res.status(200).json(orders);
+          return;
+        })
+        .catch((error) => {
+          res.status(500).json({ error: { message: 'Internal Server Error' } });
+        });
     } else {
       res.status(401).json({
         errors: { message: 'Unauthorized' },

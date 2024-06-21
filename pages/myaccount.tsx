@@ -2,6 +2,7 @@ import { GetServerSidePropsContext } from 'next';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import { underConstruction } from '../components/Placeholder';
 import prisma from '../prisma';
+import { getUsersOrderHistory } from '../util/database';
 import { firebaseAdmin } from '../util/firebase-admin-config';
 
 type SerializedOrders = {
@@ -111,45 +112,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       },
     });
     if (user) {
-      const orders = await prisma.orderItem.findMany({
-        orderBy: [{ order_id: 'desc' }],
-        where: {
-          order: {
-            user_id: user.id,
-          },
-        },
-        include: {
-          product: {
-            select: {
-              title: true,
-            },
-          },
-
-          order: {
-            select: {
-              id: true,
-              created_at: true,
-              total_price: true,
-              order_status: {
-                select: {
-                  name: true,
-                },
-              },
-              payment: {
-                select: {
-                  id: true,
-                  status: {
-                    select: {
-                      name: true,
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      });
-
+      const orders = await getUsersOrderHistory(user.id);
       // count orders
       const orderCount = await prisma.order.count({
         where: {

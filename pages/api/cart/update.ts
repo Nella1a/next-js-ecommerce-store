@@ -1,8 +1,8 @@
 import { getCookie } from 'cookies-next';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../prisma';
+import { updateCartItems } from '../../../util/database';
 import { firebaseAdmin } from '../../../util/firebase-admin-config';
-import { Cookie } from '../../../util/types';
 import { ErrorAPI } from '../register';
 
 type ResponseData =
@@ -40,26 +40,10 @@ export default async function handler(
         res.status(401).json({ error: { message: 'Unauthorized' } });
         return;
       }
-
       // update cart items
       const cartItems = req.body.cart;
       if (cartItems?.length > 0) {
-        // remove current cart items
-        await prisma.cartItem.deleteMany({
-          where: {
-            user_id: user.id,
-          },
-        });
-        // update cart items
-        cartItems.map(async (item: Cookie) => {
-          await prisma.cartItem.create({
-            data: {
-              product_id: item.id,
-              quantity: item.quantity,
-              user_id: user.id,
-            },
-          });
-        });
+        updateCartItems(cartItems, user).then().catch();
       }
 
       const newCart = await prisma.cartItem.findMany({
