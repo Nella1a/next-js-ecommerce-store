@@ -1,16 +1,3 @@
-type Plants = {
-  id: number;
-  title: string;
-  price: number;
-};
-
-export interface PlantsTwo {
-  id: number;
-  title: string;
-  price: number;
-  descr: string;
-}
-
 export type Plant = {
   id: number;
   title: string;
@@ -29,10 +16,6 @@ export interface Cart {
   quantity: number;
   price: number;
   title: string;
-}
-
-export interface PlantsAndDescription extends Plants {
-  descr: string;
 }
 
 // actually same as CART
