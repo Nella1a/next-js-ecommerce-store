@@ -22,6 +22,7 @@ import {
   Plant,
   PropsTypePlantsCartCookieLayerPlantId,
 } from '../../util/types';
+import Plants from '../plants';
 
 export default function SingleProduct(
   props: PropsTypePlantsCartCookieLayerPlantId,
@@ -101,7 +102,7 @@ export default function SingleProduct(
         <article>
           <div css={productImageContainer}>
             {titleAndPrice()}
-            <ProductImage src={`/image${props.plant.id}.jpg`} title={title} />
+            <ProductImage src={props.plant.img_url[0].url} title={title} />
           </div>
 
           <div css={productDetailsContainer}>
@@ -142,6 +143,13 @@ export async function getServerSideProps(
   const plantSlug = String(context.query.slug);
   const plant = await prisma.product.findMany({
     where: { slug: plantSlug },
+    include: {
+      img_url: {
+        select: {
+          url: true,
+        },
+      },
+    },
   });
   const [plantSerializedPrice] = cleanedProducts(plant);
 

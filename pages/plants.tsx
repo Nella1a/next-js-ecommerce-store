@@ -10,7 +10,6 @@ import {
 import Layout from '../components/Layout';
 import Products from '../components/Products';
 import prisma from '../prisma';
-import ProductsHeroImage from '../public/productsHeroImage.jpg';
 import { cleanedProducts } from '../util/database';
 import { PropsTypePlantsLayer } from '../util/types';
 
@@ -55,7 +54,7 @@ export default function Plants(props: PropsTypePlantsLayer) {
 
   return (
     <Layout
-      imgUrl={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/v1719077115/dr635i8y7x450vvrwwfg.jpg`}
+      imgUrl={`https://res.cloudinary.com/mix571zo0/image/upload/v1719077115/dr635i8y7x450vvrwwfg.jpg`}
       // buttonInHeroImage={buttonInHeroImage}
     >
       <Head>
@@ -75,7 +74,13 @@ export default function Plants(props: PropsTypePlantsLayer) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const products = await prisma.product.findMany();
+  const products = await prisma.product.findMany({
+    include: {
+      img_url: {
+        select: { url: true },
+      },
+    },
+  });
   const plantsSerializedPrice = cleanedProducts(products);
 
   return {
