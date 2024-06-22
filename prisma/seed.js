@@ -58,6 +58,28 @@ async function main() {
   await prisma.orderStatus.createMany({ data: orderStatus });
 }
 
+const getProductInDB = await prisma.product.findMany();
+
+await prisma.productImgURL.createMany({
+  data: [
+    {
+      url: `https://res.cloudinary.com/mix571zo0/image/upload/v1719068058/gxsmq5bjuwi10zqmibjv.jpg`,
+      product_id: getProductInDB[0].id,
+    },
+    {
+      url: `https://res.cloudinary.com/mix571zo0/image/upload/v1719068064/xgjkjeiq3ehq5wk8j2of.jpg`,
+      product_id: getProductInDB[1].id,
+    },
+    {
+      url: `https://res.cloudinary.com/mix571zo0/image/upload/v1719068049/olptdxljhjm5gebjigv9.jpg`,
+      product_id: getProductInDB[2].id,
+    },
+    {
+      url: `https://res.cloudinary.com/mix571zo0/image/upload/v1719068071/pdxrsit2ox8q0jpefv91.jpg`,
+      product_id: getProductInDB[3].id,
+    },
+  ],
+});
 main()
   .catch((e) => {
     console.error(e);
