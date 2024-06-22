@@ -1,5 +1,4 @@
 import { GetStaticProps } from 'next';
-import { CldImage } from 'next-cloudinary';
 import Head from 'next/head';
 import ButtonCallToAction from '../components/Buttons/ButtonCallToAction';
 import { bestSellerStyle, summerFavoritesStyle } from '../components/elements';
@@ -7,22 +6,8 @@ import SummerFavoritesSection from '../components/Images/SummerFavoritesSections
 import Layout from '../components/Layout';
 import Products from '../components/Products';
 import prisma from '../prisma';
-import IndexHeroImage from '../public/indexHeroImg.jpg';
 import { cleanedProducts } from '../util/database';
 import { PropsTypePlantsCartCookieLayer } from '../util/types';
-
-const CloudinaryImUrl = () => (
-  <CldImage
-    src={'eh3naqlztfpedjqd1ldk'}
-    alt="HeroImage"
-    quality={100}
-    fill
-    sizes="100vw"
-    style={{
-      objectFit: 'cover',
-    }}
-  />
-);
 
 export default function Home(props: PropsTypePlantsCartCookieLayer) {
   const buttonInHeroImage = <ButtonCallToAction innerText="View All Plants" />;
@@ -69,7 +54,16 @@ export default function Home(props: PropsTypePlantsCartCookieLayer) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const products = await prisma.product.findMany({});
+  const products = await prisma.product.findMany({
+    include: {
+      img_url: {
+        select: {
+          url: true,
+        },
+      },
+    },
+  });
+  console.log('\nproducts: ', products);
   const plantsSerializedPrice = cleanedProducts(products);
 
   return {
