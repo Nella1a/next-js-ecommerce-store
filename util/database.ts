@@ -1,5 +1,4 @@
 import { Decimal } from '@prisma/client/runtime/library.js';
-import { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier';
 import prisma from '../prisma';
 import { Cookie, User } from './types';
 
