@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next';
+import { CldImage } from 'next-cloudinary';
 import Head from 'next/head';
 import ButtonCallToAction from '../components/Buttons/ButtonCallToAction';
 import { bestSellerStyle, summerFavoritesStyle } from '../components/elements';
@@ -10,11 +11,27 @@ import IndexHeroImage from '../public/indexHeroImg.jpg';
 import { cleanedProducts } from '../util/database';
 import { PropsTypePlantsCartCookieLayer } from '../util/types';
 
+const CloudinaryImUrl = () => (
+  <CldImage
+    src={'eh3naqlztfpedjqd1ldk'}
+    alt="HeroImage"
+    quality={100}
+    fill
+    sizes="100vw"
+    style={{
+      objectFit: 'cover',
+    }}
+  />
+);
+
 export default function Home(props: PropsTypePlantsCartCookieLayer) {
   const buttonInHeroImage = <ButtonCallToAction innerText="View All Plants" />;
 
   return (
-    <Layout bgImageHero={IndexHeroImage} buttonInHeroImage={buttonInHeroImage}>
+    <Layout
+      imgUrl={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/v1719075598/ztapevp2qkipvlwx6fgf.jpg`}
+      buttonInHeroImage={buttonInHeroImage}
+    >
       <Head>
         <title>Plant Love</title>
         <meta name="description" content="Plant Shop" />

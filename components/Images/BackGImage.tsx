@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import Image from 'next/image';
+import { CldImage, getCldImageUrl } from 'next-cloudinary';
 import { flexRowXYCenter } from '../elements';
 
 export const bgImgContainer = css`
@@ -67,20 +67,26 @@ export const bgImgContainerContent = () => css`
 `;
 
 export default function BackGImage(props: any) {
+  const url = getCldImageUrl(
+    {
+      src: props.imgUrl,
+    },
+    { cloud: { cloudName: "'mix571zo0'" } },
+  );
+
   return (
     <div css={bgImgContainer}>
       {/* using fill, the parent element must have position: relative */}
-      <Image
-        src={props.bgImageHero}
-        alt="desk full of plants"
-        placeholder="blur"
-        quality={100}
-        fill
+      <CldImage
+        src={url}
+        alt="HeroImage"
         sizes="100vw"
+        fill
         style={{
           objectFit: 'cover',
         }}
       />
+
       <article css={bgImgContainerContent}>
         <p>{props.firstText}</p>
         <p>{props.secondText}</p>

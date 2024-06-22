@@ -55,7 +55,7 @@ export default function Plants(props: PropsTypePlantsLayer) {
 
   return (
     <Layout
-      bgImageHero={ProductsHeroImage}
+      imgUrl={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/v1719077115/dr635i8y7x450vvrwwfg.jpg`}
       // buttonInHeroImage={buttonInHeroImage}
     >
       <Head>

@@ -30,7 +30,7 @@ export interface PlantsAndQuantity {
 
 export interface PropsTypeChildrenLayer {
   children?: React.ReactNode;
-  bgImageHero?: any;
+  imgUrl?: any;
   buttonInHeroImage?: any;
 }
 
