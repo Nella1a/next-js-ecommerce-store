@@ -37,7 +37,7 @@ export default function RegisterForm() {
 
   const { toggle, toggleLayover } = useContext(OverlayContext);
   const [error, setError] = useState<Error>({ message: undefined });
-  const [registerOkay, setRegisterOkay] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
 
   const router = useRouter();
   const { signUp, logOut } = useAuth();
@@ -66,7 +66,7 @@ export default function RegisterForm() {
           setError({ message: response.error.message });
         } else if (res.status === 201) {
           // registration okay
-          setRegisterOkay(true);
+          setIsRegistered(true);
           toggleLayover();
           reset();
           setTimeout(() => {
@@ -84,56 +84,59 @@ export default function RegisterForm() {
 
   return (
     <article>
-      {registerOkay && (
+      {isRegistered ? (
         <div>
           <p>Your registration was successful.</p>
           <p>You will be forward to the login page.</p>
         </div>
+      ) : (
+        <>
+          <form
+            action="/api"
+            css={loginAndRegisterForm}
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <label htmlFor="username">Username</label>
+            <input
+              {...register('username', {
+                required: 'username is required.',
+              })}
+              aria-invalid={errors.username ? 'true' : 'false'}
+              data-test-id="username"
+              css={errorStyle(errors.username?.type)}
+              placeholder="Username"
+              id="username"
+            />
+
+            <label htmlFor="email">Email</label>
+            <input
+              {...register('email', {
+                required: 'email is required.',
+              })}
+              aria-invalid={errors.email ? 'true' : 'false'}
+              data-test-id="userEmail"
+              css={errorStyle(errors.email?.type)}
+              placeholder="Email"
+              id="email"
+            />
+            <label htmlFor="password">Password</label>
+            <input
+              {...register('password', {
+                required: 'password is required.',
+              })}
+              aria-invalid={errors.password ? 'true' : 'false'}
+              data-test-id="password"
+              css={errorStyle(errors.password?.type)}
+              placeholder="Password"
+              type="password"
+              id="password"
+            />
+            <button type="submit">Create Account</button>
+          </form>
+
+          {error.message && <div css={apiErrorStyle}>{error.message}</div>}
+        </>
       )}
-      <form
-        action="/api"
-        css={loginAndRegisterForm}
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <label htmlFor="username">Username</label>
-        <input
-          {...register('username', {
-            required: 'username is required.',
-          })}
-          aria-invalid={errors.username ? 'true' : 'false'}
-          data-test-id="username"
-          css={errorStyle(errors.username?.type)}
-          placeholder="Username"
-          id="username"
-        />
-
-        <label htmlFor="email">Email</label>
-        <input
-          {...register('email', {
-            required: 'email is required.',
-          })}
-          aria-invalid={errors.email ? 'true' : 'false'}
-          data-test-id="userEmail"
-          css={errorStyle(errors.email?.type)}
-          placeholder="Email"
-          id="email"
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          {...register('password', {
-            required: 'password is required.',
-          })}
-          aria-invalid={errors.password ? 'true' : 'false'}
-          data-test-id="password"
-          css={errorStyle(errors.password?.type)}
-          placeholder="Password"
-          type="password"
-          id="password"
-        />
-        <button type="submit">Create Account</button>
-      </form>
-
-      {error.message && <div css={apiErrorStyle}>{error.message}</div>}
     </article>
   );
 }
