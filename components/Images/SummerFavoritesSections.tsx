@@ -1,16 +1,10 @@
-import Image from 'next/image';
+import { CldImage } from 'next-cloudinary';
 import { Fragment } from 'react';
-import indexSectionImage from '../../public/indexSectionImage.jpg';
+import { Plant } from '../../util/types';
 import Products from '../Products';
 
 type Props = {
-  plants: Plants[];
-};
-
-type Plants = {
-  id: number;
-  title: string;
-  price: number;
+  plants: Plant[];
 };
 
 // const bgImageSale = css`
@@ -22,8 +16,10 @@ export default function SummerFavoritesSection(props: Props) {
   return (
     <Fragment>
       <div>
-        <Image
-          src={indexSectionImage}
+        <CldImage
+          src={
+            'https://res.cloudinary.com/mix571zo0/image/upload/v1719095342/epmstabvbza1lqkdvjbs.jpg'
+          }
           alt="plants on a table"
           fill
           sizes="100vw"
