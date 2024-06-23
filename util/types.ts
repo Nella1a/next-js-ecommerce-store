@@ -58,3 +58,8 @@ export type User = {
   email: string;
   username: string;
 };
+
+export type ProductImage = {
+  title?: string;
+  src: string | null;
+};
