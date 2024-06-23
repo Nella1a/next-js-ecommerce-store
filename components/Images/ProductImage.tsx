@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
-import Image from 'next/legacy/image';
+import { CldImage } from 'next-cloudinary';
+import ImageNotFound from '../Icons/ImageNotFound';
 
 type Props = {
-  src: string;
+  src: string | null;
   title: string;
 };
 const img = css`
@@ -11,13 +12,18 @@ const img = css`
 
 export default function ProductImage(props: Props) {
   return (
-    <Image
-      src={props.src}
-      width="393"
-      height="491.5"
-      data-test-id="product-image"
-      //layout="responsive"
-      alt={`plant-name-is-${props.title}`}
-    />
+    <>
+      {props.src ? (
+        <CldImage
+          src={props.src}
+          width={393}
+          height={491.5}
+          data-test-id="product-image"
+          alt={`plant-name-is-${props.title}`}
+        />
+      ) : (
+        <ImageNotFound />
+      )}
+    </>
   );
 }

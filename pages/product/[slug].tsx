@@ -86,16 +86,16 @@ export default function SingleProduct(
       <section css={singleProductPageStyle}>
         <article css={imageGallery}>
           <div>
-            <ProductImageSmall src={`/image${props.plant.id}.jpg`} />
+            <ProductImageSmall src={props.plant.img_url[0].url} />
           </div>
           <div>
-            <ProductImageSmall src={`/image${props.plant.id}.jpg`} />
+            <ProductImageSmall src={props.plant.img_url[0].url} />
           </div>
           <div>
-            <ProductImageSmall src={`/image${props.plant.id}.jpg`} />
+            <ProductImageSmall src={props.plant.img_url[0].url} />
           </div>
           <div>
-            <ProductImageSmall src={`/image${props.plant.id}.jpg`} />
+            <ProductImageSmall src={props.plant.img_url[0].url} />
           </div>
         </article>
 

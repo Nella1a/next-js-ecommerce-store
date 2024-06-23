@@ -1,19 +1,21 @@
-import Image from 'next/image';
-
-type Props = {
-  src: string;
-};
+import { CldImage } from 'next-cloudinary';
+import ImageNotFound from '../Icons/ImageNotFound';
 
 // todo: alt text
-export default function ProductImageSmall(props: Props) {
+export default function ProductImageSmall({ src }: { src: string | null }) {
   return (
-    <Image
-      src={props.src}
-      width={19.65}
-      height={24.575}
-      data-test-id="product-image"
-      // layout="responsive"
-      alt="image of a plant"
-    />
+    <>
+      {src ? (
+        <CldImage
+          src={src}
+          width={98.25}
+          height={113.875}
+          data-test-id="product-image"
+          alt="image of a plant"
+        />
+      ) : (
+        <ImageNotFound />
+      )}
+    </>
   );
 }
