@@ -1,16 +1,39 @@
 const ImageNotFound = () => {
-  // SVG from https://heroicons.com/mini
+  // source: https://ionic.io/ionicons
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-      className="imageNotFoundIcon"
+      className="closeIcon"
+      viewBox="0 0 512 512"
     >
+      <rect
+        x="48"
+        y="80"
+        width="416"
+        height="352"
+        rx="48"
+        ry="48"
+        fill="none"
+        stroke="currentColor"
+        stroke-linejoin="round"
+        stroke-width="32"
+      />
+      <circle
+        cx="336"
+        cy="176"
+        r="32"
+        fill="none"
+        stroke="currentColor"
+        stroke-miterlimit="10"
+        stroke-width="32"
+      />
       <path
-        fillRule="evenodd"
-        d="M1 5.25A2.25 2.25 0 0 1 3.25 3h13.5A2.25 2.25 0 0 1 19 5.25v9.5A2.25 2.25 0 0 1 16.75 17H3.25A2.25 2.25 0 0 1 1 14.75v-9.5Zm1.5 5.81v3.69c0 .414.336.75.75.75h13.5a.75.75 0 0 0 .75-.75v-2.69l-2.22-2.219a.75.75 0 0 0-1.06 0l-1.91 1.909.47.47a.75.75 0 1 1-1.06 1.06L6.53 8.091a.75.75 0 0 0-1.06 0l-2.97 2.97ZM12 7a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-        clipRule="evenodd"
+        d="M304 335.79l-90.66-90.49a32 32 0 00-43.87-1.3L48 352M224 432l123.34-123.34a32 32 0 0143.11-2L464 368"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="32"
       />
     </svg>
   );

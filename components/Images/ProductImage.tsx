@@ -1,16 +1,13 @@
 import { css } from '@emotion/react';
 import { CldImage } from 'next-cloudinary';
+import { ProductImageDetails } from '../../util/types';
 import ImageNotFound from '../Icons/ImageNotFound';
 
-type Props = {
-  src: string | null;
-  title: string;
-};
 const img = css`
   max-inline-size: 100%;
 `;
 
-export default function ProductImage(props: Props) {
+export default function ProductImage(props: ProductImageDetails) {
   return (
     <>
       {props.src ? (

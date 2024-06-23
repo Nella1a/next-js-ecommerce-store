@@ -59,7 +59,7 @@ export type User = {
   username: string;
 };
 
-export type ProductImage = {
+export type ProductImageDetails = {
   title?: string;
   src: string | null;
 };

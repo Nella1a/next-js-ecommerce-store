@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { useContext, useEffect, useRef } from 'react';
 import { CartContext } from '../../../util/context/cartContext';
+import XMark from '../../Icons/XMark';
 import NavMenu from '../../Navigation/NavMenu';
 
 const mobileMenuStyle = (showBurger) => css`
@@ -119,20 +120,7 @@ export default function MobileMenu() {
               role="menu"
               tabIndex={0}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="menuCloseIcon"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18 18 6M6 6l12 12"
-                />
-              </svg>
+              <XMark />
             </button>
           </li>
           <NavMenu />
