@@ -87,7 +87,7 @@ export default function RegisterForm() {
       {isRegistered ? (
         <div>
           <p>Your registration was successful.</p>
-          <p>You will be forward to the login page.</p>
+          <p>You will be forwarded to the login page.</p>
         </div>
       ) : (
         <>
