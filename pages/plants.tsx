@@ -10,7 +10,7 @@ import {
 import Layout from '../components/Layout';
 import Products from '../components/Products';
 import { cleanedProducts, getAllProducts } from '../util/database';
-import { PropsTypePlantsLayer } from '../util/types';
+import { Plant } from '../util/types';
 
 export const productsComponentStyle = css`
   ${container}
@@ -48,7 +48,7 @@ export const productsComponentStyle = css`
   }
 `;
 
-export default function Plants(props: PropsTypePlantsLayer) {
+export default function Plants(props: { plants: Plant[] }) {
   // disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer);
 
   return (

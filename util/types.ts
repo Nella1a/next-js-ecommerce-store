@@ -1,3 +1,5 @@
+import { Decimal } from '@prisma/client/runtime/library';
+
 export type Plant = {
   id: number;
   title: string;
@@ -12,21 +14,13 @@ export interface Cookie {
   quantity: number;
 }
 
-export interface Cart {
-  id: number;
-  quantity: number;
+export interface Cart extends Cookie {
   price: number;
   title: string;
 }
 
-// actually same as CART
-export interface PlantsAndQuantity {
+export interface PlantsAndQuantity extends Plant {
   quantity: number;
-  id: number;
-  title: string;
-  price: number;
-  descr?: string;
-  slug?: string;
 }
 
 export interface PropsTypeChildrenLayer {
@@ -35,22 +29,9 @@ export interface PropsTypeChildrenLayer {
   buttonInHeroImage?: any;
 }
 
-export interface PropsLayoutCart {
-  children?: React.ReactNode;
-}
-
 export interface PropsTypePlantsCartCookieLayer {
   plants: Plant[];
   cartCookies: Plant[];
-}
-
-export interface PropsTypePlantsLayer {
-  plants: Plant[];
-}
-
-export interface PropsTypePlantsCartCookieLayerPlantId {
-  plant: Plant;
-  cartCookie: Cookie[];
 }
 
 export type User = {
