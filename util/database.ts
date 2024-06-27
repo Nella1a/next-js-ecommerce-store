@@ -79,3 +79,15 @@ export const updateCartItems = async (cartItems: Cookie[], user: User) => {
     });
   }
 };
+
+export const getProducts = async () => {
+  return await prisma.product.findMany({
+    include: {
+      img_url: {
+        select: {
+          url: true,
+        },
+      },
+    },
+  });
+};

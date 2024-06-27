@@ -10,7 +10,7 @@ import {
 import Layout from '../components/Layout';
 import Products from '../components/Products';
 import prisma from '../prisma';
-import { cleanedProducts } from '../util/database';
+import { cleanedProducts, getProducts } from '../util/database';
 import { PropsTypePlantsLayer } from '../util/types';
 
 export const productsComponentStyle = css`
@@ -74,13 +74,8 @@ export default function Plants(props: PropsTypePlantsLayer) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const products = await prisma.product.findMany({
-    include: {
-      img_url: {
-        select: { url: true },
-      },
-    },
-  });
+  const products = await getProducts();
+
   const plantsSerializedPrice = cleanedProducts(products);
 
   return {
