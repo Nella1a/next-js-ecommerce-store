@@ -9,7 +9,7 @@ import {
 } from '../components/elements';
 import Layout from '../components/Layout';
 import Products from '../components/Products';
-import { cleanedProducts, getProducts } from '../util/database';
+import { cleanedProducts, getAllProducts } from '../util/database';
 import { PropsTypePlantsLayer } from '../util/types';
 
 export const productsComponentStyle = css`
@@ -73,7 +73,7 @@ export default function Plants(props: PropsTypePlantsLayer) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const products = await getProducts();
+  const products = await getAllProducts();
 
   const plantsSerializedPrice = cleanedProducts(products);
 

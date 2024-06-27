@@ -1,8 +1,8 @@
 import { Decimal } from '@prisma/client/runtime/library.js';
 import prisma from '../prisma';
-import { Cookie, User } from './types';
+import { Cookie, Plant, User } from './types';
 
-export type Plant = {
+export type PlantWithPriceDecimal = {
   id: number;
   title: string;
   price: Decimal;
@@ -11,13 +11,14 @@ export type Plant = {
   img_url: { url: string | null }[];
 };
 
-export const cleanedProducts = (products: Plant[]) =>
-  products.map((product) => ({
+export const cleanedProducts = (products: PlantWithPriceDecimal[]) => {
+  return products.map((product) => ({
     ...product,
 
     // solves error: object Decimal cannot be serialized as JSON
     price: product.price.toNumber(),
   }));
+};
 
 export const getUsersOrderHistory = async (userId: number) =>
   await prisma.orderItem.findMany({
@@ -80,7 +81,7 @@ export const updateCartItems = async (cartItems: Cookie[], user: User) => {
   }
 };
 
-export const getProducts = async () => {
+export const getAllProducts = async () => {
   return await prisma.product.findMany({
     include: {
       img_url: {

@@ -6,7 +6,7 @@ import SummerFavoritesSection from '../components/Images/SummerFavoritesSections
 import Layout from '../components/Layout';
 import Products from '../components/Products';
 import prisma from '../prisma';
-import { cleanedProducts, getProducts } from '../util/database';
+import { cleanedProducts, getAllProducts } from '../util/database';
 import { PropsTypePlantsCartCookieLayer } from '../util/types';
 
 export default function Home(props: PropsTypePlantsCartCookieLayer) {
@@ -54,7 +54,7 @@ export default function Home(props: PropsTypePlantsCartCookieLayer) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const products = await getProducts();
+  const products = await getAllProducts();
 
   console.log('\nproducts: ', products);
   const plantsSerializedPrice = cleanedProducts(products);
