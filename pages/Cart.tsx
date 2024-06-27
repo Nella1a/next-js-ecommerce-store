@@ -11,14 +11,14 @@ import prisma from '../prisma';
 //import { disableGrayLayer } from '../hooks';
 import { CartContext } from '../util/context/cartContext';
 import { CartCookieContext } from '../util/context/cookieContext';
-import { cleanedProducts, Plant } from '../util/database';
-import { Cookie, PlantsAndQuantity } from '../util/types';
+import { cleanedProducts } from '../util/database';
+import { Cookie, Plant, PlantsAndQuantity } from '../util/types';
 
-type Props = {
+export type CartProps = {
   plants: PlantsAndQuantity[];
 };
 
-export default function Cart(props: Props) {
+export default function Cart(props: CartProps) {
   const [cartProducts] = useState(props.plants);
   const { cartCount, currentCookie } = useContext(CartCookieContext);
   const { cartItems } = useContext(CartContext);
@@ -109,6 +109,13 @@ export async function getServerSideProps(
     where: {
       id: {
         in: plantIds,
+      },
+    },
+    include: {
+      img_url: {
+        select: {
+          url: true,
+        },
       },
     },
   });

@@ -14,6 +14,7 @@ import prisma from '../prisma';
 import { CartCookieContext } from '../util/context/cookieContext';
 import { cleanedProducts } from '../util/database';
 import { Cookie, PlantsAndQuantity } from '../util/types';
+import { CartProps } from './Cart';
 
 export interface DefaultFormValues {
   shipping: {
@@ -37,11 +38,11 @@ export interface DefaultFormValues {
 
 const defaultValues = {};
 
-type Props = {
-  plants: PlantsAndQuantity[];
-};
+// type Props = {
+//   plants: PlantsAndQuantity[];
+// };
 
-export default function CheckOut(props: Props) {
+export default function CheckOut(props: CartProps) {
   const [toNextStep, setToNextStep] = useState(false);
   const { user } = useAuth();
   const { removeCookie, clearCartCount } = useContext(CartCookieContext);
@@ -194,6 +195,13 @@ export async function getServerSideProps(
     where: {
       id: {
         in: plantIds,
+      },
+    },
+    include: {
+      img_url: {
+        select: {
+          url: true,
+        },
       },
     },
   });
