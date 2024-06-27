@@ -8,11 +8,13 @@ export type Plant = {
   price: Decimal;
   descr: string;
   slug: string;
+  img_url: { url: string | null }[];
 };
 
 export const cleanedProducts = (products: Plant[]) =>
   products.map((product) => ({
     ...product,
+
     // solves error: object Decimal cannot be serialized as JSON
     price: product.price.toNumber(),
   }));
