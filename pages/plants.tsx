@@ -9,7 +9,6 @@ import {
 } from '../components/elements';
 import Layout from '../components/Layout';
 import Products from '../components/Products';
-import prisma from '../prisma';
 import { cleanedProducts, getProducts } from '../util/database';
 import { PropsTypePlantsLayer } from '../util/types';
 
