@@ -12,7 +12,7 @@ import { checkoutFormStyle, checkoutPageStyle } from '../components/elements';
 import LayoutNoHeaderAndFooter from '../components/Layout/LayoutNoHeaderFooter';
 import prisma from '../prisma';
 import { CartCookieContext } from '../util/context/cookieContext';
-import { cleanedProducts } from '../util/database';
+import { cleanedProducts, getPlantsById } from '../util/database';
 import { Cookie, PlantsAndQuantity } from '../util/types';
 import { CartProps } from './Cart';
 
@@ -191,20 +191,7 @@ export async function getServerSideProps(
   const plantIds = cartCookie.map((event) => event.id);
 
   // query db
-  const plants = await prisma.product.findMany({
-    where: {
-      id: {
-        in: plantIds,
-      },
-    },
-    include: {
-      img_url: {
-        select: {
-          url: true,
-        },
-      },
-    },
-  });
+  const plants = await getPlantsById(plantIds);
 
   // serialize price
   const plantsSerializedPrice = cleanedProducts(plants);

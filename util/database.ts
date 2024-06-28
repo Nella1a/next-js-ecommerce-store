@@ -92,3 +92,22 @@ export const getAllProducts = async () => {
     },
   });
 };
+
+export const getPlantsById = async (plantId: number[]) => {
+  const plants = await prisma.product.findMany({
+    where: {
+      id: {
+        in: plantId,
+      },
+    },
+    include: {
+      img_url: {
+        select: {
+          url: true,
+        },
+      },
+    },
+  });
+
+  return plants;
+};

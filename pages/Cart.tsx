@@ -11,7 +11,7 @@ import prisma from '../prisma';
 //import { disableGrayLayer } from '../hooks';
 import { CartContext } from '../util/context/cartContext';
 import { CartCookieContext } from '../util/context/cookieContext';
-import { cleanedProducts } from '../util/database';
+import { cleanedProducts, getPlantsById } from '../util/database';
 import { Cookie, Plant, PlantsAndQuantity } from '../util/types';
 
 export type CartProps = {
@@ -105,20 +105,7 @@ export async function getServerSideProps(
   const plantIds = cartCookie.map((event) => event.id);
 
   // query db
-  const plants = await prisma.product.findMany({
-    where: {
-      id: {
-        in: plantIds,
-      },
-    },
-    include: {
-      img_url: {
-        select: {
-          url: true,
-        },
-      },
-    },
-  });
+  const plants = await getPlantsById(plantIds);
 
   // serialize price
   const plantsSerializedPrice = cleanedProducts(plants);
