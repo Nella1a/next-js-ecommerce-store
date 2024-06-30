@@ -1,6 +1,5 @@
 import {
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { createContext, useContext, useEffect, useState } from 'react';
@@ -32,7 +31,7 @@ export const AuthContextProvider = ({
 
   // Update the state depending on auth
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setUser({
           email: user.email,
