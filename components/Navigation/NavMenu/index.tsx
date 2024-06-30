@@ -1,26 +1,8 @@
-import { css } from '@emotion/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { useAuth } from '../../../AuthProvider';
 import { OverlayContext } from '../../../util/context/overlayContext';
-import User from '../../Icons/User';
-
-const userIconStyle = css`
-  .userIcon {
-    width: 24px;
-    height: 24px;
-    text-decoration: none;
-  }
-`;
-
-const UserIcon = () => {
-  return (
-    <Link href={{ pathname: '/myaccount' }} passHref data-test-id="userIcon">
-      <User />
-    </Link>
-  );
-};
 
 export default function NavMenu() {
   const { toggleLoginLayover } = useContext(OverlayContext);
@@ -95,7 +77,6 @@ export default function NavMenu() {
         <AllProductsLink />
       </li>
       <li>{user.uid ? <LogoutButton /> : <LoginButton />}</li>
-      <li css={userIconStyle}>{user.uid && <UserIcon />}</li>
     </>
   );
 }

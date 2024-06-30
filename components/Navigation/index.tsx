@@ -2,10 +2,12 @@ import { css } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, useContext, useEffect, useState } from 'react';
+import { useAuth } from '../../AuthProvider';
 import { CartContext } from '../../util/context/cartContext';
 import { CartCookieContext } from '../../util/context/cookieContext';
 import MobileMenuBars from '../Icons/MobileMenuBars';
 import ShoppingBag from '../Icons/ShoppingBag';
+import User from '../Icons/User';
 import MobileMenu from '../Mobile/MobileMenu';
 import NavMenu from './NavMenu';
 
@@ -104,6 +106,14 @@ const shoppingBagStyle = (itemsInCart: boolean) => css`
   }
 `;
 
+const userIconStyle = css`
+  .userIcon {
+    width: 24px;
+    height: 24px;
+    text-decoration: none;
+  }
+`;
+
 // get window width
 export const getScreenSize = () => {
   const [screenSize, setScreenSize] = useState(0);
@@ -127,10 +137,19 @@ export const getScreenSize = () => {
 
 export const BREAKPOINT_AT_768 = 768;
 
+const UserIcon = () => {
+  return (
+    <Link href={{ pathname: '/myaccount' }} passHref data-test-id="userIcon">
+      <User />
+    </Link>
+  );
+};
+
 export default function Navigation() {
   const screenwidth = getScreenSize();
   const { cartCount } = useContext(CartCookieContext);
   const { toggleMenu, toggleMobileMenu } = useContext(CartContext);
+  const { user } = useAuth();
 
   const toggleMobileMenuHandler = () => {
     toggleMobileMenu();
@@ -184,6 +203,7 @@ export default function Navigation() {
                 </button>
               </li>
             )}
+            <li css={userIconStyle}>{user.uid && <UserIcon />}</li>
             <li>{shoppingBagIcon()}</li>
           </ul>
         </section>
