@@ -55,7 +55,7 @@ const userAccount = css`
       gap: 0.5rem;
       > div:first-of-type {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(6, 1fr);
       }
     }
   }
@@ -129,7 +129,17 @@ export default function Account({
                       <h4>Products</h4>
                       {order.products.map((product) => (
                         <p key={`${order.order_id}-${product.title}`}>
-                          {product.title} {product.id}
+                          {product.title}
+                        </p>
+                      ))}
+                    </div>
+                    <div>
+                      <h4>Quantity</h4>
+                      {order.products.map((product) => (
+                        <p
+                          key={`${order.order_id}-${product.title}-${product.quantity}`}
+                        >
+                          {product.quantity}
                         </p>
                       ))}
                     </div>
