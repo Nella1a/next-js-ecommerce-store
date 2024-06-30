@@ -34,3 +34,36 @@ export type ProductImageDetails = {
   title?: string;
   src: string | null;
 };
+
+export type SerializedOrders = {
+  quantity: number;
+  product_id: number;
+  order_id: number;
+  product: { [key: string]: string | number };
+  order: Orders;
+};
+
+export type Orders = {
+  order_id: number;
+  created_at: string;
+  total_price: string;
+  order_status: { name: string };
+  payment: { status: { name: string } };
+  products: { [key: string]: string | number }[];
+};
+
+export type UserAccount = {
+  email?: string;
+  username?: string;
+  orderCount?: number;
+  orders?: Orders[];
+  isLoggedIn: boolean;
+};
+
+export interface PropsLayoutCart {
+  children?: React.ReactNode;
+}
+
+export type Error = {
+  message: string | undefined;
+};

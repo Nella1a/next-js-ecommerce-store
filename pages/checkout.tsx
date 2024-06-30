@@ -13,7 +13,6 @@ import LayoutNoHeaderAndFooter from '../components/Layout/LayoutNoHeaderFooter';
 import { CartCookieContext } from '../util/context/cookieContext';
 import { cleanedProducts, getPlantsById } from '../util/database';
 import { Cookie, Plant } from '../util/types';
-import { CartProps } from './Cart';
 
 export interface DefaultFormValues {
   shipping: {
@@ -37,7 +36,7 @@ export interface DefaultFormValues {
 
 const defaultValues = {};
 
-export default function CheckOut(props: CartProps) {
+export default function CheckOut(props: { plants: Plant[] }) {
   const [toNextStep, setToNextStep] = useState(false);
   const { user } = useAuth();
   const { removeCookie, clearCartCount } = useContext(CartCookieContext);

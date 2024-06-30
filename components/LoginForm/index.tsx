@@ -5,6 +5,7 @@ import { json } from 'stream/consumers';
 import { useAuth } from '../../AuthProvider';
 import { CartCookieContext } from '../../util/context/cookieContext';
 import { OverlayContext } from '../../util/context/overlayContext';
+import { Error } from '../../util/types';
 import { errorStyle } from '../CheckoutForm/Shipping';
 import { loginAndRegisterForm } from '../elements';
 import { apiErrorStyle } from '../RegisterForm';
@@ -14,9 +15,6 @@ export interface DefaultFormValues {
   password: string;
 }
 
-interface Error {
-  message: string | undefined;
-}
 export default function LoginForm() {
   const defaultValues = {};
   const router = useRouter();

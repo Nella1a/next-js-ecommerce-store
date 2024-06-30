@@ -28,13 +28,13 @@ const changeCartQuantityButtons = css`
   }
 `;
 
-type Props = {
+type UpdateQuantity = {
   quantity: number;
   increment: () => void;
   decrement: () => void;
 };
 
-export default function ChangeCartQuantity(props: Props) {
+export default function ChangeCartQuantity(props: UpdateQuantity) {
   return (
     <div>
       <div css={changeCartQuantityButtons}>

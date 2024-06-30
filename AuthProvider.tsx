@@ -5,9 +5,7 @@ import {
 import { createContext, useContext, useEffect, useState } from 'react';
 import { auth } from './util/firebase-config';
 
-type AuthStatus = 'authenticated' | 'unauthenticated' | 'loading';
-type Error = { error: { message: string } };
-// User data type interface
+// User data type
 interface UserType {
   email: string | null;
   uid: string | null;

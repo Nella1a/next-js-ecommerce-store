@@ -33,12 +33,12 @@ const newsLetterForm = css`
   }
 `;
 
-type Props = {
+type NewsLetterEmail = {
   email: string;
   setEmail: (email: string) => void;
 };
 
-export default function FormNewsletter({ email, setEmail }: Props) {
+export default function FormNewsletter({ email, setEmail }: NewsLetterEmail) {
   return (
     <form
       action="#"

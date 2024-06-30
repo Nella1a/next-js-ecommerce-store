@@ -53,13 +53,12 @@ export function multiplePriceAndQuantity(price: number, quantity: number) {
 }
 
 export default function CheckoutProductCard(props: { plant: Plant }) {
-  const { id, title, price, quantity } = props.plant;
-  const { plant } = props;
+  const { title, price, quantity } = props.plant;
 
   return (
     <div css={checkoutProductCardStyle}>
       <div>
-        <CartItem plant={plant} />
+        <CartItem plant={props.plant} />
       </div>
 
       <div>

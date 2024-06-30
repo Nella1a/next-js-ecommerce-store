@@ -9,6 +9,7 @@ import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import prisma from '../prisma';
 import { getUsersOrderHistory } from '../util/database';
 import { firebaseAdmin } from '../util/firebase-admin-config';
+import { Orders, SerializedOrders, UserAccount } from '../util/types';
 
 const userAccount = css`
   ${container};
@@ -59,31 +60,6 @@ const userAccount = css`
     }
   }
 `;
-
-type SerializedOrders = {
-  quantity: number;
-  product_id: number;
-  order_id: number;
-  product: { [key: string]: string | number };
-  order: Orders;
-};
-
-type Orders = {
-  order_id: number;
-  created_at: string;
-  total_price: string;
-  order_status: { name: string };
-  payment: { status: { name: string } };
-  products: { [key: string]: string | number }[];
-};
-
-type UserAccount = {
-  email?: string;
-  username?: string;
-  orderCount?: number;
-  orders?: Orders[];
-  isLoggedIn: boolean;
-};
 
 const formateDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString('de-DE');

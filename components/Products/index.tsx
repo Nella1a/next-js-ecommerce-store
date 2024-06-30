@@ -72,11 +72,7 @@ export const productCardStyle = css`
   }
 `;
 
-type Props = {
-  plants: Plant[];
-};
-
-export default function Products(props: Props) {
+export default function Products(props: { plants: Plant[] }) {
   // slug-name
   props.plants.map((plant) => {
     plant.slug = plant.title.toLowerCase().replace(/\s+/g, '-');

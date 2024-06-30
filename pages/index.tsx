@@ -5,7 +5,6 @@ import { bestSellerStyle, summerFavoritesStyle } from '../components/elements';
 import SummerFavoritesSection from '../components/Images/SummerFavoritesSections';
 import Layout from '../components/Layout';
 import Products from '../components/Products';
-import prisma from '../prisma';
 import { cleanedProducts, getAllProducts } from '../util/database';
 import { PropsTypePlantsCartCookieLayer } from '../util/types';
 

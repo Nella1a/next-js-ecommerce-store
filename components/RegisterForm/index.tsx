@@ -4,6 +4,7 @@ import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../AuthProvider';
 import { OverlayContext } from '../../util/context/overlayContext';
+import { Error } from '../../util/types';
 import { errorStyle } from '../CheckoutForm/Shipping';
 import { loginAndRegisterForm } from '../elements';
 
@@ -18,10 +19,6 @@ export interface DefaultFormValues {
   lastName?: string;
   username: string;
   password: string;
-}
-
-interface Error {
-  message: string | undefined;
 }
 
 export default function RegisterForm() {

@@ -17,11 +17,11 @@ const buttonCallToAction = () => css`
   }
 `;
 
-type ButtonText = {
+export default function ButtonCallToAction({
+  innerText,
+}: {
   innerText: string;
-};
-
-export default function ButtonCallToAction({ innerText }: ButtonText) {
+}) {
   return (
     <Link
       href={{

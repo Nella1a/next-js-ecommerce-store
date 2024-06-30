@@ -14,11 +14,7 @@ import { CartCookieContext } from '../util/context/cookieContext';
 import { cleanedProducts, getPlantsById } from '../util/database';
 import { Cookie, Plant } from '../util/types';
 
-export type CartProps = {
-  plants: Plant[];
-};
-
-export default function Cart(props: CartProps) {
+export default function Cart(props: { plants: Plant[] }) {
   const [cartProducts] = useState(props.plants);
   const { cartCount, currentCookie } = useContext(CartCookieContext);
   const { cartItems } = useContext(CartContext);

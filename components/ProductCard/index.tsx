@@ -1,20 +1,9 @@
 import { CldImage } from 'next-cloudinary';
+import { Plant } from '../../util/types';
 import ImageNotFound from '../Icons/ImageNotFound';
 
-type Plants = {
-  id: number;
-  title: string;
-  price: number;
-  slug?: string;
-  img_url: { url: string | null }[];
-};
-
-type Props = {
-  plant: Plants;
-};
-
-export default function ProductCard(props: Props) {
-  const { id, slug, title, price, img_url } = props.plant;
+export default function ProductCard(props: { plant: Plant }) {
+  const { title, price, img_url } = props.plant;
 
   return (
     <>
