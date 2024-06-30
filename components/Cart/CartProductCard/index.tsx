@@ -2,23 +2,19 @@ import { useContext } from 'react';
 import { useAuth } from '../../../AuthProvider';
 import { CartContext } from '../../../util/context/cartContext';
 import { CartCookieContext } from '../../../util/context/cookieContext';
-import { Cart } from '../../../util/types';
+import { Plant } from '../../../util/types';
 import ChangeCartQuantity from '../../ChangeCartQuantity';
 import CartItem from '../CartItem';
-
-type Props = {
-  plant: Cart;
-};
 
 // calculates subtotal price
 export function multiplePriceAndQuantity(price: number, quantity: number) {
   return price * quantity;
 }
 
-export default function CartProductCard(props: Props) {
+export default function CartProductCard({ plant }: { plant: Plant }) {
   const { user } = useAuth();
-  const { id, title, price, quantity } = props.plant;
-  const { plant } = props;
+  const { id, title, price, quantity } = plant;
+
   const { updateCartQuantity, deleteProductFromCookie } =
     useContext(CartCookieContext);
   const { updateCartProduct, deleteProductFromCart } = useContext(CartContext);

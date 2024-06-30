@@ -1,25 +1,15 @@
-import { Decimal } from '@prisma/client/runtime/library';
-
 export type Plant = {
   id: number;
   title: string;
   price: number;
-  descr: string;
+  descr?: string;
   slug: string;
   img_url: { url: string | null }[];
+  quantity: number;
 };
 
 export interface Cookie {
   id: number;
-  quantity: number;
-}
-
-export interface Cart extends Cookie {
-  price: number;
-  title: string;
-}
-
-export interface PlantsAndQuantity extends Plant {
   quantity: number;
 }
 

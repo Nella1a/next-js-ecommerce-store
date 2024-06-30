@@ -1,15 +1,11 @@
 import Link from 'next/link';
-import { PlantsAndQuantity } from '../../../util/types';
+import { Plant } from '../../../util/types';
 import ProductImageSmall from '../../Images/ProductImageSmall';
 
-type Props = {
-  plant: PlantsAndQuantity;
-};
-
-export default function CartItem({ plant }: Props) {
+export default function CartItem({ plant }: { plant: Plant }) {
   return (
     <Link href={`/product/${plant.slug}`} passHref>
-      <ProductImageSmall src={`/image${plant.id}.jpg`} />
+      {plant.img_url && <ProductImageSmall src={plant.img_url[0].url} />}
     </Link>
   );
 }

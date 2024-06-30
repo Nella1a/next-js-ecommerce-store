@@ -12,10 +12,10 @@ import prisma from '../prisma';
 import { CartContext } from '../util/context/cartContext';
 import { CartCookieContext } from '../util/context/cookieContext';
 import { cleanedProducts, getPlantsById } from '../util/database';
-import { Cookie, Plant, PlantsAndQuantity } from '../util/types';
+import { Cookie, Plant } from '../util/types';
 
 export type CartProps = {
-  plants: PlantsAndQuantity[];
+  plants: Plant[];
 };
 
 export default function Cart(props: CartProps) {
@@ -89,7 +89,7 @@ export default function Cart(props: CartProps) {
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext,
-): Promise<GetServerSidePropsResult<{ plants: PlantsAndQuantity[] }>> {
+): Promise<GetServerSidePropsResult<{ plants: Plant[] }>> {
   const cartCookie: Cookie[] = JSON.parse(context.req.cookies.cart || '[]');
 
   // typescript narrowing

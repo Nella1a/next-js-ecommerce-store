@@ -1,6 +1,6 @@
 import { Decimal } from '@prisma/client/runtime/library.js';
 import prisma from '../prisma';
-import { Cookie, Plant, User } from './types';
+import { Cookie, User } from './types';
 
 export type PlantWithPriceDecimal = {
   id: number;

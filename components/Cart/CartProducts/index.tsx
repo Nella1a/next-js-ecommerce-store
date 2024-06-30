@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { Dispatch, SetStateAction, useContext } from 'react';
 import { CartContext } from '../../../util/context/cartContext';
-import { PlantsAndQuantity } from '../../../util/types';
+import { Plant } from '../../../util/types';
 import CartProductCard from '../CartProductCard';
 
 const cartProductCard = css`
@@ -77,7 +77,7 @@ const cartProductCard = css`
 `;
 
 type Props = {
-  setCartProducts: Dispatch<SetStateAction<PlantsAndQuantity[]>>;
+  setCartProducts: Dispatch<SetStateAction<Plant[]>>;
 };
 
 export default function CartProducts() {

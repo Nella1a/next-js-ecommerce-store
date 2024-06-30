@@ -3,17 +3,16 @@ import Head from 'next/head';
 import Router from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { AuthContextProvider, useAuth } from '../AuthProvider';
+import { useAuth } from '../AuthProvider';
 import OrderTotal from '../components/Cart/OrderTotal';
 import Payment from '../components/CheckoutForm/Payment';
 import Shipping from '../components/CheckoutForm/Shipping';
 import CheckoutProductCard from '../components/CheckoutProductCard';
 import { checkoutFormStyle, checkoutPageStyle } from '../components/elements';
 import LayoutNoHeaderAndFooter from '../components/Layout/LayoutNoHeaderFooter';
-import prisma from '../prisma';
 import { CartCookieContext } from '../util/context/cookieContext';
 import { cleanedProducts, getPlantsById } from '../util/database';
-import { Cookie, PlantsAndQuantity } from '../util/types';
+import { Cookie, Plant } from '../util/types';
 import { CartProps } from './Cart';
 
 export interface DefaultFormValues {
@@ -38,15 +37,12 @@ export interface DefaultFormValues {
 
 const defaultValues = {};
 
-// type Props = {
-//   plants: PlantsAndQuantity[];
-// };
-
 export default function CheckOut(props: CartProps) {
   const [toNextStep, setToNextStep] = useState(false);
   const { user } = useAuth();
   const { removeCookie, clearCartCount } = useContext(CartCookieContext);
   const { pathname } = Router;
+
   const {
     register,
     handleSubmit,
@@ -175,7 +171,7 @@ export default function CheckOut(props: CartProps) {
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext,
-): Promise<GetServerSidePropsResult<{ plants: PlantsAndQuantity[] }>> {
+): Promise<GetServerSidePropsResult<{ plants: Plant[] }>> {
   const cartCookie: Cookie[] = JSON.parse(context.req.cookies.cart || '[]');
 
   // typescript narrowing
