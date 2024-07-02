@@ -25,7 +25,7 @@ const updateProductQuantity = (
   } else {
     const newCookie = cartItems?.map((product) => {
       // find product and update quantity
-      if (product.id === productId) {
+      if (product.id === productId && product.quantity) {
         product.quantity = decrementFlag
           ? product.quantity - quantity
           : product.quantity + quantity;
@@ -42,7 +42,7 @@ const addNewProductToCart = (
   quantity: number,
   price: number,
   title: string,
-  img_url: { url: string }[],
+  img_url: { url: string | null }[],
   slug: string,
 ) => {
   cartItems.push({
@@ -69,7 +69,7 @@ export const CartContext = createContext({
       price: 0,
       slug: '',
       img_url: [] as { url: string | null }[],
-      quantity: 0,
+      // quantity: 0,
     },
   ],
   updateCart: (
@@ -77,7 +77,7 @@ export const CartContext = createContext({
     title: string,
     price: number,
     slug: string,
-    img_url: { url: string }[],
+    img_url: { url: string | null }[],
     quantity: number,
     decrementFlag: boolean = false,
   ) => {},
@@ -102,10 +102,12 @@ export const CartContextProvider = ({ children }: any) => {
   };
 
   useEffect(() => {
-    const sum = currentCartItems.reduce(
-      (total, product) => total + product.quantity * product.price,
-      0,
-    );
+    const sum = currentCartItems.reduce((total, product) => {
+      if (product.quantity) {
+        return total + product.quantity * product.price;
+      }
+      return total;
+    }, 0);
     setTotalPrice(Number(sum.toFixed(2)));
   }, [currentCartItems]);
 
@@ -114,7 +116,7 @@ export const CartContextProvider = ({ children }: any) => {
     title: string,
     price: number,
     slug: string,
-    img_url: { url: string }[],
+    img_url: { url: string | null }[],
     quantity: number,
     decrementFlag = false,
   ) => {
@@ -137,7 +139,7 @@ export const CartContextProvider = ({ children }: any) => {
         slug,
       );
     }
-    setCurrentCartItems([...updatedCartItems]);
+    setCurrentCartItems(updatedCartItems);
   };
 
   const updateCartProduct = (
@@ -151,13 +153,13 @@ export const CartContextProvider = ({ children }: any) => {
       quantity,
       decrementFlag,
     );
-    setCurrentCartItems([...updatedCartItems]);
+    setCurrentCartItems(updatedCartItems);
   };
 
   // clear product from cookie
   const deleteProductFromCart = (removeProductId: number) => {
     const newCart = clearProduct(currentCartItems, removeProductId);
-    setCurrentCartItems([...newCart]);
+    setCurrentCartItems(newCart);
   };
 
   const toggleMobileMenu = () => {
