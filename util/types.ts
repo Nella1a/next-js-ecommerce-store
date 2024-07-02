@@ -5,7 +5,7 @@ export type Plant = {
   descr?: string;
   slug: string;
   img_url: { url: string | null }[];
-  quantity: number;
+  quantity?: number;
 };
 
 export interface Cookie {
