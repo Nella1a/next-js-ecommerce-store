@@ -65,12 +65,14 @@ export default function CartProductCard({ plant }: { plant: Plant }) {
               2,
             )}
           </p>
-
-          <ChangeCartQuantity
-            quantity={quantity}
-            increment={incrementHandler}
-            decrement={decrementHandler}
-          />
+          |
+          {quantity && (
+            <ChangeCartQuantity
+              quantity={quantity}
+              increment={incrementHandler}
+              decrement={decrementHandler}
+            />
+          )}
         </div>
         <div className="removeButton">
           <button

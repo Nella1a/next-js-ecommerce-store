@@ -64,7 +64,7 @@ export default function CheckoutProductCard(props: { plant: Plant }) {
       <div>
         <p>
           <span>{title}</span>
-          {quantity >= 1 && <span>Quantity: {quantity}</span>}
+          {quantity && quantity >= 1 && <span>Quantity: {quantity}</span>}
         </p>
         <p>
           &euro;
