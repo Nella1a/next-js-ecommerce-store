@@ -9,7 +9,7 @@ import {
 } from '../components/elements';
 import Layout from '../components/Layout';
 import Products from '../components/Products';
-import { cleanedProducts, getAllProducts } from '../util/database';
+import { getAllProducts } from '../util/database';
 import { Plant } from '../util/types';
 
 export const productsComponentStyle = css`
@@ -75,11 +75,9 @@ export default function Plants(props: { plants: Plant[] }) {
 export const getStaticProps: GetStaticProps = async () => {
   const products = await getAllProducts();
 
-  const plantsSerializedPrice = cleanedProducts(products);
-
   return {
     props: {
-      plants: plantsSerializedPrice,
+      plants: products,
     },
   };
 };

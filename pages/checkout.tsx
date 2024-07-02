@@ -11,7 +11,7 @@ import CheckoutProductCard from '../components/CheckoutProductCard';
 import { checkoutFormStyle, checkoutPageStyle } from '../components/elements';
 import LayoutNoHeaderAndFooter from '../components/Layout/LayoutNoHeaderFooter';
 import { CartCookieContext } from '../util/context/cookieContext';
-import { cleanedProducts, getPlantsById } from '../util/database';
+import { getPlantsById } from '../util/database';
 import { Cookie, Plant } from '../util/types';
 
 export interface DefaultFormValues {
@@ -188,11 +188,8 @@ export async function getServerSideProps(
   // query db
   const plants = await getPlantsById(plantIds);
 
-  // serialize price
-  const plantsSerializedPrice = cleanedProducts(plants);
-
   // combine db-product info with cookie info:
-  const plantsAndQuantity = plantsSerializedPrice.map((plant) => {
+  const plantsAndQuantity = plants.map((plant) => {
     return {
       ...plant,
       quantity:

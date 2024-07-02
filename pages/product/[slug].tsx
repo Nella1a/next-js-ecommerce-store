@@ -15,7 +15,6 @@ import LayoutNoHeader from '../../components/Layout/LayoutNoHeader';
 import prisma from '../../prisma';
 import { CartContext } from '../../util/context/cartContext';
 import { CartCookieContext } from '../../util/context/cookieContext';
-import { cleanedProducts } from '../../util/database';
 import { Cookie, Plant } from '../../util/types';
 
 type SingleProductProps = {
@@ -27,7 +26,7 @@ export default function SingleProduct(props: SingleProductProps) {
   const [quantity, setQuantity] = useState<number>(1);
   const { setParsedCookie, updateCartQuantity } = useContext(CartCookieContext);
   const { updateCart } = useContext(CartContext);
-  const { id, price, title } = props.plant;
+  const { id, price, title, slug, img_url } = props.plant;
 
   const incrementHandler = () =>
     setQuantity((previousCount) => previousCount + 1);
@@ -44,7 +43,7 @@ export default function SingleProduct(props: SingleProductProps) {
 
   const updateCartAndCookieHandler = () => {
     updateCartQuantity(id, quantity);
-    updateCart(id, price, quantity, title);
+    updateCart(id, title, price, slug, img_url, quantity);
 
     const addToCartFunction = async () => {
       const res = await fetch('/api/addToCart', {
@@ -146,13 +145,20 @@ export async function getServerSideProps(
       },
     },
   });
-  const [plantSerializedPrice] = cleanedProducts(plant);
+
+  // Map over the results to format them with the Plant type
+  const formattedPlants = plant.map((p) => {
+    return {
+      ...p,
+      price: p.price.toNumber(),
+    };
+  });
 
   const cartCookie: Cookie[] = JSON.parse(context.req.cookies.cart || '[]');
 
   return {
     props: {
-      plant: plantSerializedPrice,
+      plant: formattedPlants[0],
       cartCookie: cartCookie,
     },
   };

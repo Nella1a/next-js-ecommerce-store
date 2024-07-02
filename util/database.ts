@@ -11,15 +11,6 @@ export type PlantWithPriceDecimal = {
   img_url: { url: string | null }[];
 };
 
-export const cleanedProducts = (products: PlantWithPriceDecimal[]) => {
-  return products.map((product) => ({
-    ...product,
-
-    // solves error: object Decimal cannot be serialized as JSON
-    price: product.price.toNumber(),
-  }));
-};
-
 export const getUsersOrderHistory = async (userId: number) =>
   await prisma.orderItem.findMany({
     orderBy: [{ order_id: 'desc' }],
@@ -82,7 +73,7 @@ export const updateCartItems = async (cartItems: Cookie[], user: User) => {
 };
 
 export const getAllProducts = async () => {
-  return await prisma.product.findMany({
+  const plants = await prisma.product.findMany({
     include: {
       img_url: {
         select: {
@@ -91,6 +82,16 @@ export const getAllProducts = async () => {
       },
     },
   });
+
+  // serialize price
+  const formattedPlants = plants.map((plant) => {
+    return {
+      ...plant,
+      price: plant.price.toNumber(),
+    };
+  });
+
+  return formattedPlants;
 };
 
 export const getPlantsById = async (plantId: number[]) => {
@@ -109,5 +110,13 @@ export const getPlantsById = async (plantId: number[]) => {
     },
   });
 
-  return plants;
+  // serialize price
+  const formattedPlants = plants.map((plant) => {
+    return {
+      ...plant,
+      price: plant.price.toNumber(),
+    };
+  });
+
+  return formattedPlants;
 };
