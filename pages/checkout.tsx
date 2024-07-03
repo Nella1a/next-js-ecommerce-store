@@ -50,15 +50,11 @@ export default function CheckOut(props: { plants: Plant[] }) {
     trigger,
     getValues,
   } = useForm<DefaultFormValues>({ defaultValues });
-  console.log('USER: ', user);
-  const onSubmit = async (data: DefaultFormValues): Promise<void> => {
-    console.log('FormDATA: ', data);
 
+  const onSubmit = async (data: DefaultFormValues): Promise<void> => {
     // check if user is logged in
     if (user) {
-      console.log('errors: ', errors);
       try {
-        console.log('HELLO2');
         const response = await fetch('api/checkout', {
           method: 'POST',
           headers: {
@@ -70,7 +66,6 @@ export default function CheckOut(props: { plants: Plant[] }) {
         });
 
         const result = await response.json();
-        console.log('result: ', result);
 
         if (pathname == '/checkout') {
           removeCookie('cart');
@@ -79,7 +74,7 @@ export default function CheckOut(props: { plants: Plant[] }) {
         }
       } catch (error) {
         console.log(console.error);
-        alert('ups something went wrong');
+        alert('Oops, something went wrong.');
       }
     }
   };
