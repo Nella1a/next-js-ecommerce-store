@@ -64,7 +64,11 @@ export default async function addToCartHandler(
         } else
           return res
             .status(500)
-            .json({ error: { message: 'Oops, something went wrong ' } });
+            .json({
+              error: {
+                message: 'Oops, something went wrong while updating the cart',
+              },
+            });
       } else {
         // add new item
         const newCartItem = await prisma.cartItem.create({
@@ -82,7 +86,11 @@ export default async function addToCartHandler(
         } else {
           return res
             .status(500)
-            .json({ error: { message: 'Oops, something went wrong ' } });
+            .json({
+              error: {
+                message: 'Oops, something went wrong while updating the cart',
+              },
+            });
         }
       }
     } else {
