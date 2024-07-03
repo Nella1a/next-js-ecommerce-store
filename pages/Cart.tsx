@@ -2,12 +2,12 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
+import { useAuth } from '../AuthProvider';
 import CartProducts from '../components/Cart/CartProducts';
 import OrderTotal from '../components/Cart/OrderTotal';
 import { shoppingCartStyle } from '../components/elements';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import Placeholder from '../components/Placeholder';
-import prisma from '../prisma';
 //import { disableGrayLayer } from '../hooks';
 import { CartContext } from '../util/context/cartContext';
 import { CartCookieContext } from '../util/context/cookieContext';
@@ -18,6 +18,7 @@ export default function Cart(props: { plants: Plant[] }) {
   const [cartProducts] = useState(props.plants);
   const { cartCount, currentCookie } = useContext(CartCookieContext);
   const { cartItems } = useContext(CartContext);
+  const { user } = useAuth();
 
   useEffect(() => {
     cartItems(props.plants);
@@ -35,19 +36,22 @@ export default function Cart(props: { plants: Plant[] }) {
   );
 
   const onClickHandler = async () => {
-    //ToDo: check if user is logged in
-    const response = await fetch('api/cart/update', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        cart: currentCookie,
-      }),
-    });
-
-    const result = response.json();
-    console.log('RESULT CHECKOUT:   ', result);
+    if (user) {
+      try {
+        await fetch('api/cart/update', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            cart: currentCookie,
+          }),
+        });
+      } catch (error: any) {
+        alert('Please sign in to continue with your order.');
+        console.log(error.message);
+      }
+    }
   };
 
   // case: cookie set
