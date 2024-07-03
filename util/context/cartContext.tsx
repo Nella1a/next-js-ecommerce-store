@@ -69,7 +69,6 @@ export const CartContext = createContext({
       price: 0,
       slug: '',
       img_url: [] as { url: string | null }[],
-      // quantity: 0,
     },
   ],
   updateCart: (
