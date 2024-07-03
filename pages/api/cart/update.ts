@@ -10,7 +10,7 @@ type ResponseData =
       product_id: number;
       quantity: number;
     }[]
-  | { errors: { message: string } };
+  | { error: { message: string } };
 
 export default async function handler(
   req: NextApiRequest,
@@ -60,7 +60,7 @@ export default async function handler(
       return;
     } else {
       res.status(401).json({
-        errors: { message: 'Unauthorized' },
+        error: { message: 'Unauthorized' },
       });
     }
   } else {
