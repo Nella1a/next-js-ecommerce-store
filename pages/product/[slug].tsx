@@ -1,6 +1,7 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Head from 'next/head';
 import { useContext, useEffect, useState } from 'react';
+import { useAuth } from '../../AuthProvider';
 import ChangeCartQuantity from '../../components/ChangeCartQuantity';
 import {
   imageGallery,
@@ -26,6 +27,7 @@ export default function SingleProduct(props: SingleProductProps) {
   const [quantity, setQuantity] = useState<number>(1);
   const { setParsedCookie, updateCartQuantity } = useContext(CartCookieContext);
   const { updateCart } = useContext(CartContext);
+  const { user } = useAuth();
   const { id, price, title, slug, img_url } = props.plant;
 
   const incrementHandler = () =>
@@ -46,18 +48,18 @@ export default function SingleProduct(props: SingleProductProps) {
     updateCart(id, title, price, slug, img_url, quantity);
 
     const addToCartFunction = async () => {
-      const res = await fetch('/api/addToCart', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id, quantity }),
-      });
-
-      const response = await res.json();
-
-      if ('error' in response) {
-        return null;
+      if (user) {
+        try {
+          await fetch('/api/addToCart', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id, quantity }),
+          });
+        } catch (error) {
+          console.log(error);
+        }
       }
     };
 
