@@ -104,7 +104,6 @@ const CartProductCard = ({ plant }: { plant: Plant }) => {
               2,
             )}
           </p>
-          |
           {quantity && (
             <ChangeCartQuantity
               quantity={quantity}
