@@ -47,7 +47,6 @@ export default async function addToCartHandler(
       if (cartItems.length > 0) {
         // update quantity
         // todo: add try{}catch()?
-        console.log('----------> CARTITEMS: ', cartItems);
         const updatedQuantity = addItemToCart.increment
           ? cartItems[0].quantity + addItemToCart.quantity
           : cartItems[0].quantity - addItemToCart.quantity;

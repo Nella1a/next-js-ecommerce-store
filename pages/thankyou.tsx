@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Layout from '../components/Layout';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import { underConstruction } from '../components/Placeholder';
 

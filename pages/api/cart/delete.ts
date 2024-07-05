@@ -2,7 +2,6 @@ import { getCookie } from 'cookies-next';
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../prisma';
 import { firebaseAdmin } from '../../../util/firebase-admin-config';
-import { Cookie } from '../../../util/types';
 import { ErrorAPI } from '../register';
 
 export type DeleteItemFromCartResponseBody =
@@ -14,8 +13,6 @@ export default async function handler(
   res: NextApiResponse<DeleteItemFromCartResponseBody | ErrorAPI>,
 ) {
   if (req.method === 'DELETE') {
-    console.log('--------> IN DELETE <---------');
-
     const accessToken = getCookie('accessToken', { req, res });
 
     if (accessToken) {

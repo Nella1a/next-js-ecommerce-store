@@ -104,7 +104,7 @@ export default function MobileMenu() {
       document.body.style.overflow = 'scroll';
     }
   }, [toggleMenu]);
-  console.log('burgerMenu: ', toggleMenu);
+
   const toggleMobileMenuHandler = () => {
     toggleMobileMenu();
   };

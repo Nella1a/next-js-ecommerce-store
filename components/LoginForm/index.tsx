@@ -31,7 +31,6 @@ export default function LoginForm() {
   const [error, setError] = useState<Error>({ message: undefined });
   const { logIn, logOut } = useAuth();
   const { currentCookie } = useContext(CartCookieContext);
-  console.log('currenCookie: ', currentCookie);
 
   const onSubmit = async (formValues: DefaultFormValues) => {
     setError({ message: undefined });

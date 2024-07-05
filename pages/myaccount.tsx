@@ -83,8 +83,6 @@ export default function Account({
     }
   }, [isLoggedIn]);
 
-  console.log('is logged in: ', isLoggedIn);
-
   return (
     <LayoutNoHeader>
       <section css={userAccount}>
@@ -250,7 +248,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     }
   } catch (error: any) {
     // user not logged in
-    console.log('\n ERORR: ', error);
 
     if (error.code === 'auth/id-token-expired') {
       return {

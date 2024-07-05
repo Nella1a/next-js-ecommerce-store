@@ -73,15 +73,12 @@ export default function CheckOut(props: { plants: Plant[] }) {
           Router.push('/thankyou');
         }
       } catch (error) {
-        console.log(console.error);
         alert('Oops, something went wrong.');
       }
     }
   };
 
   const submitShippingInfosHandler = async (event: any) => {
-    const shippingValues = getValues('shipping');
-    console.log('shipping Values: ', shippingValues);
     const noErrors = await trigger('shipping');
     if (noErrors) {
       setToNextStep(true);

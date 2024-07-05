@@ -64,7 +64,6 @@ const CartProductCard = ({ plant }: { plant: Plant }) => {
           }),
         });
         const result = await response.json();
-        console.log('RESULT: ', result);
       } else {
         await addToCartFunction(false, QUANTITY_OF_ONE);
       }
@@ -87,7 +86,6 @@ const CartProductCard = ({ plant }: { plant: Plant }) => {
         }),
       });
       const result = await response.json();
-      console.log('RESULT: ', result);
     }
   };
 
