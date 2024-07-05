@@ -45,6 +45,7 @@ export const navigation = () => css`
       a:hover,
       a:active {
         font-weight: bold;
+        color: var(--text-color);
       }
 
       > li:nth-of-type(2) button {
