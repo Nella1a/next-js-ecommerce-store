@@ -50,7 +50,7 @@ export default function SingleProduct(props: SingleProductProps) {
     const addToCartFunction = async () => {
       if (user) {
         try {
-          await fetch('/api/addToCart', {
+          await fetch('/api/cart/addToCart', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

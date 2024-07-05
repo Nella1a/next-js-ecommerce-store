@@ -1,7 +1,7 @@
 import { getCookie } from 'cookies-next';
 import { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '../../prisma';
-import { firebaseAdmin } from '../../util/firebase-admin-config';
+import prisma from '../../../prisma';
+import { firebaseAdmin } from '../../../util/firebase-admin-config';
 
 export type AddToCartResponseBody =
   | { error: { message: string } }
@@ -62,13 +62,11 @@ export default async function addToCartHandler(
             quantity: itemUpdatedQuantity.quantity,
           });
         } else
-          return res
-            .status(500)
-            .json({
-              error: {
-                message: 'Oops, something went wrong while updating the cart',
-              },
-            });
+          return res.status(500).json({
+            error: {
+              message: 'Oops, something went wrong while updating the cart',
+            },
+          });
       } else {
         // add new item
         const newCartItem = await prisma.cartItem.create({
@@ -84,13 +82,11 @@ export default async function addToCartHandler(
             .status(200)
             .json({ id: newCartItem.id, quantity: newCartItem.quantity });
         } else {
-          return res
-            .status(500)
-            .json({
-              error: {
-                message: 'Oops, something went wrong while updating the cart',
-              },
-            });
+          return res.status(500).json({
+            error: {
+              message: 'Oops, something went wrong while updating the cart',
+            },
+          });
         }
       }
     } else {
