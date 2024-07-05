@@ -53,6 +53,9 @@ export default function CheckOut(props: { plants: Plant[] }) {
 
   const onSubmit = async (data: DefaultFormValues): Promise<void> => {
     // check if user is logged in
+
+    data.payment.cardNumber = 0;
+    data.payment.securityCode = 0;
     if (user) {
       try {
         const response = await fetch('api/checkout', {
