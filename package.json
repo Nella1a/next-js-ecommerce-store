@@ -57,6 +57,6 @@
     ".next/cache"
   ],
   "prisma": {
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.js"
+    "seed": "ts-node prisma/seed.js"
   }
 }
