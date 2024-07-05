@@ -30,9 +30,16 @@ export const globalStyleBody = css`
     /* base color */
     --text-color: #343a40;
     --main-bg-color: #f8f9fa;
-    --color-btn-primary-bg: #f76707;
-    --color-btn-text: #343a40;
-    --color-btn-hover: #ff922b;
+
+    //--color-btn-primary-bg: #f76707;
+    //--color-btn-hover: #ff922b;
+
+    //--color-btn-primary-bg: #f2be5c;
+    //--color-btn-hover: #ffcd70;
+
+    --color-btn-primary-bg: #eda974;
+    --color-btn-hover: #f7b481;
+
     --color-white: #ffff;
     --color-grey-6: #868e96;
     --color-grey-5: #adb5bd;
@@ -111,15 +118,10 @@ export const globalStyleBody = css`
   }
 
   a:link,
-  a:visited {
-    text-decoration: none;
-    color: var(--text-color);
-  }
-
+  a:visited,
   a:hover,
   a:active {
     text-decoration: none;
-    color: var(--text-color);
   }
 `;
 
@@ -160,6 +162,7 @@ export const btn = {
   padding: '1rem',
   border: 'none',
   cursor: 'pointer',
+  color: '#fff',
 };
 
 const flexCenter = {
@@ -555,9 +558,7 @@ export const productDetailsContainer = css`
         ${btn};
         display: inline-block;
         background-color: var(--color-btn-primary-bg);
-        color: var(--text-color);
         ${size('17.65rem', '1.47rem')}
-
         :hover {
           background-color: var(--color-btn-hover);
         }

@@ -1,22 +1,11 @@
-type Plants = {
-  id: number;
-  title: string;
-  price: number;
-};
-
-export interface PlantsTwo {
-  id: number;
-  title: string;
-  price: number;
-  descr: string;
-}
-
 export type Plant = {
   id: number;
   title: string;
   price: number;
-  descr: string;
+  descr?: string;
   slug: string;
+  img_url: { url: string | null }[];
+  quantity?: number;
 };
 
 export interface Cookie {
@@ -24,35 +13,10 @@ export interface Cookie {
   quantity: number;
 }
 
-export interface Cart {
-  id: number;
-  quantity: number;
-  price: number;
-  title: string;
-}
-
-export interface PlantsAndDescription extends Plants {
-  descr: string;
-}
-
-// actually same as CART
-export interface PlantsAndQuantity {
-  quantity: number;
-  id: number;
-  title: string;
-  price: number;
-  descr?: string;
-  slug?: string;
-}
-
 export interface PropsTypeChildrenLayer {
   children?: React.ReactNode;
-  bgImageHero?: any;
+  imgUrl?: any;
   buttonInHeroImage?: any;
-}
-
-export interface PropsLayoutCart {
-  children?: React.ReactNode;
 }
 
 export interface PropsTypePlantsCartCookieLayer {
@@ -60,11 +24,46 @@ export interface PropsTypePlantsCartCookieLayer {
   cartCookies: Plant[];
 }
 
-export interface PropsTypePlantsLayer {
-  plants: Plant[];
+export type User = {
+  id: number;
+  email: string;
+  username: string;
+};
+
+export type ProductImageDetails = {
+  title?: string;
+  src: string | null;
+};
+
+export type SerializedOrders = {
+  quantity: number;
+  product_id: number;
+  order_id: number;
+  product: { [key: string]: string | number };
+  order: Orders;
+};
+
+export type Orders = {
+  order_id: number;
+  created_at: string;
+  total_price: string;
+  order_status: { name: string };
+  payment: { status: { name: string } };
+  products: { [key: string]: string | number }[];
+};
+
+export type UserAccount = {
+  email?: string;
+  username?: string;
+  orderCount?: number;
+  orders?: Orders[];
+  isLoggedIn: boolean;
+};
+
+export interface PropsLayoutCart {
+  children?: React.ReactNode;
 }
 
-export interface PropsTypePlantsCartCookieLayerPlantId {
-  plant: Plant;
-  cartCookie: Cookie[];
-}
+export type Error = {
+  message: string | undefined;
+};

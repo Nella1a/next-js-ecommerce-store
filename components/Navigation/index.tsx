@@ -2,8 +2,12 @@ import { css } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, useContext, useEffect, useState } from 'react';
+import { useAuth } from '../../AuthProvider';
 import { CartContext } from '../../util/context/cartContext';
 import { CartCookieContext } from '../../util/context/cookieContext';
+import MobileMenuBars from '../Icons/MobileMenuBars';
+import ShoppingBag from '../Icons/ShoppingBag';
+import User from '../Icons/User';
 import MobileMenu from '../Mobile/MobileMenu';
 import NavMenu from './NavMenu';
 
@@ -41,6 +45,7 @@ export const navigation = () => css`
       a:hover,
       a:active {
         font-weight: bold;
+        color: var(--text-color);
       }
 
       > li:nth-of-type(2) button {
@@ -102,6 +107,14 @@ const shoppingBagStyle = (itemsInCart: boolean) => css`
   }
 `;
 
+const userIconStyle = css`
+  .userIcon {
+    width: 24px;
+    height: 24px;
+    text-decoration: none;
+  }
+`;
+
 // get window width
 export const getScreenSize = () => {
   const [screenSize, setScreenSize] = useState(0);
@@ -125,10 +138,19 @@ export const getScreenSize = () => {
 
 export const BREAKPOINT_AT_768 = 768;
 
+const UserIcon = () => {
+  return (
+    <Link href={{ pathname: '/myaccount' }} passHref data-test-id="userIcon">
+      <User />
+    </Link>
+  );
+};
+
 export default function Navigation() {
   const screenwidth = getScreenSize();
   const { cartCount } = useContext(CartCookieContext);
   const { toggleMenu, toggleMobileMenu } = useContext(CartContext);
+  const { user } = useAuth();
 
   const toggleMobileMenuHandler = () => {
     toggleMobileMenu();
@@ -143,21 +165,7 @@ export default function Navigation() {
       css={shoppingBagStyle(Boolean(cartCount))}
       data-test-id="cart-link"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth="1.5"
-        stroke="currentColor"
-        className="shoppingBagSVG"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-        />
-      </svg>
-
+      <ShoppingBag />
       <span>
         <span data-test-id="cart-count">{cartCount}</span>
       </span>
@@ -177,7 +185,6 @@ export default function Navigation() {
                   alt={'logo she loves plants'}
                   width={'250'}
                   height={'36'}
-                  priority
                 />
               </Link>
             </li>
@@ -193,23 +200,11 @@ export default function Navigation() {
                   aria-label={'Open the menu'}
                   aria-expanded={`${toggleMenu}`}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="hamburgerIcon"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                    />
-                  </svg>
+                  <MobileMenuBars />
                 </button>
               </li>
             )}
+            <li css={userIconStyle}>{user.uid && <UserIcon />}</li>
             <li>{shoppingBagIcon()}</li>
           </ul>
         </section>

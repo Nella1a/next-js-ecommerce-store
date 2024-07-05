@@ -56,11 +56,7 @@ export const loginLayoverStyle = (loginLayover: boolean) => css`
   }
 `;
 
-type Props = {
-  token: string;
-};
-
-export default function LoginInFormLayover(props: Props) {
+export default function LoginInFormLayover(props: { token: string }) {
   const { toggle, toggleLayover, loginLayover, toggleLoginLayover } =
     useContext(OverlayContext);
   const pathName = usePathname();

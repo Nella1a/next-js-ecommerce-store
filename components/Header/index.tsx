@@ -18,7 +18,7 @@ export function Header(props: any) {
       <BackGImage
         firstText=""
         secondText=""
-        bgImageHero={props.bgImageHero}
+        imgUrl={props.imgUrl}
         buttonInHeroImage={props.buttonInHeroImage}
       />
     </header>

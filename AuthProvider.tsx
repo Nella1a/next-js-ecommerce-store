@@ -1,14 +1,11 @@
 import {
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { auth } from './util/firebase-config';
 
-type AuthStatus = 'authenticated' | 'unauthenticated' | 'loading';
-type Error = { error: { message: string } };
-// User data type interface
+// User data type
 interface UserType {
   email: string | null;
   uid: string | null;
@@ -32,7 +29,7 @@ export const AuthContextProvider = ({
 
   // Update the state depending on auth
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setUser({
           email: user.email,

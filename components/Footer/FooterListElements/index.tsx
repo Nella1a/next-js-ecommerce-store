@@ -8,11 +8,11 @@ const footerListElements = css`
   font-size: 0.9rem;
 `;
 
-type Props = {
+type FooterInfos = {
   info: { [key: string]: string };
 };
 
-export default function FooterListElements(props: Props) {
+export default function FooterListElements(props: FooterInfos) {
   const { info } = props;
   return (
     <ul css={footerListElements}>

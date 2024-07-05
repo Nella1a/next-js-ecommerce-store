@@ -1,11 +1,14 @@
 import { css } from '@emotion/react';
 import { marginTop } from '../elements';
+import ShieldChecked from '../Icons/ShieldChecked';
+import StarIcon from '../Icons/StarIcon';
+import Truck from '../Icons/Truck';
 
 export const deliveryInfos = css`
   ${marginTop}
-  //  border: 2px solid red;
+
   background-color: var(--color-green);
-  //color: #000;
+  color: var(--color-white);
   height: 8rem;
   max-width: unset;
   width: 100vw;
@@ -27,13 +30,25 @@ export const deliveryInfos = css`
       display: flex;
       align-items: center;
       justify-content: center;
-      //border: 1px solid black;
+
       > div {
-        width: 3rem;
-        height: 3rem;
-        background-color: lightgrey;
+        border: 1px solid var(--color-white);
+        width: 2rem;
+        height: 2rem;
         border-radius: 50%;
         margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        > span {
+          display: block;
+          height: 50%;
+          width: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
       }
     }
 
@@ -55,15 +70,27 @@ export default function Delivery() {
     <section css={deliveryInfos}>
       <div>
         <article>
-          <div></div>
+          <div>
+            <span>
+              <Truck />
+            </span>
+          </div>
           <p>Free Shipping</p>
         </article>
         <article>
-          <div></div>
+          <div>
+            <span>
+              <ShieldChecked />
+            </span>
+          </div>
           <p>30 Day Guarantee</p>
         </article>
         <article>
-          <div></div>
+          <div>
+            <span>
+              <StarIcon />
+            </span>
+          </div>
           <p>Best Quality</p>
         </article>
       </div>

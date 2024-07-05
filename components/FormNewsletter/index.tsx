@@ -25,7 +25,6 @@ const newsLetterForm = css`
   button {
     ${btn}
     background-color: var(--color-btn-primary-bg);
-    color: var(--text-color);
 
     &:hover {
       background-color: var(--color-btn-hover);
@@ -33,12 +32,12 @@ const newsLetterForm = css`
   }
 `;
 
-type Props = {
+type NewsLetterEmail = {
   email: string;
   setEmail: (email: string) => void;
 };
 
-export default function FormNewsletter({ email, setEmail }: Props) {
+export default function FormNewsletter({ email, setEmail }: NewsLetterEmail) {
   return (
     <form
       action="#"

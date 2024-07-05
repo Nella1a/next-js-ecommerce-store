@@ -17,7 +17,7 @@ export default function Layout(props: PropsTypeChildrenLayer) {
       <Header
         firstText="Delivering Plants,"
         secondText="Delivering Happiness!"
-        bgImageHero={props.bgImageHero}
+        imgUrl={props.imgUrl}
         buttonInHeroImage={props.buttonInHeroImage}
       />
 

@@ -1,8 +1,11 @@
 import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { json } from 'stream/consumers';
 import { useAuth } from '../../AuthProvider';
+import { CartCookieContext } from '../../util/context/cookieContext';
 import { OverlayContext } from '../../util/context/overlayContext';
+import { Error } from '../../util/types';
 import { errorStyle } from '../CheckoutForm/Shipping';
 import { loginAndRegisterForm } from '../elements';
 import { apiErrorStyle } from '../RegisterForm';
@@ -12,9 +15,6 @@ export interface DefaultFormValues {
   password: string;
 }
 
-interface Error {
-  message: string | undefined;
-}
 export default function LoginForm() {
   const defaultValues = {};
   const router = useRouter();
@@ -30,6 +30,7 @@ export default function LoginForm() {
   const { loginLayover, toggleLoginLayover } = useContext(OverlayContext);
   const [error, setError] = useState<Error>({ message: undefined });
   const { logIn, logOut } = useAuth();
+  const { currentCookie } = useContext(CartCookieContext);
 
   const onSubmit = async (formValues: DefaultFormValues) => {
     setError({ message: undefined });
@@ -42,6 +43,9 @@ export default function LoginForm() {
           headers: {
             Authorization: `Bearer ${await userCred.user.accessToken}`,
           },
+          body: JSON.stringify({
+            cart: currentCookie,
+          }),
         });
 
         const result = await response.json();

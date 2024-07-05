@@ -5,16 +5,17 @@ import { bestSellerStyle, summerFavoritesStyle } from '../components/elements';
 import SummerFavoritesSection from '../components/Images/SummerFavoritesSections';
 import Layout from '../components/Layout';
 import Products from '../components/Products';
-import prisma from '../prisma';
-import IndexHeroImage from '../public/indexHeroImg.webp';
-import { cleanedProducts } from '../util/database';
+import { getAllProducts } from '../util/database';
 import { PropsTypePlantsCartCookieLayer } from '../util/types';
 
 export default function Home(props: PropsTypePlantsCartCookieLayer) {
   const buttonInHeroImage = <ButtonCallToAction innerText="View All Plants" />;
 
   return (
-    <Layout bgImageHero={IndexHeroImage} buttonInHeroImage={buttonInHeroImage}>
+    <Layout
+      imgUrl={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/v1719075598/ztapevp2qkipvlwx6fgf.jpg`}
+      buttonInHeroImage={buttonInHeroImage}
+    >
       <Head>
         <title>Plant Love</title>
         <meta name="description" content="Plant Shop" />
@@ -52,12 +53,11 @@ export default function Home(props: PropsTypePlantsCartCookieLayer) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const products = await prisma.product.findMany({});
-  const plantsSerializedPrice = cleanedProducts(products);
+  const products = await getAllProducts();
 
   return {
     props: {
-      plants: plantsSerializedPrice,
+      plants: products,
     },
   };
 };

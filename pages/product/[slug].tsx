@@ -1,7 +1,7 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Head from 'next/head';
 import { useContext, useEffect, useState } from 'react';
-import ButtonCallToAction from '../../components/Buttons/ButtonCallToAction';
+import { useAuth } from '../../AuthProvider';
 import ChangeCartQuantity from '../../components/ChangeCartQuantity';
 import {
   imageGallery,
@@ -16,53 +16,50 @@ import LayoutNoHeader from '../../components/Layout/LayoutNoHeader';
 import prisma from '../../prisma';
 import { CartContext } from '../../util/context/cartContext';
 import { CartCookieContext } from '../../util/context/cookieContext';
-import { cleanedProducts } from '../../util/database';
-import {
-  Cookie,
-  Plant,
-  PropsTypePlantsCartCookieLayerPlantId,
-} from '../../util/types';
+import { Cookie, Plant } from '../../util/types';
 
-export default function SingleProduct(
-  props: PropsTypePlantsCartCookieLayerPlantId,
-) {
+type SingleProductProps = {
+  plant: Plant;
+  cartCookie: Cookie[];
+};
+
+export default function SingleProduct(props: SingleProductProps) {
   const [quantity, setQuantity] = useState<number>(1);
+  const { setParsedCookie, updateCartQuantity } = useContext(CartCookieContext);
+  const { updateCart } = useContext(CartContext);
+  const { user } = useAuth();
+  const { id, price, title, slug, img_url } = props.plant;
 
-  const incrementHandler = () => setQuantity(() => quantity + 1);
-  //const decrementHandler = () => setQuantity(() => quantity - 1);
+  const incrementHandler = () =>
+    setQuantity((previousCount) => previousCount + 1);
 
   const decrementHandler = () => {
     if (quantity > 1) {
-      setQuantity(() => quantity - 1);
+      setQuantity((previousCount) => previousCount - 1);
     }
   };
-
-  const { setParsedCookie, updateCartQuantity } = useContext(CartCookieContext);
-  const { updateCart } = useContext(CartContext);
 
   useEffect(() => {
     setParsedCookie(props.cartCookie);
   }, []);
 
-  const { id, price, title } = props.plant;
-
   const updateCartAndCookieHandler = () => {
     updateCartQuantity(id, quantity);
-    updateCart(id, price, quantity, title);
+    updateCart(id, title, price, slug, img_url, quantity);
 
     const addToCartFunction = async () => {
-      const res = await fetch('/api/addToCart', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id, quantity }),
-      });
-
-      const response = await res.json();
-
-      if ('error' in response) {
-        return null;
+      if (user) {
+        try {
+          await fetch('/api/cart/addToCart', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id, quantity }),
+          });
+        } catch (error) {
+          console.log(error);
+        }
       }
     };
 
@@ -85,23 +82,23 @@ export default function SingleProduct(
       <section css={singleProductPageStyle}>
         <article css={imageGallery}>
           <div>
-            <ProductImageSmall src={`/image${props.plant.id}.jpg`} />
+            <ProductImageSmall src={props.plant.img_url[0].url} />
           </div>
           <div>
-            <ProductImageSmall src={`/image${props.plant.id}.jpg`} />
+            <ProductImageSmall src={props.plant.img_url[0].url} />
           </div>
           <div>
-            <ProductImageSmall src={`/image${props.plant.id}.jpg`} />
+            <ProductImageSmall src={props.plant.img_url[0].url} />
           </div>
           <div>
-            <ProductImageSmall src={`/image${props.plant.id}.jpg`} />
+            <ProductImageSmall src={props.plant.img_url[0].url} />
           </div>
         </article>
 
         <article>
           <div css={productImageContainer}>
             {titleAndPrice()}
-            <ProductImage src={`/image${props.plant.id}.jpg`} title={title} />
+            <ProductImage src={props.plant.img_url[0].url} title={title} />
           </div>
 
           <div css={productDetailsContainer}>
@@ -142,14 +139,28 @@ export async function getServerSideProps(
   const plantSlug = String(context.query.slug);
   const plant = await prisma.product.findMany({
     where: { slug: plantSlug },
+    include: {
+      img_url: {
+        select: {
+          url: true,
+        },
+      },
+    },
   });
-  const [plantSerializedPrice] = cleanedProducts(plant);
+
+  // Map over the results to format them with the Plant type
+  const formattedPlants = plant.map((p) => {
+    return {
+      ...p,
+      price: p.price.toNumber(),
+    };
+  });
 
   const cartCookie: Cookie[] = JSON.parse(context.req.cookies.cart || '[]');
 
   return {
     props: {
-      plant: plantSerializedPrice,
+      plant: formattedPlants[0],
       cartCookie: cartCookie,
     },
   };

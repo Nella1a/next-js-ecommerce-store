@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import Link from 'next/link';
+import { Plant } from '../../util/types';
 import ProductCard from '../ProductCard';
 
 export const productCardStyle = css`
@@ -71,29 +72,18 @@ export const productCardStyle = css`
   }
 `;
 
-type Plants = {
-  id: number;
-  title: string;
-  price: number;
-  slugName?: string;
-};
-
-type Props = {
-  plants: Plants[];
-};
-
-export default function Products(props: Props) {
+export default function Products(props: { plants: Plant[] }) {
   // slug-name
   props.plants.map((plant) => {
-    plant.slugName = plant.title.toLowerCase().replace(/\s+/g, '-');
+    plant.slug = plant.title.toLowerCase().replace(/\s+/g, '-');
   });
 
   return (
     <>
-      {props.plants.map((plant: Plants) => (
+      {props.plants.map((plant: Plant) => (
         <Link
           href="/product/[slug]"
-          as={`/product/${plant.slugName}`}
+          as={`/product/${plant.slug}`}
           key={`guest-${plant.id}`}
         >
           <article css={productCardStyle}>

@@ -28,23 +28,21 @@ const changeCartQuantityButtons = css`
   }
 `;
 
-type Props = {
+type UpdateQuantity = {
   quantity: number;
   increment: () => void;
   decrement: () => void;
 };
 
-export default function ChangeCartQuantity(props: Props) {
+export default function ChangeCartQuantity(props: UpdateQuantity) {
   return (
     <div>
       <div css={changeCartQuantityButtons}>
         <button onClick={props.decrement} type="button">
-          {' '}
           -{' '}
         </button>
         <span data-test-id="add-quantity">{props.quantity}</span>
         <button onClick={props.increment} type="button">
-          {' '}
           +{' '}
         </button>
       </div>

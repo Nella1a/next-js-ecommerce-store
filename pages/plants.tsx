@@ -9,10 +9,8 @@ import {
 } from '../components/elements';
 import Layout from '../components/Layout';
 import Products from '../components/Products';
-import prisma from '../prisma';
-import ProductsHeroImage from '../public/productsHeroImage.jpg';
-import { cleanedProducts } from '../util/database';
-import { PropsTypePlantsLayer } from '../util/types';
+import { getAllProducts } from '../util/database';
+import { Plant } from '../util/types';
 
 export const productsComponentStyle = css`
   ${container}
@@ -50,12 +48,12 @@ export const productsComponentStyle = css`
   }
 `;
 
-export default function Plants(props: PropsTypePlantsLayer) {
+export default function Plants(props: { plants: Plant[] }) {
   // disableGrayLayer(props.showGrayLayer, props.setShowGrayLayer);
 
   return (
     <Layout
-      bgImageHero={ProductsHeroImage}
+      imgUrl={`https://res.cloudinary.com/mix571zo0/image/upload/v1719077115/dr635i8y7x450vvrwwfg.jpg`}
       // buttonInHeroImage={buttonInHeroImage}
     >
       <Head>
@@ -75,12 +73,11 @@ export default function Plants(props: PropsTypePlantsLayer) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const products = await prisma.product.findMany();
-  const plantsSerializedPrice = cleanedProducts(products);
+  const products = await getAllProducts();
 
   return {
     props: {
-      plants: plantsSerializedPrice,
+      plants: products,
     },
   };
 };

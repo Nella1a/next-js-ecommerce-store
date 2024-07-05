@@ -1,23 +1,15 @@
-import { createContext, useEffect, useReducer, useState } from 'react';
-import { Cart } from '../types';
-
-type UpdateCart = {
-  id: number;
-  price: number;
-  quantity: number;
-  title: string;
-  decrementFlag?: boolean;
-};
+import { createContext, useEffect, useState } from 'react';
+import { Plant } from '../types';
 
 const checkIfProductIsAlreadyInCart = (
-  cartItems: Cart[],
+  cartItems: Plant[],
   productId: number,
 ) => {
   return cartItems.findIndex((product) => product.id === productId);
 };
 
 const updateProductQuantity = (
-  cartItems: Cart[],
+  cartItems: Plant[],
   productId: number,
   quantity: number,
   decrementFlag: boolean,
@@ -33,7 +25,7 @@ const updateProductQuantity = (
   } else {
     const newCookie = cartItems?.map((product) => {
       // find product and update quantity
-      if (product.id === productId) {
+      if (product.id === productId && product.quantity) {
         product.quantity = decrementFlag
           ? product.quantity - quantity
           : product.quantity + quantity;
@@ -45,19 +37,26 @@ const updateProductQuantity = (
 };
 
 const addNewProductToCart = (
-  cartItems: Cart[],
+  cartItems: Plant[],
   productId: number,
   quantity: number,
   price: number,
   title: string,
+  img_url: { url: string | null }[],
+  slug: string,
 ) => {
-  return [
-    ...cartItems,
-    { id: productId, quantity: quantity, price: price, title: title },
-  ];
+  cartItems.push({
+    id: productId,
+    title: title,
+    price: price,
+    slug: slug,
+    img_url: img_url,
+    quantity: quantity,
+  });
+  return cartItems;
 };
 
-const clearProduct = (currentCookie: Cart[], removeProductId: number) => {
+const clearProduct = (currentCookie: Plant[], removeProductId: number) => {
   return currentCookie.filter((product) => product.id !== removeProductId);
 };
 
@@ -66,19 +65,22 @@ export const CartContext = createContext({
   currentCartItems: [
     {
       id: 0,
-      quantity: 0,
-      price: 0,
       title: '',
+      price: 0,
+      slug: '',
+      img_url: [] as { url: string | null }[],
     },
   ],
   updateCart: (
     id: number,
-    price: number,
-    quantity: number,
     title: string,
+    price: number,
+    slug: string,
+    img_url: { url: string | null }[],
+    quantity: number,
     decrementFlag: boolean = false,
   ) => {},
-  cartItems: (cartItems: Cart[]) => {},
+  cartItems: (cartItems: Plant[]) => {},
   totalPrice: 0,
   updateCartProduct: (
     id: number,
@@ -92,28 +94,32 @@ export const CartContext = createContext({
 
 export const CartContextProvider = ({ children }: any) => {
   const [toggleMenu, setToggleMenu] = useState(false);
-  const [currentCartItems, setCurrentCartItems] = useState<Cart[]>([]);
+  const [currentCartItems, setCurrentCartItems] = useState<Plant[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const cartItems = (cartItems: Cart[]) => {
-    setCurrentCartItems([...cartItems]);
+  const cartItems = (cartItems: Plant[]) => {
+    setCurrentCartItems(cartItems);
   };
 
   useEffect(() => {
-    const sum = currentCartItems.reduce(
-      (total, product) => total + product.quantity * product.price,
-      0,
-    );
+    const sum = currentCartItems.reduce((total, product) => {
+      if (product.quantity) {
+        return total + product.quantity * product.price;
+      }
+      return total;
+    }, 0);
     setTotalPrice(Number(sum.toFixed(2)));
   }, [currentCartItems]);
 
   const updateCart = (
     id: number,
-    price: number,
-    quantity: number,
     title: string,
+    price: number,
+    slug: string,
+    img_url: { url: string | null }[],
+    quantity: number,
     decrementFlag = false,
   ) => {
-    let updatedCartItems: Cart[] = [];
+    let updatedCartItems: Plant[] = [];
     if (checkIfProductIsAlreadyInCart(currentCartItems, id) != -1) {
       updatedCartItems = updateProductQuantity(
         currentCartItems,
@@ -128,9 +134,11 @@ export const CartContextProvider = ({ children }: any) => {
         quantity,
         price,
         title,
+        img_url,
+        slug,
       );
     }
-    setCurrentCartItems([...updatedCartItems]);
+    setCurrentCartItems(updatedCartItems);
   };
 
   const updateCartProduct = (
@@ -144,13 +152,13 @@ export const CartContextProvider = ({ children }: any) => {
       quantity,
       decrementFlag,
     );
-    setCurrentCartItems([...updatedCartItems]);
+    setCurrentCartItems(updatedCartItems);
   };
 
   // clear product from cookie
   const deleteProductFromCart = (removeProductId: number) => {
     const newCart = clearProduct(currentCartItems, removeProductId);
-    setCurrentCartItems([...newCart]);
+    setCurrentCartItems(newCart);
   };
 
   const toggleMobileMenu = () => {

@@ -39,7 +39,7 @@ export default function Shipping({
           data-test-id="checkout-email"
           css={errorStyle(errors.shipping?.userEmail?.type)}
           placeholder="Email"
-          id="email"
+          id="contact-email"
         />
         <p>
           <span>{errors.shipping?.userEmail?.message}</span>

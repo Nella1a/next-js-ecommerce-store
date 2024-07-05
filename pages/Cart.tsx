@@ -2,27 +2,23 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
+import { useAuth } from '../AuthProvider';
 import CartProducts from '../components/Cart/CartProducts';
 import OrderTotal from '../components/Cart/OrderTotal';
 import { shoppingCartStyle } from '../components/elements';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import Placeholder from '../components/Placeholder';
-import prisma from '../prisma';
 //import { disableGrayLayer } from '../hooks';
 import { CartContext } from '../util/context/cartContext';
 import { CartCookieContext } from '../util/context/cookieContext';
-import { cleanedProducts, Plant } from '../util/database';
-import { Cookie, PlantsAndQuantity } from '../util/types';
+import { getPlantsById } from '../util/database';
+import { Cookie, Plant } from '../util/types';
 
-type Props = {
-  plants: PlantsAndQuantity[];
-};
-
-export default function Cart(props: Props) {
+export default function Cart(props: { plants: Plant[] }) {
   const [cartProducts] = useState(props.plants);
-  const { cartCount } = useContext(CartCookieContext);
-
+  const { cartCount, currentCookie } = useContext(CartCookieContext);
   const { cartItems } = useContext(CartContext);
+  const { user } = useAuth();
 
   useEffect(() => {
     cartItems(props.plants);
@@ -38,6 +34,25 @@ export default function Cart(props: Props) {
       Your Cart ({cartCount} {cartCount === 1 ? 'Product' : 'Products'})
     </h1>
   );
+
+  const onClickHandler = async () => {
+    if (user) {
+      try {
+        await fetch('api/cart/update', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            cart: currentCookie,
+          }),
+        });
+      } catch (error: any) {
+        alert('Please sign in to continue with your order.');
+        console.log(error.message);
+      }
+    }
+  };
 
   // case: cookie set
   return (
@@ -61,6 +76,7 @@ export default function Cart(props: Props) {
               }}
               passHref
               data-test-id="cart-checkout"
+              onClick={onClickHandler}
             >
               Go to checkout
             </Link>
@@ -73,7 +89,7 @@ export default function Cart(props: Props) {
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext,
-): Promise<GetServerSidePropsResult<{ plants: PlantsAndQuantity[] }>> {
+): Promise<GetServerSidePropsResult<{ plants: Plant[] }>> {
   const cartCookie: Cookie[] = JSON.parse(context.req.cookies.cart || '[]');
 
   // typescript narrowing
@@ -89,19 +105,10 @@ export async function getServerSideProps(
   const plantIds = cartCookie.map((event) => event.id);
 
   // query db
-  const plants = await prisma.product.findMany({
-    where: {
-      id: {
-        in: plantIds,
-      },
-    },
-  });
-
-  // serialize price
-  const plantsSerializedPrice = cleanedProducts(plants);
+  const plants = await getPlantsById(plantIds);
 
   // combine db-product info with cookie info
-  const plantsAndQuantity = plantsSerializedPrice.map((plant) => {
+  const plantsAndQuantity = plants.map((plant) => {
     return {
       ...plant,
       quantity:

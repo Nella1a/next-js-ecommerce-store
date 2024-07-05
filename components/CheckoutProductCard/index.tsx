@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Cart } from '../../util/types';
+import { Plant } from '../../util/types';
 import CartItem from '../Cart/CartItem';
 
 export const checkoutProductCardStyle = css`
@@ -47,29 +47,24 @@ export const checkoutProductCardStyle = css`
   }
 `;
 
-type Props = {
-  plant: Cart;
-};
-
 // calculates subtotal price
 export function multiplePriceAndQuantity(price: number, quantity: number) {
   return price * quantity;
 }
 
-export default function CheckoutProductCard(props: Props) {
-  const { id, title, price, quantity } = props.plant;
-  const { plant } = props;
+export default function CheckoutProductCard(props: { plant: Plant }) {
+  const { title, price, quantity } = props.plant;
 
   return (
     <div css={checkoutProductCardStyle}>
       <div>
-        <CartItem plant={plant} />
+        <CartItem plant={props.plant} />
       </div>
 
       <div>
         <p>
           <span>{title}</span>
-          {quantity >= 1 && <span>Quantity: {quantity}</span>}
+          {quantity && quantity >= 1 && <span>Quantity: {quantity}</span>}
         </p>
         <p>
           &euro;

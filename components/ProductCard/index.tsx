@@ -1,38 +1,29 @@
-import Image from 'next/image';
+import { CldImage } from 'next-cloudinary';
+import { Plant } from '../../util/types';
+import ImageNotFound from '../Icons/ImageNotFound';
 
-type Plants = {
-  id: number;
-  title: string;
-  price: number;
-  slugName?: string;
-};
-
-type Props = {
-  plant: Plants;
-};
-
-export default function ProductCard(props: Props) {
-  const { id, slugName, title, price } = props.plant;
+export default function ProductCard(props: { plant: Plant }) {
+  const { title, price, img_url } = props.plant;
 
   return (
     <>
       <div>
         {/* {id === 1 && <span>Easy Care</span>}
         {id === 4 && <span>Pet-Friendly</span>}{' '} */}
-        <Image
-          src={`/image${id}.jpg`}
-          alt={`plantName-${title}`}
-          //fill
-          //sizes="90vw"
-          // style={{ objectFit: 'cover' }}
-
-          style={{
-            width: '100%',
-            height: 'auto',
-          }}
-          width={440}
-          height={550}
-        />
+        {img_url[0]?.url ? (
+          <CldImage
+            src={img_url[0].url}
+            alt="HeroImage"
+            width={440}
+            height={550}
+            style={{
+              width: '100%',
+              height: 'auto',
+            }}
+          />
+        ) : (
+          <ImageNotFound />
+        )}
       </div>
       <div>
         <span>{title}</span>

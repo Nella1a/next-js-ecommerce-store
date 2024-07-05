@@ -3,16 +3,16 @@ import Head from 'next/head';
 import Router from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useAuth } from '../AuthProvider';
 import OrderTotal from '../components/Cart/OrderTotal';
 import Payment from '../components/CheckoutForm/Payment';
 import Shipping from '../components/CheckoutForm/Shipping';
 import CheckoutProductCard from '../components/CheckoutProductCard';
 import { checkoutFormStyle, checkoutPageStyle } from '../components/elements';
 import LayoutNoHeaderAndFooter from '../components/Layout/LayoutNoHeaderFooter';
-import prisma from '../prisma';
 import { CartCookieContext } from '../util/context/cookieContext';
-import { cleanedProducts } from '../util/database';
-import { Cookie, PlantsAndQuantity } from '../util/types';
+import { getPlantsById } from '../util/database';
+import { Cookie, Plant } from '../util/types';
 
 export interface DefaultFormValues {
   shipping: {
@@ -36,14 +36,11 @@ export interface DefaultFormValues {
 
 const defaultValues = {};
 
-type Props = {
-  plants: PlantsAndQuantity[];
-};
-
-export default function CheckOut(props: Props) {
+export default function CheckOut(props: { plants: Plant[] }) {
   const [toNextStep, setToNextStep] = useState(false);
-
+  const { user } = useAuth();
   const { removeCookie, clearCartCount } = useContext(CartCookieContext);
+  const { pathname } = Router;
 
   const {
     register,
@@ -51,9 +48,38 @@ export default function CheckOut(props: Props) {
     formState: { isSubmitSuccessful, errors },
     getFieldState,
     trigger,
+    getValues,
   } = useForm<DefaultFormValues>({ defaultValues });
 
-  const onSubmit = (data: DefaultFormValues): void => {};
+  const onSubmit = async (data: DefaultFormValues): Promise<void> => {
+    // check if user is logged in
+
+    data.payment.cardNumber = 0;
+    data.payment.securityCode = 0;
+    if (user) {
+      try {
+        const response = await fetch('api/checkout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            form: data,
+          }),
+        });
+
+        const result = await response.json();
+
+        if (pathname == '/checkout') {
+          removeCookie('cart');
+          clearCartCount();
+          Router.push('/thankyou');
+        }
+      } catch (error) {
+        alert('Oops, something went wrong.');
+      }
+    }
+  };
 
   const submitShippingInfosHandler = async (event: any) => {
     const noErrors = await trigger('shipping');
@@ -83,7 +109,7 @@ export default function CheckOut(props: Props) {
     </div>
   );
 
-  const ButtonSumitFormValues = () => (
+  const ButtonSubmitFormValues = () => (
     <div>
       <button type="submit">Place order</button>
     </div>
@@ -98,11 +124,7 @@ export default function CheckOut(props: Props) {
 
       <section css={checkoutPageStyle}>
         <article>
-          <form
-            action="/api"
-            css={checkoutFormStyle}
-            onSubmit={handleSubmit(onSubmit)}
-          >
+          <form css={checkoutFormStyle} onSubmit={handleSubmit(onSubmit)}>
             {!toNextStep ? (
               <>
                 <Shipping
@@ -119,7 +141,7 @@ export default function CheckOut(props: Props) {
                   errors={errors}
                   getFieldState={getFieldState}
                 />
-                <ButtonSumitFormValues />
+                <ButtonSubmitFormValues />
               </>
             )}
           </form>
@@ -127,7 +149,10 @@ export default function CheckOut(props: Props) {
         <article>
           <div>
             {props.plants?.map((plant) => (
-              <CheckoutProductCard plant={plant} />
+              <CheckoutProductCard
+                key={`${plant.id}-${plant.price}`}
+                plant={plant}
+              />
             ))}
           </div>
 
@@ -140,7 +165,7 @@ export default function CheckOut(props: Props) {
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext,
-): Promise<GetServerSidePropsResult<{ plants: PlantsAndQuantity[] }>> {
+): Promise<GetServerSidePropsResult<{ plants: Plant[] }>> {
   const cartCookie: Cookie[] = JSON.parse(context.req.cookies.cart || '[]');
 
   // typescript narrowing
@@ -156,19 +181,10 @@ export async function getServerSideProps(
   const plantIds = cartCookie.map((event) => event.id);
 
   // query db
-  const plants = await prisma.product.findMany({
-    where: {
-      id: {
-        in: plantIds,
-      },
-    },
-  });
-
-  // serialize price
-  const plantsSerializedPrice = cleanedProducts(plants);
+  const plants = await getPlantsById(plantIds);
 
   // combine db-product info with cookie info:
-  const plantsAndQuantity = plantsSerializedPrice.map((plant) => {
+  const plantsAndQuantity = plants.map((plant) => {
     return {
       ...plant,
       quantity:
