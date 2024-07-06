@@ -29,7 +29,8 @@ export const globalStyleBody = css`
 
     /* base color */
     --text-color: #343a40;
-    --main-bg-color: #f8f9fa;
+    //--main-bg-color: #f8f9fa;
+    --main-bg-color: #eef7ea;
 
     //--color-btn-primary-bg: #f76707;
     //--color-btn-hover: #ff922b;
@@ -348,6 +349,9 @@ export const summerFavoritesStyle = css`
     // container for img and product cards
     > div:first-of-type {
       position: relative;
+      img {
+        border-radius: 20px;
+      }
     }
 
     > div:last-of-type {
