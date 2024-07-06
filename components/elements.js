@@ -162,6 +162,9 @@ export const btn = {
   padding: '1rem',
   border: 'none',
   cursor: 'pointer',
+};
+
+export const btnTextColorWhite = {
   color: '#fff',
 };
 

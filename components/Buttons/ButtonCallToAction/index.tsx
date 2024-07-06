@@ -1,9 +1,10 @@
 import { css } from '@emotion/react';
 import Link from 'next/link';
-import { btn } from '../../elements';
+import { btn, btnTextColorWhite } from '../../elements';
 
 const buttonCallToAction = () => css`
   ${btn};
+  ${btnTextColorWhite}
   font-size: 0.75rem;
   display: block;
   margin: 1rem 0;

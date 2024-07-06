@@ -4,7 +4,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useAuth } from '../AuthProvider';
-import { btn, container, h2Section } from '../components/elements';
+import {
+  btn,
+  btnTextColorWhite,
+  container,
+  h2Section,
+} from '../components/elements';
 import LayoutNoHeader from '../components/Layout/LayoutNoHeader';
 import prisma from '../prisma';
 import { getUsersOrderHistory } from '../util/database';
@@ -15,10 +20,11 @@ const userAccount = css`
   ${container};
   margin-top: 8rem;
 
-  button {
+  a {
+    display: block;
     ${btn}
+    ${btnTextColorWhite}
     background-color: var(--color-btn-primary-bg);
-    color: var(--text-color);
   }
   article:first-of-type {
     display: flex;
@@ -93,9 +99,7 @@ export default function Account({
           <div>
             <span>Orders Placed</span>
             <span>{orderCount}</span>
-            <button>
-              <Link href={'/plants'}>Shop Plants</Link>
-            </button>
+            <Link href={'/plants'}>Shop Plants</Link>
           </div>
         </article>
         <article>
