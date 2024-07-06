@@ -20,31 +20,42 @@ const userAccount = css`
   ${container};
   margin-top: 8rem;
 
-  a {
-    display: block;
-    ${btn}
-    ${btnTextColorWhite}
-    background-color: var(--color-btn-primary-bg);
-  }
   article:first-of-type {
-    display: flex;
-    border-bottom: 1px solid var(--color-grey-6);
-    justify-content: space-between;
     padding-bottom: 1rem;
 
     h1 {
-      width: 20rem;
       ${h2Section}
       font-weight: 600;
     }
 
     div {
-      span {
-        display: block;
-        text-align: right;
+      p {
+        margin-bottom: 0.5rem;
+        font-size: var(--text-lg);
+        span:first-of-type {
+          font-weight: bold;
+        }
       }
-      > span:nth-of-type(2) {
-        font-size: 2rem;
+
+      a {
+        display: inline-block;
+        ${btn}
+        ${btnTextColorWhite}
+    background-color: var(--color-btn-primary-bg);
+      }
+    }
+
+    @media (max-width: 30rem) {
+      h1 {
+        font-size: var(--text-xxxl);
+      }
+      div {
+        p {
+          font-size: var(--text-lg);
+        }
+
+        a {
+        }
       }
     }
   }
@@ -53,8 +64,11 @@ const userAccount = css`
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 3rem;
 
+    h2 {
+      text-align: center;
+    }
     > div {
       display: flex;
       flex-direction: column;
@@ -62,8 +76,33 @@ const userAccount = css`
       > div:first-of-type {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
+        border-top: 1px solid var(--color-grey-4);
+        padding-top: 0.5rem;
       }
     }
+    @media (max-width: 75rem) {
+      > div {
+        > div:first-of-type {
+          gap: 0.8rem;
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+    }
+    @media (max-width: 30rem) {
+      margin-top: 2rem;
+      gap: 2rem;
+
+      > div {
+        > div:first-of-type {
+          gap: 0.8rem;
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    }
+  }
+
+  @media (max-width: 48rem) {
+    padding: 0 1.5rem;
   }
 `;
 
@@ -97,8 +136,10 @@ export default function Account({
             Welcome Back, <span>{username}</span>
           </h1>
           <div>
-            <span>Orders Placed</span>
-            <span>{orderCount}</span>
+            <p>
+              <span>Total Orders: </span>
+              <span>{orderCount}</span>
+            </p>
             <Link href={'/plants'}>Shop Plants</Link>
           </div>
         </article>
