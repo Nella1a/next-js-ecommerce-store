@@ -69,6 +69,7 @@ const mobileMenuStyle = (showBurger) => css`
             font-weight: bold;
             display: inline-block;
             width: 100%;
+            color: var(--text-color);
           }
         }
 
