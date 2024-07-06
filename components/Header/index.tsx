@@ -3,7 +3,6 @@ import BackGImage from '../Images/BackGImage';
 import Navigation from '../Navigation';
 
 const header = () => css`
-  background-color: green;
   width: 100vw;
 
   nav ~ div {
