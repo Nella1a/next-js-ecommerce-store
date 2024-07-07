@@ -12,7 +12,8 @@ import MobileMenu from '../Mobile/MobileMenu';
 import NavMenu from './NavMenu';
 
 export const navigation = () => css`
-  background-color: var(--main-bg-color);
+  background-color: #50a458;
+  border: 2px solid blue;
   width: 100vw;
   height: 4rem;
   display: flex;
@@ -22,7 +23,6 @@ export const navigation = () => css`
   z-index: 10;
   padding-top: 1rem;
   margin-bottom: 0.5rem;
-  border-bottom: 1px solid var(--color-grey-6);
 
   // container
   > section {
@@ -45,7 +45,7 @@ export const navigation = () => css`
       a:hover,
       a:active {
         font-weight: bold;
-        color: var(--text-color);
+        color: var(--color-white);
       }
 
       > li:nth-of-type(2) button {
@@ -181,7 +181,7 @@ export default function Navigation() {
             <li>
               <Link href="/" passHref data-test-id="nav-home-button">
                 <Image
-                  src={'/logo_shelovesplants.svg'}
+                  src={'/shelovesplants-logo-white.png'}
                   alt={'logo she loves plants'}
                   width={'250'}
                   height={'36'}
