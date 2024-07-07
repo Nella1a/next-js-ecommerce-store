@@ -1,68 +1,137 @@
 import { css } from '@emotion/react';
 import { CldImage, getCldImageUrl } from 'next-cloudinary';
-import { flexRowXYCenter } from '../elements';
 
 export const bgImgContainer = css`
-  z-index: 1;
-  height: 20rem;
+  height: 29rem;
   position: relative;
-  ${flexRowXYCenter}
+  border: 2px solid white;
+  background-color: #50a458;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
 
-  ::after {
-    content: '';
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    //background-color: rgba(52, 58, 64, 0.1); //grey 6
+  gap: 1rem;
+  max-width: 1350px;
+  margin: 0 auto;
+
+  div {
+    position: relative;
+    border: 3px solid black;
+    min-width: 300px;
+    max-width: 1200px;
+    img {
+      overflow: visible;
+    }
   }
 
-  @media (max-width: 48rem) {
-    height: 18rem;
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    height: 32rem;
+
+    div {
+      max-width: 700px;
+      margin-bottom: 152px;
+      width: 500px;
+    }
   }
 
-  @media (max-width: 40rem) {
-    height: 16rem;
+  @media (max-width: 505px) {
+    div {
+      width: 100%;
+      margin-bottom: 130px;
+    }
+  }
+
+  @media (max-width: 403px) {
+    div {
+      width: 100%;
+      margin-bottom: 90px;
+    }
   }
 `;
 
 export const bgImgContainerContent = () => css`
-  //border: 2px solid red;
-  z-index: 1;
-
-  width: auto;
-  color: var(--main-bg-color);
-  letter-spacing: 0.2rem;
+  justify-self: center;
+  align-self: center;
+  padding-left: 2rem;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  // height: 100%;
 
-  /* background: linear-gradient(
-    270deg,
-    rgba(52, 58, 64, 0.1),
-    rgba(52, 58, 64, 0.5),
-    rgba(52, 58, 64, 0.1)
-  ); */
-  /* p {
-    font-size: 2.25rem;
-    font-weight: 600;
-  } */
+  gap: 0.5rem;
+  border: 2px solid red;
+  color: var(--color-white);
+
+  z-index: 1;
+  width: 100%;
+
+  h1 {
+    font-size: 50px;
+    border: 1px solid blue;
+    width: 100%;
+    span {
+      display: block;
+    }
+  }
+
+  p {
+    font-size: 21px;
+    font-family: sans-serif;
+  }
 
   a {
     display: flex;
     align-items: center;
-    padding-left: 5rem;
-    width: 16rem;
+    justify-content: center;
+    padding: 0.2rem;
+    width: 8rem;
+    border-radius: 5px;
   }
 
-  @media (max-width: 769px) {
-    height: 10.25rem;
+  @media (max-width: 1024px) {
+    h1 {
+      font-size: 40px;
+    }
   }
 
-  @media (max-width: 640px) {
-    display: none;
+  @media (max-width: 767px) {
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 610px) {
+    h1 {
+      font-size: 28px;
+      width: 100%;
+      span {
+        display: inline-block;
+      }
+    }
+  }
+
+  @media (max-width: 546px) {
+    div {
+      min-height: 39%;
+    }
+  }
+
+  @media (max-width: 450px) {
+    //  margin-top: 3rem;
+
+    padding-left: 1.5rem;
+    h1 {
+      font-size: 28px;
+    }
+
+    p:nth-of-type(2) {
+      font-size: 16px;
+      // width: 60%;
+    }
+
+    a {
+      padding: unset;
+    }
+  }
+
+  @media (max-width: 375px) {
   }
 `;
 
@@ -77,21 +146,26 @@ export default function BackGImage(props: any) {
   return (
     <div css={bgImgContainer}>
       {/* using fill, the parent element must have position: relative */}
-      <CldImage
-        src={url}
-        alt="HeroImage"
-        sizes="100vw"
-        fill
-        style={{
-          objectFit: 'cover',
-        }}
-      />
 
       <article css={bgImgContainerContent}>
-        <p>{props.firstText}</p>
-        <p>{props.secondText}</p>
-        {/* {props.buttonInHeroImage} */}
+        <h1>
+          {props.firstText} <span>{props.secondText}</span>
+        </h1>
+
+        <p>{props.thirdText}</p>
+        {props.buttonInHeroImage}
       </article>
+      <div>
+        <CldImage
+          src={url}
+          alt="HeroImage"
+          fill
+          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 100vw, 33vw"
+          style={{
+            objectFit: 'cover',
+          }}
+        />
+      </div>
     </div>
   );
 }
