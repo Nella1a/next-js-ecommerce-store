@@ -4,9 +4,12 @@ import Navigation from '../Navigation';
 
 const header = () => css`
   width: 100vw;
-
-  nav ~ div {
-    margin-top: 4rem;
+  border: 2px solid black;
+  position: relative;
+  background-color: #50a458;
+  overflow: hidden;
+  > div:first-of-type {
+    height: 4rem;
   }
 `;
 
@@ -14,9 +17,11 @@ export function Header(props: any) {
   return (
     <header css={header}>
       <Navigation />
+      <div />
       <BackGImage
-        firstText=""
-        secondText=""
+        firstText="Delivering plants, "
+        secondText="delivering happiness!"
+        thirdText="Get your favorite plants right to your doorstep"
         imgUrl={props.imgUrl}
         buttonInHeroImage={props.buttonInHeroImage}
       />
