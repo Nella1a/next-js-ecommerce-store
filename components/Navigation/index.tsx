@@ -39,12 +39,12 @@ export const navigation = () => css`
       gap: var(--space-md);
       margin: 0;
       padding-left: 0;
+      color: var(--color-white);
 
       a:link,
       a:visited,
       a:hover,
       a:active {
-        font-weight: bold;
         color: var(--color-white);
       }
 
