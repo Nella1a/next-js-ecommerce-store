@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { btn, btnTextColorWhite } from '../elements';
+import { btn, btnTextColorGreen } from '../elements';
 
 const newsLetterForm = css`
   display: flex;
@@ -24,11 +24,14 @@ const newsLetterForm = css`
 
   button {
     ${btn}
-    ${btnTextColorWhite}
-    background-color: var(--color-btn-primary-bg);
+    ${btnTextColorGreen}
+   // background-color: var(--color-btn-primary-bg);
+   background-color: transparent;
+    border: 1px solid var(--color-primary-green);
 
     &:hover {
-      background-color: var(--color-btn-hover);
+      //background-color: var(--color-btn-hover);
+      background-color: var(--color-primary-green);
     }
   }
 `;

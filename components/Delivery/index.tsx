@@ -7,7 +7,7 @@ import Truck from '../Icons/Truck';
 export const deliveryInfos = css`
   ${marginTop}
 
-  background-color: var(--color-green);
+  background-color:  var(--color-primary-green);
   color: var(--color-white);
   height: 8rem;
   max-width: unset;

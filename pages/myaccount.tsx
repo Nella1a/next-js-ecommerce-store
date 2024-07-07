@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useAuth } from '../AuthProvider';
 import {
   btn,
-  btnTextColorWhite,
+  btnTextColorGreen,
   container,
   h2Section,
 } from '../components/elements';
@@ -40,7 +40,7 @@ const userAccount = css`
       a {
         display: inline-block;
         ${btn}
-        ${btnTextColorWhite}
+        ${btnTextColorGreen}
     background-color: var(--color-btn-primary-bg);
       }
     }
