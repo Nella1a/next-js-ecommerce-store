@@ -19,9 +19,9 @@ export function Header(props: any) {
       <Navigation />
       <div />
       <BackGImage
-        firstText="Delivering plants, "
-        secondText="delivering happiness!"
-        thirdText="Get your favorite plants right to your doorstep"
+        firstText={props.firstText}
+        secondText={props.secondText}
+        thirdText={props.thirdText}
         imgUrl={props.imgUrl}
         buttonInHeroImage={props.buttonInHeroImage}
       />
