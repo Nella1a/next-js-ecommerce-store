@@ -76,7 +76,8 @@ const mobileMenuStyle = (showBurger) => css`
         > li:first-of-type {
           margin-left: unset;
           padding-left: unset;
-          background-color: var(--color-grey-3);
+          background-color: var(--color-primary-green);
+          color: var(--color-white);
           display: flex;
           justify-content: space-between;
           width: 100%;
