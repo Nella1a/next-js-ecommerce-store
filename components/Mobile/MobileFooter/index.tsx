@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
+import Image from 'next/image';
 import { useState } from 'react';
-import { btn } from '../../elements';
+import { btn, container } from '../../elements';
 import { footerInfos } from '../../Footer';
 import FooterListElements from '../../Footer/FooterListElements';
 import FormNewsletter from '../../FormNewsletter';
+import SocialMediaIcons from '../../SocialMediaIcons';
 
 export const MobileFooterStyle = css`
   display: none;
@@ -14,9 +16,10 @@ export const MobileFooterStyle = css`
 
     > nav {
       margin: 0 auto;
-      gap: 4.25rem;
+      gap: 1rem;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      padding: 0rem;
 
       > div {
         display: flex;
@@ -28,12 +31,15 @@ export const MobileFooterStyle = css`
           display: flex;
           justify-content: space-between;
           align-items: center;
+          background-color: transparent;
+          border-bottom: 1px solid var(--color-grey-3);
 
           span {
             font-family: var(--font-primary);
             font-size: 0.9rem;
             display: inline-block;
             font-weight: bold;
+            color: var(--color-primary-green);
           }
 
           span:last-of-type {
@@ -49,14 +55,26 @@ export const MobileFooterStyle = css`
 
         line-height: 2.5rem;
       }
-
-      @media screen and (max-width: 1051px) {
-        gap: 1.5rem;
+      > div:first-of-type {
+        justify-content: center;
+        align-items: center;
       }
-
-      @media (max-width: 768px) {
-        flex-direction: column-reverse;
-        padding: 0rem;
+    }
+    nav ~ div {
+      margin-top: 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--color-primary-green);
+      div {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 0.5rem;
+        span {
+          display: inline-block;
+          width: 1.5rem;
+          height: 2rem;
+        }
       }
     }
   }
@@ -79,9 +97,18 @@ export default function MobileFooter() {
   return (
     <footer css={MobileFooterStyle}>
       <nav>
+        <div>
+          <Image
+            src={'/logo_shelovesplants_green.png'}
+            alt={'logo she loves plants'}
+            width={'193'}
+            height={'28'}
+          />
+        </div>
+        <FormNewsletter email={email} setEmail={setEmail} />
         {footerInfos.map((info, index) => {
           return (
-            <div key={`moble-footer-${index}`}>
+            <div key={`mobile-footer-${index}`}>
               <button
                 key={`header-${index}-${info.header}`}
                 onClick={() => handleAccordionClick(index)}
@@ -99,8 +126,11 @@ export default function MobileFooter() {
             </div>
           );
         })}
-        <FormNewsletter email={email} setEmail={setEmail} />
       </nav>
+      <div>
+        <SocialMediaIcons />
+        <p>2024 She Loves Plants. All Rights Reserved.</p>
+      </div>
     </footer>
   );
 }

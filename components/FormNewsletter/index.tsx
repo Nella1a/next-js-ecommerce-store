@@ -10,6 +10,8 @@ const newsLetterForm = css`
 
   label {
     font-weight: 600;
+    color: var(--color-primary-green);
+    font-size: var(--text-xl);
   }
 
   input {
@@ -19,19 +21,26 @@ const newsLetterForm = css`
     display: block;
     width: 100%;
     padding: 1rem;
-    border: 1px solid var(--color-grey-2);
+    border: 1px solid var(--color-grey-4);
+    border-radius: 8px;
   }
-
   button {
     ${btn}
     ${btnTextColorGreen}
-   // background-color: var(--color-btn-primary-bg);
+
    background-color: transparent;
-    border: 1px solid var(--color-primary-green);
+    border: 2px solid var(--color-primary-green);
+    border-radius: 8px;
 
     &:hover {
-      //background-color: var(--color-btn-hover);
       background-color: var(--color-primary-green);
+      color: var(--color-white);
+    }
+  }
+
+  @media (max-width: 768px) {
+    label {
+      text-align: center;
     }
   }
 `;
@@ -51,11 +60,7 @@ export default function FormNewsletter({ email, setEmail }: NewsLetterEmail) {
       }}
       css={newsLetterForm}
     >
-      <label htmlFor="user-email">
-        Join us!
-        <span> Subscribe to our newsletter.</span>
-      </label>
-
+      <label htmlFor="user-email">Join Our Newsletter</label>
       <input
         type="email"
         id="user-email"
