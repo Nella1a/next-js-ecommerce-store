@@ -15,8 +15,11 @@ export interface Cookie {
 
 export interface PropsTypeChildrenLayer {
   children?: React.ReactNode;
-  imgUrl?: any;
+  imgUrl?: string;
   buttonInHeroImage?: any;
+  firstText?: string;
+  secondText?: string;
+  thirdText?: string;
 }
 
 export interface PropsTypePlantsCartCookieLayer {
