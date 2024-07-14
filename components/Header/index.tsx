@@ -4,7 +4,6 @@ import Navigation from '../Navigation';
 
 const header = () => css`
   width: 100vw;
-  border: 2px solid black;
   position: relative;
   background-color: #50a458;
   overflow: hidden;
