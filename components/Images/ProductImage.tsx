@@ -17,6 +17,8 @@ export default function ProductImage(props: ProductImageDetails) {
           height={491.5}
           data-test-id="product-image"
           alt={`plant-name-is-${props.title}`}
+          crop={'fit'}
+          priority
         />
       ) : (
         <ImageNotFound />

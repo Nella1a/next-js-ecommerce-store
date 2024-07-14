@@ -12,6 +12,7 @@ export default function ProductImageSmall({ src }: { src: string | null }) {
           height={113.875}
           data-test-id="product-image"
           alt="image of a plant"
+          crop={'fit'}
         />
       ) : (
         <ImageNotFound />
