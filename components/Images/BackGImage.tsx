@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
 import { CldImage, getCldImageUrl } from 'next-cloudinary';
+import { env } from 'process';
+import { PropsTypeChildrenLayer } from '../../util/types';
 
 export const bgImgContainer = css`
   height: 29rem;
   position: relative;
-  border: 2px solid white;
   background-color: #50a458;
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -15,7 +16,6 @@ export const bgImgContainer = css`
 
   div {
     position: relative;
-    border: 3px solid black;
     min-width: 300px;
     max-width: 1200px;
     img {
@@ -58,7 +58,6 @@ export const bgImgContainerContent = () => css`
   flex-direction: column;
 
   gap: 0.5rem;
-  border: 2px solid red;
   color: var(--color-white);
 
   z-index: 1;
@@ -66,7 +65,6 @@ export const bgImgContainerContent = () => css`
 
   h1 {
     font-size: 50px;
-    border: 1px solid blue;
     width: 100%;
     span {
       display: block;
@@ -135,12 +133,12 @@ export const bgImgContainerContent = () => css`
   }
 `;
 
-export default function BackGImage(props: any) {
+export default function BackGImage(props: PropsTypeChildrenLayer) {
   const url = getCldImageUrl(
     {
-      src: props.imgUrl,
+      src: props.imgUrl ? props.imgUrl : '#',
     },
-    { cloud: { cloudName: "'mix571zo0'" } },
+    { cloud: { cloudName: `${env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}` } },
   );
 
   return (
