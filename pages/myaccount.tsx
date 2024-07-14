@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useAuth } from '../AuthProvider';
 import {
   btn,
-  btnTextColorGreen,
+  btnTextColorWhite,
   container,
   h2Section,
 } from '../components/elements';
@@ -37,11 +37,17 @@ const userAccount = css`
         }
       }
 
-      a {
+      a:link,
+      a:visited,
+      a:focus,
+      a:active {
         display: inline-block;
         ${btn}
-        ${btnTextColorGreen}
-    background-color: var(--color-btn-primary-bg);
+        ${btnTextColorWhite}
+         background-color: var(--color-btn-primary-bg);
+      }
+      a:hover {
+        background-color: var(--color-btn-hover);
       }
     }
 
