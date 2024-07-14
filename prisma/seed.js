@@ -62,19 +62,19 @@ async function main() {
   await prisma.productImgURL.createMany({
     data: [
       {
-        url: `https://res.cloudinary.com/mix571zo0/image/upload/v1719068058/gxsmq5bjuwi10zqmibjv.jpg`,
+        url: `plantStore/small/kgwlb36lufd4glwel6pe`,
         product_id: getProductInDB[0].id,
       },
       {
-        url: `https://res.cloudinary.com/mix571zo0/image/upload/v1719068064/xgjkjeiq3ehq5wk8j2of.jpg`,
+        url: `plantStore/small/q6indmyfo6mt8hfhhind`,
         product_id: getProductInDB[1].id,
       },
       {
-        url: `https://res.cloudinary.com/mix571zo0/image/upload/v1719068049/olptdxljhjm5gebjigv9.jpg`,
+        url: `plantStore/small/muldcj9tih7uxgzodnnk`,
         product_id: getProductInDB[2].id,
       },
       {
-        url: `https://res.cloudinary.com/mix571zo0/image/upload/v1719068071/pdxrsit2ox8q0jpefv91.jpg`,
+        url: `plantStore/small/dbv9zzi9of605rnxfw9r`,
         product_id: getProductInDB[3].id,
       },
     ],
