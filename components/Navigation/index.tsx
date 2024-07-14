@@ -13,7 +13,6 @@ import NavMenu from './NavMenu';
 
 export const navigation = () => css`
   background-color: #50a458;
-  border: 2px solid blue;
   width: 100vw;
   height: 4rem;
   display: flex;

@@ -7,7 +7,6 @@ import { CartCookieProvider } from '../util/context/cookieContext';
 import { OverLayContextProvider } from '../util/context/overlayContext';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: any) {
-  // Create a new supabase browser client on every first render.
   return (
     <>
       <AuthContextProvider>
