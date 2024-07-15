@@ -42,6 +42,7 @@ const userAccount = css`
       a:focus,
       a:active {
         display: inline-block;
+        border-radius: 5px;
         ${btn}
         ${btnTextColorWhite}
          background-color: var(--color-btn-primary-bg);
