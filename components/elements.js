@@ -649,6 +649,7 @@ export const shoppingCartStyle = css`
         background-color: var(--color-btn-primary-bg);
         transition: all 0.3s;
         ${btnTextColorWhite}
+        border-radius: 5px;
 
         :hover {
           background-color: var(--color-btn-hover);
@@ -804,6 +805,7 @@ export const checkoutFormStyle = css`
     ${size('17.65rem', '1.47rem')}
     margin-top: 1rem;
     ${btnTextColorWhite}
+    border-radius: 5px;
 
     @media screen and (max-width: 960px) {
       width: 100%;
@@ -931,6 +933,7 @@ export const loginAndRegisterForm = css`
     margin-bottom: 1rem;
     padding: 1.2rem;
     font-size: 0.9rem;
+    border-radius: 5px;
   }
 
   button {
