@@ -10,7 +10,7 @@ export const checkoutProductCardStyle = css`
 
   > div:first-of-type {
     // Image
-    width: 80px;
+    width: 98px;
   }
 
   > div:nth-of-type(2) {
