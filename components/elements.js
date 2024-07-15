@@ -576,6 +576,7 @@ export const productDetailsContainer = css`
         background-color: var(--color-btn-primary-bg);
         ${btnTextColorWhite}
         ${size('17.65rem', '1.47rem')}
+        border-radius: 5px;
         :hover {
           background-color: var(--color-btn-hover);
         }

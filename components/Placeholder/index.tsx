@@ -33,6 +33,7 @@ export const underConstruction = css`
       height: 1.47rem;
       text-align: center;
       font-size: 1rem;
+      border-radius: 5px;
     }
 
     @media (max-width: 480px) {
