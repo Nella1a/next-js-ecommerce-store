@@ -13,8 +13,11 @@ export default function Home(props: PropsTypePlantsCartCookieLayer) {
 
   return (
     <Layout
-      imgUrl={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/v1719075598/ztapevp2qkipvlwx6fgf.jpg`}
+      imgUrl={`plantStore/v81giaflb1ywkppfbj4v`}
       buttonInHeroImage={buttonInHeroImage}
+      firstText="Delivering plants,"
+      secondText="delivering happiness!"
+      thirdText="Shop your favorite plants"
     >
       <Head>
         <title>Plant Love</title>

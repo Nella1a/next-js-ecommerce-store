@@ -53,7 +53,10 @@ export default function Plants(props: { plants: Plant[] }) {
 
   return (
     <Layout
-      imgUrl={`https://res.cloudinary.com/mix571zo0/image/upload/v1719077115/dr635i8y7x450vvrwwfg.jpg`}
+      imgUrl={`plantStore/jofqtldcixcumcbdm3hw`}
+      firstText="Delivering plants,"
+      secondText="delivering happiness!"
+      thirdText="Shop your favorite plants"
       // buttonInHeroImage={buttonInHeroImage}
     >
       <Head>
