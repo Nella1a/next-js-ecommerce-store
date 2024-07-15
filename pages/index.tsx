@@ -9,7 +9,7 @@ import { getAllProducts } from '../util/database';
 import { PropsTypePlantsCartCookieLayer } from '../util/types';
 
 export default function Home(props: PropsTypePlantsCartCookieLayer) {
-  const buttonInHeroImage = <ButtonCallToAction innerText="View All Plants" />;
+  const buttonInHeroImage = <ButtonCallToAction innerText="Shop now" />;
 
   return (
     <Layout
