@@ -66,6 +66,7 @@ export const bgImgContainerContent = () => css`
   h1 {
     font-size: 50px;
     width: 100%;
+    color: var(--color-white);
     span {
       display: block;
     }

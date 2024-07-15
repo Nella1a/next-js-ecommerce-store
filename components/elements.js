@@ -98,6 +98,7 @@ export const globalStyleBody = css`
   h1,
   h2 {
     font-family: ${calistoga.style.fontFamily};
+    color: var(--color-primary-green);
   }
   /* make img easier to work with*/
   img {

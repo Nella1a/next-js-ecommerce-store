@@ -7,6 +7,7 @@ const header = () => css`
   position: relative;
   background-color: #50a458;
   overflow: hidden;
+
   > div:first-of-type {
     height: 4rem;
   }
