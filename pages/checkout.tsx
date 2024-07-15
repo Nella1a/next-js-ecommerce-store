@@ -86,7 +86,6 @@ export default function CheckOut(props: { plants: Plant[] }) {
     if (noErrors) {
       setToNextStep(true);
     }
-    //  setToNextStep(true);
   };
 
   useEffect(() => {

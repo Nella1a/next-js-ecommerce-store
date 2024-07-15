@@ -52,7 +52,6 @@ const mobileMenuStyle = (showBurger) => css`
         justify-content: space-between;
         width: 100%;
         font-family: var(--font-primary);
-        font-weight: bold;
 
         li {
           border-bottom: 1px solid var(--color-grey-4);
@@ -63,6 +62,7 @@ const mobileMenuStyle = (showBurger) => css`
           align-items: center;
           justify-content: space-between;
 
+          a,
           a:link,
           a:visited {
             display: block;
@@ -76,10 +76,12 @@ const mobileMenuStyle = (showBurger) => css`
         > li:first-of-type {
           margin-left: unset;
           padding-left: unset;
-          background-color: var(--color-grey-3);
+          background-color: var(--color-primary-green);
+          color: var(--color-white);
           display: flex;
           justify-content: space-between;
           width: 100%;
+          font-weight: bold;
 
           padding: 0.96rem;
           button {

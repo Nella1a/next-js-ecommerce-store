@@ -1,7 +1,9 @@
 import { css } from '@emotion/react';
+import Image from 'next/image';
 import { useState } from 'react';
 import { container, marginTop } from '../elements';
 import FormNewsletter from '../FormNewsletter';
+import SocialMediaIcons from '../SocialMediaIcons';
 import FooterListElements from './FooterListElements';
 
 export const footerStyle = css`
@@ -13,29 +15,54 @@ export const footerStyle = css`
     ${container};
     ${marginTop};
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 2rem;
+    grid-template-columns: minmax(100px, 250px) repeat(3, 0.5fr) 1fr;
+    gap: 1rem;
 
-    > div {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      line-height: 2rem;
-      font-size: 0.9rem;
+    p {
+      font-weight: 600;
+      color: var(--color-primary-green);
+      font-size: var(--text-xl);
+      margin-bottom: 0.5rem;
+    }
+  }
 
-      p {
-        font-weight: bold;
+  nav ~ div {
+    ${container}
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+    color: var(--color-primary-green);
+    div {
+      display: flex;
+      gap: 0.5rem;
+
+      span {
+        display: inline-block;
+        width: 1.5rem;
+        height: 2rem;
       }
     }
   }
 
-  @media (max-width: 75rem) {
-    section {
-      padding: 0 1.5rem;
-    }
-  }
+  @media (max-width: 1024px) {
+    nav {
+      grid-template-columns: minmax(100px, 250px) repeat(2, 0.5fr);
+      grid-template-rows: 2;
+      row-gap: 3rem;
+      justify-items: center;
+      > div:first-of-type {
+        grid-column: 1/-1;
+        justify-self: center;
+      }
 
-  @media (max-width: 48rem) {
-    display: none;
+      > div:last-of-type {
+        label {
+          text-align: center;
+        }
+        grid-column: 1/-1;
+        justify-self: stretch;
+      }
+    }
   }
 `;
 
@@ -62,16 +89,10 @@ export const footerInfos = [
     infoThree: 'Blog',
   },
   {
-    header: 'Social',
-    infoOne: 'Instagram',
-    infoTwo: 'Pinterest',
-    infoThree: 'Youtube',
-  },
-  {
     header: 'Terms',
     infoOne: 'Refund Policy',
     infoTwo: 'Terms of Service',
-    infoThree: 'Delivery and Schipping',
+    infoThree: 'Delivery & Schipping',
   },
 ];
 
@@ -82,15 +103,29 @@ export default function Footer() {
     <footer css={footerStyle}>
       <nav>
         <div>
-          {footerInfos.map((info, index: number) => (
-            <div key={`desktop-footer-${index}`}>
-              <p>{info.header}</p>
-              <FooterListElements info={info} />
-            </div>
-          ))}
+          <Image
+            src={'/logo_shelovesplants_green.png'}
+            alt={'logo she loves plants'}
+            width={'193'}
+            height={'28'}
+          />
         </div>
-        <FormNewsletter email={email} setEmail={setEmail} />
+
+        {footerInfos.map((info, index: number) => (
+          <div key={`desktop-footer-${index}`}>
+            <p>{info.header}</p>
+            <FooterListElements info={info} />
+          </div>
+        ))}
+
+        <div>
+          <FormNewsletter email={email} setEmail={setEmail} />
+        </div>
       </nav>
+      <div>
+        <p>2024 She Loves Plants. All Rights Reserved.</p>
+        <SocialMediaIcons />
+      </div>
     </footer>
   );
 }

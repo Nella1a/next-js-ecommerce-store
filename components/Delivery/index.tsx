@@ -5,17 +5,16 @@ import StarIcon from '../Icons/StarIcon';
 import Truck from '../Icons/Truck';
 
 export const deliveryInfos = css`
-  ${marginTop}
-
-  background-color: var(--color-green);
+  margin-top: 6.25rem;
+  background-color: var(--color-primary-green);
   color: var(--color-white);
-  height: 8rem;
+  height: 12rem;
   max-width: unset;
   width: 100vw;
   display: flex;
   justify-content: center;
 
-  div {
+  > div {
     max-width: 1920px;
     width: 100%;
     height: inherit;
@@ -26,20 +25,24 @@ export const deliveryInfos = css`
     align-content: center;
 
     > article {
-      gap: 1rem;
+      gap: 0.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
+      font-size: var(--text-lg);
 
       > div {
-        border: 1px solid var(--color-white);
-        width: 2rem;
-        height: 2rem;
+        /* width: 2rem;
+        height: 2rem; */
+        width: 3.875rem;
+        height: 3.875rem;
         border-radius: 50%;
         margin: 0;
         display: flex;
         justify-content: center;
         align-items: center;
+        background-color: rgba(255, 255, 255, 0.3);
 
         > span {
           display: block;
@@ -51,16 +54,13 @@ export const deliveryInfos = css`
         }
       }
     }
+  }
 
-    @media screen and (max-width: 600px) {
-      > article > div {
-        display: none;
-      }
-    }
-
-    @media screen and (max-width: 480px) {
+  @media screen and (max-width: 768px) {
+    height: 28rem;
+    > div {
       grid-template-columns: 1fr;
-      gap: var(--space-xs);
+      gap: 2.5rem;
     }
   }
 `;

@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { calistoga, roboto } from '../util/fonts';
 
 /* - font sizes (px)
 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
@@ -17,27 +18,20 @@ import { css } from '@emotion/react';
 /* *************************** */
 /*    Global Styles            */
 /* *************************** */
+
 export const globalStyleBody = css`
   :root {
-    --font-primary: 'Yeseva One';
-    --font-fallback: sans-serif;
+    // --font-primary: 'Yeseva One';
 
     /* set base values */
     --text-base-size: 1em;
     --text-scale-ratio: 1.2; //120% of what they would normally be”.
-    // --baseline: 24px;
 
     /* base color */
-    --text-color: #343a40;
-    --main-bg-color: #f8f9fa;
+    --text-color: #333;
+    --main-bg-color: #eef7ea;
 
-    //--color-btn-primary-bg: #f76707;
-    //--color-btn-hover: #ff922b;
-
-    //--color-btn-primary-bg: #f2be5c;
-    //--color-btn-hover: #ffcd70;
-
-    --color-btn-primary-bg: #eda974;
+    --color-btn-primary-bg: #f2aa57;
     --color-btn-hover: #f7b481;
 
     --color-white: #ffff;
@@ -54,6 +48,7 @@ export const globalStyleBody = css`
     --color-red-9: #c92a2a;
 
     --color-green: #709f7a;
+    --color-primary-green: #50a458;
 
     --text-xxs: 0.5em; // 8
     --text-xs: 0.625em; // 10
@@ -97,8 +92,14 @@ export const globalStyleBody = css`
     background-color: var(--main-bg-color);
     color: var(--text-color);
     position: relative;
+    font-family: ${roboto.style.fontFamily};
   }
 
+  h1,
+  h2 {
+    font-family: ${calistoga.style.fontFamily};
+    color: var(--color-primary-green);
+  }
   /* make img easier to work with*/
   img {
     max-width: 100%; /* ensure that the img gets narrow when viewport shrinks*/
@@ -164,6 +165,9 @@ export const btn = {
   cursor: 'pointer',
 };
 
+export const btnTextColorGreen = {
+  color: '#50a458',
+};
 export const btnTextColorWhite = {
   color: '#fff',
 };
@@ -188,6 +192,11 @@ export const styleLargeButton = css`
 
   button {
     ${size('17.65rem', '1.47rem')}
+  }
+
+  h1,
+  h2 {
+    color: var(--color-primary-green);
   }
 `;
 
@@ -334,6 +343,7 @@ export const summerFavoritesStyle = css`
 
   h2 {
     ${h2Section}
+    color: var(--color-primary-green);
   }
 
   display: flex;
@@ -348,6 +358,9 @@ export const summerFavoritesStyle = css`
     // container for img and product cards
     > div:first-of-type {
       position: relative;
+      img {
+        border-radius: 20px;
+      }
     }
 
     > div:last-of-type {
@@ -561,6 +574,7 @@ export const productDetailsContainer = css`
         ${btn};
         display: inline-block;
         background-color: var(--color-btn-primary-bg);
+        ${btnTextColorWhite}
         ${size('17.65rem', '1.47rem')}
         :hover {
           background-color: var(--color-btn-hover);
@@ -613,7 +627,7 @@ export const shoppingCartStyle = css`
     article:nth-of-type(2) {
       // container order total
       width: 100%;
-      background-color: var(--color-grey-3);
+      background-color: var(--color-white);
       position: sticky;
       top: 69px;
       padding: 1rem 1.5rem;
@@ -623,14 +637,19 @@ export const shoppingCartStyle = css`
       // border: 1px solid red;
 
       // checkout button
+
       a:link,
-      a:visited {
+      a:visited,
+      a:focus,
+      a:hover {
         ${btn};
         display: block;
         width: 100%;
         text-align: center;
         background-color: var(--color-btn-primary-bg);
         transition: all 0.3s;
+        ${btnTextColorWhite}
+        border-radius: 5px;
 
         :hover {
           background-color: var(--color-btn-hover);
@@ -785,6 +804,8 @@ export const checkoutFormStyle = css`
     ${btn}
     ${size('17.65rem', '1.47rem')}
     margin-top: 1rem;
+    ${btnTextColorWhite}
+    border-radius: 5px;
 
     @media screen and (max-width: 960px) {
       width: 100%;
@@ -912,6 +933,7 @@ export const loginAndRegisterForm = css`
     margin-bottom: 1rem;
     padding: 1.2rem;
     font-size: 0.9rem;
+    border-radius: 5px;
   }
 
   button {
@@ -919,7 +941,7 @@ export const loginAndRegisterForm = css`
     background-color: var(--color-btn-primary-bg);
     transition: all 0.3s;
     margin-bottom: 0;
-
+    ${btnTextColorWhite}
     :hover {
       background-color: var(--color-btn-hover);
     }

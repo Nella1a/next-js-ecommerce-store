@@ -5,7 +5,7 @@ const footerListElements = css`
   display: flex;
   flex-direction: column;
   font-family: inherit;
-  font-size: 0.9rem;
+  font-size: var(--text-base-size);
 `;
 
 type FooterInfos = {

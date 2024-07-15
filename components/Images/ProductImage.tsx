@@ -13,10 +13,12 @@ export default function ProductImage(props: ProductImageDetails) {
       {props.src ? (
         <CldImage
           src={props.src}
-          width={393}
-          height={491.5}
+          width={390}
+          height={480}
           data-test-id="product-image"
           alt={`plant-name-is-${props.title}`}
+          crop={'fit'}
+          priority
         />
       ) : (
         <ImageNotFound />

@@ -5,7 +5,7 @@ import { btn, btnTextColorWhite } from '../../elements';
 const buttonCallToAction = () => css`
   ${btn};
   ${btnTextColorWhite}
-  font-size: 0.75rem;
+  font-size: var(--text-base-size);
   display: block;
   margin: 1rem 0;
   background-color: var(--color-btn-primary-bg);

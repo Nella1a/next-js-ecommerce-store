@@ -37,11 +37,18 @@ const userAccount = css`
         }
       }
 
-      a {
+      a:link,
+      a:visited,
+      a:focus,
+      a:active {
         display: inline-block;
+        border-radius: 5px;
         ${btn}
         ${btnTextColorWhite}
-    background-color: var(--color-btn-primary-bg);
+         background-color: var(--color-btn-primary-bg);
+      }
+      a:hover {
+        background-color: var(--color-btn-hover);
       }
     }
 

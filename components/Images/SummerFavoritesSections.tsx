@@ -17,13 +17,12 @@ export default function SummerFavoritesSection(props: Props) {
     <Fragment>
       <div>
         <CldImage
-          src={
-            'https://res.cloudinary.com/mix571zo0/image/upload/v1719095342/epmstabvbza1lqkdvjbs.jpg'
-          }
+          src={'plantStore/small/dmzoekskll2cvquz3ebq'}
           alt="plants on a table"
           fill
           sizes="100vw"
           style={{ objectFit: 'cover' }}
+          crop={'fill'}
         />
       </div>
       <div>

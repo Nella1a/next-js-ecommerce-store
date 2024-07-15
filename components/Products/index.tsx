@@ -9,9 +9,15 @@ export const productCardStyle = css`
   gap: var(--space-sm);
   transition: all 0.3s;
 
+  border-radius: 15px;
   // image container
   div:first-of-type {
     position: relative;
+    border-radius: 15px;
+
+    img {
+      border-radius: 20px;
+    }
   }
 
   div:last-of-type {
