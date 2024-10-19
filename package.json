@@ -9,7 +9,7 @@
     "start": "next start",
     "test": "jest",
     "test:watch": "jest --watch",
-    "vercel-build": "prisma generate  && next build",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build",
     "seed": "node -r dotenv/config ./prisma/seed.js",
     "postinstall": "prisma migrate deploy"
   },
