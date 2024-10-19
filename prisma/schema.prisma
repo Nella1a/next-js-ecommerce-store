@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
 }
 
 datasource db {
@@ -7,6 +8,7 @@ datasource db {
   // Uses connection pooling
   url = env("POSTGRES_PRISMA_URL")
   directUrl = env("POSTGRES_URL_NON_POOLING")
+  schemas = ["base", "hotdeals"]
 }
 
 model CartItem {
@@ -20,6 +22,7 @@ model CartItem {
   user_id     Int
 
   @@map("cart_items")
+  @@schema("base")
 }
 
 model OrderItem {
@@ -31,6 +34,8 @@ model OrderItem {
   order   Order         @relation(fields: [order_id], references: [id])
 
  @@map("order_items")
+ @@schema("base")
+
 }
 
 
@@ -41,6 +46,7 @@ model OrderStatus {
   order  Order[]
 
   @@map("order_status")
+  @@schema("base")
 }
 
 model PaymentStatus {
@@ -48,6 +54,7 @@ model PaymentStatus {
   name   String   @db.VarChar(60)
   status OrderPayments[]
   @@map("payment_status")
+  @@schema("base")
 }
 
 
@@ -66,6 +73,7 @@ model Order {
 
 
   @@map("orders")
+  @@schema("base")
 }
 
 model OrderPayments {
@@ -77,6 +85,7 @@ model OrderPayments {
   status PaymentStatus @relation(fields: [status_id], references: [id])
 
  @@map("order_payments")
+ @@schema("base")
 }
 
 
@@ -87,6 +96,7 @@ model ProductCategory {
   name String @db.VarChar(100)
   product Product[]
    @@map("product_categories")
+   @@schema("base")
 }
 
 
@@ -102,6 +112,7 @@ model Product {
   product OrderItem[]
 
   @@map("products")
+  @@schema("base")
 }
 
 model UserDetail {
@@ -116,6 +127,7 @@ model UserDetail {
   users      User?  @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("user_details")
+  @@schema("base")
 }
 
 model UserRole {
@@ -124,6 +136,7 @@ model UserRole {
   users     User[]
 
   @@map("user_roles")
+  @@schema("base")
 }
 
 model User {
@@ -142,8 +155,8 @@ model User {
 
 
   @@unique([email, username])
-
   @@map("users")
+  @@schema("base")
 }
 
 model UserPayment {
@@ -155,6 +168,7 @@ model UserPayment {
   users        User     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@map("users_payment")
+  @@schema("base")
 }
 
 
@@ -164,6 +178,7 @@ model ProductImgURL {
    product_id Int
    product Product @relation(fields: [product_id], references: [id])
  @@map("product_img_urls")
+ @@schema("base")
 }
 
 
@@ -175,4 +190,5 @@ model UserSession {
   users        User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("user_sessions")
+  @@schema("base")
 }
