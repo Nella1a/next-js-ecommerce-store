@@ -45,7 +45,7 @@ const productCategories = [{ name: 'Pet friendly' }, { name: 'Easy Care' }];
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.product.createMany({ data: products });
+  await prisma.plantProduct.createMany({ data: products });
 
   await prisma.userRole.createMany({
     data: [
@@ -57,7 +57,7 @@ async function main() {
   await prisma.paymentStatus.createMany({ data: paymentStatus });
   await prisma.orderStatus.createMany({ data: orderStatus });
 
-  const getProductInDB = await prisma.product.findMany();
+  const getProductInDB = await prisma.plantProduct.findMany();
 
   await prisma.productImgURL.createMany({
     data: [

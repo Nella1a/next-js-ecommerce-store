@@ -73,7 +73,7 @@ export const updateCartItems = async (cartItems: Cookie[], user: User) => {
 };
 
 export const getAllProducts = async () => {
-  const plants = await prisma.product.findMany({
+  const plants = await prisma.plantProduct.findMany({
     include: {
       img_url: {
         select: {
@@ -95,7 +95,7 @@ export const getAllProducts = async () => {
 };
 
 export const getPlantsById = async (plantId: number[]) => {
-  const plants = await prisma.product.findMany({
+  const plants = await prisma.plantProduct.findMany({
     where: {
       id: {
         in: plantId,

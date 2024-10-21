@@ -137,7 +137,7 @@ export async function getServerSideProps(
 > {
   // get current plant via slug in url
   const plantSlug = String(context.query.slug);
-  const plant = await prisma.product.findMany({
+  const plant = await prisma.plantProduct.findMany({
     where: { slug: plantSlug },
     include: {
       img_url: {
