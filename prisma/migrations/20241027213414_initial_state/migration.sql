@@ -1,7 +1,4 @@
 -- CreateSchema
-CREATE SCHEMA IF NOT EXISTS "base";
-
--- CreateSchema
 CREATE SCHEMA IF NOT EXISTS "hotdeals";
 
 -- CreateTable
@@ -149,7 +146,7 @@ CREATE TABLE "base"."user_sessions" (
 );
 
 -- CreateTable
-CREATE TABLE "base"."_ProductToProductCategory" (
+CREATE TABLE "base"."_PlantProductToProductCategory" (
     "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL
 );
@@ -167,10 +164,10 @@ CREATE UNIQUE INDEX "users_user_id_external_key" ON "base"."users"("user_id_exte
 CREATE UNIQUE INDEX "users_email_username_key" ON "base"."users"("email", "username");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "_ProductToProductCategory_AB_unique" ON "base"."_ProductToProductCategory"("A", "B");
+CREATE UNIQUE INDEX "_PlantProductToProductCategory_AB_unique" ON "base"."_PlantProductToProductCategory"("A", "B");
 
 -- CreateIndex
-CREATE INDEX "_ProductToProductCategory_B_index" ON "base"."_ProductToProductCategory"("B");
+CREATE INDEX "_PlantProductToProductCategory_B_index" ON "base"."_PlantProductToProductCategory"("B");
 
 -- AddForeignKey
 ALTER TABLE "base"."cart_items" ADD CONSTRAINT "cart_items_product_id_fkey" FOREIGN KEY ("product_id") REFERENCES "base"."products"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -212,7 +209,7 @@ ALTER TABLE "base"."product_img_urls" ADD CONSTRAINT "product_img_urls_product_i
 ALTER TABLE "base"."user_sessions" ADD CONSTRAINT "user_sessions_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "base"."users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "base"."_ProductToProductCategory" ADD CONSTRAINT "_ProductToProductCategory_A_fkey" FOREIGN KEY ("A") REFERENCES "base"."products"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "base"."_PlantProductToProductCategory" ADD CONSTRAINT "_PlantProductToProductCategory_A_fkey" FOREIGN KEY ("A") REFERENCES "base"."products"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "base"."_ProductToProductCategory" ADD CONSTRAINT "_ProductToProductCategory_B_fkey" FOREIGN KEY ("B") REFERENCES "base"."product_categories"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "base"."_PlantProductToProductCategory" ADD CONSTRAINT "_PlantProductToProductCategory_B_fkey" FOREIGN KEY ("B") REFERENCES "base"."product_categories"("id") ON DELETE CASCADE ON UPDATE CASCADE;
