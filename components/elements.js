@@ -509,7 +509,6 @@ export const productImageContainer = css`
   display: block;
   height: auto;
   width: 40%;
-  border: 2px solid red;
 
   > div:first-of-type {
     display: none;
