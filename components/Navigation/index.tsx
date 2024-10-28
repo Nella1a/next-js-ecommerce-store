@@ -71,6 +71,14 @@ export const navigation = () => css`
 
     @media (max-width: 30rem) {
       grid-template-columns: 1fr 1fr;
+
+      ul {
+        gap: unset;
+        > li:nth-of-type(2) {
+          margin-left: 30px;
+          margin-right: 10px;
+        }
+      }
     }
   }
 `;
@@ -184,6 +192,9 @@ export default function Navigation() {
                   alt={'logo she loves plants'}
                   width={'250'}
                   height={'36'}
+                  style={{
+                    height: 'auto',
+                  }}
                 />
               </Link>
             </li>
