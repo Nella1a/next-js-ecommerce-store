@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
+import { Suspense } from 'react';
 import ButtonCallToAction from '../components/Buttons/ButtonCallToAction';
 import { bestSellerStyle, summerFavoritesStyle } from '../components/elements';
 import SummerFavoritesSection from '../components/Images/SummerFavoritesSections';
@@ -10,6 +11,8 @@ import { PropsTypePlantsCartCookieLayer } from '../util/types';
 
 export default function Home(props: PropsTypePlantsCartCookieLayer) {
   const buttonInHeroImage = <ButtonCallToAction innerText="Shop now" />;
+
+  const Loading = () => <h2>🌀 Loading...</h2>;
 
   return (
     <Layout
@@ -28,14 +31,18 @@ export default function Home(props: PropsTypePlantsCartCookieLayer) {
       <section css={bestSellerStyle}>
         <h2>Bestsellers</h2>
         <div>
-          <Products plants={props.plants} />
+          <Suspense fallback={<Loading />}>
+            <Products plants={props.plants} />
+          </Suspense>
         </div>
       </section>
 
       <section css={bestSellerStyle}>
         <h2>New Releases</h2>
         <div>
-          <Products plants={props.plants} />
+          <Suspense fallback={<Loading />}>
+            <Products plants={props.plants} />
+          </Suspense>
         </div>
       </section>
 
@@ -48,7 +55,9 @@ export default function Home(props: PropsTypePlantsCartCookieLayer) {
       <section css={bestSellerStyle}>
         <h2>On Sale</h2>
         <div>
-          <Products plants={props.plants} />
+          <Suspense fallback={<Loading />}>
+            <Products plants={props.plants} />
+          </Suspense>
         </div>
       </section>
     </Layout>
