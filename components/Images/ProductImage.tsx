@@ -19,6 +19,9 @@ export default function ProductImage(props: ProductImageDetails) {
           alt={`plant-name-is-${props.title}`}
           crop={'fit'}
           priority
+          style={{
+            height: 'auto',
+          }}
         />
       ) : (
         <ImageNotFound />
