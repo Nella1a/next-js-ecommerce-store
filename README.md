@@ -1,47 +1,76 @@
-# ecommerce store for plants
+**_Please note this project is in active development and subject to change and ongoing improvement._**
 
-<!-- ## Description
+# Ecommerce Store For Plants Mock-Up
 
-- landing page
-- products-overview page
-- single product page, includes price, description and possibility to select quantity and add to cart
-- shopping cart page, shows selected product(s), price, quantity and total price
-- checkout page, includes a form for shipping address and payment details
-- thank you page
+## Description
 
-## Languages & Technologies used
+## Features
 
-<p> <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a> <a href="https://www.figma.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/> </a> <a href="https://heroku.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/heroku/heroku-icon.svg" alt="heroku" width="40" height="40"/> </a> <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://nextjs.org/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/nextjs-2.svg" alt="nextjs" width="40" height="40"/> </a> <a href="https://nodejs.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> <a href="https://www.postgresql.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/> </a>  <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/> </a> </p>
+- Products overview and product page
+- Shopping cart
+- Update or delete products in the shopping cart
+- Checkout process
+- User account
+- User authentication (registration and login)
 
-## Setup instructions
+## Setup
 
-Clone the repository and install all dependencies
+1. Clone the repository
 
-```
+```text
 git clone https://github.com/Nella1a/next-js-ecommerce-store
 cd next-js-ecommerce-store
-yarn
 ```
 
-Setup a database with postgres on your computer
+2. Ensure that you have a PostgreSQL instance running, then create a database and user.
 
-```
-psql <login>
-CREATE DATABASE <database name>;
-CREATE USER <username> WITH ENCRYPTED PASSWORD '<pw>';
-GRANT ALL PRIVILEGES ON DATABASE <database name> TO <user name>;
-```
+   ```sql
+   CREATE DATABASE mydatabase;
+   CREATE USER myuser WITH PASSWORD 'mypassword';
+   GRANT ALL PRIVILEGES ON DATABASE mydatabase TO myuser;
+   ```
 
-Create a .env file and include all information for the database (eg password, username). Use yarn migrate up/down to run migrations. -->
+3. Create a .env file in the project’s root directory and set the environment variable for the database connection URL that Prisma ORM uses to connect to the database.
+   For example:
 
-<!-- ## Screenshots of the project
+   ```text
+   POSTGRES_PRISMA_URL="postgresql://myuser:mypassword@localhost:5432/mydatabase?schema=hotdeals"
+   ```
 
-<p>
-  <img src="./public/landingPage.png" width="400" alt="screenhot of original landig page">
-</p>
-<p>
-  <img src="./public/singleProductPage.png" width="400" alt="screenhot of original landig page">
-</p>
-<p>
-  <img src="./public/shoppingCart.png" width="400" alt="screenhot of original landig page">
-</p> -->
+4. Install dependencies
+
+   ```text
+   npm install
+   ```
+
+5. Run database migrations
+
+   ```text
+   npx prisma migrate dev
+   ```
+
+6. Run application
+
+   ```text
+   npm run start
+   ```
+
+7. Open <http://localhost:3000> on your browser.
+
+## Technology Stack
+
+- Next.js
+- TypeScript
+- PostgreSQL
+- Prisma
+- Firebase Authentication
+- Emotion CSS
+- Deployed to Vercel
+
+## Screenshots of the project
+
+![screenshot of original landig page](./public/landingPage.png)
+![screenshot of original landig page including footer](./public/landingPage2.png)
+![screenshot of original product page](./public/productPage.png)
+![screenshot of original shopping cart page](./public/shoppingCart.pn)
+![screenshot of original checkout pag](./public/checkout.png)
