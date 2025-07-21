@@ -2,7 +2,7 @@
 
 # E-commerce Store for Plants (Mock-Up)
 
-SheLovesPlants is a full-stack e-commerce mock application built with **Next.js**, simulating a modern online plant shop with product listings, user accounts, and a cart system. Product and customer data are stored in a **PostgreSQL** database, with data access and modeling handled through **Prisma**, a type-safe ORM that streamlines queries and database migrations. User authentication — including registration and login — is implemented using **Firebase Authentication,** offering a secure and scalable solution for managing users.
+SheLovesPlants is a full-stack e-commerce mock application built with Next.js, simulating a modern online plant shop with product listings, user accounts, and a cart system. Product and customer data are stored in a PostgreSQL database, with data access and modeling handled through Prisma, a type-safe ORM that streamlines queries and database migrations. User authentication — including registration and login — is implemented using Firebase Authentication, offering a secure and scalable solution for managing users.
 
 ## Features
 
