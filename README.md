@@ -1,4 +1,3 @@
-**_Please note this project is in active development and subject to change and ongoing improvement._**
 
 # E-commerce Store for Plants (Mock-Up)
 
