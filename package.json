@@ -23,7 +23,7 @@
     "dotenv-cli": "7.4.2",
     "dotenv-safe": "9.1.0",
     "final-form": "4.20.10",
-    "firebase": "10.12.3",
+    "firebase": "12.7.0",
     "firebase-admin": "12.2.0",
     "json5": "2.2.3",
     "next": "14.2.35",
